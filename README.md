@@ -39,6 +39,9 @@ En Windows también podés hacer doble clic en `iniciar.cmd`.
 
 Si el puerto está ocupado: `python -m quiz servir --puerto 8766`.
 
+**Para compartir con los alumnos:** [`docs/GUIA-ALUMNO.md`](docs/GUIA-ALUMNO.md) tiene el paso a paso
+completo (requisitos, modos, IA opcional, problemas comunes y cómo aprovechar los intentos).
+
 ### Sin interfaz gráfica
 
 ```bash
@@ -158,7 +161,9 @@ la aplicación no envía datos a ningún servicio externo.
 │   ├── validate_bank.py                Valida el banco contra el esquema
 │   └── extract_corpus.py               Regenera content/corpus desde los PDF (opcional)
 ├── tests/                              78 tests (unittest, sin dependencias)
+├── docs/GUIA-ALUMNO.md                 Paso a paso para quien va a practicar
 ├── docs/GUIA-AUTORIA.md                Cómo escribir preguntas nuevas
+├── docs/COMO-FUNCIONA.md               Diseño interno (muestreo, corrección, API)
 ├── examenes/                           Tus intentos y boletas (se crea al usar la app)
 ├── iniciar.cmd / iniciar.sh            Atajo para levantar la interfaz
 ├── Dockerfile / docker-compose.yml     Para correrlo en contenedor
