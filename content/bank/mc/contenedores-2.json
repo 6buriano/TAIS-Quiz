@@ -1,0 +1,622 @@
+[
+  {
+    "id": "cont-021",
+    "tema": "contenedores",
+    "subtema": "integracion-continua",
+    "dificultad": "facil",
+    "pregunta": "Un equipo quiere dejar de descubrir los conflictos al final del sprint. ¿Qué propone la Integración Continua según el material?",
+    "opciones": [
+      {
+        "texto": "Integrar los cambios con frecuencia en un repositorio compartido, disparando una verificación automática en cada integración.",
+        "correcta": true
+      },
+      {
+        "texto": "Desplegar automáticamente en producción cada commit que se integra al repositorio.",
+        "correcta": false,
+        "porque_no": "El despliegue automático corresponde a la Entrega Continua; la integración continua se ocupa de validar el software."
+      },
+      {
+        "texto": "Mantener ramas aisladas por desarrollador hasta el cierre del sprint.",
+        "correcta": false,
+        "porque_no": "Las ramas aisladas de larga vida son justamente la práctica anterior a CI y la causa del Integration Hell."
+      },
+      {
+        "texto": "Congelar el repositorio mientras se ejecutan las pruebas de regresión.",
+        "correcta": false,
+        "porque_no": "CI no congela el repositorio: alienta integraciones pequeñas y frecuentes con retroalimentación en minutos."
+      }
+    ],
+    "explicacion": "La Integración Continua es una práctica de ingeniería de software en la que todos los desarrolladores integran sus cambios con frecuencia en un repositorio compartido. Cada integración dispara un proceso automático de verificación con build y pruebas. El objetivo es evitar los problemas de las integraciones tardías, donde los conflictos se acumulan durante días o semanas.",
+    "fuente": { "archivo": "02-02-tais-CI-CD-02-02.pdf", "pagina": 2 },
+    "tags": ["ci", "integracion", "practica"]
+  },
+  {
+    "id": "cont-022",
+    "tema": "contenedores",
+    "subtema": "actividades-ci",
+    "dificultad": "facil",
+    "pregunta": "Cada vez que un desarrollador hace push al repositorio, el servidor de CI ejecuta una secuencia de actividades. ¿Qué secuencia describe el material?",
+    "opciones": [
+      {
+        "texto": "Obtener el código, compilar, correr pruebas unitarias, ejecutar análisis estático, generar reportes y notificar resultados.",
+        "correcta": true
+      },
+      {
+        "texto": "Obtener el código, aprovisionar nodos del cluster, balancear el tráfico y escalar los Pods.",
+        "correcta": false,
+        "porque_no": "El aprovisionamiento y el balanceo son tareas de la infraestructura y del orquestador, no actividades del ciclo de integración."
+      },
+      {
+        "texto": "Obtener el código, desplegar en producción, medir la latencia y volver a compilar si hay errores.",
+        "correcta": false,
+        "porque_no": "El despliegue a producción no forma parte del ciclo de integración continua y la verificación ocurre antes de publicar."
+      },
+      {
+        "texto": "Obtener el código, asignar un revisor manual, esperar su aprobación y recién después compilar.",
+        "correcta": false,
+        "porque_no": "El material describe un proceso automático que no depende de una revisión manual previa para compilar y probar."
+      }
+    ],
+    "explicacion": "El material enumera las actividades que desencadena cada modificación: obtención del código fuente, compilación, pruebas unitarias, análisis estático, generación de reportes y notificación de resultados. Todo eso ocurre de forma automática en cada push. El objetivo es detectar los errores tan pronto como son introducidos y reducir el costo de corrección.",
+    "fuente": { "archivo": "02-02-tais-CI-CD-02-02.pdf", "pagina": 3 },
+    "tags": ["ci", "pipeline", "automatizacion"]
+  },
+  {
+    "id": "cont-023",
+    "tema": "contenedores",
+    "subtema": "ci-vs-cd",
+    "dificultad": "media",
+    "pregunta": "En una reunión se discute qué agrega la Entrega Continua sobre la Integración Continua. ¿Cuál es la diferencia clave que plantea el material?",
+    "opciones": [
+      {
+        "texto": "CI valida el software; CD lo despliega automáticamente en los distintos entornos.",
+        "correcta": true
+      },
+      {
+        "texto": "CI despliega el software; CD se limita a validarlo con pruebas automatizadas.",
+        "correcta": false,
+        "porque_no": "Los roles están invertidos: la validación corresponde a CI y el despliegue automatizado a CD."
+      },
+      {
+        "texto": "CD reemplaza a CI, porque al automatizar el despliegue ya no hacen falta las pruebas.",
+        "correcta": false,
+        "porque_no": "CD extiende a CI y se apoya en ella; sin la validación previa el despliegue automático no tendría control de calidad."
+      },
+      {
+        "texto": "CI es una herramienta concreta y CD es una práctica cultural de los equipos DevOps.",
+        "correcta": false,
+        "porque_no": "Ambas son prácticas del ciclo de vida; el material no las define como herramienta y cultura respectivamente."
+      }
+    ],
+    "explicacion": "La Entrega Continua extiende la Integración Continua automatizando el despliegue del software en los distintos entornos. El material lo resume en una diferencia de roles: CI valida el software y CD lo despliega automáticamente. Las etapas típicas que atraviesa CD son build, test, staging y producción, con el objetivo de reducir el tiempo entre el desarrollo y la disponibilidad en producción.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 13 },
+    "tags": ["ci", "cd", "entrega-continua"]
+  },
+  {
+    "id": "cont-024",
+    "tema": "contenedores",
+    "subtema": "deteccion-temprana",
+    "dificultad": "media",
+    "pregunta": "Un programador sube un cambio que rompe la compilación y en pocos minutos el pipeline lo reporta señalando el commit exacto. ¿Qué beneficio de la Integración Continua explica esa capacidad?",
+    "opciones": [
+      {
+        "texto": "La detección temprana de defectos: el pipeline identifica qué cambio introdujo el error y reduce el tiempo de localización.",
+        "correcta": true
+      },
+      {
+        "texto": "La disminución de conflictos de integración entre ramas de larga vida.",
+        "correcta": false,
+        "porque_no": "Ese beneficio aparece cuando varias personas integran seguido; acá el valor señalado es encontrar el defecto y su causa de inmediato."
+      },
+      {
+        "texto": "La automatización de pruebas, que amplía la cantidad de casos ejecutados en cada iteración.",
+        "correcta": false,
+        "porque_no": "La automatización aumenta la cobertura de validación, pero no es lo que permite atribuir la falla a un cambio concreto."
+      },
+      {
+        "texto": "La generación de reportes históricos que documentan la evolución del proyecto.",
+        "correcta": false,
+        "porque_no": "Los reportes dejan registro de lo ocurrido, pero la detección inmediata del defecto viene de la ejecución automática en cada integración."
+      }
+    ],
+    "explicacion": "Uno de los beneficios centrales de CI es la detección temprana de defectos: cuando una modificación genera un problema, el pipeline identifica inmediatamente qué cambio introdujo el error. Eso reduce drásticamente el tiempo necesario para localizar la causa raíz. El material insiste en que integrar frecuentemente reduce el riesgo acumulado.",
+    "fuente": { "archivo": "02-02-tais-CI-CD-02-02.pdf", "pagina": 6 },
+    "tags": ["ci", "defectos", "feedback"]
+  },
+  {
+    "id": "cont-025",
+    "tema": "contenedores",
+    "subtema": "etapas-pipeline",
+    "dificultad": "facil",
+    "pregunta": "Un equipo documenta su pipeline y quiere respetar el orden de etapas que describe el material. ¿Cuál es ese orden?",
+    "opciones": [
+      {
+        "texto": "Source Control → Build → Testing → Packaging → Deployment",
+        "correcta": true
+      },
+      {
+        "texto": "Source Control → Testing → Build → Deployment → Packaging",
+        "correcta": false,
+        "porque_no": "No se puede probar antes de construir: los artefactos ejecutables se generan en la etapa de build."
+      },
+      {
+        "texto": "Build → Source Control → Testing → Packaging → Deployment",
+        "correcta": false,
+        "porque_no": "El repositorio es la fuente única de verdad y la etapa inicial; el build no puede precederlo."
+      },
+      {
+        "texto": "Testing → Build → Packaging → Source Control → Deployment",
+        "correcta": false,
+        "porque_no": "El control de fuentes va primero y las pruebas se ejecutan sobre lo compilado, no al revés."
+      }
+    ],
+    "explicacion": "El material describe cinco etapas claramente diferenciadas: control de fuentes, build, testing, packaging y deployment. El repositorio actúa como fuente única de verdad y todas las modificaciones pasan por él. Desde ahí la cadena avanza desde la compilación hacia el despliegue automático.",
+    "fuente": { "archivo": "02-02-tais-CI-CD-02-02.pdf", "pagina": 8 },
+    "tags": ["pipeline", "etapas", "ci"]
+  },
+  {
+    "id": "cont-026",
+    "tema": "contenedores",
+    "subtema": "artefactos",
+    "dificultad": "facil",
+    "pregunta": "Terminaron la compilación y las pruebas, y el equipo ya tiene un WAR junto con una imagen Docker. ¿Qué etapa del pipeline prepara esos artefactos para su distribución?",
+    "opciones": [
+      {
+        "texto": "Packaging, donde los artefactos quedan listos para distribuirse.",
+        "correcta": true
+      },
+      {
+        "texto": "Testing, donde se ejecutan las pruebas de integración sobre los artefactos.",
+        "correcta": false,
+        "porque_no": "Testing valida el software; la preparación de los artefactos para su distribución es la etapa siguiente."
+      },
+      {
+        "texto": "Deployment, donde el software se pone en ejecución en los entornos.",
+        "correcta": false,
+        "porque_no": "Deployment es la etapa final, que ocurre después de que los artefactos están empaquetados."
+      },
+      {
+        "texto": "Source Control, donde se versiona el código que origina los artefactos.",
+        "correcta": false,
+        "porque_no": "Source Control es la etapa inicial del pipeline y trabaja sobre el código, no sobre los artefactos compilados."
+      }
+    ],
+    "explicacion": "La etapa de build compila el código y genera artefactos ejecutables como JAR, WAR, binarios o imágenes Docker. Después de las pruebas, la etapa de packaging prepara esos artefactos para la distribución. Finalmente el deployment los pone en ejecución de forma automática.",
+    "fuente": { "archivo": "02-02-tais-CI-CD-02-02.pdf", "pagina": 10 },
+    "tags": ["pipeline", "artefactos", "packaging"]
+  },
+  {
+    "id": "cont-027",
+    "tema": "contenedores",
+    "subtema": "integration-hell",
+    "dificultad": "dificil",
+    "pregunta": "Un equipo trabajó durante semanas en ramas aisladas y, al integrar, aparecieron conflictos complejos, errores de compilación y fallas difíciles de diagnosticar. ¿Cómo se denomina ese fenómeno y qué lo revierte según el material?",
+    "opciones": [
+      {
+        "texto": "Integration Hell, que se revierte con integraciones pequeñas y frecuentes verificadas automáticamente.",
+        "correcta": true
+      },
+      {
+        "texto": "Deuda técnica acumulada, que se revierte documentando los conflictos al cierre del sprint.",
+        "correcta": false,
+        "porque_no": "Documentar no evita la acumulación: el problema se origina en la falta de integración y no en la ausencia de documentación."
+      },
+      {
+        "texto": "Regresión funcional, que se revierte congelando el repositorio hasta terminar la integración.",
+        "correcta": false,
+        "porque_no": "Congelar el repositorio agrava la distancia entre ramas y no es la respuesta que propone el material."
+      },
+      {
+        "texto": "Falta de trazabilidad, que se revierte vinculando cada commit a una incidencia.",
+        "correcta": false,
+        "porque_no": "La trazabilidad ordena la relación entre requerimientos y cambios, pero no elimina los conflictos de una integración tardía."
+      }
+    ],
+    "explicacion": "El material denomina Integration Hell a la situación de equipos que trabajan largos períodos en ramas aisladas y descubren los problemas recién al integrar. La respuesta es una estrategia de integraciones pequeñas y frecuentes con verificación automática. Así los conflictos aparecen inmediatamente, cuando todavía son baratos de resolver.",
+    "fuente": { "archivo": "02-02-tais-CI-CD-02-02.pdf", "pagina": 2 },
+    "tags": ["ci", "integration-hell", "ramas"]
+  },
+  {
+    "id": "cont-028",
+    "tema": "contenedores",
+    "subtema": "jenkins-plugins",
+    "dificultad": "media",
+    "pregunta": "Instalan Jenkins desde cero y descubren que casi no puede hacer nada útil con la configuración mínima. ¿Cómo explica el material esa situación?",
+    "opciones": [
+      {
+        "texto": "La arquitectura de Jenkins se basa en plugins: las capacidades avanzadas se agregan con ellos.",
+        "correcta": true
+      },
+      {
+        "texto": "La instalación básica no incluye Java y por eso no ejecuta ningún job.",
+        "correcta": false,
+        "porque_no": "La instalación mediante contenedor evita instalar Java a mano, y esa comodidad no es la razón por la que faltan funcionalidades."
+      },
+      {
+        "texto": "Los plugins reemplazan al repositorio Git, que Jenkins no puede leer por sí solo.",
+        "correcta": false,
+        "porque_no": "Jenkins se integra con repositorios Git mediante un plugin; el repositorio sigue siendo el origen del código."
+      },
+      {
+        "texto": "Jenkins solo funciona con pipelines definidos en contenedores Docker.",
+        "correcta": false,
+        "porque_no": "El material lo muestra integrado con contenedores, pero también soporta múltiples lenguajes y tecnologías sin exigir Docker."
+      }
+    ],
+    "explicacion": "La arquitectura de Jenkins es extensible y se basa en plugins: la instalación básica solo aporta funcionalidades mínimas. Capacidades como la integración con Git, la definición de pipelines, el uso de Docker o la publicación de resultados de JUnit llegan a través de plugins. Eso explica su flexibilidad y también por qué hay que complementar la instalación para tener un pipeline real.",
+    "fuente": { "archivo": "02-02-tais-CI-CD-02-02.pdf", "pagina": 24 },
+    "tags": ["jenkins", "plugins", "automatizacion"]
+  },
+  {
+    "id": "cont-029",
+    "tema": "contenedores",
+    "subtema": "pipeline-as-code",
+    "dificultad": "facil",
+    "pregunta": "Guardar la definición del pipeline en un Jenkinsfile dentro del repositorio, ¿qué permite según el material?",
+    "opciones": [
+      {
+        "texto": "Versionar el pipeline, revisar sus cambios, replicar configuraciones y reducir errores manuales.",
+        "correcta": true
+      },
+      {
+        "texto": "Persistir el historial de builds fuera del contenedor de Jenkins.",
+        "correcta": false,
+        "porque_no": "El historial se conserva con volúmenes persistentes; el Jenkinsfile versiona la definición del pipeline."
+      },
+      {
+        "texto": "Instalar automáticamente los plugins que el pipeline necesita en cada ejecución.",
+        "correcta": false,
+        "porque_no": "Los plugins se gestionan como parte de la configuración de Jenkins; el Jenkinsfile describe las etapas y sus pasos."
+      },
+      {
+        "texto": "Balancear la carga del pipeline entre varios agentes de ejecución.",
+        "correcta": false,
+        "porque_no": "El archivo define el pipeline como código; el reparto de ejecuciones entre agentes es una decisión de infraestructura."
+      }
+    ],
+    "explicacion": "Pipeline as Code consiste en almacenar la definición completa del pipeline en un archivo llamado Jenkinsfile dentro del repositorio. Eso permite versionar el pipeline, revisar sus cambios como cualquier código, replicar configuraciones y reducir errores manuales. El pipeline pasa a ser parte del producto software y no una configuración escondida en una interfaz.",
+    "fuente": { "archivo": "02-02-tais-CI-CD-02-02.pdf", "pagina": 27 },
+    "tags": ["jenkins", "pipeline-as-code", "jenkinsfile"]
+  },
+  {
+    "id": "cont-030",
+    "tema": "contenedores",
+    "subtema": "persistencia",
+    "dificultad": "media",
+    "pregunta": "Instalaron Jenkins en un contenedor, lo recrearon para actualizar la versión y perdieron configuraciones, historial de builds, plugins y usuarios. ¿Qué faltó configurar?",
+    "opciones": [
+      {
+        "texto": "Volúmenes persistentes para los datos de Jenkins, que sobrevivan a la eliminación del contenedor.",
+        "correcta": true
+      },
+      {
+        "texto": "Una imagen preconfigurada en lugar de instalar Java y dependencias a mano.",
+        "correcta": false,
+        "porque_no": "La imagen preconfigurada aporta reproducibilidad y portabilidad, pero no conserva los datos cuando el contenedor se elimina."
+      },
+      {
+        "texto": "El tag latest en la imagen de Jenkins para no perder compatibilidad.",
+        "correcta": false,
+        "porque_no": "El tag no tiene relación con la persistencia: los datos viven en el contenedor y desaparecen con él si no hay un volumen."
+      },
+      {
+        "texto": "El plugin de Docker dentro de Jenkins para ejecutar los builds.",
+        "correcta": false,
+        "porque_no": "El plugin habilita capacidades de construcción, no evita que se pierda la configuración guardada en el contenedor."
+      }
+    ],
+    "explicacion": "Uno de los errores más comunes al instalar Jenkins con Docker es no persistir los datos: si el contenedor se elimina, desaparecen configuraciones, historial de builds, plugins y usuarios. Por eso hay que usar volúmenes persistentes. El mismo criterio aplica a cualquier servicio con estado, porque el contenedor en sí es descartable.",
+    "fuente": { "archivo": "02-02-tais-CI-CD-02-02.pdf", "pagina": 23 },
+    "tags": ["jenkins", "volumenes", "persistencia"]
+  },
+  {
+    "id": "cont-031",
+    "tema": "contenedores",
+    "subtema": "jenkins-docker",
+    "dificultad": "media",
+    "pregunta": "En lugar de instalar Java, dependencias y configuraciones a mano, el equipo decide levantar Jenkins con una imagen preconfigurada. ¿Qué ventajas del material respaldan esa decisión?",
+    "opciones": [
+      {
+        "texto": "Reproducibilidad, portabilidad a cualquier sistema con Docker, independencia de otras aplicaciones y facilidad de actualización.",
+        "correcta": true
+      },
+      {
+        "texto": "Eliminación de los plugins, porque la imagen ya trae todas las capacidades integradas.",
+        "correcta": false,
+        "porque_no": "La arquitectura sigue basada en plugins; la imagen simplifica la instalación, no las funcionalidades que se agregan después."
+      },
+      {
+        "texto": "Persistencia automática de los datos, porque la imagen conserva el estado entre ejecuciones.",
+        "correcta": false,
+        "porque_no": "Los datos se pierden al eliminar el contenedor: la persistencia requiere volúmenes, tal como advierte el material."
+      },
+      {
+        "texto": "Pipelines más rápidos, porque el contenedor evita ejecutar las pruebas unitarias.",
+        "correcta": false,
+        "porque_no": "El contenedor no reemplaza pruebas: la imagen preconfigurada reduce el trabajo de instalación y las diferencias entre entornos."
+      }
+    ],
+    "explicacion": "Usar una imagen preconfigurada evita instalar Java, dependencias y configuraciones a mano. El material enumera las ventajas: reproducibilidad, entornos idénticos, portabilidad a cualquier sistema compatible con Docker, independencia respecto de otras aplicaciones instaladas y facilidad de actualización con nuevas imágenes. La contrapartida es recordar la persistencia de los datos.",
+    "fuente": { "archivo": "02-02-tais-CI-CD-02-02.pdf", "pagina": 22 },
+    "tags": ["jenkins", "docker", "instalacion"]
+  },
+  {
+    "id": "cont-032",
+    "tema": "contenedores",
+    "subtema": "jobs",
+    "dificultad": "facil",
+    "pregunta": "El equipo debe elegir el tipo de Job de Jenkins para un proyecto nuevo y quiere poder auditar quién cambió el pipeline. ¿Qué recomienda el material para entornos modernos?",
+    "opciones": [
+      {
+        "texto": "Pipeline Jobs, por su trazabilidad y su capacidad de versionado.",
+        "correcta": true
+      },
+      {
+        "texto": "Freestyle Jobs, porque se configuran desde la interfaz gráfica.",
+        "correcta": false,
+        "porque_no": "La configuración por interfaz es justamente lo que se quiere evitar cuando hace falta versionar y auditar los cambios."
+      },
+      {
+        "texto": "Folder Jobs, porque agrupan varios proyectos en una carpeta común.",
+        "correcta": false,
+        "porque_no": "Agrupar proyectos ordena la vista, pero no aporta versionado ni trazabilidad al pipeline."
+      },
+      {
+        "texto": "Multibranch Pipeline, porque es el único que puede leer un repositorio Git.",
+        "correcta": false,
+        "porque_no": "Multibranch aporta soporte para varias ramas, pero no es el único tipo de Job que se integra con Git."
+      }
+    ],
+    "explicacion": "El material distingue cuatro tipos de Job: Freestyle, configurado desde la interfaz gráfica; Pipeline, configurado por código; Multibranch Pipeline, con soporte para múltiples ramas Git; y Folder, para agrupar proyectos. Para entornos modernos recomienda Pipeline Jobs por su trazabilidad y capacidad de versionado. Esa recomendación se apoya en la idea de que el pipeline forme parte del producto.",
+    "fuente": { "archivo": "02-02-tais-CI-CD-02-02.pdf", "pagina": 26 },
+    "tags": ["jenkins", "jobs", "pipeline"]
+  },
+  {
+    "id": "cont-033",
+    "tema": "contenedores",
+    "subtema": "trazabilidad",
+    "dificultad": "dificil",
+    "pregunta": "Ante una auditoría, piden determinar qué cambio corrigió un error, quién lo implementó, qué pruebas lo validaron y en qué versión se desplegó. ¿Qué práctica permite responder esas cuatro preguntas?",
+    "opciones": [
+      {
+        "texto": "La trazabilidad de extremo a extremo entre incidencias, commits, builds, casos de prueba y despliegues.",
+        "correcta": true
+      },
+      {
+        "texto": "El análisis estático del código, que detecta defectos antes de la ejecución.",
+        "correcta": false,
+        "porque_no": "El análisis estático encuentra problemas de código, pero no vincula una incidencia con su commit, su prueba y su despliegue."
+      },
+      {
+        "texto": "El multi-stage build, que separa la compilación de la imagen final.",
+        "correcta": false,
+        "porque_no": "El multi-stage mejora el artefacto publicado, no registra la cadena de relaciones entre requerimientos y despliegues."
+      },
+      {
+        "texto": "El escalado automático del cluster, que registra cada réplica creada.",
+        "correcta": false,
+        "porque_no": "El orquestador registra instancias técnicas, no la relación entre una corrección y las pruebas que la validaron."
+      }
+    ],
+    "explicacion": "La trazabilidad es la capacidad de relacionar todos los artefactos generados durante el ciclo de vida del software. En un entorno CI/CD moderno vincula requerimientos, historias de usuario, incidencias, commits, pull requests, builds, casos de prueba, releases y despliegues. Gracias a eso se puede responder qué cambio corrigió un error, quién lo hizo, qué pruebas lo validaron y en qué versión se desplegó, algo esencial cuando hay requisitos de auditoría o cumplimiento normativo.",
+    "fuente": { "archivo": "02-02-tais-CI-CD-02-02.pdf", "pagina": 14 },
+    "tags": ["trazabilidad", "auditoria", "ci-cd"]
+  },
+  {
+    "id": "cont-034",
+    "tema": "contenedores",
+    "subtema": "despliegue-sin-downtime",
+    "dificultad": "dificil",
+    "pregunta": "Se necesita actualizar una aplicación en Kubernetes sin cortar el servicio y, si una instancia falla durante la actualización, que el sistema se recupere sin intervención humana. ¿Qué capacidades del orquestador cubren ese requisito?",
+    "opciones": [
+      {
+        "texto": "Desplegar sin downtime y gestionar los fallos de forma automática.",
+        "correcta": true
+      },
+      {
+        "texto": "Construir imágenes en varias etapas y reducir su tamaño final.",
+        "correcta": false,
+        "porque_no": "El multi-stage optimiza el artefacto, pero no evita el corte del servicio ni recupera instancias caídas."
+      },
+      {
+        "texto": "Etiquetar las imágenes con latest para que el cambio se aplique solo.",
+        "correcta": false,
+        "porque_no": "El tag no orquesta la transición entre versiones y además quita trazabilidad sobre lo que está en ejecución."
+      },
+      {
+        "texto": "Ejecutar análisis estático y generar reportes antes del despliegue.",
+        "correcta": false,
+        "porque_no": "Ese control previo mejora la calidad del artefacto, pero no resuelve la continuidad del servicio durante la actualización."
+      }
+    ],
+    "explicacion": "Entre las capacidades que el material atribuye a Kubernetes están desplegar sin downtime y gestionar los fallos automáticamente. Eso permite actualizar la aplicación sin cortar el servicio y recuperar instancias que fallan sin intervención humana. La contenerización previa es la base: la imagen inmutable y reproducible es lo que el orquestador reemplaza y vuelve a levantar.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 20 },
+    "tags": ["kubernetes", "despliegue", "disponibilidad"]
+  },
+  {
+    "id": "cont-035",
+    "tema": "contenedores",
+    "subtema": "despliegue-automatizado",
+    "dificultad": "facil",
+    "pregunta": "La puesta en producción se hace hoy con una lista de pasos manuales y suele depender de quién esté de guardia. ¿Qué busca el despliegue automatizado según el material?",
+    "opciones": [
+      {
+        "texto": "Eliminar la intervención manual y convertir el despliegue en un proceso repetible, confiable y automático.",
+        "correcta": true
+      },
+      {
+        "texto": "Reemplazar las pruebas automatizadas por verificaciones manuales antes de publicar.",
+        "correcta": false,
+        "porque_no": "El despliegue automatizado se apoya en la validación previa del pipeline; no vuelve a las verificaciones manuales."
+      },
+      {
+        "texto": "Reducir la cantidad de entornos hasta quedarse solo con producción.",
+        "correcta": false,
+        "porque_no": "El material mantiene los entornos de build, test, staging y producción; lo que automatiza es el pasaje entre ellos."
+      },
+      {
+        "texto": "Eliminar la necesidad de contenedores para poder desplegar más rápido.",
+        "correcta": false,
+        "porque_no": "La contenerización es la base del despliegue moderno, no un obstáculo que el despliegue automatizado deba quitar del medio."
+      }
+    ],
+    "explicacion": "El despliegue automatizado elimina la intervención manual en la puesta en producción del software. El objetivo es convertir el despliegue en un proceso repetible, confiable y automático. El material contrapone esa práctica a los problemas del despliegue manual: errores humanos frecuentes, inconsistencias entre entornos, deploys lentos y riesgosos y dificultad para reproducir fallos.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 14 },
+    "tags": ["despliegue", "automatizacion", "ci-cd"]
+  },
+  {
+    "id": "cont-036",
+    "tema": "contenedores",
+    "subtema": "cultura-equipo",
+    "dificultad": "media",
+    "pregunta": "Cuando el pipeline queda en rojo, todo el equipo se entera y la corrección sale casi de inmediato. ¿Qué beneficio del material describe ese comportamiento?",
+    "opciones": [
+      {
+        "texto": "Una cultura de responsabilidad compartida: el build roto es un problema visible para todo el equipo.",
+        "correcta": true
+      },
+      {
+        "texto": "La disminución de conflictos de integración entre las ramas del repositorio.",
+        "correcta": false,
+        "porque_no": "Ese beneficio se refiere a trabajar con versiones recientes y sincronizar cambios, no a la visibilidad del fallo y la reacción del equipo."
+      },
+      {
+        "texto": "La detección temprana de defectos por parte del pipeline automático.",
+        "correcta": false,
+        "porque_no": "La detección describe la capacidad técnica de encontrar el error; el comportamiento descrito es la respuesta social del equipo frente al fallo visible."
+      },
+      {
+        "texto": "El aumento de la cobertura de pruebas gracias a la automatización de casos.",
+        "correcta": false,
+        "porque_no": "La cobertura crece con la automatización de pruebas, pero no explica por qué el equipo reacciona en conjunto al build roto."
+      }
+    ],
+    "explicacion": "El material señala que CI no es solo una herramienta de automatización, sino una estrategia de reducción sistemática del riesgo técnico. Desde lo organizacional genera una cultura de responsabilidad compartida: un build roto se vuelve un problema visible para todos. Esa visibilidad es la que hace que la corrección llegue rápido.",
+    "fuente": { "archivo": "02-02-tais-CI-CD-02-02.pdf", "pagina": 7 },
+    "tags": ["ci", "equipo", "cultura"]
+  },
+  {
+    "id": "cont-037",
+    "tema": "contenedores",
+    "subtema": "infraestructura-como-codigo",
+    "dificultad": "dificil",
+    "pregunta": "Un equipo quiere que la definición del pipeline y de la infraestructura viva versionada junto al código, sin configurar a mano en interfaces. ¿A qué generación de la evolución de Jenkins corresponde y qué prácticas involucra?",
+    "opciones": [
+      {
+        "texto": "A la quinta generación, con Pipeline as Code e Infrastructure as Code.",
+        "correcta": true
+      },
+      {
+        "texto": "A la tercera generación, con la entrega continua como práctica central.",
+        "correcta": false,
+        "porque_no": "La tercera generación corresponde a la entrega continua, previa a la incorporación del pipeline y la infraestructura como código."
+      },
+      {
+        "texto": "A la cuarta generación, con la integración de contenedores y cloud.",
+        "correcta": false,
+        "porque_no": "La cuarta generación agrega contenedores y cloud, pero el versionado de la definición aparece en la generación siguiente."
+      },
+      {
+        "texto": "A la segunda generación, con la integración continua completa.",
+        "correcta": false,
+        "porque_no": "La segunda generación consolida la integración continua, mucho antes de que se planteara tratar la infraestructura como código."
+      }
+    ],
+    "explicacion": "El material recorre cinco generaciones de Jenkins: automatización de builds, integración continua completa, entrega continua, integración con contenedores y cloud, y finalmente Pipeline as Code e Infrastructure as Code. La quinta es la que pone la definición del pipeline y de la infraestructura dentro del control de versiones. Eso reduce la configuración manual y hace replicables los entornos.",
+    "fuente": { "archivo": "02-02-tais-CI-CD-02-02.pdf", "pagina": 21 },
+    "tags": ["jenkins", "iac", "pipeline-as-code"]
+  },
+  {
+    "id": "cont-038",
+    "tema": "contenedores",
+    "subtema": "ciclo-vida-pod",
+    "dificultad": "facil",
+    "pregunta": "Un Pod fue aceptado por el cluster pero sus contenedores todavía no se están ejecutando. ¿En qué estado del ciclo de vida se encuentra?",
+    "opciones": [
+      {
+        "texto": "Pending, el estado previo a que los contenedores empiecen a correr.",
+        "correcta": true
+      },
+      {
+        "texto": "Running, el estado que indica que los contenedores ya se están ejecutando.",
+        "correcta": false,
+        "porque_no": "Running describe un Pod cuyos contenedores ya están en ejecución, no uno que todavía espera para arrancar."
+      },
+      {
+        "texto": "Succeeded, el estado terminal de una finalización correcta.",
+        "correcta": false,
+        "porque_no": "Succeeded indica que el Pod terminó bien y no volverá a ejecutarse, lo que no coincide con un arranque pendiente."
+      },
+      {
+        "texto": "Failed, el estado terminal de una finalización con error.",
+        "correcta": false,
+        "porque_no": "Failed implica que el Pod terminó con falla, no que esté aguardando para iniciar su ejecución."
+      }
+    ],
+    "explicacion": "El material enumera los estados por los que atraviesa un Pod: Pending, Running, Succeeded, Failed y Unknown. Pending es la etapa previa al arranque de los contenedores. Los estados Succeeded y Failed son terminales y describen cómo terminó la ejecución.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 23 },
+    "tags": ["kubernetes", "pods", "estados"]
+  },
+  {
+    "id": "cont-039",
+    "tema": "contenedores",
+    "subtema": "volumenes-pod",
+    "dificultad": "media",
+    "pregunta": "Dos contenedores del mismo Pod necesitan intercambiar archivos temporales sin salir del Pod. ¿Qué característica del Pod habilita ese intercambio?",
+    "opciones": [
+      {
+        "texto": "Que los contenedores del Pod comparten red y almacenamiento mediante volúmenes.",
+        "correcta": true
+      },
+      {
+        "texto": "Que cada contenedor del Pod mantiene su propio espacio de almacenamiento aislado.",
+        "correcta": false,
+        "porque_no": "El material indica que los contenedores del Pod comparten almacenamiento; el aislamiento de almacenamiento es lo contrario."
+      },
+      {
+        "texto": "Que kube-proxy replica los archivos entre los contenedores del Pod.",
+        "correcta": false,
+        "porque_no": "kube-proxy gestiona el ruteo y el balanceo de red, no la replicación de archivos entre contenedores."
+      },
+      {
+        "texto": "Que la imagen base incluye un directorio compartido entre todos los Pods del nodo.",
+        "correcta": false,
+        "porque_no": "La imagen es un artefacto inmutable y no define almacenamiento compartido entre Pods del nodo."
+      }
+    ],
+    "explicacion": "El material describe al Pod como uno o más contenedores que comparten red y almacenamiento. Esa cercanía es la que permite que dos contenedores del mismo Pod intercambien archivos a través de un volumen compartido, sin necesidad de exponer tráfico de red. Por eso el Pod se diseña como unidad lógica de despliegue.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 22 },
+    "tags": ["kubernetes", "pods", "volumenes"]
+  },
+  {
+    "id": "cont-040",
+    "tema": "contenedores",
+    "subtema": "testing-contenedores",
+    "dificultad": "facil",
+    "pregunta": "El equipo quiere que unitarias, de integración y end-to-end corran dentro del pipeline. ¿Qué sostiene el material sobre contenerizar cada uno de esos tipos de prueba?",
+    "opciones": [
+      {
+        "texto": "Que los tres tipos de testing pueden ejecutarse en contenedores.",
+        "correcta": true
+      },
+      {
+        "texto": "Que solo las pruebas unitarias pueden contenerizarse, porque no usan dependencias externas.",
+        "correcta": false,
+        "porque_no": "El material no restringe la contenerización a las pruebas unitarias: incluye también integración y end-to-end."
+      },
+      {
+        "texto": "Que las pruebas de integración deben correr en el host para usar las dependencias ya instaladas.",
+        "correcta": false,
+        "porque_no": "Correr en el host es precisamente lo que reintroduce diferencias de entorno; el contenedor aporta un entorno idéntico."
+      },
+      {
+        "texto": "Que las pruebas end-to-end necesitan el entorno completo de la aplicación y por eso quedan fuera de los contenedores.",
+        "correcta": false,
+        "porque_no": "Las pruebas end-to-end son uno de los tres tipos que el material incluye como ejecutables en contenedores."
+      }
+    ],
+    "explicacion": "El material enumera tres tipos de testing con contenedores: unit tests, integration tests y E2E tests. Aclara que todos pueden ejecutarse en contenedores. La ventaja es doble: entornos idénticos entre desarrollo y pipeline, y pruebas reproducibles que eliminan el “works on my machine”.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 11 },
+    "tags": ["testing", "contenedores", "pipeline"]
+  }
+]

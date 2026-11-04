@@ -1,0 +1,8 @@
+# Dependencias opcionales de desarrollo (la aplicación funciona sin ellas).
+-r requirements.txt
+
+# Lee los PDF para regenerar content/corpus y verificar las páginas citadas.
+pypdf>=4.0
+
+# Alternativa más rápida al anterior (si se instala, el script la prefiere).
+# pymupdf>=1.24

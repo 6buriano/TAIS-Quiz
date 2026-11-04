@@ -1,0 +1,224 @@
+[
+  {
+    "id": "nosql-dev-limites-001",
+    "tema": "nosql",
+    "subtema": "limites-modelo-relacional",
+    "dificultad": "media",
+    "pregunta": "Una red social de alcance global debe almacenar publicaciones, seguidores y eventos de interacción de cientos de millones de usuarios distribuidos en varias regiones. Explicá qué limitaciones del modelo relacional justifican evaluar una base NoSQL y por qué el reemplazo no es automático.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Identifica limitaciones del modelo relacional pertinentes al escenario: esquema rígido, JOINs costosos, escalamiento vertical y consistencia estricta entre regiones",
+        "peso": 0.3,
+        "claves": ["esquema rigido", "joins costosos", "escalamiento vertical", "migraciones masivas", "consistencia estricta", "limites fisicos y economicos"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Relaciona el volumen y la distribución geográfica con la necesidad de escalabilidad horizontal y de replicación regional",
+        "peso": 0.3,
+        "claves": ["escalabilidad horizontal", "agregar servidores", "distribucion geografica", "varias regiones", "volumen masivo", "reducir latencia"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Explica el costo del cambio: resignar consistencia fuerte, transacciones complejas o integridad referencial estricta",
+        "peso": 0.25,
+        "claves": ["consistencia fuerte", "consistencia eventual", "transacciones complejas", "integridad referencial", "trade-off"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Aclara que NoSQL no reemplaza al relacional y que la decisión depende de los requisitos y los patrones de acceso",
+        "peso": 0.15,
+        "claves": ["no reemplaza", "depende de los requisitos", "requisitos funcionales", "patrones de acceso", "no es una moda"]
+      }
+    ],
+    "respuesta_modelo": "El modelo relacional se apoya en esquemas rígidos: cualquier cambio estructural obliga a modificar tablas, índices y restricciones, y a migrar millones de registros, lo que puede afectar la disponibilidad y el rendimiento. Además, reconstruir relaciones con JOINs sobre tablas de miles de millones de filas genera cuellos de botella, y el crecimiento se consigue sobre todo por escalamiento vertical, que tiene límites físicos y económicos. En un sistema global se suma la dificultad de distribuir datos con consistencia transaccional estricta entre centros de datos separados: ahí aparecen la latencia, las particiones de red y la necesidad de replicación. NoSQL responde a esos desafíos con escalabilidad horizontal, replicación y particionamiento nativos, pero el reemplazo no es automático porque obliga a resignar consistencia fuerte, transacciones complejas e integridad referencial estricta. La decisión debe basarse en los requisitos funcionales y no funcionales del sistema, no en la popularidad de la tecnología.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 7 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["limites", "red-social", "trade-offs"]
+  },
+  {
+    "id": "nosql-dev-cap-002",
+    "tema": "nosql",
+    "subtema": "cap",
+    "dificultad": "media",
+    "pregunta": "Durante una partición de red entre dos centros de datos, un sistema tiene que seguir operando. Explicá qué alternativa enfrenta el arquitecto según el teorema CAP, qué consecuencias tiene cada camino y por qué la tolerancia a particiones se considera prácticamente obligatoria.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Explica que CAP exige comprometer consistencia o disponibilidad mientras dure la partición, y no elegir dos propiedades para siempre",
+        "peso": 0.3,
+        "claves": ["compromiso entre consistencia y disponibilidad", "durante la particion", "no puede garantizar las tres", "no es permanente", "elegir entre consistencia y disponibilidad"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Describe el camino de consistencia (CP): rechaza o hace esperar solicitudes, menor disponibilidad y datos confiables",
+        "peso": 0.25,
+        "claves": ["rechaza solicitudes", "menor disponibilidad", "datos confiables", "espera sincronizarse", "tiempos de espera"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Describe el camino de disponibilidad (AP): sigue respondiendo, aparecen lecturas desactualizadas y hace falta reconciliación posterior",
+        "peso": 0.25,
+        "claves": ["sigue respondiendo", "lecturas desactualizadas", "datos antiguos", "reconciliacion posterior", "mejor experiencia de usuario"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Justifica por qué la tolerancia a particiones es prácticamente obligatoria: en sistemas distribuidos reales las fallas de red ocurren",
+        "peso": 0.2,
+        "claves": ["fallas de red", "particiones inevitables", "sistemas distribuidos reales", "practicamente obligatoria", "no existe ca"]
+      }
+    ],
+    "respuesta_modelo": "El teorema CAP sostiene que, cuando ocurre una partición de red, un sistema distribuido no puede garantizar al mismo tiempo consistencia, disponibilidad y tolerancia a particiones. Como la partición ya está ocurriendo, la decisión real del arquitecto es entre consistencia y disponibilidad. Si prioriza la consistencia, algunos nodos rechazan o dejan en espera solicitudes hasta poder sincronizarse: se gana confiabilidad de los datos, pero se pierde disponibilidad y aparecen tiempos de espera. Si prioriza la disponibilidad, cada nodo sigue respondiendo aunque no pueda sincronizarse: mejora la experiencia de usuario, pero hay riesgo de lecturas desactualizadas y hacen falta mecanismos posteriores de reconciliación. La tolerancia a particiones se considera prácticamente obligatoria porque en los sistemas distribuidos reales los fallos de red pueden ocurrir, de modo que la combinación CA no resulta viable en la práctica. Conviene aclarar que CAP no obliga a una base a elegir solo dos propiedades para siempre: el compromiso se activa durante la partición.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 18 },
+    "tiempo_sugerido_min": 7,
+    "tags": ["cap", "particion", "consistencia"]
+  },
+  {
+    "id": "nosql-dev-sharding-003",
+    "tema": "nosql",
+    "subtema": "sharding",
+    "dificultad": "dificil",
+    "pregunta": "Un servicio de mensajería va a particionar su base de mensajes. Explicá qué criterios usarías para elegir una buena shard key, qué consecuencias concretas tiene una mala elección y cómo se combina el particionado con la replicación.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Propone criterios de buena shard key: distribución uniforme, alta cardinalidad y alineación con los patrones de acceso frecuentes",
+        "peso": 0.3,
+        "claves": ["distribucion uniforme", "alta cardinalidad", "patron de acceso", "evitar desbalanceo", "presente en las consultas", "sin hotspots"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Explica el beneficio del sharding: escalabilidad horizontal, más capacidad de almacenamiento y menor presión sobre un único servidor",
+        "peso": 0.25,
+        "claves": ["escalabilidad horizontal", "agregar nodos", "reduce la presion", "cada shard una parte", "mas almacenamiento"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Explica las consecuencias de una mala elección: desbalanceo, shard sobrecargado, cuello de botella y consultas que deben recorrer todos los shards",
+        "peso": 0.25,
+        "claves": ["desbalanceo", "shard sobrecargado", "cuello de botella", "sobrecarga de nodos", "consultas a todos los shards", "rendimiento degradado"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Distingue sharding de replicación: particionar resuelve capacidad y replicar resuelve disponibilidad",
+        "peso": 0.2,
+        "claves": ["no es lo mismo que replicar", "particionar capacidad", "replicacion para disponibilidad", "son complementarios", "copias completas en cada nodo"]
+      }
+    ],
+    "respuesta_modelo": "El sharding divide el conjunto de datos entre nodos independientes, de modo que cada shard almacena solo una parte y el sistema puede crecer agregando nodos. Una buena shard key debe repartir los datos de forma uniforme, tener alta cardinalidad para no formar pocos grupos gigantes y estar presente en las consultas más frecuentes, de modo que la mayoría de los accesos se resuelva contra un único shard. Si la clave se elige mal, aparece desbalanceo: un shard concentra la mayor parte de los datos y de la carga y se transforma en el cuello de botella del clúster, mientras las consultas que no incluyen la clave deben recorrer todos los shards. La cátedra señala justamente ese riesgo: la elección incorrecta de la shard key y la sobrecarga de algunos nodos. Conviene recordar que el particionado no reemplaza a la replicación: el sharding resuelve capacidad y la replicación resuelve disponibilidad, y en la práctica se combinan replicando cada shard.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 29 },
+    "tiempo_sugerido_min": 7,
+    "tags": ["sharding", "shard-key", "escalabilidad"]
+  },
+  {
+    "id": "nosql-dev-cqrs-004",
+    "tema": "nosql",
+    "subtema": "cqrs",
+    "dificultad": "media",
+    "pregunta": "Un back office recibe muchas más consultas que escrituras y hoy usa la misma base para ambas. Explicá cómo CQRS mejora el rendimiento y qué problema introduce en términos de consistencia.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Explica la separación de responsabilidades: un modelo de comandos para crear, modificar y eliminar, y un modelo de consultas para buscar y reportar",
+        "peso": 0.3,
+        "claves": ["separa escrituras de lecturas", "modelo de comandos", "modelo de consultas", "responsabilidades distintas", "crear modificar eliminar"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Justifica la mejora de rendimiento: cada modelo se optimiza para su propósito y puede usar una tecnología distinta",
+        "peso": 0.25,
+        "claves": ["tecnologias distintas", "optimizado para lectura", "escalar lecturas", "indices de busqueda", "elasticsearch", "consultas complejas"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Identifica el problema de consistencia: el modelo de lectura se actualiza de forma asíncrona y puede quedar desactualizado",
+        "peso": 0.25,
+        "claves": ["consistencia eventual", "modelo de lectura desactualizado", "ventana de desactualizacion", "proyeccion asincrona", "retraso de sincronizacion"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Propone una mitigación o criterio de aceptación del retraso, según el tipo de operación",
+        "peso": 0.2,
+        "claves": ["leer del modelo de escritura", "read-after-write", "monitorear el retraso", "aceptar la consistencia eventual", "solo en operaciones criticas"]
+      }
+    ],
+    "respuesta_modelo": "CQRS propone separar explícitamente las operaciones que modifican datos de las que los consultan, en lugar de usar una misma estructura para todo. Las escrituras necesitan validaciones de negocio, control transaccional y reglas de integridad; las lecturas priorizan rapidez, escalabilidad, consultas complejas y agregaciones, y en un back office son amplia mayoría. Al separar los modelos, el de consultas puede optimizarse solo para leer, indexarse de otra forma e incluso usar otra tecnología, por ejemplo PostgreSQL para las escrituras y Elasticsearch para las búsquedas. El costo aparece en la consistencia: los cambios del modelo de comandos deben proyectarse hacia el modelo de lectura, y mientras esa proyección no llega el reporte muestra información vieja. Es decir, se asume una consistencia eventual entre ambos modelos, que hay que monitorear y acotar. Si una operación exige el dato recién escrito, conviene leerlo del modelo de escritura o esperar la confirmación de la proyección.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 35 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["cqrs", "rendimiento", "consistencia-eventual"]
+  },
+  {
+    "id": "nosql-dev-replicacion-005",
+    "tema": "nosql",
+    "subtema": "replicacion",
+    "dificultad": "dificil",
+    "pregunta": "Una fintech replica sus datos de forma asíncrona para no frenar las escrituras. Explicá qué problemas de consistencia pueden aparecer, cómo se relacionan con la consistencia eventual y qué conviene decidir según el tipo de operación.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Explica la replicación asíncrona: la escritura se confirma sin esperar la confirmación de todas las réplicas, para priorizar disponibilidad y rendimiento",
+        "peso": 0.3,
+        "claves": ["no espera a las replicas", "prioriza disponibilidad", "prioriza rendimiento", "confirmacion inmediata", "primary y secondary"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Enumera los problemas posibles: lecturas desactualizadas, escrituras concurrentes, conflictos entre réplicas y pérdida de escrituras recientes ante un failover",
+        "peso": 0.25,
+        "claves": ["lecturas desactualizadas", "datos antiguos", "escrituras concurrentes", "conflictos entre replicas", "failover", "perdida de escrituras"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Relaciona el escenario con la consistencia eventual y con sus variantes, como read-after-write o session consistency",
+        "peso": 0.25,
+        "claves": ["consistencia eventual", "convergen", "read-after-write", "session consistency", "strong eventual consistency"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Decide según la operación: lectura del primario y consistencia fuerte para saldos, lectura de réplicas para reportes o analítica",
+        "peso": 0.2,
+        "claves": ["leer del primario", "consistencia fuerte", "lectura de replicas", "reportes", "segun la operacion", "consistencia hibrida"]
+      }
+    ],
+    "respuesta_modelo": "En la replicación asíncrona el nodo que recibe la escritura la confirma sin esperar a que todas las réplicas la hayan aplicado, porque el objetivo es priorizar disponibilidad y rendimiento. Esa decisión abre una ventana en la que las réplicas tienen versiones distintas del mismo dato: una lectura contra una réplica puede devolver información antigua, pueden aparecer escrituras concurrentes sobre el mismo registro y, si el primario falla antes de propagar, se pierden las últimas escrituras. Esos síntomas son la consistencia eventual: se acepta que los nodos difieran durante un lapso y que finalmente converjan al mismo estado. Muchos sistemas ofrecen variantes más finas, como read-after-write consistency o session consistency, para que el usuario al menos vea sus propias escrituras. La decisión práctica es por operación: para saldos o transferencias conviene leer del primario y exigir consistencia fuerte, aunque cueste latencia; para reportes, tableros y analítica alcanza con leer de las réplicas y aceptar el retraso. La mayoría de las bases NoSQL usan estrategias híbridas para equilibrar consistencia, rendimiento y disponibilidad.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 31 },
+    "tiempo_sugerido_min": 7,
+    "tags": ["replicacion-asincrona", "consistencia-eventual", "fintech"]
+  },
+  {
+    "id": "nosql-dev-poliglota-006",
+    "tema": "nosql",
+    "subtema": "persistencia-poliglota",
+    "dificultad": "media",
+    "pregunta": "Un equipo propone resolver usuarios, catálogo, caché y recomendaciones con una sola base relacional. Explicá por qué la persistencia políglota es coherente con una arquitectura de microservicios y qué costo introduce esa decisión.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Define persistencia políglota: no existe una única base adecuada para todos los problemas, se elige la mejor para cada necesidad",
+        "peso": 0.3,
+        "claves": ["no existe una sola base", "tecnologia adecuada", "cada necesidad", "combinar tecnologias", "polyglot persistence"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Relaciona la persistencia políglota con los microservicios: cada servicio gestiona su propia persistencia y su ciclo de vida",
+        "peso": 0.3,
+        "claves": ["cada servicio su persistencia", "autonomia", "gestiona su ciclo de vida", "despliegues autonomos", "evolucion tecnologica"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Da ejemplos del curso de asignación de tecnologías según el tipo de dato o consulta",
+        "peso": 0.2,
+        "claves": ["postgresql para usuarios", "mongodb para catalogo", "redis para cache", "neo4j para recomendaciones", "grafo"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Menciona el costo operativo: más motores que administrar, más especialización y consistencia entre servicios",
+        "peso": 0.2,
+        "claves": ["complejidad operativa", "varios motores", "curva de aprendizaje", "consistencia entre servicios", "mas especializacion"]
+      }
+    ],
+    "respuesta_modelo": "La persistencia políglota parte de una idea simple: no existe una única tecnología de persistencia adecuada para todos los problemas, así que conviene elegir la más apropiada para cada necesidad. En microservicios eso encaja naturalmente, porque cada servicio tiene responsabilidades específicas, gestiona su propio ciclo de vida y mantiene su propia persistencia, sin depender de un esquema global centralizado. Así, los usuarios pueden vivir en PostgreSQL, el catálogo en MongoDB por su flexibilidad de esquema, la caché en Redis por su baja latencia y las recomendaciones en Neo4j porque las relaciones son el dato principal. Esa independencia favorece la escalabilidad, los despliegues autónomos y la evolución tecnológica de cada servicio. El costo es operativo: hay más motores que administrar, el equipo necesita especialización en cada uno y aparece el problema de mantener coherente la información que cruza servicios. Por eso la decisión debe justificarse con los requisitos y los patrones de acceso, no con la popularidad de las herramientas.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 37 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["persistencia-poliglota", "microservicios", "costos"]
+  }
+]

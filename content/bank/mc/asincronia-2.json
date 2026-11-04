@@ -1,0 +1,693 @@
+[
+  {
+    "id": "asinc-019",
+    "tema": "asincronia",
+    "subtema": "mom",
+    "dificultad": "facil",
+    "pregunta": "En una integración entre aplicaciones se menciona un Message Oriented Middleware (MOM). ¿Qué designa ese término?",
+    "opciones": [
+      {
+        "texto": "Una biblioteca que se instala en cada aplicación para serializar los objetos a JSON antes de enviarlos.",
+        "correcta": false,
+        "porque_no": "El MOM es infraestructura de intercambio de mensajes, no una biblioteca de serialización."
+      },
+      {
+        "texto": "Un estándar del ecosistema Java que define las APIs y los contratos de mensajería.",
+        "correcta": false,
+        "porque_no": "Eso es JMS, un estándar dentro de Java; el MOM es la infraestructura que intermedia entre productores y consumidores."
+      },
+      {
+        "texto": "Un protocolo liviano pensado para dispositivos con recursos limitados y conectividad inestable.",
+        "correcta": false,
+        "porque_no": "Eso describe MQTT, que es un protocolo de mensajería y no el middleware en general."
+      },
+      {
+        "texto": "Una infraestructura de software que permite intercambiar mensajes entre aplicaciones de manera desacoplada.",
+        "correcta": true
+      }
+    ],
+    "explicacion": "Un MOM es la infraestructura que permite a las aplicaciones intercambiar mensajes de forma desacoplada, actuando como intermediario entre productores y consumidores. Sus componentes fundamentales son el productor, el broker, el consumidor y el canal. No es un protocolo ni una biblioteca: es la capa que transporta y almacena mensajes.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 2
+    },
+    "tags": [
+      "asincronia",
+      "mom",
+      "mensajeria"
+    ]
+  },
+  {
+    "id": "asinc-020",
+    "tema": "asincronia",
+    "subtema": "kafka",
+    "dificultad": "media",
+    "pregunta": "El consumidor de Kafka del material se suscribe al tópico y luego ejecuta, dentro de un while (true):\nConsumerRecords<String,String> records = consumer.poll(Duration.ofMillis(100));\nfor (ConsumerRecord<String,String> record : records) { System.out.println(record.value()); }\n¿Qué hace ese consumidor con los eventos que ya procesó?",
+    "opciones": [
+      {
+        "texto": "Los borra del tópico a medida que los imprime, para liberar espacio en el log.",
+        "correcta": false,
+        "porque_no": "El consumidor de Kafka no elimina eventos: solo registra hasta dónde leyó, y el log conserva lo anterior."
+      },
+      {
+        "texto": "Avanza su posición de lectura: los eventos no se eliminan y siguen almacenados en el log del tópico.",
+        "correcta": true
+      },
+      {
+        "texto": "Los confirma con ACK y el broker los quita del tópico, igual que en una cola JMS.",
+        "correcta": false,
+        "porque_no": "Ese comportamiento corresponde a una cola JMS; en Kafka el evento permanece almacenado después de ser consumido."
+      },
+      {
+        "texto": "Los descarta, porque poll() devuelve solo eventos nuevos y no permite releer los anteriores.",
+        "correcta": false,
+        "porque_no": "Los eventos anteriores siguen accesibles: el consumidor puede reubicar su offset y reprocesarlos."
+      }
+    ],
+    "explicacion": "El consumidor de Kafka consulta periódicamente nuevos eventos con poll() y los procesa en un bucle. Lo que registra es su posición de lectura: el evento no se elimina del log al consumirse. Esa diferencia con una cola JMS es la que habilita el reprocesamiento y la relectura de históricos.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 27
+    },
+    "tags": [
+      "asincronia",
+      "kafka",
+      "consumidor",
+      "codigo"
+    ]
+  },
+  {
+    "id": "asinc-021",
+    "tema": "asincronia",
+    "subtema": "mqtt",
+    "dificultad": "facil",
+    "pregunta": "¿Para qué tipo de entorno fue diseñado originalmente el protocolo MQTT?",
+    "opciones": [
+      {
+        "texto": "Para transacciones bancarias que requieren garantías de integridad y auditoría.",
+        "correcta": false,
+        "porque_no": "Ese terreno lo cubren los brokers empresariales como ActiveMQ, con transacciones y persistencia."
+      },
+      {
+        "texto": "Para el procesamiento de millones de eventos históricos con analítica en tiempo real.",
+        "correcta": false,
+        "porque_no": "Para grandes volúmenes históricos el material propone Kafka, ya que MQTT tiene almacenamiento limitado."
+      },
+      {
+        "texto": "Para conectar aplicaciones legadas dentro de una misma red corporativa.",
+        "correcta": false,
+        "porque_no": "MQTT apunta a telemetría con ancho de banda restringido; la integración de legados es un caso típico de ActiveMQ."
+      },
+      {
+        "texto": "Para comunicaciones entre dispositivos con recursos limitados y conectividad costosa o inestable.",
+        "correcta": true
+      }
+    ],
+    "explicacion": "MQTT es un protocolo de mensajería extremadamente liviano, pensado para dispositivos con recursos limitados y conectividad costosa o inestable. Usa encabezados reducidos, comunicación publish/subscribe y soporte de conexiones persistentes. Por eso se volvió un estándar de facto en soluciones de IoT e industria.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 6
+    },
+    "tags": [
+      "asincronia",
+      "mqtt",
+      "iot"
+    ]
+  },
+  {
+    "id": "asinc-022",
+    "tema": "asincronia",
+    "subtema": "mqtt",
+    "dificultad": "facil",
+    "pregunta": "En una solución de telemetría con MQTT, ¿qué función cumple Mosquitto?",
+    "opciones": [
+      {
+        "texto": "Es el cliente que publica las lecturas de cada sensor en los tópicos configurados del broker.",
+        "correcta": false,
+        "porque_no": "El que publica es el dispositivo o cliente MQTT; Mosquitto ocupa el rol de intermediario."
+      },
+      {
+        "texto": "Es el broker: recibe los mensajes publicados por los productores y los distribuye a los suscriptores.",
+        "correcta": true
+      },
+      {
+        "texto": "Es la especificación del protocolo, que define los encabezados y los niveles de calidad de servicio.",
+        "correcta": false,
+        "porque_no": "MQTT es el protocolo; Mosquitto es una implementación concreta del broker."
+      },
+      {
+        "texto": "Es el tablero de monitoreo que consume, grafica y almacena las lecturas que recibe.",
+        "correcta": false,
+        "porque_no": "El tablero es un consumidor suscripto; Mosquitto está en el medio de la comunicación."
+      }
+    ],
+    "explicacion": "Mosquitto es un broker MQTT: recibe los mensajes que publican los productores y los distribuye a los suscriptores correspondientes. Es una implementación open source, de bajo consumo de memoria, con autenticación de usuarios y persistencia configurable. Su simplicidad operativa lo hace habitual en telemetría y monitoreo.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 7
+    },
+    "tags": [
+      "asincronia",
+      "mqtt",
+      "broker"
+    ]
+  },
+  {
+    "id": "asinc-023",
+    "tema": "asincronia",
+    "subtema": "jms",
+    "dificultad": "facil",
+    "pregunta": "Un compañero afirma que JMS es un broker de mensajería y que se instala como un servidor más. ¿Cómo se describe JMS en el material?",
+    "opciones": [
+      {
+        "texto": "Como una especificación estándar de Java que define APIs, modelos de comunicación y contratos de interoperabilidad.",
+        "correcta": true
+      },
+      {
+        "texto": "Como un broker open source de bajo consumo de memoria, con persistencia configurable y autenticación.",
+        "correcta": false,
+        "porque_no": "Esa descripción corresponde a Mosquitto, un broker MQTT."
+      },
+      {
+        "texto": "Como una plataforma distribuida de procesamiento de eventos basada en logs distribuidos con offsets.",
+        "correcta": false,
+        "porque_no": "Eso es Kafka; JMS no almacena eventos en logs distribuidos."
+      },
+      {
+        "texto": "Como un protocolo liviano de publicación y suscripción pensado para dispositivos de IoT.",
+        "correcta": false,
+        "porque_no": "Ese es MQTT; JMS es una especificación de API para el ecosistema Java."
+      }
+    ],
+    "explicacion": "JMS es una especificación del ecosistema Java que define APIs, modelos de comunicación y contratos de interoperabilidad para mensajería. No es un producto ni un broker: las implementaciones concretas las aportan plataformas como ActiveMQ, IBM MQ o ActiveMQ Artemis. Confundir la especificación con la implementación es un error frecuente.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 11
+    },
+    "tags": [
+      "asincronia",
+      "jms",
+      "activemq"
+    ]
+  },
+  {
+    "id": "asinc-024",
+    "tema": "asincronia",
+    "subtema": "kafka",
+    "dificultad": "facil",
+    "pregunta": "En Kafka, cada evento almacenado en el log recibe un identificador secuencial. ¿Qué nombre recibe y para qué se usa?",
+    "opciones": [
+      {
+        "texto": "Consumer group, y se usa para agrupar los consumidores de un mismo equipo.",
+        "correcta": false,
+        "porque_no": "El consumer group agrupa consumidores para repartir el procesamiento; no es el identificador de cada evento."
+      },
+      {
+        "texto": "Partition, y se usa para numerar las copias de un mismo evento en el cluster.",
+        "correcta": false,
+        "porque_no": "La partición divide la carga de trabajo del tópico; el identificador secuencial del evento es el offset."
+      },
+      {
+        "texto": "Offset, y se usa para registrar hasta qué posición leyó cada consumidor.",
+        "correcta": true
+      },
+      {
+        "texto": "Topic, y se usa para ordenar los eventos según su categoría lógica.",
+        "correcta": false,
+        "porque_no": "El tópico es la categoría de mensajes; el orden dentro del log lo marca el offset."
+      }
+    ],
+    "explicacion": "En Kafka cada evento recibe un identificador secuencial llamado offset dentro de un log distribuido. El offset indica la posición del evento y es lo que los consumidores registran para saber hasta dónde leyeron. Como los eventos no se borran al consumirse, ese registro permite relecturas y reprocesamiento.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 20
+    },
+    "tags": [
+      "asincronia",
+      "kafka",
+      "offset"
+    ]
+  },
+  {
+    "id": "asinc-025",
+    "tema": "asincronia",
+    "subtema": "kafka",
+    "dificultad": "facil",
+    "pregunta": "Un equipo necesita separar, dentro del mismo cluster de Kafka, los eventos de compras de los de envíos. ¿Qué componente representa esa categoría lógica de mensajes?",
+    "opciones": [
+      {
+        "texto": "La partition, que define la categoría de negocio a la que pertenece cada evento.",
+        "correcta": false,
+        "porque_no": "La partición divide la carga de trabajo dentro de un tópico; no define la categoría de negocio."
+      },
+      {
+        "texto": "El topic, que representa una categoría lógica de mensajes.",
+        "correcta": true
+      },
+      {
+        "texto": "El consumer group, que agrupa los eventos por tipo para cada equipo.",
+        "correcta": false,
+        "porque_no": "El consumer group agrupa consumidores para repartir el procesamiento, no eventos."
+      },
+      {
+        "texto": "El offset, que identifica la categoría a la que pertenece cada evento.",
+        "correcta": false,
+        "porque_no": "El offset es la posición del evento dentro del log, no una categoría."
+      }
+    ],
+    "explicacion": "En Kafka el topic representa una categoría lógica de mensajes, y cada tópico se divide en particiones para repartir la carga. El consumer group, en cambio, agrupa consumidores para procesar en paralelo. El offset es la posición del evento dentro del log y no una clasificación de negocio.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 21
+    },
+    "tags": [
+      "asincronia",
+      "kafka",
+      "topic"
+    ]
+  },
+  {
+    "id": "asinc-026",
+    "tema": "asincronia",
+    "subtema": "seleccion",
+    "dificultad": "media",
+    "pregunta": "Un equipo elige la plataforma de mensajería según cuál aparece más en las encuestas del momento. ¿Cómo debería encararse esa decisión según el material?",
+    "opciones": [
+      {
+        "texto": "Comparando solo el rendimiento en mensajes por segundo, que según ellos resume el resto de los criterios.",
+        "correcta": false,
+        "porque_no": "El rendimiento es un criterio más; por sí solo no dice nada sobre persistencia, disponibilidad ni costo operativo."
+      },
+      {
+        "texto": "Adoptando la plataforma que use la mayoría de las empresas del sector, para reducir el riesgo de la decisión.",
+        "correcta": false,
+        "porque_no": "El material advierte de forma explícita contra elegir por popularidad o por moda tecnológica."
+      },
+      {
+        "texto": "Evaluando criterios técnicos como rendimiento, latencia, persistencia, escalabilidad, disponibilidad y complejidad operativa.",
+        "correcta": true
+      },
+      {
+        "texto": "Eligiendo la de menor complejidad operativa, porque los demás requisitos se resuelven con configuración.",
+        "correcta": false,
+        "porque_no": "La complejidad operativa es un criterio entre varios; no reemplaza a los requisitos de persistencia, latencia o escalabilidad."
+      }
+    ],
+    "explicacion": "El material advierte que la plataforma de mensajería no se elige por popularidad o moda tecnológica. Los criterios relevantes son rendimiento, latencia, persistencia, escalabilidad, disponibilidad y complejidad operativa. Cada uno se mide de forma distinta y su peso relativo depende del escenario.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 4
+    },
+    "tags": [
+      "asincronia",
+      "seleccion",
+      "mensajeria"
+    ]
+  },
+  {
+    "id": "asinc-027",
+    "tema": "asincronia",
+    "subtema": "seleccion",
+    "dificultad": "media",
+    "pregunta": "Al comparar dos plataformas de mensajería, un equipo confunde rendimiento con latencia. ¿Cómo se distinguen esos criterios?",
+    "opciones": [
+      {
+        "texto": "El rendimiento es el tiempo de entrega de un mensaje y la latencia es el volumen total de mensajes almacenados.",
+        "correcta": false,
+        "porque_no": "Invierte los criterios y mezcla la latencia con la persistencia, que mide el almacenamiento durable."
+      },
+      {
+        "texto": "Los dos criterios miden lo mismo, pero el rendimiento se evalúa en el broker y la latencia en el consumidor final.",
+        "correcta": false,
+        "porque_no": "Son criterios distintos: uno mide caudal de procesamiento y el otro, demora de entrega."
+      },
+      {
+        "texto": "El rendimiento depende del hardware y la latencia del protocolo, por eso no se comparan entre plataformas.",
+        "correcta": false,
+        "porque_no": "El material los presenta como criterios separados y comparables al evaluar tecnologías de mensajería."
+      },
+      {
+        "texto": "El rendimiento es la cantidad de mensajes procesados por unidad de tiempo; la latencia es el tiempo que tarda en entregarse un mensaje.",
+        "correcta": true
+      }
+    ],
+    "explicacion": "Rendimiento y latencia son criterios diferentes: el rendimiento mide cuántos mensajes se procesan por unidad de tiempo y la latencia mide cuánto tarda en entregarse un mensaje. Un sistema puede tener un caudal alto y aun así entregar cada mensaje con demora. Por eso el material los lista por separado entre los criterios de evaluación.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 4
+    },
+    "tags": [
+      "asincronia",
+      "seleccion",
+      "rendimiento",
+      "latencia"
+    ]
+  },
+  {
+    "id": "asinc-028",
+    "tema": "asincronia",
+    "subtema": "mqtt",
+    "dificultad": "media",
+    "pregunta": "Una empresa quiere usar MQTT como única plataforma para guardar y consultar años de telemetría. ¿Qué limitación del protocolo aparece en ese escenario?",
+    "opciones": [
+      {
+        "texto": "Tiene capacidades limitadas de almacenamiento histórico y escalabilidad restringida para grandes volúmenes históricos.",
+        "correcta": true
+      },
+      {
+        "texto": "No soporta el patrón publish/subscribe, así que no puede distribuir la telemetría a varios consumidores.",
+        "correcta": false,
+        "porque_no": "Al contrario: la arquitectura de MQTT está basada completamente en el patrón publish/subscribe."
+      },
+      {
+        "texto": "Exige conexiones cortas y no admite conexiones persistentes entre los dispositivos y el broker.",
+        "correcta": false,
+        "porque_no": "El protocolo soporta conexiones persistentes; es una de sus características principales."
+      },
+      {
+        "texto": "No puede usarse en dispositivos con recursos limitados por el tamaño de sus encabezados.",
+        "correcta": false,
+        "porque_no": "Se diseñó justamente para esos dispositivos, con encabezados reducidos y bajo consumo de recursos."
+      }
+    ],
+    "explicacion": "MQTT fue diseñado para telemetría liviana, no para mensajería empresarial con grandes volúmenes históricos. Sus limitaciones son el almacenamiento histórico acotado y la escalabilidad restringida cuando crecen los requisitos de historia. Por eso el material señala que suele complementarse con plataformas especializadas.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 10
+    },
+    "tags": [
+      "asincronia",
+      "mqtt",
+      "limitaciones"
+    ]
+  },
+  {
+    "id": "asinc-029",
+    "tema": "asincronia",
+    "subtema": "activemq",
+    "dificultad": "facil",
+    "pregunta": "¿Qué conjunto de capacidades ofrece ActiveMQ como implementación de JMS?",
+    "opciones": [
+      {
+        "texto": "Logs distribuidos con offsets y consumer groups por partición.",
+        "correcta": false,
+        "porque_no": "Eso describe Kafka; ActiveMQ trabaja con colas y tópicos, persistencia y transacciones."
+      },
+      {
+        "texto": "Publicación en tópicos con calidad de servicio y consumo mínimo de batería.",
+        "correcta": false,
+        "porque_no": "Esas son características de MQTT, pensadas para dispositivos con recursos limitados."
+      },
+      {
+        "texto": "Colas y tópicos, persistencia, transacciones, balanceo de carga y clustering.",
+        "correcta": true
+      },
+      {
+        "texto": "Definición de las APIs de mensajería, porque ActiveMQ es el estándar JMS.",
+        "correcta": false,
+        "porque_no": "ActiveMQ implementa JMS, no lo define: JMS es una especificación del ecosistema Java."
+      }
+    ],
+    "explicacion": "ActiveMQ implementa JMS y ofrece colas y tópicos, persistencia, transacciones, balanceo de carga y clustering. Está orientado a entornos empresariales donde la confiabilidad y la integridad de los mensajes son requisitos centrales. Por eso se usa en sistemas bancarios, gubernamentales y corporativos.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 12
+    },
+    "tags": [
+      "asincronia",
+      "activemq",
+      "jms"
+    ]
+  },
+  {
+    "id": "asinc-030",
+    "tema": "asincronia",
+    "subtema": "consumidor-jms",
+    "dificultad": "media",
+    "pregunta": "Un consumidor JMS ejecuta consumer.receive() sobre una cola que contiene las órdenes 1, 2 y 3, y confirma el mensaje con ACK. ¿Qué ocurre?",
+    "opciones": [
+      {
+        "texto": "Recibe la orden 1 y, al confirmarla con ACK, el broker la elimina de la cola y quedan las órdenes 2 y 3.",
+        "correcta": true
+      },
+      {
+        "texto": "Recibe las tres órdenes en un mismo ACK porque comparten la misma cola.",
+        "correcta": false,
+        "porque_no": "Cada receive() toma un mensaje, y el ACK confirma ese mensaje, no el resto de la cola."
+      },
+      {
+        "texto": "Recibe la orden 1, pero el mensaje permanece en la cola para que otros consumidores también lo lean.",
+        "correcta": false,
+        "porque_no": "Eso es el comportamiento de un log de Kafka; en la cola de ActiveMQ el ACK elimina el mensaje."
+      },
+      {
+        "texto": "Recibe la última orden encolada, porque la cola prioriza los mensajes más recientes.",
+        "correcta": false,
+        "porque_no": "El consumidor recibe la primera orden disponible; la cola respeta el orden de llegada."
+      }
+    ],
+    "explicacion": "En JMS, receive() bloquea al consumidor hasta que haya un mensaje disponible en la cola y devuelve el primero de la fila. Cuando el consumidor confirma con ACK, el broker elimina ese mensaje de la cola. Así, después de procesar la orden 1, la cola queda con las órdenes 2 y 3.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 17
+    },
+    "tags": [
+      "asincronia",
+      "jms",
+      "consumidor"
+    ]
+  },
+  {
+    "id": "asinc-031",
+    "tema": "asincronia",
+    "subtema": "kafka",
+    "dificultad": "media",
+    "pregunta": "¿Para qué sirve dividir un tópico de Kafka en particiones y atenderlo con un consumer group?",
+    "opciones": [
+      {
+        "texto": "Para que todos los consumidores del grupo reciban una copia completa de cada evento.",
+        "correcta": false,
+        "porque_no": "Eso es un esquema de suscriptores independientes; el consumer group reparte el trabajo en lugar de replicar cada evento a todos."
+      },
+      {
+        "texto": "Para eliminar los eventos ya procesados y liberar espacio en el log.",
+        "correcta": false,
+        "porque_no": "Kafka no elimina eventos al consumirlos: el consumidor solo avanza su posición de lectura."
+      },
+      {
+        "texto": "Para ordenar los eventos según su prioridad de negocio dentro de cada tópico.",
+        "correcta": false,
+        "porque_no": "Las particiones dividen la carga; no son un mecanismo de priorización de eventos."
+      },
+      {
+        "texto": "Para repartir la carga de trabajo y habilitar procesamiento paralelo y escalable.",
+        "correcta": true
+      }
+    ],
+    "explicacion": "Kafka divide cada tópico en particiones para repartir la carga de trabajo y usa el consumer group para que varios consumidores procesen en paralelo. Cada partición se asigna a un consumidor del grupo, lo que permite escalar el procesamiento agregando instancias. Las particiones no priorizan eventos ni entregan una copia a cada consumidor del grupo: solo dividen la carga.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 21
+    },
+    "tags": [
+      "asincronia",
+      "kafka",
+      "paralelismo"
+    ]
+  },
+  {
+    "id": "asinc-032",
+    "tema": "asincronia",
+    "subtema": "productor-jms",
+    "dificultad": "media",
+    "pregunta": "El productor JMS del material ejecuta:\nConnection connection = factory.createConnection();\nconnection.start();\nSession session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);\nQueue queue = session.createQueue(\"ordenes\");\nMessageProducer producer = session.createProducer(queue);\nproducer.send(message);\n¿Qué representa la cola ordenes y qué ocurre con el mensaje después del send?",
+    "opciones": [
+      {
+        "texto": "Es el tópico al que se suscriben todos los consumidores, y cada uno recibe una copia del mensaje.",
+        "correcta": false,
+        "porque_no": "Una cola JMS entrega el mensaje a un consumidor; para varios suscriptores haría falta un tópico."
+      },
+      {
+        "texto": "Es el canal donde se deposita el mensaje, y el broker lo almacena hasta que algún consumidor lo procese.",
+        "correcta": true
+      },
+      {
+        "texto": "El mensaje se entrega al consumidor conectado en ese instante y, si no hay ninguno, se descarta.",
+        "correcta": false,
+        "porque_no": "El broker almacena el mensaje hasta que algún consumidor lo procese; no exige un consumidor conectado en el momento del envío."
+      },
+      {
+        "texto": "El send() queda esperando la confirmación del consumidor antes de devolver el control al productor.",
+        "correcta": false,
+        "porque_no": "El productor envía al broker y continúa; la confirmación la realiza el consumidor al procesar el mensaje."
+      }
+    ],
+    "explicacion": "El fragmento crea la conexión al broker, abre una sesión JMS, obtiene la cola ordenes, arma un productor y envía un mensaje de texto. La cola es el canal donde se deposita el mensaje, y el broker lo almacena hasta que algún consumidor lo procese. El productor no espera a un consumidor: envía al broker y cierra la sesión.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 16
+    },
+    "tags": [
+      "asincronia",
+      "activemq",
+      "jms",
+      "codigo"
+    ]
+  },
+  {
+    "id": "asinc-033",
+    "tema": "asincronia",
+    "subtema": "mqtt",
+    "dificultad": "dificil",
+    "pregunta": "Una organización opera miles de sensores ambientales que envían temperatura, humedad y presión cada pocos minutos, con conectividad inestable y batería limitada. ¿Por qué MQTT resulta adecuado y qué habría que agregar si además se exige histórico de años?",
+    "opciones": [
+      {
+        "texto": "Porque MQTT guarda el histórico de cada sensor en el log del broker, así que no hace falta agregar ninguna otra pieza.",
+        "correcta": false,
+        "porque_no": "MQTT tiene almacenamiento histórico limitado y escalabilidad restringida para grandes volúmenes; el material propone complementarlo."
+      },
+      {
+        "texto": "Porque MQTT garantiza transacciones y auditoría igual que un broker empresarial, y además conserva el histórico completo.",
+        "correcta": false,
+        "porque_no": "Las transacciones y la confiabilidad empresarial son el terreno de ActiveMQ y JMS, no de MQTT."
+      },
+      {
+        "texto": "Porque MQTT exige una conexión dedicada y persistente por cada sensor, y eso es lo que reduce el consumo de batería.",
+        "correcta": false,
+        "porque_no": "El bajo consumo viene de los encabezados reducidos y las conexiones persistentes, no de exigir una conexión dedicada."
+      },
+      {
+        "texto": "Por su bajo consumo de ancho de banda y batería y su modelo pub/sub; el histórico excede a MQTT y conviene complementarlo con otra plataforma.",
+        "correcta": true
+      }
+    ],
+    "explicacion": "Para miles de sensores con conectividad inestable y batería limitada, MQTT es la opción por su bajo consumo de ancho de banda y energía, sus encabezados reducidos y su modelo pub/sub. El broker recibe las lecturas y las distribuye a los suscriptores, como el tablero de monitoreo. Si además se exige histórico de años, MQTT queda corto y hay que complementarlo con una plataforma especializada.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 9
+    },
+    "tags": [
+      "asincronia",
+      "mqtt",
+      "iot",
+      "escenario"
+    ]
+  },
+  {
+    "id": "asinc-034",
+    "tema": "asincronia",
+    "subtema": "seleccion",
+    "dificultad": "dificil",
+    "pregunta": "Un banco debe registrar, validar, auditar y almacenar cada operación, y la pérdida de un solo mensaje tendría consecuencias legales. Según los criterios de selección del material, ¿qué plataforma se ajusta y por qué?",
+    "opciones": [
+      {
+        "texto": "Mosquitto, porque es open source, consume poca memoria y permite autenticación de usuarios.",
+        "correcta": false,
+        "porque_no": "Mosquitto está pensado para telemetría y monitoreo con MQTT; no es la opción con garantías transaccionales para operaciones financieras."
+      },
+      {
+        "texto": "ActiveMQ, porque ofrece persistencia, transacciones y confiabilidad para garantizar la integridad de los mensajes.",
+        "correcta": true
+      },
+      {
+        "texto": "Kafka, porque prioriza la durabilidad por encima de las transacciones y la integridad del mensaje.",
+        "correcta": false,
+        "porque_no": "Kafka prioriza volumen, rendimiento y analítica en tiempo real; las garantías transaccionales del escenario son el terreno de ActiveMQ."
+      },
+      {
+        "texto": "Cualquiera de las tres, porque usar mensajería garantiza por sí solo la entrega de los mensajes.",
+        "correcta": false,
+        "porque_no": "La garantía depende de las capacidades y la configuración de la plataforma, no del solo hecho de usar mensajería."
+      }
+    ],
+    "explicacion": "El criterio del material es claro: ActiveMQ cuando se integran aplicaciones empresariales, existen requerimientos transaccionales y la confiabilidad es prioritaria. El caso de la institución financiera lo ilustra: cada transacción se registra, se valida, se audita y se almacena, y la pérdida de un mensaje tendría consecuencias legales. Kafka apunta a grandes volúmenes y analítica en tiempo real, y MQTT a telemetría liviana.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 23
+    },
+    "tags": [
+      "asincronia",
+      "activemq",
+      "seleccion",
+      "escenario"
+    ]
+  },
+  {
+    "id": "asinc-035",
+    "tema": "asincronia",
+    "subtema": "comparativa",
+    "dificultad": "dificil",
+    "pregunta": "La misma orden de compra se procesa con ActiveMQ y con Kafka. ¿Qué diferencia central aparece entre ambos esquemas?",
+    "opciones": [
+      {
+        "texto": "En ActiveMQ un único consumidor procesa el pago y el mensaje se elimina; en Kafka varios reciben el mismo evento y pueden releerlo.",
+        "correcta": true
+      },
+      {
+        "texto": "En ActiveMQ el mensaje se replica a todos los consumidores; en Kafka lo recibe un solo consumidor por tópico.",
+        "correcta": false,
+        "porque_no": "Invierte los modelos: la cola entrega a un consumidor y el tópico de Kafka distribuye el mismo evento a varios consumidores."
+      },
+      {
+        "texto": "En los dos casos el mensaje se elimina al ser consumido, pero Kafka lo conserva en memoria durante un rato.",
+        "correcta": false,
+        "porque_no": "Kafka no elimina el evento al consumirlo: lo mantiene almacenado durante un período configurable."
+      },
+      {
+        "texto": "En Kafka cada consumidor debe dar de alta su propia cola antes de leer el tópico, y en ActiveMQ se suscribe directamente.",
+        "correcta": false,
+        "porque_no": "En Kafka los consumidores se suscriben al tópico y se registran en un consumer group; no crean colas."
+      }
+    ],
+    "explicacion": "Con ActiveMQ la orden se envía a una cola, un único consumidor procesa el pago y el mensaje se elimina al finalizar. Con Kafka la orden se publica en un tópico y los consumidores independientes de facturación, inventario y dashboard reciben el mismo evento. Además, en Kafka los eventos quedan almacenados y pueden releerse cuando haga falta.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 30
+    },
+    "tags": [
+      "asincronia",
+      "kafka",
+      "activemq",
+      "comparativa"
+    ]
+  },
+  {
+    "id": "asinc-036",
+    "tema": "asincronia",
+    "subtema": "kafka",
+    "dificultad": "dificil",
+    "pregunta": "Un consumidor de Kafka procesó hasta el offset 3 de un tópico. ¿Qué implica esa posición y qué habilita?",
+    "opciones": [
+      {
+        "texto": "Que los eventos 0 a 3 fueron eliminados del log, porque el consumidor ya los confirmó uno por uno al procesarlos.",
+        "correcta": false,
+        "porque_no": "El consumidor no elimina eventos: solo registra hasta dónde leyó, y el log conserva lo anterior."
+      },
+      {
+        "texto": "Que el consumidor ya no puede releer los offsets anteriores, porque quedaron confirmados al avanzar su posición.",
+        "correcta": false,
+        "porque_no": "Justamente lo anterior sigue disponible, lo que habilita reprocesamiento, recuperación ante errores y auditoría."
+      },
+      {
+        "texto": "Que avanzó su posición de lectura hasta el offset 3; los eventos anteriores siguen almacenados y pueden reprocesarse o auditarse.",
+        "correcta": true
+      },
+      {
+        "texto": "Que el tópico queda bloqueado para el resto del grupo hasta que otro consumidor continúe leyendo desde el offset 4.",
+        "correcta": false,
+        "porque_no": "El offset es una posición de lectura de cada consumidor o grupo; no bloquea el tópico."
+      }
+    ],
+    "explicacion": "En Kafka el consumidor registra su posición de lectura mediante el offset: si procesó hasta el 3, la próxima lectura empieza en el 4. Los eventos anteriores no se borran por haber sido consumidos; siguen en el log durante el período configurado. Eso habilita reprocesamiento, recuperación ante errores, auditoría y analítica histórica.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 28
+    },
+    "tags": [
+      "asincronia",
+      "kafka",
+      "offset",
+      "reprocesamiento"
+    ]
+  }
+]

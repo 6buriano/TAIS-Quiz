@@ -1,0 +1,687 @@
+[
+  {
+    "id": "asinc-001",
+    "tema": "asincronia",
+    "subtema": "modelo-asincronico",
+    "dificultad": "facil",
+    "pregunta": "Un servicio web pasa gran parte del tiempo esperando respuestas de la base de datos y de otras APIs. ¿Qué caracteriza al modelo de ejecución asincrónico?",
+    "opciones": [
+      {
+        "texto": "Cada operación se ejecuta en su propio proceso y el sistema espera a que cada una termine antes de continuar.",
+        "correcta": false,
+        "porque_no": "El modelo asincrónico no exige un proceso por operación ni esperar a que cada una termine; justamente permite seguir con otras tareas mientras la operación pendiente se resuelve."
+      },
+      {
+        "texto": "Las tareas no bloquean el flujo principal: el sistema sigue procesando otras tareas y toma el resultado más tarde.",
+        "correcta": true
+      },
+      {
+        "texto": "El sistema ejecuta las instrucciones en orden estricto, pero asignando mayor prioridad a las operaciones de entrada y salida.",
+        "correcta": false,
+        "porque_no": "Eso es un modelo síncrono con prioridades: el asincronismo cambia la forma de esperar el resultado, no el orden en que se ejecutan las instrucciones."
+      },
+      {
+        "texto": "El servidor mantiene la conexión abierta y consulta el resultado en intervalos fijos hasta que esté disponible.",
+        "correcta": false,
+        "porque_no": "El sondeo periódico es una técnica posible, pero el modelo asincrónico se notifica mediante un evento, un callback o un mensaje cuando el resultado está listo."
+      }
+    ],
+    "explicacion": "La programación asincrónica es un modelo de ejecución donde las tareas no bloquean el flujo principal mientras esperan que termine una operación. El sistema continúa procesando otras tareas y toma el resultado más tarde, cuando la operación avisa que está lista. Ese aviso llega como evento, callback o mensaje, y es la base para desacoplar la producción de trabajo de su consumo.",
+    "fuente": {
+      "archivo": "05-01-ProgAsincronica-05-01.pdf",
+      "pagina": 2
+    },
+    "tags": [
+      "asincronia",
+      "modelo-ejecucion"
+    ]
+  },
+  {
+    "id": "asinc-002",
+    "tema": "asincronia",
+    "subtema": "modelo-bloqueante",
+    "dificultad": "facil",
+    "pregunta": "En un modelo síncrono tradicional llega una solicitud HTTP, el servidor consulta la base de datos y espera la respuesta. ¿Qué ocurre con el hilo que atiende esa solicitud durante la espera?",
+    "opciones": [
+      {
+        "texto": "Se libera y vuelve al pool, y la base de datos avisa al servidor cuando la consulta termina.",
+        "correcta": false,
+        "porque_no": "Eso describe una operación no bloqueante con notificación; en el modelo síncrono el hilo queda tomado hasta que la consulta termina."
+      },
+      {
+        "texto": "Sigue atendiendo otras solicitudes en paralelo mientras la base responde, sin costo adicional.",
+        "correcta": false,
+        "porque_no": "El modelo síncrono bloquea el hilo: durante la espera no atiende otras solicitudes, y por eso la capacidad del sistema cae bajo carga."
+      },
+      {
+        "texto": "Queda bloqueado durante toda la espera y no puede atender otras solicitudes.",
+        "correcta": true
+      },
+      {
+        "texto": "Se suspende solo si la consulta supera un umbral de tiempo y hasta entonces procesa otros pedidos.",
+        "correcta": false,
+        "porque_no": "La suspensión no depende de un umbral: el hilo se bloquea desde que lanza la operación hasta que recibe el resultado."
+      }
+    ],
+    "explicacion": "En el modelo síncrono cada operación bloquea el hilo de ejecución hasta completar su tarea: el servidor consulta la base y espera. Durante esa espera el hilo no atiende otras solicitudes, así que la capacidad del sistema se reduce. De ahí surgen la baja escalabilidad bajo carga, el uso ineficiente de recursos y la mayor latencia percibida.",
+    "fuente": {
+      "archivo": "05-01-ProgAsincronica-05-01.pdf",
+      "pagina": 4
+    },
+    "tags": [
+      "asincronia",
+      "bloqueo",
+      "hilos"
+    ]
+  },
+  {
+    "id": "asinc-003",
+    "tema": "asincronia",
+    "subtema": "rendimiento",
+    "dificultad": "media",
+    "pregunta": "¿Qué problema de rendimiento resuelve principalmente el asincronismo cuando hay operaciones de entrada y salida con latencia significativa?",
+    "opciones": [
+      {
+        "texto": "Reduce el tiempo de cómputo que insume cada operación de entrada y salida en el servidor.",
+        "correcta": false,
+        "porque_no": "El asincronismo no acelera la operación de entrada y salida en sí: cambia lo que hace el sistema mientras la espera."
+      },
+      {
+        "texto": "Elimina la latencia de red porque las operaciones pasan a ejecutarse en el cliente.",
+        "correcta": false,
+        "porque_no": "La latencia de red es inevitable en sistemas distribuidos; el asincronismo la gestiona mediante desacoplamiento, no la elimina."
+      },
+      {
+        "texto": "Multiplica los hilos del servidor para que cada uno espere una operación distinta.",
+        "correcta": false,
+        "porque_no": "Sumar hilos no es la propuesta del modelo asincrónico: la idea es delegar la operación y continuar, no acumular hilos esperando."
+      },
+      {
+        "texto": "Evita que el hilo quede esperando sin hacer nada y aprovecha ese tiempo para procesar otras tareas.",
+        "correcta": true
+      }
+    ],
+    "explicacion": "Cuando una operación de entrada y salida tiene latencia, el modelo síncrono deja el hilo esperando sin producir nada. El asincronismo delega la operación a un componente externo y usa ese tiempo para procesar otras tareas, maximizando el uso del CPU. No reduce la latencia de la operación: cambia lo que hace el sistema durante la espera.",
+    "fuente": {
+      "archivo": "05-01-ProgAsincronica-05-01.pdf",
+      "pagina": 5
+    },
+    "tags": [
+      "asincronia",
+      "rendimiento",
+      "io"
+    ]
+  },
+  {
+    "id": "asinc-004",
+    "tema": "asincronia",
+    "subtema": "delegacion",
+    "dificultad": "facil",
+    "pregunta": "Según la idea fundamental del modelo asincrónico, ¿qué hace el sistema cuando inicia una operación lenta?",
+    "opciones": [
+      {
+        "texto": "La delega a un componente externo y continúa ejecutando otras tareas hasta que el resultado esté disponible.",
+        "correcta": true
+      },
+      {
+        "texto": "La ejecuta él mismo y, cuando termina, retoma el resto del programa en el mismo punto donde lo dejó.",
+        "correcta": false,
+        "porque_no": "Eso es exactamente la ejecución síncrona: el programa espera el resultado antes de seguir con la instrucción siguiente."
+      },
+      {
+        "texto": "La descarta si no se resuelve de inmediato y notifica un error al cliente para que reintente.",
+        "correcta": false,
+        "porque_no": "La operación no se descarta: queda en curso y su resultado se recibe después mediante un evento, un callback o un mensaje."
+      },
+      {
+        "texto": "La divide en pasos pequeños que resuelve uno detrás del otro dentro del mismo hilo de ejecución.",
+        "correcta": false,
+        "porque_no": "Esa partición no evita el bloqueo si los pasos se ejecutan uno detrás del otro en el mismo hilo; lo que define al asincronismo es delegar y continuar."
+      }
+    ],
+    "explicacion": "En el modelo asincrónico la operación se delega a un componente externo y el hilo principal continúa ejecutando otras tareas. Cuando el resultado está disponible, el sistema recibe una notificación y lo procesa en ese momento. El flujo conceptual es: se inicia la operación, se delega, el sistema sigue operando y el resultado llega más tarde.",
+    "fuente": {
+      "archivo": "05-01-ProgAsincronica-05-01.pdf",
+      "pagina": 5
+    },
+    "tags": [
+      "asincronia",
+      "delegacion"
+    ]
+  },
+  {
+    "id": "asinc-005",
+    "tema": "asincronia",
+    "subtema": "callbacks",
+    "dificultad": "facil",
+    "pregunta": "Cuando una operación asincrónica termina, ¿cómo se entera el sistema de que el resultado está disponible?",
+    "opciones": [
+      {
+        "texto": "Consultando el estado de la operación en un bucle activo que ocupa el hilo hasta obtenerlo.",
+        "correcta": false,
+        "porque_no": "El sondeo activo gasta el hilo; el modelo asincrónico se apoya en la notificación que llega cuando el resultado está disponible."
+      },
+      {
+        "texto": "Porque la operación interrumpe el hilo principal y ejecuta el resto del programa en ese mismo momento.",
+        "correcta": false,
+        "porque_no": "El hilo principal no se interrumpe: continúa con otras tareas y atiende el resultado cuando corresponde."
+      },
+      {
+        "texto": "Se le notifica mediante un evento, un callback o un mensaje, y recién entonces procesa el resultado.",
+        "correcta": true
+      },
+      {
+        "texto": "Únicamente al reiniciar el proceso, que es cuando se leen los resultados pendientes.",
+        "correcta": false,
+        "porque_no": "Los resultados no se recogen al reiniciar: la notificación ocurre apenas la operación finaliza."
+      }
+    ],
+    "explicacion": "El resultado de una operación asincrónica no se obtiene en la misma línea de código que la inicia. El sistema se entera mediante un evento, un callback o un mensaje que se dispara cuando la operación termina. Ese mecanismo de notificación es lo que permite desacoplar la producción de trabajo de su consumo.",
+    "fuente": {
+      "archivo": "05-01-ProgAsincronica-05-01.pdf",
+      "pagina": 5
+    },
+    "tags": [
+      "asincronia",
+      "callbacks",
+      "eventos"
+    ]
+  },
+  {
+    "id": "asinc-006",
+    "tema": "asincronia",
+    "subtema": "atributos-calidad",
+    "dificultad": "media",
+    "pregunta": "El asincronismo se justifica desde la arquitectura de software porque mejora atributos de calidad. ¿Qué conjunto de atributos destaca el material del curso?",
+    "opciones": [
+      {
+        "texto": "Rendimiento, escalabilidad y responsividad.",
+        "correcta": true
+      },
+      {
+        "texto": "Seguridad, auditabilidad y trazabilidad.",
+        "correcta": false,
+        "porque_no": "Son atributos valiosos en un sistema, pero no son los que el material asocia al modelo asincrónico."
+      },
+      {
+        "texto": "Portabilidad, mantenibilidad y testabilidad.",
+        "correcta": false,
+        "porque_no": "El asincronismo no se presenta como una mejora de portabilidad o de testabilidad; su aporte se mide en rendimiento, escalabilidad y responsividad."
+      },
+      {
+        "texto": "Consistencia fuerte, atomicidad y durabilidad.",
+        "correcta": false,
+        "porque_no": "Esas son propiedades transaccionales y, de hecho, el asincronismo suele introducir desafíos de consistencia en lugar de resolverlos."
+      }
+    ],
+    "explicacion": "El material presenta el asincronismo como un modelo que mejora rendimiento, escalabilidad y responsividad. El rendimiento mejora porque el CPU no queda esperando operaciones de entrada y salida; la escalabilidad, porque un mismo servidor atiende más solicitudes concurrentes; la responsividad, porque el sistema sigue respondiendo mientras espera resultados.",
+    "fuente": {
+      "archivo": "05-01-ProgAsincronica-05-01.pdf",
+      "pagina": 3
+    },
+    "tags": [
+      "asincronia",
+      "atributos-calidad"
+    ]
+  },
+  {
+    "id": "asinc-007",
+    "tema": "asincronia",
+    "subtema": "acoplamiento-temporal",
+    "dificultad": "media",
+    "pregunta": "En sistemas distribuidos se habla de acoplamiento temporal entre componentes. ¿Qué designa ese concepto?",
+    "opciones": [
+      {
+        "texto": "La dependencia de dos componentes respecto del mismo huso horario configurado en los servidores.",
+        "correcta": false,
+        "porque_no": "No tiene que ver con zonas horarias: se refiere a la simultaneidad que se exige para el intercambio de mensajes."
+      },
+      {
+        "texto": "La obligación de versionar los contratos de las APIs cada vez que cambian.",
+        "correcta": false,
+        "porque_no": "Eso es acoplamiento de contrato o de interfaz, no la dependencia de estar activos al mismo tiempo."
+      },
+      {
+        "texto": "La demora que introduce la red entre dos servicios que se comunican por HTTP.",
+        "correcta": false,
+        "porque_no": "La latencia es una demora medible; el acoplamiento temporal es la dependencia de simultaneidad que obliga a esperar la respuesta."
+      },
+      {
+        "texto": "La necesidad de que dos componentes estén activos al mismo tiempo para poder comunicarse.",
+        "correcta": true
+      }
+    ],
+    "explicacion": "El acoplamiento temporal aparece cuando dos componentes deben estar activos al mismo tiempo para comunicarse, como A esperando la respuesta de B. Si B falla o está lento, A también se degrada porque necesita esa respuesta para continuar. La mensajería rompe esa dependencia: A envía el mensaje y sigue, y B lo procesa cuando puede.",
+    "fuente": {
+      "archivo": "05-01-ProgAsincronica-05-01.pdf",
+      "pagina": 7
+    },
+    "tags": [
+      "asincronia",
+      "acoplamiento",
+      "distribuidos"
+    ]
+  },
+  {
+    "id": "asinc-008",
+    "tema": "asincronia",
+    "subtema": "acoplamiento-temporal",
+    "dificultad": "dificil",
+    "pregunta": "El servicio A llama por HTTP al servicio B y espera su respuesta. Los fines de semana B se satura y tarda varios segundos. ¿Qué consecuencia se produce y cómo la evita la mensajería asincrónica?",
+    "opciones": [
+      {
+        "texto": "A mantiene su desempeño porque la llamada HTTP se ejecuta en otro hilo del servidor y no ocupa el principal.",
+        "correcta": false,
+        "porque_no": "Otro hilo no elimina la dependencia: A todavía necesita la respuesta de B para completar su trabajo y se degrada si B tarda."
+      },
+      {
+        "texto": "A se degrada junto con B por el acoplamiento temporal; con mensajería, A envía el mensaje y sigue, y B procesa cuando puede.",
+        "correcta": true
+      },
+      {
+        "texto": "El problema desaparece porque el broker reparte la carga y acelera el procesamiento del servicio B.",
+        "correcta": false,
+        "porque_no": "El broker desacopla la entrega, pero no acelera a B; si B es lento, la cola crece en lugar de degradarse A."
+      },
+      {
+        "texto": "A reintenta la llamada hasta obtener respuesta, con lo que mantiene la comunicación síncrona pero más confiable.",
+        "correcta": false,
+        "porque_no": "Reintentar conserva la espera y multiplica la carga sobre B; no rompe el acoplamiento temporal."
+      }
+    ],
+    "explicacion": "Con la llamada síncrona, A queda atado a la disponibilidad y a la velocidad de B: si B tarda, A se degrada. Con mensajería, A publica el mensaje y continúa, y B procesa a su ritmo, lo que elimina la dependencia temporal estricta. Reintentar no rompe ese acoplamiento: solo agrega carga sobre el servicio lento.",
+    "fuente": {
+      "archivo": "05-01-ProgAsincronica-05-01.pdf",
+      "pagina": 7
+    },
+    "tags": [
+      "asincronia",
+      "acoplamiento",
+      "escenario"
+    ]
+  },
+  {
+    "id": "asinc-009",
+    "tema": "asincronia",
+    "subtema": "mensajeria",
+    "dificultad": "facil",
+    "pregunta": "En un sistema de mensajería, ¿qué rol cumple el broker?",
+    "opciones": [
+      {
+        "texto": "Genera los mensajes de negocio y decide en qué momento deben publicarse.",
+        "correcta": false,
+        "porque_no": "El que genera mensajes es el productor; el broker es el intermediario que los recibe y distribuye."
+      },
+      {
+        "texto": "Procesa los mensajes y ejecuta la lógica de negocio de cada consumidor.",
+        "correcta": false,
+        "porque_no": "La lógica la ejecuta el consumidor; el broker se limita a recibir, almacenar y distribuir."
+      },
+      {
+        "texto": "Define el contrato de la API que usan los servicios para comunicarse entre sí.",
+        "correcta": false,
+        "porque_no": "El contrato es parte de la especificación de mensajería; el broker es el componente que transporta y almacena los mensajes."
+      },
+      {
+        "texto": "Recibe los mensajes de los productores, los almacena y los distribuye a los consumidores.",
+        "correcta": true
+      }
+    ],
+    "explicacion": "El broker es el intermediario del sistema de mensajería: recibe los mensajes que publican los productores, los almacena y los distribuye a los consumidores. Gracias a esa intermediación, productores y consumidores no se conocen entre sí. En MQTT ese rol lo cumple, por ejemplo, Mosquitto.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 2
+    },
+    "tags": [
+      "asincronia",
+      "mensajeria",
+      "broker"
+    ]
+  },
+  {
+    "id": "asinc-010",
+    "tema": "asincronia",
+    "subtema": "canales",
+    "dificultad": "media",
+    "pregunta": "Se publican tres pedidos en un canal atendido por tres workers. ¿Cuántos workers procesan cada pedido y en qué orden se consumen?",
+    "opciones": [
+      {
+        "texto": "Cada pedido lo procesan los tres workers para validarlo por triplicado.",
+        "correcta": false,
+        "porque_no": "Eso es el comportamiento de pub/sub; en un canal cada mensaje lo toma un único consumidor."
+      },
+      {
+        "texto": "Cada pedido lo procesa un solo worker y el canal se comporta como una cola FIFO.",
+        "correcta": true
+      },
+      {
+        "texto": "Cada pedido lo procesa el worker que esté libre en ese instante, sin ningún orden de llegada.",
+        "correcta": false,
+        "porque_no": "El orden FIFO se respeta; lo que puede variar es cuál de los workers toma cada mensaje."
+      },
+      {
+        "texto": "Los pedidos se reparten entre los workers y cada uno recibe una copia completa del lote.",
+        "correcta": false,
+        "porque_no": "En un canal el mensaje se entrega a un consumidor y no se replica: no hay copia del lote para cada worker."
+      }
+    ],
+    "explicacion": "Un canal funciona como una fila de trabajo: cada mensaje que entra en la cola lo procesa un solo consumidor, aunque haya varios workers disponibles. El canal se comporta como cola FIFO, respetando el orden de llegada. Por eso los pedidos se reparten entre los workers en lugar de replicarse a todos.",
+    "fuente": {
+      "archivo": "05-01-ProgAsincronica-05-01.pdf",
+      "pagina": 9
+    },
+    "tags": [
+      "asincronia",
+      "canales",
+      "workers"
+    ]
+  },
+  {
+    "id": "asinc-011",
+    "tema": "asincronia",
+    "subtema": "control-de-flujo",
+    "dificultad": "media",
+    "pregunta": "Un canal de pedidos recibe un pico de tráfico muy superior al ritmo habitual. ¿Qué propiedad del canal explica que la aplicación principal no se sobrecargue?",
+    "opciones": [
+      {
+        "texto": "Actúa como buffer y control de flujo: retiene los mensajes y los consumidores los procesan a su propio ritmo.",
+        "correcta": true
+      },
+      {
+        "texto": "Duplica cada mensaje que llega para que los consumidores elijan el que puedan procesar en ese momento.",
+        "correcta": false,
+        "porque_no": "Duplicar mensajes no es una propiedad del canal y generaría trabajo repetido; el buffer retiene, no duplica."
+      },
+      {
+        "texto": "Rechaza los mensajes excedentes en la entrada para proteger a los consumidores durante el pico.",
+        "correcta": false,
+        "porque_no": "El canal absorbe el pico; descartar mensajes sería una política posible, pero no lo que describe el material."
+      },
+      {
+        "texto": "Ejecuta a los consumidores en el mismo hilo de la aplicación para evitar la contención entre procesos.",
+        "correcta": false,
+        "porque_no": "Eso volvería a acoplar temporalmente la aplicación con el consumo y no explicaría la absorción del pico."
+      }
+    ],
+    "explicacion": "El canal actúa como cola o buffer entre productor y consumidor, y por eso permite absorber picos de carga sin sobrecargar a los consumidores. La aplicación principal deposita el mensaje y sigue, mientras los consumidores procesan a su propio ritmo. Esa es la propiedad de control de flujo que el material enumera entre las características de los canales.",
+    "fuente": {
+      "archivo": "05-01-ProgAsincronica-05-01.pdf",
+      "pagina": 10
+    },
+    "tags": [
+      "asincronia",
+      "canales",
+      "control-de-flujo",
+      "buffer"
+    ]
+  },
+  {
+    "id": "asinc-012",
+    "tema": "asincronia",
+    "subtema": "pubsub",
+    "dificultad": "facil",
+    "pregunta": "En el patrón publish/subscribe, ¿qué ocurre cuando un publicador emite un evento sobre un tema?",
+    "opciones": [
+      {
+        "texto": "Lo recibe el primer consumidor que llegue y el evento se elimina del tema después de esa entrega.",
+        "correcta": false,
+        "porque_no": "Eso describe un canal con un consumidor por mensaje, no el patrón publish/subscribe."
+      },
+      {
+        "texto": "Lo reciben únicamente los consumidores que ya estaban suscriptos cuando se creó el tema.",
+        "correcta": false,
+        "porque_no": "La recepción depende de estar suscripto al tema, y esa suscripción no se congela en el momento de creación."
+      },
+      {
+        "texto": "Todos los consumidores suscriptos a ese tema reciben una copia del evento, sin que el publicador los conozca.",
+        "correcta": true
+      },
+      {
+        "texto": "El publicador elige de forma explícita a cada destinatario dentro de la lista de suscriptores.",
+        "correcta": false,
+        "porque_no": "Justamente el publicador no conoce a los consumidores: esa es la fuente del bajo acoplamiento del patrón."
+      }
+    ],
+    "explicacion": "En pub/sub los productores publican eventos sin conocer a los consumidores, que se suscriben a los temas que les interesan. Un mismo evento llega a todos los suscriptores del tema, no a uno solo como en un canal. Ese desacoplamiento permite sumar consumidores nuevos sin modificar a los publicadores.",
+    "fuente": {
+      "archivo": "05-01-ProgAsincronica-05-01.pdf",
+      "pagina": 12
+    },
+    "tags": [
+      "asincronia",
+      "pubsub",
+      "eventos"
+    ]
+  },
+  {
+    "id": "asinc-013",
+    "tema": "asincronia",
+    "subtema": "canales-vs-pubsub",
+    "dificultad": "media",
+    "pregunta": "Cuando se crea una orden, los servicios de inventario, facturación y notificaciones deben reaccionar al mismo evento. ¿Qué modelo corresponde y por qué?",
+    "opciones": [
+      {
+        "texto": "Un canal con un solo consumidor, porque así se garantiza el orden de facturación de las órdenes.",
+        "correcta": false,
+        "porque_no": "Un canal entrega cada mensaje a un solo consumidor: los otros dos servicios nunca se enterarían de la orden."
+      },
+      {
+        "texto": "Pub/sub, porque múltiples consumidores reciben el mismo evento y el productor no necesita conocerlos.",
+        "correcta": true
+      },
+      {
+        "texto": "Un canal por cada servicio, porque cada canal desacopla mejor que un tópico compartido.",
+        "correcta": false,
+        "porque_no": "Multiplicar canales obliga al productor a conocer a cada destinatario y pierde el desacoplamiento del pub/sub."
+      },
+      {
+        "texto": "Pub/sub, pero solo si los tres servicios comparten el mismo lenguaje y framework.",
+        "correcta": false,
+        "porque_no": "El patrón no exige homogeneidad; el broker es justamente lo que facilita integrar sistemas heterogéneos."
+      }
+    ],
+    "explicacion": "Si tres servicios tienen que reaccionar a la misma orden, el canal no alcanza: cada mensaje lo procesa un solo consumidor y los otros dos no se enterarían. Pub/sub entrega el mismo evento a todos los suscriptores de un tema y mantiene al productor ajeno a sus consumidores. La tabla comparativa del material lo resume: cola con acoplamiento medio para procesar tareas, evento con acoplamiento bajo para sistemas de eventos.",
+    "fuente": {
+      "archivo": "05-01-ProgAsincronica-05-01.pdf",
+      "pagina": 14
+    },
+    "tags": [
+      "asincronia",
+      "pubsub",
+      "canales",
+      "escenario"
+    ]
+  },
+  {
+    "id": "asinc-014",
+    "tema": "asincronia",
+    "subtema": "colas",
+    "dificultad": "dificil",
+    "pregunta": "Un equipo propone mover el procesamiento de pagos de una llamada síncrona a una cola con workers. ¿Qué beneficio y qué riesgo nuevo introduce el cambio?",
+    "opciones": [
+      {
+        "texto": "Mejora la escalabilidad y garantiza que el pago quede registrado en el mismo instante en que se encola la operación.",
+        "correcta": false,
+        "porque_no": "Encolar no es procesar: entre el encolado y el registro existe una ventana en la que el pago todavía no está confirmado."
+      },
+      {
+        "texto": "Elimina la necesidad de reintentos y de idempotencia, porque el broker asegura que cada mensaje se entrega una sola vez.",
+        "correcta": false,
+        "porque_no": "El desacoplamiento no elimina los reintentos ni la posibilidad de procesar dos veces; el material no atribuye entrega única garantizada al broker."
+      },
+      {
+        "texto": "Aumenta la capacidad de absorber picos y desacopla los servicios, pero el pago ya no está confirmado cuando el cliente recibe la respuesta.",
+        "correcta": true
+      },
+      {
+        "texto": "Reduce la latencia percibida y, al mismo tiempo, conserva la consistencia fuerte entre el pedido y el pago registrado.",
+        "correcta": false,
+        "porque_no": "La respuesta rápida viene de no esperar el procesamiento, y eso debilita la consistencia inmediata en lugar de conservarla."
+      }
+    ],
+    "explicacion": "Al mover el pago a una cola, el servicio responde sin esperar el procesamiento y los workers escalan de forma independiente, lo que absorbe picos de demanda. El costo es que la respuesta al cliente ya no confirma el pago: hay una ventana en la que la operación está encolada pero todavía no registrada. Ese desacople debilita la consistencia inmediata y obliga a definir estados intermedios y garantías de entrega del broker.",
+    "fuente": {
+      "archivo": "05-01-ProgAsincronica-05-01.pdf",
+      "pagina": 10
+    },
+    "tags": [
+      "asincronia",
+      "colas",
+      "consistencia",
+      "escenario"
+    ]
+  },
+  {
+    "id": "asinc-015",
+    "tema": "asincronia",
+    "subtema": "microservicios",
+    "dificultad": "media",
+    "pregunta": "El servicio de pedidos deja de llamar al servicio de envío y publica un evento cuando confirma una compra. ¿Qué mejora aporta esa decisión?",
+    "opciones": [
+      {
+        "texto": "Garantiza que el envío se complete antes de confirmar el pedido al cliente, sin importar el estado del servicio.",
+        "correcta": false,
+        "porque_no": "Al publicar y continuar, el pedido no espera al envío; se gana desacoplamiento a costa de no tener confirmación inmediata."
+      },
+      {
+        "texto": "Elimina la necesidad de monitorear el servicio de envío, porque el broker se ocupa de todo.",
+        "correcta": false,
+        "porque_no": "El broker intermedia los mensajes, no reemplaza al servicio ni elimina el monitoreo."
+      },
+      {
+        "texto": "Reduce la cantidad de servicios necesarios para completar una compra y simplifica el flujo.",
+        "correcta": false,
+        "porque_no": "La cantidad de servicios es la misma; lo que cambia es la forma en que se comunican."
+      },
+      {
+        "texto": "Evita la dependencia directa y permite que el sistema siga funcionando aunque envío esté temporalmente caído.",
+        "correcta": true
+      }
+    ],
+    "explicacion": "El servicio de pedidos publica un evento y no espera la respuesta del servicio de envío, con lo que desaparece la dependencia directa entre ambos. Si envío está temporalmente caído, el pedido se sigue registrando y el mensaje espera a que el servicio vuelva. Esa es la mejora de tolerancia a fallos que el material atribuye al asincronismo en microservicios.",
+    "fuente": {
+      "archivo": "05-01-ProgAsincronica-05-01.pdf",
+      "pagina": 16
+    },
+    "tags": [
+      "asincronia",
+      "microservicios",
+      "tolerancia-fallos"
+    ]
+  },
+  {
+    "id": "asinc-016",
+    "tema": "asincronia",
+    "subtema": "diagnostico",
+    "dificultad": "dificil",
+    "pregunta": "En una arquitectura de microservicios, varios servicios se llaman en cadena de forma síncrona y, cuando uno se pone lento, toda la cadena se degrada. ¿Cuál es el diagnóstico y qué cambio propone el material?",
+    "opciones": [
+      {
+        "texto": "Hay acoplamiento temporal entre los servicios; reemplazar las llamadas por mensajería permite que cada uno procese a su ritmo.",
+        "correcta": true
+      },
+      {
+        "texto": "Falta capacidad de CPU en los servidores, así que hay que agregar instancias a cada servicio de la cadena.",
+        "correcta": false,
+        "porque_no": "Agregar instancias no rompe la dependencia de simultaneidad: la cadena sigue esperando al eslabón más lento."
+      },
+      {
+        "texto": "El problema es de contratos de API; hay que versionar las interfaces para que la cadena responda más rápido.",
+        "correcta": false,
+        "porque_no": "Versionar contratos no reduce el tiempo de espera ni elimina la dependencia entre servicios."
+      },
+      {
+        "texto": "Falta un balanceador que reparta las llamadas entre los servicios de la cadena y así reduzca la espera.",
+        "correcta": false,
+        "porque_no": "El balanceo distribuye carga, pero la llamada síncrona sigue exigiendo que el otro servicio esté activo y responda a tiempo."
+      }
+    ],
+    "explicacion": "La cadena de llamadas síncronas es un caso de acoplamiento temporal: cada servicio necesita que el siguiente esté activo y responda a tiempo, y la lentitud de uno se propaga a toda la cadena. La mensajería reemplaza la espera por la publicación de un evento, y cada servicio consume cuando puede procesar. Agregar instancias o balanceadores no elimina esa dependencia de simultaneidad.",
+    "fuente": {
+      "archivo": "05-01-ProgAsincronica-05-01.pdf",
+      "pagina": 7
+    },
+    "tags": [
+      "asincronia",
+      "acoplamiento",
+      "diagnostico"
+    ]
+  },
+  {
+    "id": "asinc-017",
+    "tema": "asincronia",
+    "subtema": "mensajeria",
+    "dificultad": "facil",
+    "pregunta": "¿Qué habilita un broker instalado entre productores y consumidores que evolucionan a distinto ritmo?",
+    "opciones": [
+      {
+        "texto": "Que desaparezca la necesidad de definir el formato de los mensajes que se intercambian.",
+        "correcta": false,
+        "porque_no": "El formato sigue existiendo; el broker desacopla el transporte, no el contenido del mensaje."
+      },
+      {
+        "texto": "Que los consumidores puedan modificar los mensajes antes de que los reciban los productores.",
+        "correcta": false,
+        "porque_no": "El flujo va del productor al consumidor; el broker no habilita que el consumidor altere lo publicado."
+      },
+      {
+        "texto": "Que productores y consumidores evolucionen de forma independiente y se integren sistemas heterogéneos.",
+        "correcta": true
+      },
+      {
+        "texto": "Que todos los servicios compartan la misma base de datos para evitar duplicaciones.",
+        "correcta": false,
+        "porque_no": "Compartir la base de datos acopla todavía más a los servicios; el broker apunta en la dirección opuesta."
+      }
+    ],
+    "explicacion": "El broker media entre productores y consumidores, de modo que cada lado evoluciona por su cuenta sin conocer los detalles del otro. Por eso se pueden integrar sistemas heterogéneos y cambiar una implementación sin reescribir la otra punta. Lo que el broker no elimina es la necesidad de acordar el formato del mensaje.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 3
+    },
+    "tags": [
+      "asincronia",
+      "mensajeria",
+      "broker"
+    ]
+  },
+  {
+    "id": "asinc-018",
+    "tema": "asincronia",
+    "subtema": "acoplamiento",
+    "dificultad": "dificil",
+    "pregunta": "Un tablero de monitoreo consume las lecturas de miles de sensores a través de un broker MQTT. El equipo quiere sumar un segundo consumidor que guarde histórico sin tocar el firmware de los sensores. ¿Qué propiedad del esquema lo permite?",
+    "opciones": [
+      {
+        "texto": "El desacoplamiento del pub/sub: los sensores publican en un tópico y el nuevo consumidor se suscribe sin tocar a los emisores.",
+        "correcta": true
+      },
+      {
+        "texto": "La entrega punto a punto del canal, que asegura que cada lectura llegue también al consumidor nuevo.",
+        "correcta": false,
+        "porque_no": "En un canal cada mensaje lo toma un solo consumidor: el nuevo competiría con el tablero en lugar de recibir su propia copia."
+      },
+      {
+        "texto": "El ACK que envía el consumidor, que avisa a los sensores cuándo deben reenviar cada lectura a los demás suscriptores.",
+        "correcta": false,
+        "porque_no": "El ACK confirma el procesamiento y permite descartar el mensaje; no es un mecanismo para sumar consumidores."
+      },
+      {
+        "texto": "La conexión persistente del sensor, que queda abierta esperando la confirmación de cada consumidor nuevo.",
+        "correcta": false,
+        "porque_no": "La conexión persistente reduce el costo de reconexión; no es lo que permite sumar consumidores sin tocar al emisor."
+      }
+    ],
+    "explicacion": "En MQTT los sensores publican en tópicos y el broker distribuye a quien esté suscripto, sin que los emisores conozcan a los consumidores. Sumar un consumidor de histórico es solo una nueva suscripción, sin tocar el firmware de los sensores. Un canal no serviría para eso, porque cada mensaje lo tomaría un único consumidor y competiría con el tablero.",
+    "fuente": {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "pagina": 8
+    },
+    "tags": [
+      "asincronia",
+      "pubsub",
+      "mqtt",
+      "acoplamiento"
+    ]
+  }
+]

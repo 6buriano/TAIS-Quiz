@@ -1,0 +1,136 @@
+{
+  "documentos": [
+    {
+      "archivo": "01-01-tais-Introduccion al Curso.pdf",
+      "carpeta": "",
+      "corpus": "01-01-tais-introduccion-al-curso.json",
+      "paginas": 7
+    },
+    {
+      "archivo": "01-02-tais-Tacticas de Ing Soft.pdf",
+      "carpeta": "",
+      "corpus": "01-02-tais-tacticas-de-ing-soft.json",
+      "paginas": 33
+    },
+    {
+      "archivo": "01-03-tais-Estilos.pdf",
+      "carpeta": "",
+      "corpus": "01-03-tais-estilos.json",
+      "paginas": 78
+    },
+    {
+      "archivo": "02-01-tais-Contenerizacion-02-01.pdf",
+      "carpeta": "",
+      "corpus": "02-01-tais-contenerizacion-02-01.json",
+      "paginas": 30
+    },
+    {
+      "archivo": "02-02-tais-CI-CD-02-02.pdf",
+      "carpeta": "",
+      "corpus": "02-02-tais-ci-cd-02-02.json",
+      "paginas": 28
+    },
+    {
+      "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf",
+      "carpeta": "",
+      "corpus": "03-01-tais-persistencianorelacional-03-01.json",
+      "paginas": 24
+    },
+    {
+      "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf",
+      "carpeta": "",
+      "corpus": "03-02-tais-persistencianorelacional-03-02.json",
+      "paginas": 43
+    },
+    {
+      "archivo": "03-03-tais-PersistenciaNoRelacional-03-03.pdf",
+      "carpeta": "",
+      "corpus": "03-03-tais-persistencianorelacional-03-03.json",
+      "paginas": 17
+    },
+    {
+      "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf",
+      "carpeta": "",
+      "corpus": "04-01-cachedatos-bd-memoria-04-01.json",
+      "paginas": 39
+    },
+    {
+      "archivo": "04-02-Redis-04-02.pdf",
+      "carpeta": "",
+      "corpus": "04-02-redis-04-02.json",
+      "paginas": 28
+    },
+    {
+      "archivo": "05-01-ProgAsincronica-05-01.pdf",
+      "carpeta": "",
+      "corpus": "05-01-progasincronica-05-01.json",
+      "paginas": 16
+    },
+    {
+      "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+      "carpeta": "",
+      "corpus": "05-02-progasincronica-2-05-02.json",
+      "paginas": 30
+    },
+    {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "carpeta": "",
+      "corpus": "06-01-apis-rest-06-01.json",
+      "paginas": 47
+    },
+    {
+      "archivo": "01-00 - Practico 1 - Tacticas de Ing Software.pdf",
+      "carpeta": "Practicos",
+      "corpus": "practicos-01-00-practico-1-tacticas-de-ing-software.json",
+      "paginas": 2
+    },
+    {
+      "archivo": "02-00-Practico 02 - Contenerización.pdf",
+      "carpeta": "Practicos",
+      "corpus": "practicos-02-00-practico-02-contenerizacion.json",
+      "paginas": 1
+    },
+    {
+      "archivo": "03-00- Practico 03 -Persistencia de Datos No-Relacional.pdf",
+      "carpeta": "Practicos",
+      "corpus": "practicos-03-00-practico-03-persistencia-de-datos-no-relacional.json",
+      "paginas": 1
+    },
+    {
+      "archivo": "04-00 -Practico 04  Cache de Datos _ Bases de Datos en Memoria.pdf",
+      "carpeta": "Practicos",
+      "corpus": "practicos-04-00-practico-04-cache-de-datos-bases-de-datos-en-memoria.json",
+      "paginas": 2
+    },
+    {
+      "archivo": "05-00-Pracitco 05 Programación Asincrónica.pdf",
+      "carpeta": "Practicos",
+      "corpus": "practicos-05-00-pracitco-05-programacion-asincronica.json",
+      "paginas": 2
+    },
+    {
+      "archivo": "06-00-Practico 06 APIs Rest.pdf",
+      "carpeta": "Practicos",
+      "corpus": "practicos-06-00-practico-06-apis-rest.json",
+      "paginas": 2
+    },
+    {
+      "archivo": "Parte 3 - Laboratorio (1).pdf",
+      "carpeta": "Laboratorios",
+      "corpus": "laboratorios-parte-3-laboratorio-1.json",
+      "paginas": 2
+    },
+    {
+      "archivo": "Parte 4 - Laboratorio.pdf",
+      "carpeta": "Laboratorios",
+      "corpus": "laboratorios-parte-4-laboratorio.json",
+      "paginas": 1
+    },
+    {
+      "archivo": "Parte 5 - Laboratorio.pdf",
+      "carpeta": "Laboratorios",
+      "corpus": "laboratorios-parte-5-laboratorio.json",
+      "paginas": 1
+    }
+  ]
+}

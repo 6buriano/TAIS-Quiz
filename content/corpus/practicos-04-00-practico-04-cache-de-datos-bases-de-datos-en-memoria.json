@@ -1,0 +1,14 @@
+{
+  "archivo": "04-00 -Practico 04  Cache de Datos _ Bases de Datos en Memoria.pdf",
+  "carpeta": "Practicos",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Práctico 4: Cache de Datos / Bases de Datos en Memoria \n \n1.​ ¿Por qué el acceso a memoria RAM es significativamente más rápido que el acceso \na almacenamiento persistente? Explique cómo esta diferencia impacta en el diseño \nde sistemas de software modernos. \n \n2.​ Describa el Principio de Localidad. Explique las diferencias entre localidad temporal \ny localidad espacial e indique ejemplos de cada una. \n \n3.​ ¿Qué es una cache? ¿Cuál es su objetivo principal dentro de una arquitectura de \nsoftware? \n \n4.​ Defina los conceptos de Cache Hit y Cache Miss. ¿Cómo afectan cada uno al \nrendimiento de una aplicación? \n \n5.​ ¿Qué es una Base de Datos en Memoria (In-Memory Database)? ¿Cuáles son sus \nprincipales diferencias respecto de una cache tradicional? \n \n6.​ Explique por qué una cache es considerada una táctica arquitectónica orientada al \natributo de calidad \"performance\". \n \n7.​ Analice la relación entre cache y escalabilidad. ¿Cómo puede una cache permitir \nque un sistema soporte una mayor cantidad de usuarios concurrentes? \n \n8.​ Describa detalladamente el patrón Cache Aside (Lazy Loading). Incluya ventajas y \ndesventajas. \n \n9.​ Compare los patrones Cache Aside y Read Through. ¿Cuáles son las principales \ndiferencias arquitectónicas entre ambos? \n \n10.​Explique el funcionamiento del patrón Write Through. ¿En qué tipos de sistemas \nsuele utilizarse y por qué? \n \n11.​Explique el funcionamiento del patrón Write Back (Write Behind). ¿Qué ventajas \nofrece respecto a Write Through? \n \n12.​¿Cuáles son los riesgos asociados al patrón Write Back? ¿Qué mecanismos podrían \nimplementarse para reducir dichos riesgos? \n \n13.​¿Qué problema intenta resolver la estrategia Refresh Ahead? Explique su \nfuncionamiento. \n \n14.​¿Por qué la replicación es una técnica importante en sistemas de cache \ndistribuidos? ¿Qué beneficios aporta? \n \n15.​Compare replicación síncrona y replicación asíncrona. Analice ventajas y \ndesventajas de cada enfoque."
+    },
+    {
+      "n": 2,
+      "texto": "16.​¿Qué es el sharding? ¿Por qué se considera una estrategia fundamental para la \nescalabilidad horizontal? \n \n17.​¿Por qué la invalidación de cache es considerada uno de los problemas más \ncomplejos en sistemas distribuidos? \n \n18.​Explique el concepto de TTL (Time To Live). ¿Qué problemas pueden aparecer si el \nTTL es demasiado corto o demasiado largo? \n \n19.​Describa las responsabilidades de la capa de persistencia y de la capa de cache \ndentro de una arquitectura multicapa."
+    }
+  ]
+}

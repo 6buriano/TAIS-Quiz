@@ -1,0 +1,34 @@
+{
+  "archivo": "01-01-tais-Introduccion al Curso.pdf",
+  "carpeta": "",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Curso\nTendencias Aplicadas de \nIngenería de Software\nIntroducción\n1"
+    },
+    {
+      "n": 2,
+      "texto": "Objetivo\n• Desarrollar habilidades para aplicar técnicas concretas \nde Arquitectura e Ingeniería de Software en contextos \nmodernos de desarrollo.\n• Conocer tendencias específicas y ganar experiencia con \nherramientas que permiten su aplicación.\n• Desarrollar capacidades para evaluar y aplicar \ncomponentes Open Source que aporten en distintas \ndimensiones del desarrollo.\n• Integrar conocimientos teóricos previos con habilidades \nprácticas para llevar adelante tácticas de diseño y \ndesarrollo modernas.\n2"
+    },
+    {
+      "n": 3,
+      "texto": "Temario\n1. Introducción a las tácticas de diseño en Ingeniería de \nSoftware\n2. Contenerización para Pruebas y Despliegue \nautomatizado\n3. Persistencia de Datos No-Relacional\n4. Cache de Datos / Bases de Datos en Memoria\n5. Uso avanzado del IDE\n6. Programación Asincrónica\n_____________________________________________\n7. APIs REST\n8. Integración Continua (CI/CD)\n3"
+    },
+    {
+      "n": 4,
+      "texto": "Metodología (I)\n• Contenido teórico\n–Dictado de clases\n–Estudio de material \n• Trabajo de Taller\n–Grupos de 4 estudiantes\n• Trabajo individual\n–Presentación de un Tema, defensas, parcial final\n• Carga horaria semanal\n–4 horas de clase\n–4 horas de trabajo personal/grupal\n• Estudio del teórico, taller, prácticos, presentación\n4"
+    },
+    {
+      "n": 5,
+      "texto": "Metodología (II)\n• Realización de una Presentación\n–Tiempo a determinar\n–Tema a elección dentro de la lista propuesta.\n• Participación\n–Preguntas en las presentaciones\n–'escucha activa' durante presentaciones\n• Defensa de los entregables del Taller\n• Parcial al final del curso\n–Conocimientos integrados de todo el curso y entregas \ndel Taller\n• Múltiple opción \n–Respuestas equivocadas bajan puntos\n5"
+    },
+    {
+      "n": 6,
+      "texto": "Trabajo Grupal\n• Entregables obligatorios sobre 4 Temas\n–Realización de REST API\n–Integración con eventos (asincronía)\n–Integración con CI/CD\n–Simulación de Clusters\n• Defensa de los entregables\n6"
+    },
+    {
+      "n": 7,
+      "texto": "Bibliografía\n• Sommerville, Ian (2019). Engineering Software Products. \nPearson.\n• Kleppmann, Martin (2026). Designing Data-Intensive \nApplications, 2nd Edition. O'Reilly.\n7"
+    }
+  ]
+}

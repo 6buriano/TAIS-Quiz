@@ -1,0 +1,622 @@
+[
+  {
+    "id": "cache-001",
+    "tema": "cache",
+    "subtema": "fundamentos",
+    "dificultad": "facil",
+    "pregunta": "Un equipo guarda en un almacén rápido las respuestas que ya obtuvo de PostgreSQL para no volver a consultarlas. ¿Qué está agregando al sistema?",
+    "opciones": [
+      {
+        "texto": "Una caché: almacenamiento temporal de copias de datos ya recuperados para acelerar accesos futuros.",
+        "correcta": true
+      },
+      {
+        "texto": "Un índice: una estructura del motor que ordena las filas para acelerar las búsquedas.",
+        "correcta": false,
+        "porque_no": "Un índice vive dentro del motor y acelera la búsqueda, pero no evita el acceso al almacenamiento persistente ni guarda copias fuera de la base."
+      },
+      {
+        "texto": "Una réplica de lectura: una copia completa y sincronizada de la base de datos.",
+        "correcta": false,
+        "porque_no": "Una réplica mantiene toda la base replicada y sigue siendo un sistema persistente; no es un almacenamiento temporal de resultados."
+      },
+      {
+        "texto": "Una cola de mensajes: un búfer que desacopla al productor del consumidor.",
+        "correcta": false,
+        "porque_no": "La cola desacopla el procesamiento de los mensajes, pero no reutiliza respuestas ya calculadas para responder más rápido."
+      }
+    ],
+    "explicacion": "Una caché es un almacenamiento temporal de datos previamente recuperados cuyo objetivo es acelerar accesos futuros. Desde la arquitectura se la considera una táctica orientada al atributo de calidad performance. Un índice o una réplica siguen apoyándose en el almacenamiento persistente, mientras que la caché evita esa consulta cuando hay un acierto.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 9 },
+    "tags": ["cache", "fundamentos", "performance"]
+  },
+  {
+    "id": "cache-002",
+    "tema": "cache",
+    "subtema": "fundamentos",
+    "dificultad": "facil",
+    "pregunta": "Se renovó el hardware de los servidores y las consultas a la base siguen siendo el cuello de botella. ¿Qué explica el material?",
+    "opciones": [
+      {
+        "texto": "Que el almacenamiento persistente sigue siendo varios órdenes de magnitud más lento que la RAM.",
+        "correcta": true
+      },
+      {
+        "texto": "Que la capacidad de procesamiento de los servidores no influye en el tiempo de respuesta.",
+        "correcta": false,
+        "porque_no": "El material señala que el procesamiento mejoró mucho; lo que no acompaña es la velocidad del almacenamiento persistente."
+      },
+      {
+        "texto": "Que las bases relacionales no pueden usar índices para acelerar las consultas.",
+        "correcta": false,
+        "porque_no": "El material no atribuye el problema a la falta de índices, sino a la diferencia entre la RAM y el almacenamiento persistente."
+      },
+      {
+        "texto": "Que la red interna de los servidores es más lenta que el disco.",
+        "correcta": false,
+        "porque_no": "El orden de magnitud problemático está en el acceso a disco; la red aparece como un paso más del camino, no como la causa principal."
+      }
+    ],
+    "explicacion": "Durante las últimas dos décadas mejoró la capacidad de procesamiento, pero el acceso al almacenamiento persistente continúa siendo varios órdenes de magnitud más lento que el acceso a la memoria principal. Esa brecha genera uno de los principales cuellos de botella de los sistemas de gran escala. Las tecnologías de caché y las bases en memoria buscan acercar los datos al punto donde se usan y reducir las operaciones de entrada/salida.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 2 },
+    "tags": ["cache", "fundamentos", "io"]
+  },
+  {
+    "id": "cache-003",
+    "tema": "cache",
+    "subtema": "localidad",
+    "dificultad": "facil",
+    "pregunta": "¿En qué principio se apoya la eficacia de una caché?",
+    "opciones": [
+      {
+        "texto": "En el principio de localidad: los accesos futuros a los datos no son aleatorios.",
+        "correcta": true
+      },
+      {
+        "texto": "En la distribución uniforme de las consultas entre todos los datos disponibles.",
+        "correcta": false,
+        "porque_no": "Si los accesos fueran uniformes, guardar una fracción pequeña no mejoraría nada; el material describe una distribución tipo Pareto."
+      },
+      {
+        "texto": "En la duplicación completa de la base dentro del almacenamiento temporal.",
+        "correcta": false,
+        "porque_no": "La caché guarda copias de lo que se usa, no toda la base; su eficacia viene justamente de concentrarse en los datos más pedidos."
+      },
+      {
+        "texto": "En la latencia de la red, que se reduce al agregar más servidores de aplicación.",
+        "correcta": false,
+        "porque_no": "Agregar servidores no explica la reutilización de datos; el fundamento es la localidad de los accesos."
+      }
+    ],
+    "explicacion": "La eficacia de las cachés se basa en el principio de localidad, observado en prácticamente todos los sistemas computacionales: los accesos futuros no son aleatorios. El material distingue localidad temporal, cuando un dato usado recientemente vuelve a usarse en el corto plazo, y localidad espacial, cuando al acceder a un dato se acceden también los elementos cercanos. Ambos fenómenos permiten reducir accesos repetitivos a componentes costosos.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 6 },
+    "tags": ["cache", "localidad"]
+  },
+  {
+    "id": "cache-004",
+    "tema": "cache",
+    "subtema": "localidad",
+    "dificultad": "media",
+    "pregunta": "Un usuario abre la ficha de un producto, la cierra y dos minutos después vuelve a abrirla; la segunda respuesta se sirve desde la caché. ¿Qué fenómeno describe ese acierto?",
+    "opciones": [
+      {
+        "texto": "Localidad temporal: un dato usado recientemente tiene alta probabilidad de volver a usarse en el corto plazo.",
+        "correcta": true
+      },
+      {
+        "texto": "Localidad espacial: al acceder a un dato se acceden también los elementos cercanos.",
+        "correcta": false,
+        "porque_no": "La localidad espacial explica accesos a registros contiguos, objetos relacionados o páginas próximas, no la reutilización del mismo dato."
+      },
+      {
+        "texto": "Distribución de Pareto: el 20 % de los datos concentra el 80 % de las consultas.",
+        "correcta": false,
+        "porque_no": "Pareto describe la concentración global de los accesos y no la repetición inmediata del mismo dato por el mismo usuario."
+      },
+      {
+        "texto": "Write behind: la escritura se confirma en memoria y se persiste después.",
+        "correcta": false,
+        "porque_no": "El patrón de escritura no interviene en un acierto de lectura."
+      }
+    ],
+    "explicacion": "La localidad temporal sostiene que si un dato se utilizó recientemente existe una alta probabilidad de que vuelva a utilizarse en el corto plazo. Por eso las sesiones activas, los productos populares o las noticias destacadas se comportan bien en caché. La localidad espacial es otra cosa: predice que al acceder a un dato se accederán también los elementos cercanos, como registros consecutivos o páginas contiguas.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 7 },
+    "tags": ["cache", "localidad"]
+  },
+  {
+    "id": "cache-005",
+    "tema": "cache",
+    "subtema": "metricas",
+    "dificultad": "facil",
+    "pregunta": "En la última hora una caché registró 9.400 hits y 600 misses. ¿Cuál es su hit ratio?",
+    "opciones": [
+      {
+        "texto": "94 %, porque el hit ratio es la cantidad de hits dividida por el total de consultas.",
+        "correcta": true
+      },
+      {
+        "texto": "6 %, que es la proporción de consultas que no encontraron el dato en la caché.",
+        "correcta": false,
+        "porque_no": "El 6 % es la tasa de misses; el hit ratio mide los aciertos sobre el total, es decir 94 %."
+      },
+      {
+        "texto": "84 %, porque a los hits hay que restarles los misses antes de dividir.",
+        "correcta": false,
+        "porque_no": "La fórmula del material es hits / (hits + misses); los misses se suman en el denominador, no se restan."
+      },
+      {
+        "texto": "No se puede calcular si no se conoce la latencia promedio de cada miss.",
+        "correcta": false,
+        "porque_no": "El hit ratio depende solo de la cantidad de hits y misses, no de los tiempos de respuesta."
+      }
+    ],
+    "explicacion": "El hit ratio es el porcentaje de consultas que la caché resuelve sola y se calcula como hits / (hits + misses). En este caso, 9.400 sobre 10.000 da 0,94, es decir 94 %. La tasa de misses es el complemento y, junto con la penalidad de cada miss, explica la latencia promedio.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 10 },
+    "tags": ["cache", "metricas", "hit-ratio"]
+  },
+  {
+    "id": "cache-006",
+    "tema": "cache",
+    "subtema": "cache-vs-bd-memoria",
+    "dificultad": "media",
+    "pregunta": "El material afirma que toda base de datos en memoria puede usarse como caché, pero no toda caché puede actuar como base principal. ¿Cómo se justifica?",
+    "opciones": [
+      {
+        "texto": "Porque la base en memoria puede ser fuente principal y la caché solo guarda copias reemplazables.",
+        "correcta": true
+      },
+      {
+        "texto": "Porque una base en memoria no puede aplicar vencimientos por tiempo a sus claves.",
+        "correcta": false,
+        "porque_no": "La expiración no es la diferencia que plantea el material; la distinción pasa por ser fuente principal o copia derivada."
+      },
+      {
+        "texto": "Porque una caché responde más rápido que una base de datos en memoria en todos los casos.",
+        "correcta": false,
+        "porque_no": "Ambas operan sobre memoria principal; la diferencia que importa es conceptual, no de velocidad."
+      },
+      {
+        "texto": "Porque una base de datos en memoria no admite replicación entre nodos.",
+        "correcta": false,
+        "porque_no": "El material lista la replicación entre las capacidades de una base de datos en memoria."
+      }
+    ],
+    "explicacion": "Aunque suelen usarse como sinónimos, caché y base de datos en memoria son conceptos distintos. La caché tiene como propósito acelerar el acceso a otra fuente y trabaja con datos derivados, reemplazables y dependientes de un sistema persistente. La base en memoria puede constituir la fuente principal porque administra estructuras complejas, replicación, persistencia opcional y procesamiento transaccional.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 13 },
+    "tags": ["cache", "bases-en-memoria"]
+  },
+  {
+    "id": "cache-007",
+    "tema": "cache",
+    "subtema": "cache-aside",
+    "dificultad": "facil",
+    "pregunta": "El catálogo de una tienda cambia poco y se lee mucho. La aplicación quiere decidir qué guardar y evitar infraestructura adicional. ¿Qué patrón conviene?",
+    "opciones": [
+      {
+        "texto": "Cache aside (lazy loading): la aplicación consulta la caché y, ante un miss, va a la base y guarda el resultado.",
+        "correcta": true
+      },
+      {
+        "texto": "Read through: la caché es un intermediario transparente y la aplicación desconoce el almacenamiento.",
+        "correcta": false,
+        "porque_no": "Es una alternativa válida en general, pero read through exige una capa intermedia y quita a la aplicación la decisión de qué cachear."
+      },
+      {
+        "texto": "Write through: cada escritura actualiza la persistencia y la caché antes de confirmar.",
+        "correcta": false,
+        "porque_no": "Write through ordena las escrituras; el problema planteado es de lecturas repetidas del catálogo."
+      },
+      {
+        "texto": "Write back: la escritura se confirma en la caché y se persiste después.",
+        "correcta": false,
+        "porque_no": "Write back prioriza la velocidad de escritura y no resuelve las lecturas del catálogo."
+      }
+    ],
+    "explicacion": "Cache aside es uno de los patrones más usados en aplicaciones empresariales y también se lo denomina lazy loading. La aplicación consulta la caché; si el dato está, lo devuelve, y si no, consulta la base, almacena el resultado y responde. Requiere poca infraestructura y solo guarda los datos que efectivamente se usan.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 16 },
+    "tags": ["cache", "cache-aside", "patrones"]
+  },
+  {
+    "id": "cache-008",
+    "tema": "cache",
+    "subtema": "cache-aside",
+    "dificultad": "media",
+    "pregunta": "Tras adoptar cache aside, el primer acceso del día a cada producto sigue tardando lo mismo y algunos precios se ven desactualizados. ¿Qué dos desventajas del patrón se están viendo?",
+    "opciones": [
+      {
+        "texto": "El miss inicial y los datos obsoletos por no coordinar la invalidación.",
+        "correcta": true
+      },
+      {
+        "texto": "El aumento del hit ratio y la caída del throughput por exceso de aciertos.",
+        "correcta": false,
+        "porque_no": "Un hit ratio alto no es una desventaja; el problema es justamente que el primer acceso no acierta."
+      },
+      {
+        "texto": "La duplicación de escrituras y la pérdida de datos ante una caída del nodo.",
+        "correcta": false,
+        "porque_no": "Esos son riesgos de write back, que confirma en memoria antes de persistir los cambios."
+      },
+      {
+        "texto": "La dependencia de un intermediario transparente que la aplicación no controla.",
+        "correcta": false,
+        "porque_no": "Eso corresponde a read through, donde la caché media entre la aplicación y la base."
+      }
+    ],
+    "explicacion": "El material señala tres desventajas de cache aside: el cache miss inicial, porque el primer acceso continúa siendo costoso; la consistencia, porque puede existir información obsoleta; y la complejidad de invalidación, porque la actualización de datos debe coordinarse con cuidado. Las dos primeras son las que aparecen en el escenario: el primer request paga la consulta completa y, sin invalidación, el precio viejo sigue disponible.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 17 },
+    "tags": ["cache", "cache-aside", "consistencia"]
+  },
+  {
+    "id": "cache-009",
+    "tema": "cache",
+    "subtema": "read-through",
+    "dificultad": "media",
+    "pregunta": "Al pasar de cache aside a read through, ¿qué cambia en la arquitectura?",
+    "opciones": [
+      {
+        "texto": "La caché pasa a ser un intermediario transparente y la lógica se centraliza.",
+        "correcta": true
+      },
+      {
+        "texto": "La aplicación sigue decidiendo qué cachear y además escribe el resultado en la caché.",
+        "correcta": false,
+        "porque_no": "Eso es cache aside, donde la lógica de caché vive en la aplicación."
+      },
+      {
+        "texto": "Las escrituras dejan de ser síncronas y se persisten en un proceso aparte.",
+        "correcta": false,
+        "porque_no": "Ese cambio corresponde a write back, no a read through."
+      },
+      {
+        "texto": "Desaparece la base de datos porque la caché pasa a ser la fuente principal.",
+        "correcta": false,
+        "porque_no": "Read through mantiene la base como origen de los datos; la caché solo media de forma transparente."
+      }
+    ],
+    "explicacion": "En read through la caché se convierte en un intermediario transparente entre la aplicación y la base de datos, y la aplicación deja de conocer el mecanismo de almacenamiento. La lógica de caché se centraliza y todas las aplicaciones usan la misma política, lo que simplifica el mantenimiento. El costo es una mayor dependencia tecnológica y una caché que pasa a ser componente crítico.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 18 },
+    "tags": ["cache", "read-through", "patrones"]
+  },
+  {
+    "id": "cache-010",
+    "tema": "cache",
+    "subtema": "write-through",
+    "dificultad": "media",
+    "pregunta": "Un sistema de reservas necesita que lo leído desde la caché refleje la última versión confirmada y acepta pagar más latencia en cada escritura. ¿Qué patrón responde a ese requisito?",
+    "opciones": [
+      {
+        "texto": "Write through: la escritura actualiza la persistencia y la caché antes de confirmar al cliente.",
+        "correcta": true
+      },
+      {
+        "texto": "Write back: la caché confirma al instante y la base se actualiza después.",
+        "correcta": false,
+        "porque_no": "Write back reduce la latencia de escritura, pero deja la base desactualizada por un tiempo: lo contrario del requisito."
+      },
+      {
+        "texto": "Cache aside: la aplicación llena la caché recién cuando hay un miss de lectura.",
+        "correcta": false,
+        "porque_no": "Cache aside no ordena las escrituras y admite datos obsoletos hasta la próxima invalidación."
+      },
+      {
+        "texto": "Refresh ahead: la caché actualiza por anticipado los datos próximos a expirar.",
+        "correcta": false,
+        "porque_no": "Refresh ahead ataca los misses por expiración, no la sincronización de las escrituras."
+      }
+    ],
+    "explicacion": "Write through busca mantener sincronizadas la caché y la base: cada operación actualiza la persistencia, luego la caché y recién entonces confirma al cliente. Eso da alta consistencia y menor riesgo de obsolescencia, a costa de mayor latencia de escritura y menor throughput. Por eso se usa en pagos electrónicos, reservas e inventarios críticos.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 20 },
+    "tags": ["cache", "write-through", "consistencia"]
+  },
+  {
+    "id": "cache-011",
+    "tema": "cache",
+    "subtema": "write-back",
+    "dificultad": "facil",
+    "pregunta": "¿Cómo funciona el patrón write back (write behind)?",
+    "opciones": [
+      {
+        "texto": "La aplicación escribe en la caché, esta confirma y un proceso asíncrono actualiza la base después.",
+        "correcta": true
+      },
+      {
+        "texto": "La aplicación escribe en la base, luego en la caché y recién entonces confirma al cliente.",
+        "correcta": false,
+        "porque_no": "Ese orden corresponde a write through, que espera ambas actualizaciones antes de confirmar."
+      },
+      {
+        "texto": "La caché detecta los datos próximos a expirar y los renueva por anticipado.",
+        "correcta": false,
+        "porque_no": "Eso es refresh ahead, una estrategia ligada a la expiración de los datos."
+      },
+      {
+        "texto": "La aplicación borra la clave de la caché cada vez que actualiza la base.",
+        "correcta": false,
+        "porque_no": "Eso es invalidación explícita, otra forma de mantener la coherencia entre copias."
+      }
+    ],
+    "explicacion": "En write back la actualización se registra primero en memoria y se sincroniza después con el almacenamiento permanente. La aplicación escribe en la caché, la caché confirma inmediatamente y un proceso asíncrono actualiza la base. Así la operación finaliza sin esperar el acceso a disco y varias escrituras pueden agruparse en una sola operación.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 23 },
+    "tags": ["cache", "write-back", "patrones"]
+  },
+  {
+    "id": "cache-012",
+    "tema": "cache",
+    "subtema": "write-back",
+    "dificultad": "dificil",
+    "pregunta": "Un equipo mueve el registro de transferencias a write back para bajar la latencia y, tras reiniciar el nodo de caché, hay operaciones que el cliente vio confirmadas y nunca llegaron a la base. ¿Qué riesgo del patrón se materializó?",
+    "opciones": [
+      {
+        "texto": "La pérdida de datos confirmados: la caché falló antes de persistir los cambios.",
+        "correcta": true
+      },
+      {
+        "texto": "Un cache miss storm por datos que expiraron todos al mismo tiempo.",
+        "correcta": false,
+        "porque_no": "El problema apareció al reiniciar el nodo con cambios sin persistir, no por una expiración masiva de claves."
+      },
+      {
+        "texto": "Falta de transacciones ACID en la base de datos.",
+        "correcta": false,
+        "porque_no": "La base conserva sus propiedades transaccionales; lo que falló fue la sincronización pendiente desde la caché."
+      },
+      {
+        "texto": "Sobrecarga de la base por escrituras síncronas duplicadas.",
+        "correcta": false,
+        "porque_no": "Write back agrupa y posterga escrituras: el riesgo es que se pierdan, no que saturen por sincronía."
+      }
+    ],
+    "explicacion": "El material advierte que en write back, si la caché falla antes de persistir los cambios, pueden perderse datos. También señala que el patrón exige mecanismos de recuperación y agrega complejidad operativa, además de dejar los datos momentáneamente desactualizados. Es un patrón que privilegia disponibilidad y rendimiento por encima de la consistencia inmediata, así que no conviene usarlo en flujos como transferencias sin un respaldo que tolere la caída del nodo.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 24 },
+    "tags": ["cache", "write-back", "riesgos"]
+  },
+  {
+    "id": "cache-013",
+    "tema": "cache",
+    "subtema": "refresh-ahead",
+    "dificultad": "media",
+    "pregunta": "Con un TTL fijo, los datos más consultados vencen casi al mismo tiempo y aparecen picos de latencia porque todos se recargan juntos. ¿Qué patrón del material ataca ese problema?",
+    "opciones": [
+      {
+        "texto": "Refresh ahead: renueva por anticipado los datos frecuentes antes de que expiren.",
+        "correcta": true
+      },
+      {
+        "texto": "Write through: sincroniza la caché con la base en cada escritura.",
+        "correcta": false,
+        "porque_no": "No evita que las claves venzan en bloque; solo ordena las escrituras."
+      },
+      {
+        "texto": "Cache aside: consulta la caché y llena el dato cuando hay un miss.",
+        "correcta": false,
+        "porque_no": "Cuando cache aside actúa, el miss ya ocurrió: no anticipa la recarga."
+      },
+      {
+        "texto": "Invalidación explícita: borra la entrada cuando la fuente cambia.",
+        "correcta": false,
+        "porque_no": "Borra entradas por cambios de la fuente, no evita los vencimientos simultáneos por TTL."
+      }
+    ],
+    "explicacion": "Incluso una caché eficiente genera latencias altas cuando los datos expiran y deben recuperarse otra vez desde la fuente persistente. Esos picos temporales se conocen como cache miss storms o cold cache events. Refresh ahead identifica los datos frecuentemente utilizados y los actualiza antes de que expiren, de modo que el usuario sigue obteniendo respuestas rápidas.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 25 },
+    "tags": ["cache", "refresh-ahead", "ttl"]
+  },
+  {
+    "id": "cache-014",
+    "tema": "cache",
+    "subtema": "refresh-ahead",
+    "dificultad": "dificil",
+    "pregunta": "El equipo activa refresh ahead sobre todo el catálogo y detecta que la base recibe consultas de productos que nadie está pidiendo. ¿Cuál es la explicación?",
+    "opciones": [
+      {
+        "texto": "Refresh ahead actualiza datos que después no se usan; conviene limitarlo a los frecuentes.",
+        "correcta": true
+      },
+      {
+        "texto": "El TTL quedó demasiado largo y por eso hay más actualizaciones.",
+        "correcta": false,
+        "porque_no": "Un TTL más largo produce menos vencimientos y menos recargas, no más."
+      },
+      {
+        "texto": "Cache aside está repoblando la caché con cada lectura.",
+        "correcta": false,
+        "porque_no": "Cache aside solo llena la caché ante un miss de lectura, es decir, cuando alguien pidió el dato."
+      },
+      {
+        "texto": "Write through está replicando las escrituras en la caché.",
+        "correcta": false,
+        "porque_no": "Write through actúa sobre escrituras, no sobre lecturas de productos que nadie consultó."
+      }
+    ],
+    "explicacion": "La desventaja que señala el material es que refresh ahead realiza actualizaciones incluso si luego no son utilizadas. El patrón está pensado para datos con alta frecuencia de acceso y próximos a expirar: se detecta esa frecuencia, se actualiza de forma preventiva y el usuario recibe respuestas rápidas. Aplicarlo a todo el catálogo traslada a la base un trabajo que nadie va a aprovechar.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 27 },
+    "tags": ["cache", "refresh-ahead", "costo"]
+  },
+  {
+    "id": "cache-015",
+    "tema": "cache",
+    "subtema": "invalidacion",
+    "dificultad": "facil",
+    "pregunta": "El equipo necesita que la caché deje de servir un dato cuando la fuente original cambia. ¿Qué estrategias presenta el material para ese problema?",
+    "opciones": [
+      {
+        "texto": "TTL, invalidación explícita al ocurrir cambios y actualización proactiva.",
+        "correcta": true
+      },
+      {
+        "texto": "Sharding, replicación y particionado de claves.",
+        "correcta": false,
+        "porque_no": "Son técnicas de distribución y escalado, no estrategias de invalidación."
+      },
+      {
+        "texto": "Write through, write back y read through.",
+        "correcta": false,
+        "porque_no": "Son patrones de lectura y escritura; solo algunos tocan la sincronización entre copias."
+      },
+      {
+        "texto": "Compresión, cifrado y snapshot del almacenamiento.",
+        "correcta": false,
+        "porque_no": "Son mecanismos de almacenamiento y seguridad, ajenos al problema de la obsolescencia."
+      }
+    ],
+    "explicacion": "Toda caché genera duplicación de información y, cuando la fuente original cambia, surge la pregunta de cómo mantener sincronizadas ambas copias. El material agrupa las respuestas en tres estrategias: TTL, que expira automáticamente; invalidación explícita, que elimina entradas cuando ocurren cambios; y actualización proactiva, que reemplaza valores inmediatamente. Si no se aplica ninguna, los usuarios reciben datos obsoletos y distintos usuarios observan estados distintos.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 31 },
+    "tags": ["cache", "invalidacion", "ttl"]
+  },
+  {
+    "id": "cache-016",
+    "tema": "cache",
+    "subtema": "ttl",
+    "dificultad": "media",
+    "pregunta": "Para evitar precios viejos, un equipo baja el TTL de 10 minutos a 5 segundos y la base empieza a recibir mucho más tráfico. ¿Qué explica el efecto?",
+    "opciones": [
+      {
+        "texto": "Un TTL demasiado corto produce muchos misses: cada vencimiento obliga a volver a la fuente.",
+        "correcta": true
+      },
+      {
+        "texto": "Un TTL corto aumenta el hit ratio y por eso la base trabaja más.",
+        "correcta": false,
+        "porque_no": "Más aciertos implicarían menos consultas a la base; con un TTL corto el hit ratio cae."
+      },
+      {
+        "texto": "El TTL solo afecta a las escrituras, que ahora se duplican.",
+        "correcta": false,
+        "porque_no": "El TTL controla la vigencia de las entradas y afecta principalmente las lecturas."
+      },
+      {
+        "texto": "El problema es write back, que posterga las actualizaciones.",
+        "correcta": false,
+        "porque_no": "No se menciona ningún cambio de patrón de escritura; el efecto viene del vencimiento frecuente."
+      }
+    ],
+    "explicacion": "El TTL da a cada elemento una duración máxima y, al terminar ese período, la entrada se elimina o se considera inválida. Su ventaja es la simplicidad y el bajo acoplamiento, pero la elección del plazo es crítica: demasiado corto genera muchos misses y más carga sobre la base; demasiado largo deja datos obsoletos. El equipo mejoró la frescura y empeoró el rendimiento y la carga del origen.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 33 },
+    "tags": ["cache", "ttl", "trade-off"]
+  },
+  {
+    "id": "cache-017",
+    "tema": "cache",
+    "subtema": "coherencia",
+    "dificultad": "dificil",
+    "pregunta": "Un servicio actualiza el precio en PostgreSQL y no toca la clave producto:1 de Redis. ¿Qué consecuencia describe el material y qué solución propone?",
+    "opciones": [
+      {
+        "texto": "Redis sigue con el precio anterior hasta que se elimine la clave al actualizar.",
+        "correcta": true
+      },
+      {
+        "texto": "Redis detecta el cambio en la base y refresca la clave automáticamente.",
+        "correcta": false,
+        "porque_no": "Nadie actualizó la clave: el material muestra que Redis sigue con el valor viejo hasta que se invalida o vence."
+      },
+      {
+        "texto": "La base rechaza la lectura hasta que la caché se sincronice.",
+        "correcta": false,
+        "porque_no": "La base no interviene: las lecturas llegan a Redis y allí terminan."
+      },
+      {
+        "texto": "Se pierde la clave y hay que reiniciar Redis para recuperarla.",
+        "correcta": false,
+        "porque_no": "La clave sigue existiendo con el valor anterior; el problema es de contenido, no de disponibilidad."
+      }
+    ],
+    "explicacion": "El ejemplo del material muestra el precio de la laptop que pasa de 1000 a 1200 en la tabla: en Redis queda 1000 porque nadie lo actualizó. Una solución es invalidar la caché al actualizar, es decir, eliminar producto:1 después de guardar en la base, de modo que la próxima lectura haga un miss, consulte el motor y vuelva a guardar el valor vigente. Otra es escribir el nuevo valor en Redis, y una tercera es dejar que el TTL acote la obsolescencia.",
+    "fuente": { "archivo": "04-02-Redis-04-02.pdf", "pagina": 20 },
+    "tags": ["redis", "invalidacion", "coherencia"]
+  },
+  {
+    "id": "cache-018",
+    "tema": "cache",
+    "subtema": "coherencia",
+    "dificultad": "media",
+    "pregunta": "¿Por qué la invalidación se vuelve un problema difícil en cuanto se agrega una caché?",
+    "opciones": [
+      {
+        "texto": "Porque la caché duplica la información y, cuando la fuente cambia, hay que mantener sincronizadas las dos copias.",
+        "correcta": true
+      },
+      {
+        "texto": "Porque la caché cifra los datos y la base ya no puede leerlos.",
+        "correcta": false,
+        "porque_no": "El material no plantea cifrado; el problema es la coexistencia de dos copias del mismo dato."
+      },
+      {
+        "texto": "Porque el TTL garantiza que la copia de la caché sea la última versión disponible.",
+        "correcta": false,
+        "porque_no": "El TTL acota el tiempo de obsolescencia, pero no garantiza que la copia sea la vigente."
+      },
+      {
+        "texto": "Porque las bases de datos no permiten actualizar registros que ya fueron leídos.",
+        "correcta": false,
+        "porque_no": "La base actualiza sin problema; lo que queda desactualizado es el valor guardado en la caché."
+      }
+    ],
+    "explicacion": "La utilidad de una caché depende de que los datos almacenados sean suficientemente correctos, pero toda caché duplica información: la copia de la caché y la de la fuente. Cuando la fuente original cambia surge la pregunta de cómo mantener sincronizadas las dos copias, y sin una respuesta aparecen datos obsoletos, usuarios que observan estados distintos y decisiones tomadas sobre información desactualizada.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 29 },
+    "tags": ["cache", "invalidacion", "coherencia"]
+  },
+  {
+    "id": "cache-019",
+    "tema": "cache",
+    "subtema": "distribucion",
+    "dificultad": "dificil",
+    "pregunta": "Toda la caché de un sistema vive en un único servidor. Si ese nodo cae, se pierden datos temporales y la base se satura por la sobrecarga. ¿Qué aporta replicar la información en varios nodos?",
+    "opciones": [
+      {
+        "texto": "Elimina el punto único de falla al mantener la información en un primario y sus réplicas.",
+        "correcta": true
+      },
+      {
+        "texto": "Aumenta el hit ratio porque cada nodo guarda datos distintos.",
+        "correcta": false,
+        "porque_no": "La réplica mantiene la misma información en varios nodos; el hit ratio no mejora por eso."
+      },
+      {
+        "texto": "Garantiza consistencia fuerte entre la caché y la base de datos.",
+        "correcta": false,
+        "porque_no": "Replicar la caché no resuelve por sí solo la sincronización con la fuente."
+      },
+      {
+        "texto": "Reduce el TTL efectivo de las claves replicadas.",
+        "correcta": false,
+        "porque_no": "La replicación no modifica los vencimientos de las claves."
+      }
+    ],
+    "explicacion": "Una caché centralizada introduce un punto único de falla: si el servidor falla se pierde disponibilidad, se pierden datos temporales y la base puede colapsar por sobrecarga. La replicación mantiene la información en múltiples nodos, con un nodo primario y réplicas, para que el sistema siga respondiendo. Aun así, sostener la coherencia entre copias y la invalidación sigue siendo responsabilidad del diseño.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 28 },
+    "tags": ["cache", "replicacion", "disponibilidad"]
+  },
+  {
+    "id": "cache-020",
+    "tema": "cache",
+    "subtema": "capas",
+    "dificultad": "facil",
+    "pregunta": "La gerencia propone apagar la base de datos y dejar el catálogo solo en la caché. Según el material, ¿por qué es una mala idea?",
+    "opciones": [
+      {
+        "texto": "Porque la caché es una optimización, no la fuente de verdad ni un reemplazo de la persistencia.",
+        "correcta": true
+      },
+      {
+        "texto": "Porque la caché no puede almacenar más de una clave por producto.",
+        "correcta": false,
+        "porque_no": "El material no pone límites de ese tipo; el problema es de rol y de durabilidad."
+      },
+      {
+        "texto": "Porque la caché no admite datos en formato de texto.",
+        "correcta": false,
+        "porque_no": "Las cachés guardan cualquier dato serializable; la objeción no pasa por el formato."
+      },
+      {
+        "texto": "Porque la caché solo funciona mientras la base está disponible.",
+        "correcta": false,
+        "porque_no": "Una caché distribuida puede seguir respondiendo ante degradaciones de la base; el problema es usarla como fuente única."
+      }
+    ],
+    "explicacion": "El material es explícito sobre lo que una caché no debería hacer: reemplazar completamente la persistencia, almacenar información crítica sin respaldo o gestionar reglas de negocio complejas. La caché debe considerarse una optimización arquitectónica y no la única fuente de verdad. La durabilidad, la integridad y la recuperación siguen siendo responsabilidad de la capa de persistencia.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 39 },
+    "tags": ["cache", "capas", "persistencia"]
+  }
+]

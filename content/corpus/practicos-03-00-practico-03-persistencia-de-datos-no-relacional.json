@@ -1,0 +1,10 @@
+{
+  "archivo": "03-00- Practico 03 -Persistencia de Datos No-Relacional.pdf",
+  "carpeta": "Practicos",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Práctico 3: Persistencia de Datos No Relacional \n \n1.​ Explica por qué las bases de datos NoSQL no reemplazan completamente al modelo \nrelacional en sistemas empresariales modernos. \n \n2.​ Dado un sistema global de redes sociales, ¿qué problemas del modelo relacional \njustificarían el uso de una base de datos NoSQL? \n \n3.​ En el contexto del teorema CAP, ¿qué ocurre con un sistema cuando existe una \npartición de red y qué decisiones debe tomar el arquitecto? \n \n4.​ ¿Por qué un modelo Key-Value como Redis no es adecuado para consultas \ncomplejas o analíticas? \n \n5.​ En una base de datos documental, ¿qué ventajas tiene almacenar información \nembebida dentro de un documento en lugar de normalizarla? \n \n6.​ En qué tipo de problemas las bases de grafos superan claramente a las bases \nrelacionales y por qué? \n \n7.​ Explica la diferencia entre escalamiento vertical y escalamiento horizontal, y por qué \nNoSQL se asocia principalmente al segundo. \n \n8.​ ¿Qué problema resuelve la técnica de sharding y qué riesgo puede introducir si se \ndiseña incorrectamente? \n \n9.​ ¿Cómo CQRS mejora el rendimiento de un sistema y qué problema introduce en \ntérminos de consistencia? \n \n10.​Explica por qué la persistencia políglota es coherente con arquitecturas de \nmicroservicios modernas. \n \n11.​En un sistema distribuido que utiliza replicación asíncrona, ¿qué tipo de problemas \nde consistencia pueden aparecer y cómo se relacionan con la consistencia \neventual? \n \n12.​En un sistema que utiliza sharding, ¿qué criterios podrías usar para elegir una buena \nclave de particionamiento (shard key) y qué consecuencias tiene una mala elección? \n \n13.​Explica cómo la desnormalización en bases de datos NoSQL impacta en el \nrendimiento de lectura y en la complejidad de las actualizaciones."
+    }
+  ]
+}

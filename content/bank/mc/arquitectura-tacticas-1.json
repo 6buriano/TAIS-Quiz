@@ -1,0 +1,290 @@
+[
+  {
+    "id": "arq-tac-001",
+    "tema": "arquitectura",
+    "subtema": "introduccion",
+    "dificultad": "facil",
+    "pregunta": "Dos sistemas implementan exactamente las mismas funcionalidades: registrar usuarios, procesar pagos y generar reportes. Uno responde en milisegundos y permanece disponible; el otro tarda varios segundos y falla con frecuencia. ¿Qué explica esa diferencia?",
+    "opciones": [
+      { "texto": "Las decisiones de diseño y arquitectura que se tomaron en cada sistema.", "correcta": true },
+      { "texto": "La cantidad de funcionalidades finalmente implementadas en cada sistema.", "correcta": false, "porque_no": "Los dos sistemas tienen las mismas funcionalidades, así que el volumen funcional no explica la diferencia de tiempos ni de estabilidad." },
+      { "texto": "El lenguaje de programación elegido para escribir el código de cada sistema.", "correcta": false, "porque_no": "El lenguaje es un detalle de implementación; el material atribuye la diferencia a las decisiones de arquitectura y no al runtime." },
+      { "texto": "La cantidad de usuarios que cada sistema atiende en el horario comercial.", "correcta": false, "porque_no": "La carga es una condición de contexto, pero el material plantea que dos sistemas con igual función se diferencian por cómo se estructuran." }
+    ],
+    "explicacion": "La motivación de la clase muestra dos sistemas con la misma funcionalidad y comportamientos muy distintos. Lo que explica la diferencia son las decisiones arquitectónicas: cómo se organizan los componentes, cómo se comunican y cómo se atienden los picos de demanda. Por eso las tácticas de diseño se estudian como decisiones y no como detalles de programación.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 3 },
+    "tags": ["arquitectura", "calidad"]
+  },
+  {
+    "id": "arq-tac-002",
+    "tema": "arquitectura",
+    "subtema": "importancia",
+    "dificultad": "facil",
+    "pregunta": "Un equipo descubre que los incidentes más caros del año no vienen de errores de código puntuales, sino de haber elegido una estructura difícil de escalar. Según el material, ¿qué aspectos críticos determina la arquitectura?",
+    "opciones": [
+      { "texto": "Rendimiento, disponibilidad, seguridad, escalabilidad y evolución.", "correcta": true },
+      { "texto": "Cronograma, presupuesto, dotación y alcance del proyecto.", "correcta": false, "porque_no": "Esos son aspectos de gestión del proyecto; la arquitectura influye en atributos técnicos que se observan en operación." },
+      { "texto": "Estilo de código, convenciones de nombres y cobertura de pruebas.", "correcta": false, "porque_no": "Son prácticas de calidad del código; el material ubica a la arquitectura por encima del detalle de implementación." },
+      { "texto": "Cantidad de funcionalidades, casos de uso y pantallas del sistema.", "correcta": false, "porque_no": "Eso describe el alcance funcional; dos sistemas con el mismo alcance pueden tener arquitecturas y comportamientos muy distintos." }
+    ],
+    "explicacion": "La arquitectura determina aspectos críticos del sistema: rendimiento, disponibilidad, seguridad, escalabilidad y evolución. Muchos de los problemas más costosos de corregir son consecuencia de decisiones arquitectónicas equivocadas. Por eso las decisiones estructurales se toman temprano y con criterio de negocio.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 4 },
+    "tags": ["arquitectura", "atributos"]
+  },
+  {
+    "id": "arq-tac-003",
+    "tema": "arquitectura",
+    "subtema": "documentacion",
+    "dificultad": "facil",
+    "pregunta": "Al escribir el documento de arquitectura de un sistema de inscripciones, el equipo necesita decidir qué información incluir. ¿Qué conjunto de elementos describe la arquitectura según el material?",
+    "opciones": [
+      { "texto": "Componentes principales, relaciones entre ellos, interfaces y restricciones de diseño.", "correcta": true },
+      { "texto": "Diagramas de clases, nombres de tablas y scripts de creación de la base.", "correcta": false, "porque_no": "Son artefactos de diseño detallado y de persistencia; la arquitectura describe la estructura de más alto nivel." },
+      { "texto": "Historias de usuario, criterios de aceptación y definición de terminado.", "correcta": false, "porque_no": "Eso pertenece a la especificación funcional y al proceso de desarrollo, no a la descripción estructural del sistema." },
+      { "texto": "Manual del usuario, plan de capacitación y acuerdos de nivel de servicio.", "correcta": false, "porque_no": "Son documentos de operación y de contrato con el cliente; no describen la estructura interna del sistema." }
+    ],
+    "explicacion": "La arquitectura describe componentes principales, relaciones entre componentes, interfaces y restricciones de diseño. Esa descripción es la que se documenta y se usa como referencia durante todo el proyecto. No conviene confundir estructura con detalle: las tablas, las clases o los manuales pertenecen a otros niveles.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 5 },
+    "tags": ["arquitectura", "documentacion"]
+  },
+  {
+    "id": "arq-tac-004",
+    "tema": "arquitectura",
+    "subtema": "requisitos-funcionales",
+    "dificultad": "facil",
+    "pregunta": "En el tablero de requerimientos de una plataforma de ventas aparecen cuatro ítems. ¿Cuál de ellos es un requisito funcional?",
+    "opciones": [
+      { "texto": "Emitir la factura electrónica al confirmar el pago de la compra.", "correcta": true },
+      { "texto": "Responder en menos de dos segundos en el percentil noventa y nueve.", "correcta": false, "porque_no": "Es una restricción de tiempo de respuesta, es decir, un atributo de calidad y no una funcionalidad del sistema." },
+      { "texto": "Soportar el crecimiento de usuarios durante la temporada de descuentos.", "correcta": false, "porque_no": "Describe un comportamiento de calidad vinculado a la escalabilidad; los requisitos funcionales son servicios o funcionalidades." },
+      { "texto": "Adaptarse a cambios regulatorios sin reescribir el módulo de cálculo.", "correcta": false, "porque_no": "Es una exigencia sobre la modificabilidad del sistema, no una funcionalidad que el usuario pueda ejecutar." }
+    ],
+    "explicacion": "Los requisitos funcionales definen qué hace el sistema: registrar un cliente, realizar una compra, emitir una factura, guardar el histórico. Los no funcionales describen cómo debe comportarse: tiempo de respuesta, disponibilidad, escalabilidad, seguridad. Unos y otros suelen convivir en documentos de requerimientos o en épicas e historias de usuario.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 7 },
+    "tags": ["requisitos", "funcionales"]
+  },
+  {
+    "id": "arq-tac-005",
+    "tema": "arquitectura",
+    "subtema": "requisitos-no-funcionales",
+    "dificultad": "facil",
+    "pregunta": "Un cliente pide que el sistema no se caiga y que responda rápido, y el equipo debe traducir ese pedido a requerimientos no funcionales. ¿Qué describen este tipo de requisitos?",
+    "opciones": [
+      { "texto": "Atributos de calidad y de comportamiento, como el tiempo de respuesta o la disponibilidad.", "correcta": true },
+      { "texto": "Los servicios y las funcionalidades concretas que el sistema debe ofrecer.", "correcta": false, "porque_no": "Esa es la definición de requisito funcional; el material separa explícitamente las dos categorías." },
+      { "texto": "El cronograma de entregas y la asignación de tareas dentro del equipo.", "correcta": false, "porque_no": "Pertenece a la planificación del proyecto, no a los atributos medibles del sistema construido." },
+      { "texto": "El diseño de las pantallas y el flujo de navegación que verá el usuario.", "correcta": false, "porque_no": "Es una decisión de interfaz; los requisitos no funcionales se refieren al comportamiento de calidad del sistema." }
+    ],
+    "explicacion": "Los requisitos no funcionales definen atributos de calidad y de performance: tiempo de respuesta, disponibilidad, seguridad y escalabilidad. Responden a la pregunta de cómo debe comportarse el sistema y no a qué funcionalidad ofrece. Suelen ser los que diferencian arquitecturas que cumplen exactamente la misma función.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 8 },
+    "tags": ["rnf", "requisitos"]
+  },
+  {
+    "id": "arq-tac-006",
+    "tema": "arquitectura",
+    "subtema": "atributos-de-calidad",
+    "dificultad": "facil",
+    "pregunta": "El área de calidad quiere fijar objetivos verificables para el próximo release y revisa la lista de atributos del material. ¿Qué caracteriza a los atributos de calidad?",
+    "opciones": [
+      { "texto": "Son características medibles, como rendimiento, disponibilidad o modificabilidad.", "correcta": true },
+      { "texto": "Son opiniones de los usuarios que se relevan al final del proyecto.", "correcta": false, "porque_no": "Un atributo de calidad debe poder medirse; no depende de una impresión subjetiva relevada a posteriori." },
+      { "texto": "Son funcionalidades opcionales que se agregan si queda presupuesto.", "correcta": false, "porque_no": "No son funcionalidades sino propiedades del comportamiento, y condicionan decisiones de arquitectura desde el inicio." },
+      { "texto": "Son patrones de diseño que se aplican a los componentes de la interfaz.", "correcta": false, "porque_no": "Los patrones son soluciones estructurales; los atributos de calidad son características observables del sistema." }
+    ],
+    "explicacion": "El material define los atributos de calidad como características medibles de un sistema. Entre los más relevantes lista rendimiento, disponibilidad, seguridad, escalabilidad, modificabilidad y confiabilidad. Al ser medibles permiten fijar objetivos, comparar alternativas de diseño y verificar el resultado en operación.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 10 },
+    "tags": ["atributos", "calidad"]
+  },
+  {
+    "id": "arq-tac-007",
+    "tema": "arquitectura",
+    "subtema": "seguridad",
+    "dificultad": "facil",
+    "pregunta": "Un equipo que mantiene un sistema de pagos revisa su estrategia de seguridad antes de una auditoría. ¿Cuál es el objetivo de la seguridad y qué principios la guían en el material?",
+    "opciones": [
+      { "texto": "Proteger los activos del sistema y del negocio, con confidencialidad, integridad y disponibilidad.", "correcta": true },
+      { "texto": "Reducir el costo de infraestructura evitando réplicas innecesarias.", "correcta": false, "porque_no": "El ahorro de infraestructura es un objetivo de eficiencia; la seguridad busca proteger activos y no abaratar el despliegue." },
+      { "texto": "Acelerar los tiempos de respuesta cifrando solamente la base de datos.", "correcta": false, "porque_no": "El cifrado es una táctica de seguridad y no un objetivo de rendimiento; además el rendimiento es otro atributo distinto." },
+      { "texto": "Documentar cada decisión de diseño para facilitar las auditorías internas.", "correcta": false, "porque_no": "La trazabilidad de decisiones ayuda al gobierno del proyecto, pero el objetivo declarado es proteger los activos." }
+    ],
+    "explicacion": "La seguridad tiene como objetivo proteger los activos del sistema y del negocio. Sus principios son confidencialidad, integridad y disponibilidad. Cada táctica de seguridad que se elige después se justifica por alguno de esos tres principios.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 13 },
+    "tags": ["seguridad", "atributos"]
+  },
+  {
+    "id": "arq-tac-008",
+    "tema": "arquitectura",
+    "subtema": "nivel-de-detalle",
+    "dificultad": "media",
+    "pregunta": "Un alumno pregunta si la arquitectura de software debe indicar qué clases y métodos tendrá cada módulo del sistema. A partir de la analogía con la arquitectura de un edificio, ¿qué nivel de detalle le corresponde?",
+    "opciones": [
+      { "texto": "Define la estructura principal, no cada ladrillo ni cada detalle de construcción.", "correcta": true },
+      { "texto": "Define cada clase, método y atributo, igual que un plano de instalación eléctrica.", "correcta": false, "porque_no": "Ese es el nivel de diseño detallado; la analogía del edificio sirve justamente para separar estructura de detalle." },
+      { "texto": "Define únicamente los requisitos funcionales que el edificio debe cumplir.", "correcta": false, "porque_no": "La arquitectura no es la lista de requisitos funcionales, sino la estructura que los soporta y les da forma." },
+      { "texto": "Define el presupuesto y el plazo de ejecución de cada etapa de la obra.", "correcta": false, "porque_no": "La planificación de la obra pertenece a la gestión del proyecto y no a la descripción estructural del sistema." }
+    ],
+    "explicacion": "La analogía del edificio muestra que la arquitectura define la estructura principal y no cada ladrillo. En software ocurre lo mismo: se describen componentes, relaciones, interfaces y restricciones, y el detalle queda para las etapas de diseño y codificación. Confundir ambos niveles hace perder de vista las decisiones que después condicionan todo el sistema.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 5 },
+    "tags": ["arquitectura", "analogia"]
+  },
+  {
+    "id": "arq-tac-009",
+    "tema": "arquitectura",
+    "subtema": "decisiones",
+    "dificultad": "media",
+    "pregunta": "En la reunión de diseño se debate si la comunicación entre el servicio de pedidos y el de facturación debe ser síncrona o asíncrona. ¿Por qué el material trata esta elección como una decisión arquitectónica?",
+    "opciones": [
+      { "texto": "Porque condiciona el comportamiento del sistema y genera consecuencias sobre el software y el negocio.", "correcta": true },
+      { "texto": "Porque es una decisión reversible en cualquier momento y sin costo de migración.", "correcta": false, "porque_no": "Las decisiones arquitectónicas se caracterizan por su impacto y por el costo que tiene revertirlas más adelante." },
+      { "texto": "Porque solo afecta el formato del código y no la operación del sistema en producción.", "correcta": false, "porque_no": "Afecta el acoplamiento, la latencia, la tolerancia a fallas y la consistencia, es decir, la operación." },
+      { "texto": "Porque la define el proveedor de la base de datos y el equipo no puede cambiarla.", "correcta": false, "porque_no": "El modo de comunicación entre servicios es una decisión de diseño del equipo y no una imposición del motor de datos." }
+    ],
+    "explicacion": "El material presenta las decisiones de arquitectura como un conjunto de alternativas: monolito o microservicios, SQL o NoSQL, comunicación síncrona o asíncrona, replicación o no replicación. Cada decisión genera consecuencias e impactos en el software y en el negocio. Por eso conviene documentarlas y evaluarlas antes de comprometerse con una implementación.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 6 },
+    "tags": ["decisiones", "arquitectura"]
+  },
+  {
+    "id": "arq-tac-010",
+    "tema": "arquitectura",
+    "subtema": "rendimiento",
+    "dificultad": "media",
+    "pregunta": "El equipo de un servicio de reservas midió que cada consulta tarda 200 ms y que el sistema procesa 50 consultas por segundo. Para la próxima temporada necesitan procesar cuatro veces más consultas manteniendo el tiempo de cada una. ¿Qué métrica deben mejorar?",
+    "opciones": [
+      { "texto": "El throughput, es decir, la cantidad de solicitudes procesadas por unidad de tiempo.", "correcta": true },
+      { "texto": "La latencia, entendida como el tiempo que tarda una solicitud individual.", "correcta": false, "porque_no": "La consigna pide mantener el tiempo por solicitud y multiplicar el volumen, y eso apunta al throughput." },
+      { "texto": "La utilización de CPU, que debería aproximarse lo más posible al cien por ciento.", "correcta": false, "porque_no": "La utilización de CPU es un indicador de consumo de recursos y no una meta: saturarla suele empeorar los tiempos." },
+      { "texto": "La disponibilidad, medida como porcentaje de tiempo con el servicio operativo.", "correcta": false, "porque_no": "La disponibilidad mide la proporción de tiempo en que el servicio está operativo y no el volumen de trabajo." }
+    ],
+    "explicacion": "El material distingue latencia, throughput, utilización de CPU y utilización de memoria como métricas del rendimiento. La latencia mira una solicitud individual y el throughput mira el volumen total por unidad de tiempo. Escalar el volumen sin degradar cada respuesta es un objetivo de throughput y suele requerir balanceo o réplicas de lectura.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 11 },
+    "tags": ["rendimiento", "metricas"]
+  },
+  {
+    "id": "arq-tac-011",
+    "tema": "arquitectura",
+    "subtema": "disponibilidad",
+    "dificultad": "media",
+    "pregunta": "La gerencia pide subir la disponibilidad comprometida del servicio de home banking de 99,9 % a 99,99 %. ¿Qué consecuencia señala el material frente a ese pedido?",
+    "opciones": [
+      { "texto": "Cada decimal adicional de disponibilidad implica costos significativos de diseño y operación.", "correcta": true },
+      { "texto": "El salto entre un decimal y el siguiente no cambia la estructura del sistema.", "correcta": false, "porque_no": "Cada decimal reduce el tiempo de inactividad tolerado y exige más redundancia, más monitoreo y más pruebas." },
+      { "texto": "Solo hace falta documentar mejor la arquitectura que ya está en producción.", "correcta": false, "porque_no": "La documentación no agrega disponibilidad: hacen falta tácticas y componentes que toleren fallas." },
+      { "texto": "La disponibilidad depende únicamente de la velocidad de los servidores contratados.", "correcta": false, "porque_no": "También depende de la redundancia, el failover, el monitoreo y la calidad de los despliegues." }
+    ],
+    "explicacion": "La disponibilidad se expresa como la probabilidad de que el sistema esté operativo cuando se lo necesita, con ejemplos de 99 %, 99,9 % y 99,99 %. El material advierte que cada decimal adicional implica costos significativos. Por eso la disponibilidad objetivo se negocia con el negocio y no se lleva al máximo por defecto.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 12 },
+    "tags": ["disponibilidad", "tradeoff"]
+  },
+  {
+    "id": "arq-tac-012",
+    "tema": "arquitectura",
+    "subtema": "escalabilidad",
+    "dificultad": "media",
+    "pregunta": "Un marketplace prevé tres crecimientos simultáneos para el año próximo: el doble de usuarios activos, el triple de productos publicados y un aumento de las compras por minuto. ¿Qué atributo de calidad está en juego y qué tipos reconoce el material?",
+    "opciones": [
+      { "texto": "La escalabilidad, que debe absorber más usuarios, más datos y más transacciones.", "correcta": true },
+      { "texto": "La modificabilidad, entendida como la capacidad de adaptarse a nuevos requisitos.", "correcta": false, "porque_no": "La modificabilidad refiere a cambios de requisitos y regulaciones, no al crecimiento del volumen de trabajo." },
+      { "texto": "La seguridad, porque el crecimiento de usuarios amplía la superficie de ataque.", "correcta": false, "porque_no": "El crecimiento puede exigir más seguridad, pero el atributo que describe la capacidad de soportarlo es otro." },
+      { "texto": "La confiabilidad, medida como cantidad de incidentes registrados por mes.", "correcta": false, "porque_no": "La confiabilidad se relaciona con la continuidad del servicio y no con la capacidad de absorber crecimiento." }
+    ],
+    "explicacion": "La escalabilidad es la capacidad del sistema para soportar crecimiento, y el material distingue tres tipos: más usuarios, más datos y más transacciones. Cada tipo de crecimiento estresa recursos distintos y puede requerir tácticas diferentes. Planificarla evita que el sistema se degrade justo cuando aumenta la demanda.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 14 },
+    "tags": ["escalabilidad", "atributos"]
+  },
+  {
+    "id": "arq-tac-013",
+    "tema": "arquitectura",
+    "subtema": "modificabilidad",
+    "dificultad": "media",
+    "pregunta": "Una aseguradora cambia las reglas de cobertura varias veces por año y cada cambio obliga a reescribir tres módulos y a repetir todas las pruebas. ¿Qué atributo está fallando y qué riesgo señala el material?",
+    "opciones": [
+      { "texto": "La modificabilidad: una arquitectura rígida incrementa significativamente los costos futuros.", "correcta": true },
+      { "texto": "La disponibilidad: la aseguradora no puede operar mientras se cambian las reglas.", "correcta": false, "porque_no": "El problema descrito no es el tiempo en línea sino el esfuerzo y el costo de adaptarse al cambio." },
+      { "texto": "El rendimiento: cada cambio de reglas consume CPU adicional en los servidores.", "correcta": false, "porque_no": "El consumo de recursos durante un cambio es un efecto menor frente a la dificultad estructural de modificarse." },
+      { "texto": "La seguridad: cada cambio de reglas abre una vulnerabilidad nueva en el sistema.", "correcta": false, "porque_no": "Puede existir riesgo de seguridad, pero el síntoma que describe el caso es la dificultad y el costo de cambiar." }
+    ],
+    "explicacion": "La modificabilidad es la capacidad de adaptarse al cambio: nuevos requisitos, cambios regulatorios o integración con nuevos sistemas. El material advierte que una arquitectura rígida incrementa significativamente los costos futuros. Por eso conviene encapsular las reglas que cambian con frecuencia y reducir el acoplamiento entre módulos.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 15 },
+    "tags": ["modificabilidad", "mantenibilidad"]
+  },
+  {
+    "id": "arq-tac-014",
+    "tema": "arquitectura",
+    "subtema": "tacticas",
+    "dificultad": "media",
+    "pregunta": "El directorio fija el objetivo de mejorar el tiempo de respuesta del portal y el equipo técnico debe bajarlo a algo concreto. ¿Qué papel cumplen las tácticas en ese pasaje, según el material?",
+    "opciones": [
+      { "texto": "Transforman objetivos abstractos en mecanismos concretos, como caché, balanceo o procesamiento asíncrono.", "correcta": true },
+      { "texto": "Reemplazan a la arquitectura, porque definen la estructura completa del sistema.", "correcta": false, "porque_no": "La arquitectura combina múltiples decisiones; las tácticas son mecanismos específicos que viven dentro de ella." },
+      { "texto": "Sustituyen a los requisitos no funcionales durante la etapa de pruebas del sistema.", "correcta": false, "porque_no": "Las tácticas no reemplazan los requisitos: son el medio para cumplirlos y se verifican contra ellos." },
+      { "texto": "Documentan el organigrama y las responsabilidades del equipo que construye el sistema.", "correcta": false, "porque_no": "Las tácticas son decisiones técnicas sobre el sistema y no sobre la organización del equipo de trabajo." }
+    ],
+    "explicacion": "El material define a las tácticas como mecanismos que permiten transformar un objetivo abstracto en algo concreto. Frente a la necesidad de mejorar el tiempo de respuesta propone caché, balanceo o procesamiento asíncrono. Ese pasaje es lo que vuelve verificable un atributo de calidad.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 17 },
+    "tags": ["tacticas", "rendimiento"]
+  },
+  {
+    "id": "arq-tac-015",
+    "tema": "arquitectura",
+    "subtema": "rnf-y-arquitectura",
+    "dificultad": "dificil",
+    "pregunta": "Un banco y una red social implementan las mismas funciones básicas: registro, inicio de sesión y publicación de contenido. El banco prioriza disponibilidad, seguridad y consistencia; la red social prioriza disponibilidad, escalabilidad y rendimiento. ¿Qué conclusión se desprende del material?",
+    "opciones": [
+      { "texto": "Con los mismos requisitos funcionales, los requisitos no funcionales explican arquitecturas distintas.", "correcta": true },
+      { "texto": "Las dos arquitecturas deberían ser idénticas, porque las funcionalidades coinciden.", "correcta": false, "porque_no": "Justamente el ejemplo muestra que la coincidencia funcional no alcanza para igualar dos arquitecturas." },
+      { "texto": "La red social debería priorizar la consistencia fuerte por encima del rendimiento.", "correcta": false, "porque_no": "El material ubica la consistencia fuerte entre las prioridades del banco y no entre las de la red social." },
+      { "texto": "El banco necesita más funcionalidades que la red social para justificar su diseño.", "correcta": false, "porque_no": "El ejemplo supone funciones equivalentes; la diferencia está en los atributos de calidad que cada uno prioriza." }
+    ],
+    "explicacion": "El material usa el caso del sistema bancario y el de la red social para mostrar que dos sistemas con los mismos requisitos funcionales pueden tener arquitecturas diferentes. Lo que las diferencia son los requisitos no funcionales: consistencia y seguridad en el banco, escalabilidad y rendimiento en la red social. De ahí salen tácticas distintas, como la replicación síncrona frente a la caché distribuida con consistencia eventual.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 9 },
+    "tags": ["rnf", "tradeoff"]
+  },
+  {
+    "id": "arq-tac-016",
+    "tema": "arquitectura",
+    "subtema": "arquitectura-y-tacticas",
+    "dificultad": "dificil",
+    "pregunta": "En una entrevista, el responsable técnico afirma: 'nuestra arquitectura es Redis'. ¿Qué confusión revela esa frase según el material?",
+    "opciones": [
+      { "texto": "La arquitectura combina múltiples decisiones; Redis es solo una táctica que influye en el rendimiento.", "correcta": true },
+      { "texto": "La arquitectura es un patrón estructural y Redis es un ejemplo de patrón.", "correcta": false, "porque_no": "Redis no es una solución estructural: es una herramienta concreta con la que se implementa una táctica de caché." },
+      { "texto": "La arquitectura se reduce a las tácticas y Redis resume todas las que usa el sistema.", "correcta": false, "porque_no": "La arquitectura abarca componentes, relaciones, interfaces y restricciones, además de las tácticas que la componen." },
+      { "texto": "Redis define las interfaces y las restricciones de diseño de todo el sistema.", "correcta": false, "porque_no": "Una herramienta de caché no define las interfaces ni las restricciones estructurales de la aplicación." }
+    ],
+    "explicacion": "El material ordena los conceptos: las tácticas son mecanismos específicos que influyen en un atributo de calidad, los patrones son soluciones estructurales y la arquitectura es la combinación de múltiples decisiones. Redis pertenece al primer nivel, como mecanismo de caché para mejorar rendimiento. Decir que la arquitectura 'es' una herramienta confunde el nivel de la decisión y deja fuera las interfaces y las restricciones que sí hay que documentar.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 18 },
+    "tags": ["tacticas", "arquitectura"]
+  },
+  {
+    "id": "arq-tac-017",
+    "tema": "arquitectura",
+    "subtema": "relacion-conceptos",
+    "dificultad": "dificil",
+    "pregunta": "Un documento de arquitectura debe mostrar cómo se pasa de lo que el cliente pide a lo que finalmente se construye. ¿Cuál es el orden de la cadena que presenta el material?",
+    "opciones": [
+      { "texto": "Requerimientos funcionales y no funcionales, arquitectura y estilos, patrones, tácticas e implementación.", "correcta": true },
+      { "texto": "Implementación, tácticas, patrones, requerimientos y arquitectura al final.", "correcta": false, "porque_no": "El material ubica la implementación al final de la cadena, como consecuencia de las decisiones previas." },
+      { "texto": "Patrones, implementación, requerimientos, tácticas y arquitectura al final.", "correcta": false, "porque_no": "Invertir el orden deja los requerimientos al final, cuando son el punto de partida de toda la cadena." },
+      { "texto": "Tácticas, requerimientos, implementación, patrones y arquitectura al final.", "correcta": false, "porque_no": "Las tácticas se derivan de los requerimientos y de la arquitectura, y no al revés como propone esta opción." }
+    ],
+    "explicacion": "El material presenta una cadena que arranca en los requerimientos funcionales y no funcionales y sigue con la arquitectura y los estilos, los patrones, las tácticas y la implementación. Ese orden muestra el nivel de decisión de cada concepto. También explica por qué un cambio en un requerimiento no funcional puede arrastrar cambios en cascada hacia abajo.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 19 },
+    "tags": ["arquitectura", "conceptos"]
+  },
+  {
+    "id": "arq-tac-018",
+    "tema": "arquitectura",
+    "subtema": "tradeoffs",
+    "dificultad": "dificil",
+    "pregunta": "Un equipo propone eliminar capas de abstracción y escribir código muy especializado para exprimir la velocidad de ejecución de un módulo crítico. Según el material, ¿qué efecto cabe esperar de esa decisión?",
+    "opciones": [
+      { "texto": "Mejora el rendimiento, pero degrada la modificabilidad y encarece los cambios futuros.", "correcta": true },
+      { "texto": "Mejora todos los atributos a la vez, porque el código especializado es superior.", "correcta": false, "porque_no": "El material sostiene que la arquitectura no consiste en maximizar todos los atributos, sino en encontrar un equilibrio." },
+      { "texto": "Empeora el rendimiento y no afecta a ningún otro atributo del sistema.", "correcta": false, "porque_no": "Especializar el código suele acelerar la ejecución; el costo aparece en la capacidad de adaptación." },
+      { "texto": "No tiene efecto sobre los atributos, porque solo cambia el estilo de escritura.", "correcta": false, "porque_no": "Las decisiones sobre estructura y abstracción impactan directamente en los atributos de calidad." }
+    ],
+    "explicacion": "La arquitectura no consiste en maximizar todos los atributos, sino en encontrar el equilibrio adecuado para el contexto del negocio. Quitar abstracciones puede bajar el tiempo de respuesta, pero deja el sistema rígido frente a cambios y pruebas. El costo de esa rigidez aparece después, cuando cada modificación obliga a tocar muchas partes a la vez.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 20 },
+    "tags": ["tradeoff", "modificabilidad"]
+  }
+]

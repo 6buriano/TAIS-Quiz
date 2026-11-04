@@ -1,0 +1,318 @@
+{
+  "archivo": "01-03-tais-Estilos.pdf",
+  "carpeta": "",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Estilos arquitectónicos y Arq. de \nSoftware\n1"
+    },
+    {
+      "n": 2,
+      "texto": "Arquitectura de Software\nEspecificación de Requisitos del Sistema \n(SRS)\nSistema instalado y funcionando\nEn este camino hay mucho por hacer.\n¿Comenzamos a programar para terminar \nlo antes posible?\n¿Cuáles serían los riesgos?\n2"
+    },
+    {
+      "n": 3,
+      "texto": "Arquitectura de Software\nEspecificación de Requisitos del Sistema \n(SRS)\nSistema instalado y funcionando\n• Arquitectura de Software\n• Diseño detallado\n• Implementación\n• Verificación\nEstas fases no \nse aplican en \nCascada.\n3"
+    },
+    {
+      "n": 4,
+      "texto": "Arquitectura de Software\n• Los sistemas complejos están compuestos de \nsubsistemas que interactúan bajo el control de \nun diseño del sistema.\n• Arquitectura de Software\n– Los subsistemas que componen el sistema,\n– las interfaces y\n– las reglas de interacción entre ellos.\n4"
+    },
+    {
+      "n": 5,
+      "texto": "Definición de \nArquitectura de Software\n• Una arquitectura de software para un sistema es \nla estructura o estructuras del sistema, que \nconsta de elementos, sus propiedades visibles \nexternamente y las relaciones entre ellos.\nA software architecture for a system is the structure or structures of the \nsystem, which consist of elements, their externally visible properties, and \nthe relationships among them.\nDocumenting software architectures, views and beyond\n5"
+    },
+    {
+      "n": 6,
+      "texto": "Valor de la Arquitectura\n• Ventajas de diseñar y documentar explícitamente \nuna arquitectura de software:\n– Comunicación entre interesados\n– Decisiones tempranas de diseño\n– Reúso a gran escala\nBass, et al, Software Architecture in Practice\n6"
+    },
+    {
+      "n": 7,
+      "texto": "¿Qué afecta y qué la determina?\n• La arquitectura de software afecta la\n– Performance\n– Seguridad\n• Safety: Protección contra peligros y accidentes no intencionales.\n• Security: Protección contra amenazas y actos intencionales \nmaliciosos.\n– Disponibilidad\n– Mantenibilidad\n– …\n• La Arquitectura de un sistema está fuertemente ligada a \nlos requerimientos no funcionales. \n7"
+    },
+    {
+      "n": 8,
+      "texto": "Conflictos entre Soluciones\n• El sistema debe presentar alta performance y de fácil \nmantenimiento (mantenible).\n• ¿Cuál es el conflicto al momento de elegir el estilo \narquitectónico?\n• ¿Cómo se puede solucionar?\n– Solución de compromiso\n– Diferentes estilos para distintas partes del sistema.\n8"
+    },
+    {
+      "n": 9,
+      "texto": "La Arquitectura como \nsolución de compromiso\n• La arquitectura ofrece \nuna alternativa de \nsolución que los \ninteresados \ninfluencian, deben \ncomprender y validar \nlas características que \ndetermina de la \nSolución.\n9"
+    },
+    {
+      "n": 10,
+      "texto": "¿Qué tan fácil es de Modificar?\nSears EEUU 527 m.\nPetronas  Malasia  452 m.\nTaipei 101  China 508 m.\n10"
+    },
+    {
+      "n": 11,
+      "texto": "¿Qué tan fácil es de Modificar?\nAlgunos interesados quisieran \ntrasladar ascensores al otro \nlado …\nLos inversores quisieran que \nel puente estuviera 20 pisos \nmás arriba para una mejor \nvista.\n11"
+    },
+    {
+      "n": 12,
+      "texto": "Arquitectura y Metodologías Agiles\n• ¿Hay conflicto entre Arquitectura de Software y \nlas Metodologías Agiles?\n– Agile: Equipos autónomos, evolución permanente\n– Arquitectura:  Plan a priori y restricciones\n• No son opuestas, pero aplicar ambas requiere \ntomar medidas.\n– Arquitectos como Interesados.\n– Arquitectos incorporados a los equipos.\n– Modelos de referencia preacordados.\n12"
+    },
+    {
+      "n": 13,
+      "texto": "Patrones de Software\n• Propósito\n– Compartir una solución probada, ampliamente aplicable \na un problema particular de diseño.\n– El patrón se representa en una forma estándar que \npermite que sea fácilmente reutilizado.\n• Elementos de un patrón\n– Nombre\n– Contexto\n– Problema que considera\n– Solución\n– Consecuencias (positivas y negativas)\n13"
+    },
+    {
+      "n": 14,
+      "texto": "Estilos, Patrones e Idioms\n• Los patrones de diseño se agrupan en tres tipos:\n– Estilos arquitectónicos: Soluciones de organización \na nivel del sistema.\n– Patrones de diseño: Soluciones a problemas \ndetallados de diseño de software.\n– Idioms: Soluciones útiles para problemas específicos \nen algún lenguaje de programación.\n14"
+    },
+    {
+      "n": 15,
+      "texto": "Estilos Arquitectónicos\n•\nExpresan un esquema de organización estructural para sistemas de \nsoftware.\n•\nProvee un conjunto de tipos de elementos predefinidos, especifica \nsus responsabilidades e incluye reglas y guías para organizar las \nrelaciones entre ellos.\nCapa n\nCapa 2\nCapa 1\nCapa n-1\n15"
+    },
+    {
+      "n": 16,
+      "texto": "Patrones de Diseño\n• Un patrón de diseño\n– Provee un esquema para refinar los elementos de un \nsistema de software o las relaciones entre ellos.\n– Describe una estructura recurrente de elementos de \ndiseño interconectados que soluciona un problema \ngeneral de diseño dentro de un contexto particular.\n16"
+    },
+    {
+      "n": 17,
+      "texto": "Idioms\n• Un idiom\n– Es un patrón de bajo nivel, específico para un \nlenguaje de programación.\n– Describe cómo implementar aspectos particulares de \nelementos o de las relaciones entre ellos usando las \ncaracterísticas de un lenguaje particular.\n17"
+    },
+    {
+      "n": 18,
+      "texto": "Arquitectura de Software\nEstilos Arquitectónicos\n18"
+    },
+    {
+      "n": 19,
+      "texto": "Beneficios de aplicar\nEstilos de Arquitecturas\n• Reúso\n– Permite seleccionar una solución entendible y \nprobada en ciertos problemas, definiendo los \nprincipios organizativos del sistema.\n• Conocimiento y Experiencia Previa\n• Técnicas y Herramientas\n• Comunicación\n– Al basar la arquitectura en estilos que son conocidos, \nlas personas entienden más fácilmente las \ncaracterísticas importantes de la misma.\n19"
+    },
+    {
+      "n": 20,
+      "texto": "Formas de Uso de los Estilos\n• Solución para el diseño del sistema\n– Algún estilo sirve\n– Se adopta y se usa como una de las estructuras \ncentrales de la arquitectura.\n• Base para una adaptación\n– Algún estilo soluciona parcialmente los problemas.\n– Se puede buscar adaptar el estilo para las \nrestricciones particulares que se enfrentan.\n20"
+    },
+    {
+      "n": 21,
+      "texto": "Formas de Uso de los Estilos (2)\n• Inspiración para una solución relacionada\n– Ningún estilo sirve.\n– Sin embargo, entender problemas que solucionan ciertos \nestilos puede llevar a entender mejor el problema actual.\n– Entonces, se puede encontrar una solución que de \nalguna forma está relacionada con estilos existentes.\n• Motivación para un nuevo estilo\n– El problema no es atacado por ningún estilo \nconsiderado.\n– Es una buena oportunidad para encontrar una solución \ngeneral al problema y crear un nuevo estilo.\n21"
+    },
+    {
+      "n": 22,
+      "texto": "Algunos Estilos\n• Cliente – Servidor\n• Capas Jerárquicas\n• Descomposición Orientada a Objetos\n• Tubos y Filtros (pipes & filters)\n• Control Centralizado\n• Control Basado en Eventos\n• Arquitecturas de Sistemas Distribuidos\n– Cliente – Servidor\n– Objetos Distribuidos\n– Peer to Peer\n– Service Oriented Architecture (SOA)\n– Rest & Microservices\n22"
+    },
+    {
+      "n": 23,
+      "texto": "Shared-Data\n• Generalidades\n– Almacenamiento central de datos y un conjunto de \ncomponentes que operan sobre éste.\n– Interacción – intercambio de datos persistentes\n– Múltiples accesos a los datos\n– Al menos un almacenamiento compratido\n• Variaciones\n– Repositorio: el consumidor busca los datos\n– Pizarrón (blackboard): Se avisa al consumidor del arribo de \nnuevos datos de interés.\n23"
+    },
+    {
+      "n": 24,
+      "texto": "Pizarrón (blackboard)\nPizarrón\nFC 1\nFC 7\nFC 6\nFC 2\nFC 4\nCálculos\nMemoria (compartida)\n24"
+    },
+    {
+      "n": 25,
+      "texto": "Shared-Data: Ventajas y Desventajas\n• Forma eficiente de compartir grandes cantidades \nde  datos.\n– No se transmiten datos de un componente a otro.\n• Sin embargo, los subsistemas deben estar de \nacuerdo en el modelo de datos del repositorio.\n• Las componentes que producen datos no \nnecesitan conocer cómo van a ser usados esos datos.\n• Actividades como respaldos, seguridad, control de  \nacceso y recuperación están centralizadas.\n• Sin embargo, diferentes componentes podrían requerir \ndistintas políticas de recuperación, respaldo, etc.\n25\n25"
+    },
+    {
+      "n": 26,
+      "texto": "Cliente - Servidor\n• El sistema se descompone en dos capas: servidores y \nclientes.\n– Servidores que ofrecen servicios.\n– Clientes que usan servicios ofrecidos por los servidores.\n– Mecanismo de comunicación entre Servidores y Clientes.\nLos clientes interactúan con los servidores, pero no directamente con \notros clientes.\nLos servidores no inicial interacciones, responden a requerimientos \nde clientes\n26"
+    },
+    {
+      "n": 27,
+      "texto": "Cliente – Servidor (2)\nServidor\nCliente 1\nCliente 1\nCliente 1\nWebServer\nBrowser \n1\nBrowser \nn\nBrowser \n2\nWebServer\nWebServer\n…\nEstilo\nEjemplo con múltiples \nservidores\n27"
+    },
+    {
+      "n": 28,
+      "texto": "Capas Jerárquicas\n•\nEl sistema se organiza en capas.\n•\nCada una provee un conjunto de \nservicio a las capas superiores y \nrequiere servicios de las capas \ninferiores.\nCapa n\nCapa 2\nCapa 1\nCapa n-1\n28"
+    },
+    {
+      "n": 29,
+      "texto": "Capas Jerárquicas (2)\n•\nModelo estricto\n–\nUna capa sólo utiliza servicios de la \ninmediata inferior.\n•\nModelo relajado\n–\nSe pueden ‘saltar’ capas.\n•\nEjemplo:\n–\nModelo OSI\nAlgo particular de este ejemplo: las capas \n‘conversan’ (ejecutan un protocolo) con \notra capa en su mismo nivel en otro nodo.\n29"
+    },
+    {
+      "n": 30,
+      "texto": "Capas Jerárquicas (3)\n• Ventajas\n– Facilita la comprensión\n– Facilita mantenimiento\n– Facilita reutilización\n– Facilita portabilidad\n• Desventajas\n– No siempre es fácil \nestructurar en capas ni \nidentificar los niveles de \nabstracción a partir de los \nRequisitos.\n– La interpretación de \ncomandos en múltiples \nniveles puede afectar el \ndesempeño.\n30"
+    },
+    {
+      "n": 31,
+      "texto": "Descomposición \nOrientada a Objetos\n• Se descompone el sistema en un conjunto d \nobjetos que se comunican.\n• Representación de datos y operaciones \nasociadas se encapsulan en cada objeto.\n• Elementos típicos en este estilo:\n– Interfaces, herencia, polimorfismo, enlaces dinámicos.\n31"
+    },
+    {
+      "n": 32,
+      "texto": "Descomposición \nOrientada a Objetos (2)\n• Ventajas\n– La implementación de los \nobjetos puede ser cambiada \nsin afectar a otros.\n– Promueve la reutilización de \ncomponentes.\n– Muchos objetos representan \nentidades de la realidad por \nlo que es fácil entender la \nestructura del sistema.\n• Desventajas\n– Para  usar servicios se debe \nconocer el nombre de la \ninterface de otro objeto.\n– Los cambios en las \ninterfaces afectan a todos \nlos objetos que la usan.\n32"
+    },
+    {
+      "n": 33,
+      "texto": "Tubos y Filtros (Pipes & Filters)\n•\nSe descompone el sistema en módulos funcionales\n•\nInteracción: sucesiva transformación de un flujo de datos.\n•\nLos datos llegan a un ‘filtro’, se transforma y son pasados a través de ‘tubos’ al \nsiguiente filtro.\n•\nUn filtro puede pasar datos a múltiples tubos y recibir datos de múltiples tubos.\n•\nCada filtro es independiente del resto y no conoce la identidad de los otros filtros.\n•\nLa transformación del filtro puede comenzar antes de terminar de leer la entrada.\n•\nRespetando el grafo, no importa la secuencia (paralelismo)\n33"
+    },
+    {
+      "n": 34,
+      "texto": "Tubos y Filtros (2)\n•\nVentajas\n– Se pueden reutilizar los filtros.\n– Es intuitivo pensar en \nsecuencias de procesamientos \nde datos.\n– Agregar nuevas \ntransformaciones de forma que \nel sistema evoluciones es \nsencillo.\n•\nDesventajas\n– Acordar cuál es el formato de \nlos datos.\n– Sistemas interactivos son \ndifíciles de construir con este \nestilo.\n– Ineficiente si hay \nprocesamiento (por la \ndescomposición) o si los filtros \nrepiten chequeos.\n34"
+    },
+    {
+      "n": 35,
+      "texto": "Modelos de Control\n• Modelos de control a nivel de la arquitectura se \npreocupa del flujo de control entre subsistemas.\n• Control centralizado\n– Un subsistema controla al resto\n• Control basado en eventos\n– Cada subsistema puede responder a eventos \nexternos\n• Eventos generados por otros subsistemas\n• Eventos generados por el ambiente del sistema\n35"
+    },
+    {
+      "n": 36,
+      "texto": "Control Centralizado\nLlamada/Retorno (request/response)\n36"
+    },
+    {
+      "n": 37,
+      "texto": "Control Centralizado\nModelo Gerente (manager)\n• Un componente controla los procesos de otros \ncomponentes.\n37"
+    },
+    {
+      "n": 38,
+      "texto": "Control basado en Eventos\n• En los modelos centralizados las decisiones de \ncontrol suelen estar determinadas por valores de \nalguna variable de estado del sistema.\n• En cambio, el control basado en eventos es \nguiado por eventos generados externamente.\n• Ejemplos\n– GUIs: eventos representan acciones externas.\n– Shutdown: Se emiten eventos a todos los \nsubsistemas (broadcast) para que detengan su \noperación.\n38"
+    },
+    {
+      "n": 39,
+      "texto": "Publicación/Subscripción \n(publish/subscribe)\n• Sistema de componentes independientes que se \ncomunican mediante mensajes/eventos:\n– Los que publican no saben cuántos consumidores hay \nregistrados para el consumo.\n– Los subscriptores indican en qué mensajes están interesados. \n• Interacción vía eventos/mensajes.\n– Tópicos: una alternativa para establecer ‘temas’ para publicar \no subscribirse.\n• Sistema de Mensajería / Middleware\n– Es trabajo de esta plataforma asegurar la comunicación de los \nmensajes a todos subscriptores bajo distintas condiciones \n(transaccionales, retención, reintentos, etc.)\n39"
+    },
+    {
+      "n": 40,
+      "texto": "Arquitectura Monolítica (monolithic)\n• Aplicación desplegada como unidad \nindivisible, que no es responsable de \nuna única función.\n• Ventajas\n– Desarrollo ágil en etapas tempranas.\n– Baja complejidad de comunicación.\n• Desventajas\n– Cambio de un módulo requiere \nreconstruir y desplegar toda la solución.\n– Limitaciones para escalar.\n– Posible baja flexibilidad.\n40"
+    },
+    {
+      "n": 41,
+      "texto": "Arquitectura de Sistemas Distribuidos\n41"
+    },
+    {
+      "n": 42,
+      "texto": "Cliente - Servidor\n• Más de una forma de distribuir la lógica entra las \ncapas.\n• El enlace ahora es sobre una red, con sus \nconsecuencias.\nServidor\nCliente 1\nCliente 1\nCliente 1\n42"
+    },
+    {
+      "n": 43,
+      "texto": "Cliente-Servidor\n2 Niveles\n• Es la arquitectura más simple cliente-servidor.\n• Varios clientes y un servidor\n– Es posible usar múltiples servidores idénticos para \nescalabilidad / tolerancia a fallas.\n• Es posible balancear funcionalidad entre las capas\n– Cliente fino\n• El procesamiento de la información y la gestión de los datos ocurre en \nel servidor.\n• El cliente sólo es responsable de ejecutar el software de \npresentación.\n– Cliente grueso\n• El servidor es responsable sólo de la gestión de los datos.\n• El cliente ejecuta la lógica de la aplicación y la presentación.\n43"
+    },
+    {
+      "n": 44,
+      "texto": "Cliente – Servidor en 2 niveles\nAlgunas limitaciones\n• Hay que distribuir presentación, lógica y datos en \ndos capas o ‘nodos’.\n– Cliente fino: \n• Presentación separada de resto\n• Escalabilidad ?, rendimiento?\n– Cliente grueso:\n• Presentación y lógica separada de los datos\n• Administración del sistema?, rendimiento.\n• Alternativa\n– Utilizar más niveles.\n– 3 o 4 niveles son típicos.\n44"
+    },
+    {
+      "n": 45,
+      "texto": "Cliente-Servidor en 3 Capas\n• Mayor flexibilidad para distribuir la \nfuncionalidad del sistema.\n• Presentación\n– Presentación de información e \ninteracción con el usuario.\n• Procesamiento\n– Implementación de la lógica de la \nAplicación\n• Gestión de Datos\n– Operaciones de BD y archivos\nCapa  de Presentación\nCapa de Gestión de \nDatos\nCapa de \nProcesamiento\n45"
+    },
+    {
+      "n": 46,
+      "texto": "Cliente-Servidor en 3 Capas\n• Las capas pueden asignarse a distintos nodos \nde cómputo (ej. máquinas).\n– Ejemplo: Banco x Internet (home banking)\nCliente\nCliente\nCliente\nServidor \nWeb\nServidor \nBD\nservicios de \ncuenta\nhttp\nsql\ncliente, \ncuenta, …\n46"
+    },
+    {
+      "n": 47,
+      "texto": "47\nComparación\nCliente Fino vs 3 capas\n• Cliente Fino tiene mayor \ntráfico de red\n• 3 capas \n– escala con mayor facilidad\nCliente Grueso vs 3 capas\n• Cliente Grueso con \nmayor complejidad de \ngestión\n• 3 capas\n– mantiene lógica con \ngestión centralizada\n– más fácil de actualizar"
+    },
+    {
+      "n": 48,
+      "texto": "3 Capas - Limitaciones\n•\n¿Cómo integrar distintos tipos de Clientes?\n–\nEj. Web Browser y Apps.\n•\n¿Cómo ofrecer Servicios de Cuenta a Otros bancos?\n–\nEj. Web Services\nCliente\nBrowser\nServidor \nWeb\nServidor \nBD\n¿Hay que \ndescomponerla?\nCliente \nApp\nOtro Banco\ncon qué \ncapa habla?\ncon qué \ncapa habla?\n?\n?\n48"
+    },
+    {
+      "n": 49,
+      "texto": "4 Capas - Ejemplo\n•\n¿Cómo integrar distintos tipos de Clientes?\n–\nEj. Web Browser y Apps.\n•\n¿Cómo ofrecer Servicios de Cuenta a Otros bancos?\n–\nEj. Web Services\nCliente\nBrowser\nServidor \nWeb\nServidor \nBD\nLógica de Negocios / \nTransaccional\nCliente \nApp\nOtro Banco\nrest\nREST / SOAP \nServices\nrest\nsoap\nLógica interactiva\nrest\n49"
+    },
+    {
+      "n": 50,
+      "texto": "Objetos Distribuidos\n• En la arquitectura cliente-servidor los clientes y los \nservidores son distintos\n– Los servidores reciben servicios de los clientes y no de otros \nclientes.\n– Los servidores pueden actuar como clientes de otros \nservidores, pero no requieren servicios de clientes\n– Los clientes deben conocer los servicios ofrecidos por los \nservidores específicos y deben conocer cómo contactar a \nesos servidores.\n• Enfoque más general\n– Remover la distinción entre clientes y servidores\n– Diseñar la arquitectura como una de objetos distribuidos.\n50"
+    },
+    {
+      "n": 51,
+      "texto": "Objetos Distribuidos (2)\n• Objetos que proveen / consumen servicios de otros \nobjetos\n– No hay distinción entre clientes y servidores\n• Pueden ser distribuidos entre distintos nodos de una red \ny se comunican a través de un middleware.\n– En este caso, el middleware se llama: Object Request Broker \n(ORB).\n– Corba es un caso. \n• Es más complejo de diseñar que cliente-servidor.\n51"
+    },
+    {
+      "n": 52,
+      "texto": "La ‘Arquitectura Accidental’\nAnti-patrón\nMotivación para SOA\n52"
+    },
+    {
+      "n": 53,
+      "texto": "Service Oriented Architecture SOA\n• El sistema es el resultado de la composición de \nServicios.\n– Un servicio es una unidad de lógica de una solución a la que se \nle ha aplicado la orientación a servicios en una medida \nsignificativa (Thomas Erl).\n53"
+    },
+    {
+      "n": 54,
+      "texto": "Service Oriented Architecture SOA (2)\n•\nEl servicio es independiente de las aplicaciones que lo usan.\n•\nAplicaciones distintas pueden compartir servicios.\n•\nHay distintas formas de llevar Servicios a la práctica, \nconceptualmente operan de acuerdo con el siguiente modelo:\n54"
+    },
+    {
+      "n": 55,
+      "texto": "Servicio Web y Estándares\n• Un servicio web (web service) es una tecnología \nque utiliza un conjunto de protocolos y \nestándares para intercambiar datos enter \naplicaciones.\n– WSDL: Interfaz del servicio\n– SOAP: Mensajes intercambiados\n– XML: Serialización de los mensajes\n– HTTP: Se intercambian sobre este protocolo\n55"
+    },
+    {
+      "n": 56,
+      "texto": "Estilo REST de Arquitectura\n•\nSe basa en establecer un conjunto de reglas para describir y acceder a \nrecursos en una red.\n–\nArchitectural Styles and the Design of Network-based Software Architectures, Roy \nFielding (2000, PhD tesis).\n–\nInfluencia el desarrollo de la WWW.\n•\nRestricciones\n–\nCliente-Servidor\n–\nStateless (sin estado)\n–\nCacheability\n–\nLayered System (capas)\n–\nCode on Demand\n–\nUniform Interface: Recursos y métodos: GET, POST, PUT.\n•\nRESTful Web Services – RESTful APIs\n–\nWeb Services que promueven conceptos de REST.\n–\nAPIs basadas en HTTP.\n–\nNo todo RPC sobre HTTP es REST (Richardson Maturity Model)\n56"
+    },
+    {
+      "n": 57,
+      "texto": "Microservicios\n•\nUn sistema complejo que se modela como  un conjunto de unidades \ndesplegadas individualmente favoreciendo pipelines de CI/CD.\n•\nSe lo puede ver como evolución de conceptos de Arquitectura \nmonolítica y SOA combinados y aplicando REST.\n57\n57"
+    },
+    {
+      "n": 58,
+      "texto": "Microservicos (2)\n58"
+    },
+    {
+      "n": 59,
+      "texto": "Descomposición del Sistema\n59"
+    },
+    {
+      "n": 60,
+      "texto": "Descomposición del Sistema\n• A nivel de la arquitectura, el foco se pone en los \ncomponentes a gran escala del sistema.\n• La descomposición implica analizar estos \ncomponentes a gran escala y representarlos \ncomo un conjunto de componentes de grano \nmás fino.\n60"
+    },
+    {
+      "n": 61,
+      "texto": "Servicio, Componente, Módulo\n• Servicio\n– Unidad coherente de funcionalidad \n• Ej. Servicio para enviar mails\n• Componente\n– Unidad de software con nombre que ofrece uno o más \nservicios a otros componentes o al usuario.\n– Servicios consumidos desde otros componentes lo \nhacer a través de un API.\n• Módulo\n– Conjunto de componentes con nombre que tienen algo \nen común. \n61"
+    },
+    {
+      "n": 62,
+      "texto": "Relaciones entre Componentes\n62\n62"
+    },
+    {
+      "n": 63,
+      "texto": "Pautas de diseño de la arquitectura\n63\n63"
+    },
+    {
+      "n": 64,
+      "texto": "Un possible punto de partida\nEstructura en Capas\n64\n•\nEste puede ser un enfoque \ninicial\n–\nCapas coherentes, componentes \ncon temas comunes\n– El número de capas se debe \najustar al caso\n•\nAplicar los criterios de diseño \nrelevantes para el sistema \nparticular\n– Refinamiento\n64"
+    },
+    {
+      "n": 65,
+      "texto": "Caso: Sistema de Gestión de \nPedidos\n• Primera arquitectura usando \nestructura en capas\n• ¿Cómo incorporar?\n– Catálogos corporativos\n– Datos no estructurados\n– Búsqueda de pedidos en \nforma aproximada\n– Interoperación con sistemas \ncorporativos\n– Eventos corporativos\n– Auditoría y Monitoreo\n• ¿Características de calidad?\n• ¿Cómo afectan decisiones \ntecnológicas?\n65\n65"
+    },
+    {
+      "n": 66,
+      "texto": "Decisiones Tecnológicas\n• Bases de Datos\n– Relacionales\n– NoSQL\n• Plataforma de Interacción\n– Web\n– Mobile\n• Server\n– Servidor dedicado\n– Cloud\n• APIs\n– Desarrollados\n66"
+    },
+    {
+      "n": 67,
+      "texto": "Decisiones Tecnológicas\n• Bases de Datos\n– Relacionales\n– NoSQL ?\n• Plataforma de \nInteracción\n– Web\n– Mobile ?\n• Server\n– Servidor dedicado\n– Cloud?\n• APIs\n– Desarrolladas\n– API Gateway ?\n• Monitoreo\n– ?\n• Auditoría\n– ?\n• Herramientas de \ndesarrollo\n67"
+    },
+    {
+      "n": 68,
+      "texto": "Decisiones de Tecnologías \ndurante el Diseño\n• Influyen y restringen la arquitectura.\n• No es fácil cambiar decisiones tecnológicas.\n• Bases de Datos\n– Relacionales: Transacciones ACID\n– NoSQL: modelos alternativos de persistencia\n• Aplicaciones móviles\n– ¿Complemento o plataforma primaria?\n– Conectividad, capacidad de proceso, manejo de energía, \npantalla/teclado.\n• Server\n– ¿Dedicado o cloud?\n68"
+    },
+    {
+      "n": 69,
+      "texto": "Open Source Software\n• El uso de OSS está ampliamente difundido en \nmúltiples sectores del mercado.\n• Consideraciones a valorar\n– ¿Reusar OSS o implementar?\n– ¿Disponemos de las capacidades para aplicarlo?\n– ¿Está sobre dimensionado?\n– Licenciamiento apropiado\n– Respaldo de la comunidad\n– Implicancia en decisiones de diseño\n69"
+    },
+    {
+      "n": 70,
+      "texto": "Caso: Extensión de la primera versión de \nla arquitectura\n• La estructura en capas \npuede ir cediendo.\n– Capas no estrictas\n– API Rest debe acceder a datos, \nlog y monitoreo\n– ¿Distintos temas en la capa de \nnegocios ?\n• En qué capa va:\n– ¿Validación?\n– ¿Seguridad?\n70\n70"
+    },
+    {
+      "n": 71,
+      "texto": "Consideración de temas \ntransversalmente\n• Resolver ‘temas’ en un \núnico punto aumentar \nriesgos\n• Alternativa:\n– Considerarlos a lo largo \ndel sistema (ej. capas)\n– Evitar un único punto \nde falla. \n71\n71"
+    },
+    {
+      "n": 72,
+      "texto": "Evaluación y Documentación de Arquitecturas\n2025\n72"
+    },
+    {
+      "n": 73,
+      "texto": "Evaluación de Arquitecturas\n• Cambiar la arquitectura de un producto ya \nconstruido requiere mucho esfuerzo.\n• Entonces, es importante evaluar la arquitectura \nantes de implementarla completamente.\n– Verificar los requisitos de calidad establecidos\n– Evaluaciones a posteriori resultan útiles como forma \nde aprendizaje y estudio de posibilidades de mejora \n(pe. nuevas versiones).\n73"
+    },
+    {
+      "n": 74,
+      "texto": "La Arquitectura como \nsolución de compromiso\n• La arquitectura ofrece \nuna alternativa de \nsolución que los \ninteresados \ninfluencian, deben \ncomprender y validar \nlas características que \ndetermina de la \nSolución.\n74\n74"
+    },
+    {
+      "n": 75,
+      "texto": "Documentación de la Arquitectura\n• Objetivo y Destinatarios\n– Interesados que deben entender su impacto y analizar \ncaracterísticas a incorporar en el sistema.\n– Equipo que construye el sistema.\n– Equipos que mantienen y evolucionan el sistema.\n• Contenido\n– Contexto, Decisiones, balance entre alternativas\n– Descripción de Vistas que capturen aspectos relevantes del \nSistema desde distintas perspectivas.\n• La documentación debería amortizarse sola haciendo \nque las actividades de desarrollo sean menos costosas.\n75"
+    },
+    {
+      "n": 76,
+      "texto": "Documentación de la \nArquitectura (2)\n• Identificar Audiencia / Interesados\n– Escribir para destinatarios concretos.\n• Describir atributos de calidad y justificación de \ndecisiones\n– Patrones / Estilos aplicados\n– Tácticas activadas\n– Alternativas consideradas y descartadas\n• Vistas de la Arquitectura\n– Aspectos de la Solución\n• Relación entre las Vistas\n• Variablidad posible\n– Durante la implementación o evolución.\n76"
+    },
+    {
+      "n": 77,
+      "texto": "Ejemplo de uso de Vistas\nModelo de Vistas 4+1\n•\nPropuesta para estandarizar descripción de arquitecturas mediante \nselección de Vistas.\n77\n77"
+    },
+    {
+      "n": 78,
+      "texto": "Modelo 4+1\n•\nVista lógica\n–\nabstracciones claves en el sistema como objetos o clases.\n–\nEj. diagarmas UML: class, state\n•\nVista del proceso\n–\ninteracción de procesos en tiempo de ejecución.\n–\nEj. diagramas UML: sequence, communication, activity.\n•\nVista de desarrollo / implementación\n–\ncomo el software se descompone para el desarrollo.\n–\nEj. diagramas UML: Component, Package\n•\nVista física\n–\nhardware del sistema y componentes de software desplegados.\n–\nEj. diagramas UML: Deploy\n•\nEscenarios (+1)\n–\nRelacionados con los casos de uso o escenarios\n–\nEj. diagramas UML: Use Case\n78\n78"
+    }
+  ]
+}

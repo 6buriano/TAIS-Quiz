@@ -1,0 +1,224 @@
+[
+  {
+    "id": "cont-dev-001",
+    "tema": "contenedores",
+    "subtema": "contenedor-vs-vm",
+    "dificultad": "media",
+    "pregunta": "Compará la contenerización con la virtualización tradicional: explicá qué incluye cada enfoque, qué consecuencias tiene sobre el peso, el tiempo de inicio y el aislamiento, y justificá en qué situación elegirías cada uno.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Define el contenedor como unidad ligera que empaqueta la aplicación con sus dependencias y comparte el kernel del host",
+        "peso": 0.3,
+        "claves": ["comparte el kernel", "kernel del host", "no tiene kernel propio", "unidad ligera", "empaqueta la aplicacion", "comparte el nucleo"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Explica que la máquina virtual incluye un sistema operativo completo sobre un hipervisor",
+        "peso": 0.25,
+        "claves": ["kernel completo", "sistema operativo completo", "hipervisor", "cada vm tiene su propio so", "virtualiza el hardware"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Deriva las consecuencias sobre peso y tiempo de inicio a partir de la diferencia de kernel",
+        "peso": 0.25,
+        "claves": ["pesa menos", "peso bajo", "arranque rapido", "inicia mas rapido", "menos recursos", "levanta en segundos"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Contrasta el aislamiento fuerte de la VM con el aislamiento medio del contenedor y justifica cuándo conviene cada uno",
+        "peso": 0.2,
+        "claves": ["aislamiento fuerte", "aislamiento medio", "menor aislamiento", "comparte kernel por seguridad", "conviene la vm"]
+      }
+    ],
+    "respuesta_modelo": "Un contenedor es una unidad ligera y ejecutable que empaqueta la aplicación con sus dependencias y comparte el kernel del sistema operativo del host. Una máquina virtual, en cambio, incluye un sistema operativo completo sobre un hipervisor, con su propio kernel. De esa diferencia se desprenden el resto de las características: el contenedor pesa poco y arranca rápido, mientras que la VM pesa mucho y tarda en iniciar. El aislamiento de la VM es fuerte y el del contenedor es medio, porque comparte el kernel con el host. Por eso conviene una VM cuando se necesita un aislamiento estricto entre cargas o se ejecutan sistemas operativos distintos, y contenedores cuando se prioriza densidad, velocidad de arranque y entornos reproducibles para muchos servicios.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 5 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["contenedores", "vm", "comparacion"]
+  },
+  {
+    "id": "cont-dev-002",
+    "tema": "contenedores",
+    "subtema": "ci-vs-cd",
+    "dificultad": "media",
+    "pregunta": "Explicá qué automatiza la Integración Continua y qué agrega la Entrega Continua. Justificá la frase del material según la cual CI valida el software y CD lo despliega, e indicá qué etapas atraviesa el despliegue.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Define CI como la práctica de integrar cambios con frecuencia en un repositorio compartido con verificación automática en cada integración",
+        "peso": 0.3,
+        "claves": ["integra frecuentemente", "integraciones frecuentes", "repositorio compartido", "cada integracion dispara", "verificacion automatica"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Detalla qué valida CI: build, pruebas unitarias e integración, análisis estático, reportes y notificación",
+        "peso": 0.25,
+        "claves": ["compila", "pruebas unitarias", "tests de integracion", "analisis estatico", "genera reportes", "notifica resultados"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Explica que CD extiende CI automatizando el despliegue en los distintos entornos",
+        "peso": 0.3,
+        "claves": ["despliegue automatico", "automatiza el despliegue", "staging", "produccion", "extiende ci", "despliega automaticamente"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Menciona el objetivo de reducir el tiempo entre el desarrollo y la disponibilidad en producción",
+        "peso": 0.15,
+        "claves": ["reduce el tiempo", "time to market", "llega antes a produccion", "menos tiempo entre desarrollo y produccion"]
+      }
+    ],
+    "respuesta_modelo": "La Integración Continua es una práctica por la cual los cambios se integran con frecuencia en un repositorio compartido y cada integración dispara un proceso automático de verificación. Ese proceso obtiene el código, compila, corre pruebas unitarias y de integración, ejecuta análisis estático, genera reportes y notifica resultados, con el fin de detectar errores lo antes posible. Por eso el material dice que CI valida el software: su producto es una verificación temprana de que el sistema sigue siendo confiable. La Entrega Continua extiende esa práctica automatizando el despliegue en los distintos entornos, con etapas típicas de build, test, staging y producción. La diferencia clave es que CI valida y CD despliega automáticamente, y el objetivo compartido es reducir el tiempo entre el desarrollo y la disponibilidad en producción.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 13 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["ci", "cd", "pipeline"]
+  },
+  {
+    "id": "cont-dev-003",
+    "tema": "contenedores",
+    "subtema": "docker-vs-kubernetes",
+    "dificultad": "dificil",
+    "pregunta": "Un equipo ya empaqueta su aplicación con Docker y se pregunta si necesita Kubernetes. Explicá qué resuelve Docker, qué problemas aparecen cuando hay muchos contenedores y qué aporta el orquestador, mencionando el rol de los Pods y de al menos un componente del nodo.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Delimita el alcance de Docker: crear imágenes, ejecutar contenedores y distribuir aplicaciones",
+        "peso": 0.3,
+        "claves": ["crear imagenes", "ejecutar contenedores", "distribuir aplicaciones", "docker no orquesta", "imagen como plantilla"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Identifica las necesidades que aparecen con muchos contenedores: coordinación, escalado, balanceo y auto-recuperación",
+        "peso": 0.3,
+        "claves": ["coordinacion", "escalado", "balanceo", "auto-recuperacion", "recuperar fallas", "muchos contenedores"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Explica que Kubernetes gestiona Pods como unidad mínima y menciona kubelet o kube-proxy con su función",
+        "peso": 0.25,
+        "claves": ["pod es la unidad minima", "unidad minima de ejecucion", "kubelet ejecuta", "kube-proxy gestiona la red", "comparten red y almacenamiento"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Justifica cuándo alcanza con Docker y cuándo el orquestador es necesario, con su costo operativo",
+        "peso": 0.15,
+        "claves": ["alcanza con docker", "no hace falta orquestador", "pocos contenedores", "complejidad operativa", "escala el equipo"]
+      }
+    ],
+    "respuesta_modelo": "Docker permite crear imágenes, ejecutar contenedores y distribuir aplicaciones, y alcanza cuando el equipo maneja pocos contenedores en un único host. Cuando la cantidad crece aparecen necesidades de coordinación, escalado, balanceo y auto-recuperación que ya no se resuelven a mano. Ahí entra el orquestador: Kubernetes ejecuta contenedores a escala, gestiona fallos automáticamente, escala de forma dinámica y permite desplegar sin downtime. Kubernetes no administra contenedores individuales sino Pods, que son la unidad mínima de ejecución y agrupan uno o más contenedores que comparten red y almacenamiento. En cada nodo, el kubelet recibe las instrucciones del Control Plane y crea y monitorea los Pods, mientras que kube-proxy se ocupa del ruteo, de implementar los Services y del balanceo básico. El costo de adoptar el orquestador es mayor complejidad operativa, por eso conviene cuando la escala y la disponibilidad lo justifican.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 20 },
+    "tiempo_sugerido_min": 8,
+    "tags": ["docker", "kubernetes", "orquestacion"]
+  },
+  {
+    "id": "cont-dev-004",
+    "tema": "contenedores",
+    "subtema": "flujo-ci-cd",
+    "dificultad": "dificil",
+    "pregunta": "Diseñá un flujo CI/CD con contenedores para una aplicación web que debe escalar ante picos de tráfico. Enumerá las etapas en orden, justificá dónde entran la construcción de la imagen, el registro y el orquestador, y explicá cómo se absorbe un pico de demanda.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Ordena el flujo: commit, build de la imagen, test del contenedor, push al registro y deploy",
+        "peso": 0.35,
+        "claves": ["commit", "build image", "test container", "push registry", "deploy", "commit a build a test"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Justifica probar dentro del contenedor por entornos idénticos y tests reproducibles",
+        "peso": 0.2,
+        "claves": ["entornos identicos", "tests reproducibles", "works on my machine", "prueba dentro del contenedor", "mismas dependencias"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Explica el rol del registro y el versionado explícito de imágenes inmutables",
+        "peso": 0.25,
+        "claves": ["registro de imagenes", "push al registry", "versionado explicito", "imagen inmutable", "volver a una version anterior", "no usar latest"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Explica el despliegue con orquestador y cómo el escalado dinámico absorbe el pico de tráfico",
+        "peso": 0.2,
+        "claves": ["escalado dinamico", "escala automaticamente", "replicas", "orquestador", "auto-recuperacion", "sin downtime"]
+      }
+    ],
+    "respuesta_modelo": "El flujo arranca con el commit al repositorio, que dispara el pipeline: se construye la imagen a partir del Dockerfile, se prueban los contenedores, se publica la imagen en el registro y recién entonces se despliega. Probar sobre el contenedor garantiza entornos idénticos y tests reproducibles, porque es la misma imagen la que se valida y la que después se ejecuta. El push al registro es el punto de distribución, y conviene acompañarlo de un versionado explícito: la imagen es un artefacto inmutable, así que una versión publicada se puede volver a desplegar si algo sale mal. El despliegue queda a cargo del orquestador, que toma la imagen del registro y la ejecuta como Pods. Cuando llega un pico de tráfico, Kubernetes escala dinámicamente creando más réplicas y recupera de forma automática las instancias que fallan, sin intervención manual.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 18 },
+    "tiempo_sugerido_min": 8,
+    "tags": ["pipeline", "docker", "escalado"]
+  },
+  {
+    "id": "cont-dev-005",
+    "tema": "contenedores",
+    "subtema": "etapas-artefactos",
+    "dificultad": "media",
+    "pregunta": "Describí cómo se encadena un pipeline CI/CD: nombrá sus etapas en orden, indicá qué artefactos produce cada una y explicá qué consecuencias tiene que una etapa intermedia falle.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Enumera las cinco etapas en orden: control de fuentes, build, testing, packaging y deployment",
+        "peso": 0.3,
+        "claves": ["source control", "control de fuentes", "build", "testing", "packaging", "deployment", "orden de etapas"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Identifica los artefactos que produce el build: JAR, WAR, binarios o imágenes Docker",
+        "peso": 0.25,
+        "claves": ["jar", "war", "binarios", "imagenes docker", "artefactos ejecutables", "compila el codigo"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Explica que el pipeline es una cadena y que una falla intermedia detiene el avance y dispara el aviso al equipo",
+        "peso": 0.25,
+        "claves": ["no avanza", "se detiene", "no llega a produccion", "notifica el fallo", "feedback", "deteccion temprana"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Distingue packaging de deployment: uno prepara los artefactos para distribuir y el otro los pone en ejecución",
+        "peso": 0.2,
+        "claves": ["packaging prepara para distribucion", "deployment despliega", "despliegue automatico", "artefactos listos para distribuir"]
+      }
+    ],
+    "respuesta_modelo": "El pipeline es una cadena automatizada de actividades que transforma código fuente en software desplegable. La primera etapa es el control de fuentes, donde el repositorio actúa como fuente única de verdad. Sigue el build, que compila el código y genera artefactos ejecutables como JAR, WAR, binarios o imágenes Docker. Después viene el testing, con pruebas unitarias y de integración, y luego el packaging, que prepara esos artefactos para su distribución. La última etapa es el deployment, que despliega el software de forma automática. Como las etapas están encadenadas, si una falla intermedia el pipeline se detiene, no se llega a producción y el equipo recibe la notificación, lo que permite detectar el problema cuando todavía es barato corregirlo.",
+    "fuente": { "archivo": "02-02-tais-CI-CD-02-02.pdf", "pagina": 9 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["pipeline", "artefactos", "etapas"]
+  },
+  {
+    "id": "cont-dev-006",
+    "tema": "contenedores",
+    "subtema": "trazabilidad",
+    "dificultad": "media",
+    "pregunta": "Explicá qué es la trazabilidad de extremo a extremo en un entorno CI/CD, qué artefactos se vinculan entre sí y para qué sirve en un proyecto con requisitos de auditoría.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Define la trazabilidad como la capacidad de relacionar los artefactos generados durante el ciclo de vida",
+        "peso": 0.3,
+        "claves": ["relacionar artefactos", "ciclo de vida", "relacion entre requerimientos y cambios", "seguir el recorrido"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Enumera la cadena de artefactos: requerimientos o incidencias, commits, pull requests, builds, casos de prueba, releases y despliegues",
+        "peso": 0.3,
+        "claves": ["incidencia", "commit", "pull request", "build", "casos de prueba", "release", "despliegue", "historia de usuario"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Formula las preguntas que la trazabilidad permite responder: qué cambio corrigió el error, quién lo hizo, qué pruebas lo validaron y en qué versión se desplegó",
+        "peso": 0.25,
+        "claves": ["que cambio corrigio", "quien lo implemento", "que pruebas validaron", "en que version se desplego", "que commit introdujo"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Justifica su valor para auditoría, cumplimiento normativo y calidad del software",
+        "peso": 0.15,
+        "claves": ["auditoria", "cumplimiento normativo", "trazabilidad completa", "calidad", "reproducir incidentes"]
+      }
+    ],
+    "respuesta_modelo": "La trazabilidad es la capacidad de relacionar todos los artefactos que se generan durante el ciclo de vida del software. En un entorno CI/CD moderno se encadena una incidencia registrada en el sistema de gestión con el commit que la resuelve, el pull request que lo integra, el build que se genera, los casos de prueba que se ejecutan, la release y el despliegue correspondiente. Esa cadena permite responder preguntas concretas: qué cambio corrigió un error, quién implementó la solución, qué pruebas validaron la corrección y en qué versión se desplegó. También muestra cómo evolucionan los requisitos y cómo impactan en el diseño y la implementación. Por eso resulta esencial en proyectos con altos requisitos de calidad, auditoría o cumplimiento normativo, y facilita investigar incidentes sobre versiones ya publicadas.",
+    "fuente": { "archivo": "02-02-tais-CI-CD-02-02.pdf", "pagina": 15 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["trazabilidad", "ci-cd", "auditoria"]
+  }
+]

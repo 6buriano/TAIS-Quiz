@@ -1,0 +1,622 @@
+[
+  {
+    "id": "cont-001",
+    "tema": "contenedores",
+    "subtema": "problema-ambientes",
+    "dificultad": "facil",
+    "pregunta": "Un equipo recibe el reclamo “en QA funciona y en producción no”. Al revisar, cada entorno tiene dependencias y versiones que se instalaron a mano en momentos distintos. ¿Qué problema del material describe esa situación?",
+    "opciones": [
+      {
+        "texto": "Diferencias entre ambientes: dependencias distintas, versiones incompatibles y configuración manual.",
+        "correcta": true
+      },
+      {
+        "texto": "Ausencia de un orquestador que reparta la carga entre varias instancias.",
+        "correcta": false,
+        "porque_no": "El reparto de tráfico y el escalado son problemas de operación con muchos contenedores, no la causa de que las dependencias difieran entre entornos."
+      },
+      {
+        "texto": "Ramas de larga vida que acumulan conflictos de integración entre módulos.",
+        "correcta": false,
+        "porque_no": "Eso describe el Integration Hell de las integraciones tardías; acá el síntoma es que cada entorno quedó armado con otras versiones y configuración manual."
+      },
+      {
+        "texto": "Falta de pruebas unitarias que validen el cambio en cada push al repositorio.",
+        "correcta": false,
+        "porque_no": "La falta de pruebas afecta la detección de defectos, pero el relato apunta a entornos armados a mano con dependencias y versiones diferentes."
+      }
+    ],
+    "explicacion": "El problema clásico de los despliegues manuales es la diferencia entre los ambientes de desarrollo, QA, staging y producción. Cada uno acumula dependencias distintas, versiones incompatibles y configuración manual, y por eso aparece el “funciona en mi máquina”. La contenerización ataca esa causa empaquetando la aplicación con sus dependencias para lograr entornos reproducibles y portables.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 3 },
+    "tags": ["contenedores", "ambientes", "despliegue"]
+  },
+  {
+    "id": "cont-002",
+    "tema": "contenedores",
+    "subtema": "definicion-contenedor",
+    "dificultad": "facil",
+    "pregunta": "Un compañero define un contenedor como “un sistema operativo completo virtualizado sobre un hipervisor”. ¿Cuál es la definición que corresponde al material del curso?",
+    "opciones": [
+      {
+        "texto": "Una unidad ligera y ejecutable que empaqueta una aplicación junto con sus dependencias.",
+        "correcta": true
+      },
+      {
+        "texto": "Una máquina virtual pequeña que incluye su propio kernel y sus propios drivers.",
+        "correcta": false,
+        "porque_no": "Un contenedor no trae kernel propio: comparte el kernel del host, y esa es justamente la diferencia central con una máquina virtual."
+      },
+      {
+        "texto": "Un repositorio versionado donde se publican y distribuyen imágenes de aplicaciones.",
+        "correcta": false,
+        "porque_no": "El repositorio de imágenes es el lugar donde se publican los artefactos; el contenedor es la instancia en ejecución de una imagen."
+      },
+      {
+        "texto": "Un archivo de texto que describe los pasos necesarios para compilar el proyecto.",
+        "correcta": false,
+        "porque_no": "Ese archivo es el Dockerfile: define cómo construir una imagen, pero no es lo que se ejecuta en producción."
+      }
+    ],
+    "explicacion": "El material define al contenedor como una unidad ligera y ejecutable que empaqueta una aplicación con sus dependencias. Aclara de forma explícita que no es una VM: no virtualiza hardware ni carga un kernel completo. Esa diferencia es la que explica su peso bajo y su arranque rápido.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 4 },
+    "tags": ["contenedores", "definicion", "docker"]
+  },
+  {
+    "id": "cont-003",
+    "tema": "contenedores",
+    "subtema": "kernel",
+    "dificultad": "facil",
+    "pregunta": "Al comparar contenedores con máquinas virtuales, ¿qué diferencia de la tabla explica que un contenedor arranque rápido y una VM tarde mucho más?",
+    "opciones": [
+      {
+        "texto": "La VM usa un kernel completo, mientras que el contenedor comparte el kernel del host.",
+        "correcta": true
+      },
+      {
+        "texto": "La VM tiene aislamiento medio y el contenedor ofrece aislamiento fuerte.",
+        "correcta": false,
+        "porque_no": "La tabla indica lo contrario: el aislamiento de la VM es fuerte y el del contenedor es medio, porque comparte el kernel con el host."
+      },
+      {
+        "texto": "El contenedor pesa más porque incluye el sistema operativo completo.",
+        "correcta": false,
+        "porque_no": "El peso del contenedor es bajo justamente porque no incluye el sistema operativo completo; la que pesa más es la VM."
+      },
+      {
+        "texto": "El contenedor tiene un inicio lento pero menor consumo de disco.",
+        "correcta": false,
+        "porque_no": "El material describe el inicio del contenedor como rápido, no como lento; el inicio lento corresponde a la VM."
+      }
+    ],
+    "explicacion": "La comparación del material se ordena en cuatro características: kernel, peso, inicio y aislamiento. La VM carga un kernel completo, pesa mucho, arranca lento y aísla fuerte. El contenedor comparte el kernel del host, pesa poco, arranca rápido y su aislamiento es medio. Por eso el mismo hardware soporta muchos más contenedores que VM.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 5 },
+    "tags": ["contenedores", "vm", "kernel"]
+  },
+  {
+    "id": "cont-004",
+    "tema": "contenedores",
+    "subtema": "vm-vs-contenedor",
+    "dificultad": "media",
+    "pregunta": "Un equipo mantiene cada servicio en su propia máquina virtual y levantar el ambiente completo para probar consume mucha memoria y varios minutos de espera. ¿Qué cambia si pasan esos servicios a contenedores sobre un mismo host?",
+    "opciones": [
+      {
+        "texto": "Al compartir el kernel y pesar menos, los contenedores arrancan rápido y conviven en una sola máquina.",
+        "correcta": true
+      },
+      {
+        "texto": "Se gana aislamiento más fuerte, porque cada contenedor virtualiza su propio hardware.",
+        "correcta": false,
+        "porque_no": "El contenedor no virtualiza hardware: comparte el kernel del host y su aislamiento es medio, menor que el de una VM."
+      },
+      {
+        "texto": "Las dependencias dejan de importar, porque el host ya las tiene instaladas.",
+        "correcta": false,
+        "porque_no": "El contenedor sigue empaquetando sus propias dependencias; lo que deja de duplicarse es el sistema operativo completo."
+      },
+      {
+        "texto": "Cada servicio necesita su propio kernel, y eso reduce el tiempo de arranque.",
+        "correcta": false,
+        "porque_no": "Precisamente el contenedor no lleva kernel propio: lo comparte con el host y de ahí viene la reducción de peso y de tiempo."
+      }
+    ],
+    "explicacion": "La ventaja operativa del contenedor nace de compartir el kernel del host. Eso baja el peso de cada unidad y acelera el arranque, de modo que muchos servicios pueden correr en la misma máquina sin que el ambiente completo tarde una eternidad en levantarse. El costo es un aislamiento medio en lugar del aislamiento fuerte de la máquina virtual.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 5 },
+    "tags": ["contenedores", "vm", "escenario"]
+  },
+  {
+    "id": "cont-005",
+    "tema": "contenedores",
+    "subtema": "imagen-contenedor",
+    "dificultad": "facil",
+    "pregunta": "Un desarrollador dice que va a “editar la imagen” para corregir un dato generado durante la ejecución. Según la analogía imagen = clase y contenedor = objeto, ¿qué está confundiendo?",
+    "opciones": [
+      {
+        "texto": "Que la imagen es un artefacto inmutable y la instancia en ejecución con estado propio es el contenedor.",
+        "correcta": true
+      },
+      {
+        "texto": "Que la imagen es la instancia en ejecución y el contenedor es la plantilla del sistema.",
+        "correcta": false,
+        "porque_no": "Están invertidos: la imagen es la plantilla inmutable y el contenedor es la instancia en ejecución con estado dinámico."
+      },
+      {
+        "texto": "Que la imagen es un Dockerfile guardado y el contenedor es esa imagen ya compilada.",
+        "correcta": false,
+        "porque_no": "El Dockerfile es la receta de construcción; la imagen es el artefacto resultante, que es otra cosa distinta del contenedor."
+      },
+      {
+        "texto": "Que la imagen y el contenedor son lo mismo y solo cambia el comando que los inicia.",
+        "correcta": false,
+        "porque_no": "El material los distingue con claridad: plantilla inmutable por un lado e instancia en ejecución por el otro, como clase y objeto."
+      }
+    ],
+    "explicacion": "La imagen es un artefacto inmutable que funciona como plantilla del sistema. El contenedor es una instancia en ejecución de esa imagen y tiene estado dinámico. Por eso los cambios propios de la ejecución van al contenedor, mientras que la imagen se reconstruye si hace falta un nuevo artefacto.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 16 },
+    "tags": ["contenedores", "imagen", "docker"]
+  },
+  {
+    "id": "cont-006",
+    "tema": "contenedores",
+    "subtema": "dockerfile",
+    "dificultad": "media",
+    "pregunta": "En un Dockerfile aparecen las instrucciones FROM, WORKDIR, COPY, RUN y CMD. ¿Qué representa específicamente la línea CMD con el comando de la aplicación?",
+    "opciones": [
+      {
+        "texto": "El comando de ejecución que se lanza al iniciar el contenedor a partir de la imagen.",
+        "correcta": true
+      },
+      {
+        "texto": "La imagen base desde la que se empieza a construir la imagen propia.",
+        "correcta": false,
+        "porque_no": "La imagen base se declara con FROM, que es el primer paso de la construcción y fija el punto de partida."
+      },
+      {
+        "texto": "El paso que instala dependencias y compila durante la construcción.",
+        "correcta": false,
+        "porque_no": "Eso lo hace RUN, que ejecuta comandos dentro de la construcción de la imagen, no al iniciar el contenedor."
+      },
+      {
+        "texto": "El directorio de trabajo donde se copia el código de la aplicación.",
+        "correcta": false,
+        "porque_no": "El directorio de trabajo se fija con WORKDIR, y la copia del código se hace con COPY."
+      }
+    ],
+    "explicacion": "El Dockerfile define cómo construir una imagen e incluye imagen base, copia del código, instalación de dependencias y comando de ejecución. Cada instrucción cumple un rol distinto: FROM aporta la base, COPY y RUN preparan el contenido y CMD indica qué se ejecuta cuando el contenedor arranca. Confundir CMD con RUN lleva a pensar que el comando corre durante el build.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 10 },
+    "tags": ["docker", "dockerfile", "build"]
+  },
+  {
+    "id": "cont-007",
+    "tema": "contenedores",
+    "subtema": "multi-stage",
+    "dificultad": "media",
+    "pregunta": "La imagen publicada incluye compiladores, el código fuente y dependencias de desarrollo que nadie usa en ejecución. ¿Qué buena práctica de Docker del material ataca directamente ese problema?",
+    "opciones": [
+      {
+        "texto": "Usar multi-stage builds para separar la etapa de compilación de la imagen final.",
+        "correcta": true
+      },
+      {
+        "texto": "Fijar explícitamente la versión de la imagen base en el Dockerfile.",
+        "correcta": false,
+        "porque_no": "El versionado explícito mejora la reproducibilidad y evita sorpresas, pero no saca de la imagen las herramientas que ya no se necesitan."
+      },
+      {
+        "texto": "Etiquetar cada build con el tag latest para simplificar el despliegue.",
+        "correcta": false,
+        "porque_no": "El tag latest no reduce el tamaño de la imagen y además quita trazabilidad sobre qué versión quedó publicada."
+      },
+      {
+        "texto": "Ejecutar los tests dentro del contenedor antes de publicar la imagen.",
+        "correcta": false,
+        "porque_no": "Correr los tests en el contenedor mejora la confiabilidad de las pruebas, pero no elimina las herramientas de build de la imagen final."
+      }
+    ],
+    "explicacion": "Las buenas prácticas del material son imágenes pequeñas, multi-stage builds y versionado explícito. El multi-stage permite compilar en una etapa con todas las herramientas y quedarse solo con lo necesario en la imagen final. Así baja el tamaño del artefacto y se reduce la superficie que se publica en el registro.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 11 },
+    "tags": ["docker", "multi-stage", "imagen"]
+  },
+  {
+    "id": "cont-008",
+    "tema": "contenedores",
+    "subtema": "registro-imagenes",
+    "dificultad": "dificil",
+    "pregunta": "El pipeline publica cada build con el tag latest. Cuando hay que volver a la versión anterior en producción, nadie sabe qué imagen está corriendo ni cuál era la buena. ¿Qué dos prácticas del material faltaron?",
+    "opciones": [
+      {
+        "texto": "Versionado explícito de las imágenes y respeto por su condición de artefacto inmutable.",
+        "correcta": true
+      },
+      {
+        "texto": "Multi-stage builds e imágenes base más pequeñas para acelerar el despliegue.",
+        "correcta": false,
+        "porque_no": "Reducir el tamaño de la imagen acelera la distribución, pero no permite identificar ni recuperar una versión concreta ya publicada."
+      },
+      {
+        "texto": "Ejecutar los tests de integración dentro del contenedor antes del push.",
+        "correcta": false,
+        "porque_no": "Los tests previos mejoran la calidad del artefacto, pero no resuelven la ambigüedad de qué versión quedó desplegada."
+      },
+      {
+        "texto": "Publicar la misma imagen en varios registros para tener copias de respaldo.",
+        "correcta": false,
+        "porque_no": "Tener copias mejora la disponibilidad del artefacto, pero no aclara qué versión está corriendo ni permite identificar la anterior."
+      }
+    ],
+    "explicacion": "Entre las buenas prácticas de Docker el material incluye el versionado explícito, y además define la imagen como un artefacto inmutable. Si cada build se publica con el tag latest, la etiqueta deja de identificar un contenido concreto y se pierde la posibilidad de volver atrás. Con versiones explícitas, recuperar la versión anterior es simplemente desplegar la imagen que ya está en el registro.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 11 },
+    "tags": ["imagen", "registry", "rollback"]
+  },
+  {
+    "id": "cont-009",
+    "tema": "contenedores",
+    "subtema": "pipeline-registry",
+    "dificultad": "media",
+    "pregunta": "En el pipeline Commit → Build Image → Test Container → Push Registry → Deploy, ¿qué función cumple el paso Push Registry?",
+    "opciones": [
+      {
+        "texto": "Publicar la imagen construida en el registro para que el despliegue la tome desde ahí.",
+        "correcta": true
+      },
+      {
+        "texto": "Ejecutar las pruebas sobre el contenedor antes de publicarlo.",
+        "correcta": false,
+        "porque_no": "Ese es el paso Test Container, que valida la imagen en ejecución antes de que se distribuya."
+      },
+      {
+        "texto": "Compilar el código fuente y generar los artefactos ejecutables.",
+        "correcta": false,
+        "porque_no": "La compilación corresponde a Build Image, que es el paso anterior dentro de la cadena."
+      },
+      {
+        "texto": "Notificar el resultado del pipeline a todo el equipo.",
+        "correcta": false,
+        "porque_no": "Las notificaciones acompañan al pipeline de integración continua, pero no forman parte de la cadena de publicación y despliegue de la imagen."
+      }
+    ],
+    "explicacion": "El pipeline moderno encadena commit, construcción de la imagen, prueba del contenedor, publicación en el registro y despliegue. El registro funciona como punto de distribución: el despliegue no recompila, sino que toma la imagen ya publicada. Por eso el orden importa y cada paso depende del anterior.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 18 },
+    "tags": ["docker", "pipeline", "registry"]
+  },
+  {
+    "id": "cont-010",
+    "tema": "contenedores",
+    "subtema": "docker-alcance",
+    "dificultad": "facil",
+    "pregunta": "Un alumno afirma que Docker sirve para orquestar pods, balancear tráfico y escalar el cluster. ¿Qué conjunto de capacidades le corresponde realmente a Docker según el material?",
+    "opciones": [
+      {
+        "texto": "Crear imágenes, ejecutar contenedores y distribuir aplicaciones.",
+        "correcta": true
+      },
+      {
+        "texto": "Orquestar pods, balancear tráfico entre nodos y recuperar fallas.",
+        "correcta": false,
+        "porque_no": "Eso es lo que aporta un orquestador como Kubernetes; Docker por sí solo no coordina, escala ni balancea el cluster."
+      },
+      {
+        "texto": "Compilar el código, correr los tests y publicar los reportes del build.",
+        "correcta": false,
+        "porque_no": "Esas tareas corresponden al servidor de automatización del pipeline, por ejemplo Jenkins."
+      },
+      {
+        "texto": "Aprovisionar infraestructura cloud y administrar los nodos de trabajo.",
+        "correcta": false,
+        "porque_no": "El aprovisionamiento y la gestión de nodos son responsabilidad del orquestador y del proveedor cloud, no de Docker."
+      }
+    ],
+    "explicacion": "El material acota el alcance de Docker a tres acciones: crear imágenes, ejecutar contenedores y distribuir aplicaciones. La coordinación de muchos contenedores, el escalado y el balanceo aparecen después, cuando surge la necesidad de orquestar. Confundir ambos niveles lleva a pedirle a Docker cosas que resuelve Kubernetes.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 9 },
+    "tags": ["docker", "orquestacion", "alcance"]
+  },
+  {
+    "id": "cont-011",
+    "tema": "contenedores",
+    "subtema": "portabilidad",
+    "dificultad": "media",
+    "pregunta": "La empresa quiere poder mover la aplicación de un proveedor de cloud a otro sin reescribirla. ¿Qué beneficio del material sostiene esa decisión y con qué condición?",
+    "opciones": [
+      {
+        "texto": "Portabilidad entre clouds, siempre que los proveedores soporten Docker engine.",
+        "correcta": true
+      },
+      {
+        "texto": "Aislamiento fuerte, porque el contenedor reproduce el comportamiento de una VM.",
+        "correcta": false,
+        "porque_no": "El aislamiento del contenedor es medio y no tiene relación con la capacidad de mover la aplicación entre proveedores."
+      },
+      {
+        "texto": "Escalabilidad automática, porque Docker agrega instancias al detectar carga.",
+        "correcta": false,
+        "porque_no": "El escalado dinámico lo aporta el orquestador, no Docker, y tampoco es lo que habilita el cambio de proveedor."
+      },
+      {
+        "texto": "Un registro de imágenes propio, porque evita depender del cloud elegido.",
+        "correcta": false,
+        "porque_no": "El registro acerca las imágenes a los consumidores, pero la portabilidad depende de que el runtime de contenedores esté disponible en el proveedor."
+      }
+    ],
+    "explicacion": "Uno de los beneficios que lista el material es la portabilidad entre clouds: la misma imagen puede ejecutarse en cualquier proveedor que soporte Docker engine. La condición es explícita, porque sin un runtime compatible la imagen no corre. Esa portabilidad es la que evita reescribir la aplicación al cambiar de proveedor.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 8 },
+    "tags": ["contenedores", "portabilidad", "cloud"]
+  },
+  {
+    "id": "cont-012",
+    "tema": "contenedores",
+    "subtema": "servicios-soa",
+    "dificultad": "media",
+    "pregunta": "Un equipo tiene una arquitectura orientada a servicios y necesita desplegar y escalar cada servicio por separado. ¿Qué beneficio de los contenedores destaca el material para ese caso?",
+    "opciones": [
+      {
+        "texto": "La implementación eficiente de servicios, por el buen soporte para SOA.",
+        "correcta": true
+      },
+      {
+        "texto": "La resolución de dependencias mediante el empaquetado y la distribución de librerías.",
+        "correcta": false,
+        "porque_no": "Ese beneficio explica por qué dejan de aparecer faltantes de librerías, pero no es el que se asocia al despliegue separado de servicios."
+      },
+      {
+        "texto": "La simplificación de DevOps, porque un mismo equipo asume desarrollo y operación.",
+        "correcta": false,
+        "porque_no": "Es un beneficio organizacional real, aunque no responde a la necesidad de desplegar y escalar cada servicio de forma independiente."
+      },
+      {
+        "texto": "La portabilidad entre clouds, porque la imagen corre en cualquier proveedor.",
+        "correcta": false,
+        "porque_no": "La portabilidad facilita mudar de proveedor, no separar el ciclo de vida de cada servicio de la arquitectura."
+      }
+    ],
+    "explicacion": "Entre los beneficios del material aparecen cuatro frentes: resolución de dependencias, portabilidad entre clouds, implementación eficiente de servicios con buen soporte para SOA, y simplificación de la adopción de DevOps. Cuando la arquitectura se organiza en servicios con despliegue independiente, el beneficio que se invoca es el soporte para SOA. Los otros beneficios son reales pero responden a otras necesidades.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 8 },
+    "tags": ["contenedores", "soa", "servicios"]
+  },
+  {
+    "id": "cont-013",
+    "tema": "contenedores",
+    "subtema": "tests-reproducibles",
+    "dificultad": "dificil",
+    "pregunta": "Una prueba de integración pasa en la notebook del desarrollador y falla siempre en el pipeline. El equipo sospecha que el problema es el entorno donde corre la prueba. ¿Qué medida ataca la causa según el material?",
+    "opciones": [
+      {
+        "texto": "Ejecutar las pruebas dentro de contenedores, para tener entornos idénticos y tests reproducibles.",
+        "correcta": true
+      },
+      {
+        "texto": "Aumentar la memoria y las CPUs del agente donde corre el pipeline.",
+        "correcta": false,
+        "porque_no": "Dar más recursos puede cambiar tiempos, pero no iguala versiones ni dependencias entre la máquina del desarrollador y el agente de CI."
+      },
+      {
+        "texto": "Publicar la imagen en el registro antes de ejecutar la suite de pruebas.",
+        "correcta": false,
+        "porque_no": "El orden entre publicación y pruebas no modifica el entorno en el que se ejecutan los tests."
+      },
+      {
+        "texto": "Repartir los tests entre varios agentes para que corran en paralelo.",
+        "correcta": false,
+        "porque_no": "Paralelizar reduce el tiempo total, pero el test sigue fallando si el entorno de ejecución no es el mismo que el del desarrollo."
+      }
+    ],
+    "explicacion": "La ventaja de contenerizar las pruebas es que se obtienen entornos idénticos y tests reproducibles, lo que elimina el “works on my machine”. Si el test pasa en la notebook y falla en el pipeline, la diferencia está en el entorno y no en el código. Correr la suite en el mismo contenedor en ambos lados elimina esa variable.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 11 },
+    "tags": ["testing", "contenedores", "reproducibilidad"]
+  },
+  {
+    "id": "cont-014",
+    "tema": "contenedores",
+    "subtema": "build-once",
+    "dificultad": "facil",
+    "pregunta": "El material resume la contenerización como base del despliegue moderno con la frase “Build once, run anywhere”. ¿Qué significa en la práctica?",
+    "opciones": [
+      {
+        "texto": "Construir una vez la imagen con dependencias, configuración base y entorno de ejecución, y correrla en cualquier ambiente.",
+        "correcta": true
+      },
+      {
+        "texto": "Recompilar la aplicación en cada entorno para ajustarla a su configuración particular.",
+        "correcta": false,
+        "porque_no": "Recompilar por entorno es exactamente lo que se quiere evitar: rompe la reproducibilidad y reintroduce las diferencias entre ambientes."
+      },
+      {
+        "texto": "Ejecutar la aplicación únicamente en la nube, porque en local no hay runtime disponible.",
+        "correcta": false,
+        "porque_no": "La imagen está pensada para correr en cualquier ambiente que tenga el runtime de contenedores, incluido el equipo del desarrollador."
+      },
+      {
+        "texto": "Compartir un mismo Dockerfile entre varios repositorios para unificar el build.",
+        "correcta": false,
+        "porque_no": "Un Dockerfile describe cómo construir una imagen; la frase se refiere a ejecutar el mismo artefacto ya construido en cualquier entorno."
+      }
+    ],
+    "explicacion": "La contenerización empaqueta la aplicación con sus dependencias, su configuración base y su entorno de ejecución. Eso habilita el “Build once, run anywhere”: la imagen se construye una vez y se ejecuta igual en desarrollo, QA y producción. El resultado es la infraestructura reproducible que reemplaza al despliegue manual.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 15 },
+    "tags": ["contenedores", "reproducibilidad", "despliegue"]
+  },
+  {
+    "id": "cont-015",
+    "tema": "contenedores",
+    "subtema": "orquestacion",
+    "dificultad": "media",
+    "pregunta": "El equipo ya corre decenas de contenedores y empieza a coordinar a mano el escalado, el balanceo y la recuperación cuando alguno se cae. ¿Qué propone el material para esa situación?",
+    "opciones": [
+      {
+        "texto": "Incorporar un orquestador que se ocupe de la coordinación, el escalado, el balanceo y la auto-recuperación.",
+        "correcta": true
+      },
+      {
+        "texto": "Dividir la imagen en varias etapas de construcción para reducir su tamaño.",
+        "correcta": false,
+        "porque_no": "El multi-stage resuelve el tamaño del artefacto, no la operación de un conjunto grande de contenedores en ejecución."
+      },
+      {
+        "texto": "Mover el pipeline a un Jenkinsfile dentro del repositorio para versionarlo.",
+        "correcta": false,
+        "porque_no": "Versionar el pipeline mejora la trazabilidad del build, pero no coordina ni escala los contenedores desplegados."
+      },
+      {
+        "texto": "Publicar todas las imágenes en un registro único para centralizar la distribución.",
+        "correcta": false,
+        "porque_no": "Centralizar el registro ordena la distribución de artefactos, pero no resuelve el balanceo ni la recuperación automática de instancias."
+      }
+    ],
+    "explicacion": "Cuando la cantidad de contenedores crece, aparecen necesidades de coordinación, escalado, balanceo y auto-recuperación que ya no se pueden cubrir a mano. Ahí entra la orquestación de contenedores, con Kubernetes como referente del material. El orquestador automatiza la operación de sistemas distribuidos y deja de exigir intervención manual en cada incidente.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 19 },
+    "tags": ["kubernetes", "orquestacion", "escalado"]
+  },
+  {
+    "id": "cont-016",
+    "tema": "contenedores",
+    "subtema": "pods",
+    "dificultad": "facil",
+    "pregunta": "Un compañero dice que Kubernetes crea y destruye contenedores de a uno. ¿Cuál es la unidad mínima de ejecución que gestiona Kubernetes según el material?",
+    "opciones": [
+      {
+        "texto": "El Pod, que agrupa uno o más contenedores que comparten red y almacenamiento.",
+        "correcta": true
+      },
+      {
+        "texto": "El worker node, que es el nodo de trabajo donde corren las aplicaciones.",
+        "correcta": false,
+        "porque_no": "El nodo de trabajo es la máquina que aloja Pods; no es la unidad mínima de ejecución ni agrupa contenedores como una unidad lógica."
+      },
+      {
+        "texto": "El kube-proxy, que es el componente encargado de la red del cluster.",
+        "correcta": false,
+        "porque_no": "kube-proxy es un componente de red del nodo, no una unidad de despliegue de la aplicación."
+      },
+      {
+        "texto": "La imagen, que es el artefacto inmutable del que se crean las instancias.",
+        "correcta": false,
+        "porque_no": "La imagen es el artefacto de partida; Kubernetes no la ejecuta directamente sino a través de Pods."
+      }
+    ],
+    "explicacion": "El material es explícito: Kubernetes no gestiona contenedores individuales, sino Pods. Un Pod es la unidad mínima de ejecución y puede contener uno o más contenedores que comparten red y almacenamiento. Por eso se diseña como unidad lógica de despliegue.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 22 },
+    "tags": ["kubernetes", "pods", "orquestacion"]
+  },
+  {
+    "id": "cont-017",
+    "tema": "contenedores",
+    "subtema": "kubelet",
+    "dificultad": "media",
+    "pregunta": "Un administrador espera que el kubelet de cada nodo decida en qué nodo conviene ubicar un Pod nuevo. ¿Qué corresponde esperar según el material?",
+    "opciones": [
+      {
+        "texto": "Que el kubelet no decida qué ejecutar: solo ejecuta lo que ordena el Control Plane y monitorea la salud.",
+        "correcta": true
+      },
+      {
+        "texto": "Que el kubelet haga el scheduling y el Control Plane solo almacene el estado del cluster.",
+        "correcta": false,
+        "porque_no": "El kubelet no decide qué ejecutar; su función es recibir instrucciones del Control Plane y ejecutarlas en el nodo."
+      },
+      {
+        "texto": "Que el kubelet comparta la decisión con kube-proxy, que también programa Pods.",
+        "correcta": false,
+        "porque_no": "kube-proxy se ocupa de la red y del ruteo entre Pods; no participa de la programación de cargas de trabajo."
+      },
+      {
+        "texto": "Que el kubelet solo reporte el estado del nodo y no intervenga en la creación de Pods.",
+        "correcta": false,
+        "porque_no": "Además de reportar el estado, crea y monitorea Pods y reinicia el contenedor si falla; lo que no hace es decidir."
+      }
+    ],
+    "explicacion": "El kubelet es el agente principal del nodo y actúa como ejecutor local del orquestador. Recibe instrucciones del Control Plane, crea y monitorea Pods, reporta el estado del nodo y asegura que los contenedores estén corriendo. Si un contenedor falla, lo reinicia, pero nunca decide qué debe ejecutarse.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 26 },
+    "tags": ["kubernetes", "kubelet", "nodos"]
+  },
+  {
+    "id": "cont-018",
+    "tema": "contenedores",
+    "subtema": "redes",
+    "dificultad": "media",
+    "pregunta": "Los Pods responden bien de forma individual, pero un Service no logra enrutar el tráfico hacia ellos y no hay balanceo entre réplicas. ¿Qué componente del cluster conviene revisar?",
+    "opciones": [
+      {
+        "texto": "kube-proxy, que implementa los Services y hace el ruteo y el balanceo básico entre Pods.",
+        "correcta": true
+      },
+      {
+        "texto": "El kubelet, que es el agente que crea y monitorea los Pods del nodo.",
+        "correcta": false,
+        "porque_no": "Si los Pods están corriendo, el kubelet ya cumplió su parte; el problema está en la capa que expone y enruta el tráfico."
+      },
+      {
+        "texto": "El container runtime del nodo, que es quien ejecuta los contenedores.",
+        "correcta": false,
+        "porque_no": "El runtime ejecuta contenedores dentro del nodo; no implementa Services ni reparte tráfico entre Pods."
+      },
+      {
+        "texto": "El registro de imágenes, que distribuye las imágenes hacia los nodos.",
+        "correcta": false,
+        "porque_no": "El registro participa de la distribución de artefactos, no del ruteo de tráfico dentro del cluster."
+      }
+    ],
+    "explicacion": "kube-proxy es el componente de red del cluster: hace routing entre Pods, implementa los Services, aporta load balancing básico y maneja las reglas de red. El kubelet, en cambio, ejecuta Pods. La división que resume el material es simple: kubelet ejecuta Pods y kube-proxy gestiona la red del cluster.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 27 },
+    "tags": ["kubernetes", "redes", "kube-proxy"]
+  },
+  {
+    "id": "cont-019",
+    "tema": "contenedores",
+    "subtema": "on-premises-cloud",
+    "dificultad": "dificil",
+    "pregunta": "Una empresa con requisitos regulatorios estrictos y hardware propio evalúa Kubernetes on-premises frente a un servicio cloud gestionado. ¿Qué trade-off plantea el material?",
+    "opciones": [
+      {
+        "texto": "On-premises aporta control del hardware y cumplimiento regulatorio, pero suma complejidad operativa y mantenimiento.",
+        "correcta": true
+      },
+      {
+        "texto": "On-premises reduce la complejidad operativa, porque no depende de un tercero para administrar el cluster.",
+        "correcta": false,
+        "porque_no": "El material señala lo contrario: la operación propia agrega complejidad y costos de mantenimiento, en lugar de reducirlos."
+      },
+      {
+        "texto": "El cloud gestionado ofrece control total del hardware y cumplimiento regulatorio interno.",
+        "correcta": false,
+        "porque_no": "El control total del hardware y la seguridad interna figuran como ventajas de on-premises; el cloud aporta infraestructura gestionada y menor carga operativa."
+      },
+      {
+        "texto": "La escalabilidad física es mayor en on-premises porque el hardware es propio.",
+        "correcta": false,
+        "porque_no": "La escalabilidad on-premises está limitada por el hardware disponible; el cloud es el que ofrece escalabilidad automática."
+      }
+    ],
+    "explicacion": "El material contrasta las dos opciones con ventajas y desventajas concretas. On-premises da control total del hardware, cumplimiento regulatorio y seguridad interna, pero paga con complejidad operativa, costos de mantenimiento y un techo físico de escalabilidad. Los servicios cloud gestionados como EKS, GKE o AKS ofrecen infraestructura gestionada, escalabilidad automática y menor carga operativa.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 28 },
+    "tags": ["kubernetes", "on-premises", "cloud"]
+  },
+  {
+    "id": "cont-020",
+    "tema": "contenedores",
+    "subtema": "escalabilidad",
+    "dificultad": "dificil",
+    "pregunta": "Una aplicación web recibe picos de tráfico y hoy se escala a mano agregando servidores. ¿Qué aporta el enfoque de contenedores más orquestador frente a esa operación manual?",
+    "opciones": [
+      {
+        "texto": "Imágenes reproducibles que el orquestador puede replicar, escalar dinámicamente y reiniciar cuando una instancia falla.",
+        "correcta": true
+      },
+      {
+        "texto": "Contenedores convertidos en máquinas virtuales para obtener aislamiento fuerte durante el pico.",
+        "correcta": false,
+        "porque_no": "Volver a la VM suma peso y tiempo de arranque, justo lo contrario de lo que conviene para absorber un pico de demanda."
+      },
+      {
+        "texto": "Recompilar la imagen en cada pico para obtener más capacidad de cómputo.",
+        "correcta": false,
+        "porque_no": "Recompilar produce otro artefacto, no más capacidad; la capacidad la aportan las réplicas que crea el orquestador."
+      },
+      {
+        "texto": "Publicar siempre con el tag latest para que el orquestador tome la versión más nueva durante el pico.",
+        "correcta": false,
+        "porque_no": "El tag latest quita trazabilidad sobre lo desplegado y no agrega capacidad de cómputo."
+      }
+    ],
+    "explicacion": "La contenerización empaqueta la aplicación en imágenes reproducibles y el orquestador se encarga de ejecutarlas a escala. Kubernetes permite escalar aplicaciones dinámicamente, gestionar fallos de forma automática y desplegar sin downtime. Así el pico de tráfico se absorbe creando réplicas y no agregando servidores a mano.",
+    "fuente": { "archivo": "02-01-tais-Contenerizacion-02-01.pdf", "pagina": 20 },
+    "tags": ["kubernetes", "escalado", "escenario"]
+  }
+]

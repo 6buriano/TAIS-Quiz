@@ -1,0 +1,187 @@
+[
+  {
+    "id": "arq-tac-dev-001",
+    "tema": "arquitectura",
+    "subtema": "definicion-y-documentacion",
+    "dificultad": "media",
+    "pregunta": "Explicá qué elementos describen una arquitectura de software y por qué, según la analogía del edificio, no equivale al diseño detallado. Mencioná además por qué esa distinción importa al momento de documentar el sistema.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Enumera los elementos que describe la arquitectura: componentes principales, relaciones, interfaces y restricciones de diseño",
+        "peso": 0.3,
+        "claves": ["componentes principales", "relaciones entre componentes", "interfaces", "restricciones de diseno", "relaciones e interfaces", "estructura de componentes"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Explica la analogía del edificio: la arquitectura define la estructura principal y no cada detalle de implementación",
+        "peso": 0.3,
+        "claves": ["analogia del edificio", "no define cada ladrillo", "estructura principal", "no cada detalle", "nivel de detalle", "no define clases ni metodos"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Vincula las decisiones estructurales con el costo: los problemas de arquitectura son los más caros de corregir",
+        "peso": 0.25,
+        "claves": ["problemas mas costosos", "caros de corregir", "impacto en el negocio", "decisiones dificiles de revertir", "condiciona el resto del proyecto", "costo futuro"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Relaciona la distinción con la documentación: se documenta la estructura de alto nivel como referencia del proyecto",
+        "peso": 0.15,
+        "claves": ["documento de arquitectura", "referencia para el equipo", "descripcion de alto nivel", "no documentar el detalle", "trazabilidad de decisiones", "dejar el detalle al diseno"]
+      }
+    ],
+    "respuesta_modelo": "Una arquitectura describe los componentes principales del sistema, las relaciones que los conectan, las interfaces que exponen y las restricciones de diseño que condicionan la solución. La analogía del edificio aclara el nivel: al arquitecto le importa la estructura principal y no cada ladrillo, del mismo modo que al software le importan los componentes y sus vínculos y no cada clase o método. Por eso la arquitectura no equivale al diseño detallado, aunque lo condicione. La distinción importa al documentar porque el documento de arquitectura debe fijar esa estructura de alto nivel como referencia común del equipo, mientras el detalle se resuelve en etapas posteriores. Si se confunden los niveles, el documento se llena de detalles que cambian rápido y se pierden de vista las decisiones que realmente cuestan revertir.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 5 },
+    "tiempo_sugerido_min": 5,
+    "tags": ["arquitectura", "documentacion"]
+  },
+  {
+    "id": "arq-tac-dev-002",
+    "tema": "arquitectura",
+    "subtema": "rnf-y-arquitectura",
+    "dificultad": "media",
+    "pregunta": "Un banco y una red social ofrecen funciones equivalentes de registro, inicio de sesión y publicación de contenido. Explicá por qué sus arquitecturas pueden ser muy distintas y ejemplificá con una táctica característica de cada caso, justificando la elección.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Afirma que los requisitos funcionales por sí solos no alcanzan para definir la arquitectura",
+        "peso": 0.25,
+        "claves": ["mismos requisitos funcionales", "no alcanzan los funcionales", "misma funcionalidad", "lo que diferencia son los no funcionales", "requisitos no funcionales definen"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Identifica los atributos que prioriza cada caso: el banco seguridad, integridad y consistencia; la red social escalabilidad y rendimiento",
+        "peso": 0.3,
+        "claves": ["banco prioriza seguridad", "consistencia alta", "integridad", "red social escalabilidad", "rendimiento y disponibilidad", "prioridades distintas"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Ejemplifica tácticas coherentes con cada perfil: replicación síncrona, MFA o auditoría en el banco; caché distribuida o consistencia eventual en la red social",
+        "peso": 0.3,
+        "claves": ["replicacion sincrona", "mfa", "auditoria", "cache distribuida", "consistencia eventual", "replicacion asincrona"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Concluye que la arquitectura es un balance según el contexto del negocio y no una maximización de todos los atributos",
+        "peso": 0.15,
+        "claves": ["equilibrio", "balance de atributos", "contexto del negocio", "no maximizar todos", "trade off", "decision de negocio"]
+      }
+    ],
+    "respuesta_modelo": "Aunque las funcionalidades coincidan, lo que define la arquitectura son los requisitos no funcionales: dos sistemas con las mismas funciones pueden tener estructuras muy distintas si priorizan atributos distintos. El banco prioriza disponibilidad, seguridad, integridad y consistencia, porque no puede mostrar un saldo desactualizado ni perder una operación. Por eso recurre a tácticas como MFA, auditoría y replicación síncrona, que sostienen la consistencia aunque cuesten latencia. La red social prioriza disponibilidad, escalabilidad y rendimiento, y tolera que una publicación tarde unos segundos en propagarse. De ahí que elija caché distribuida, replicación y consistencia eventual. La conclusión es que la arquitectura es un balance según el contexto del negocio y no una maximización de todos los atributos a la vez.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 9 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["rnf", "tradeoff"]
+  },
+  {
+    "id": "arq-tac-dev-003",
+    "tema": "arquitectura",
+    "subtema": "disponibilidad",
+    "dificultad": "dificil",
+    "pregunta": "Una plataforma de ventas online debe estar disponible las veinticuatro horas y se satura en el Black Friday. Explicá al menos dos tácticas de disponibilidad, cómo eliminan puntos únicos de falla y qué mecanismo permite detectar que una instancia dejó de responder.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Explica la redundancia: componentes duplicados que eliminan puntos únicos de falla",
+        "peso": 0.3,
+        "claves": ["redundancia", "componentes duplicados", "elimina puntos unicos de falla", "instancias adicionales", "no depender de un solo servidor", "spof"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Explica el failover como transferencia automática de operaciones a un componente alternativo y su efecto en el tiempo de inactividad",
+        "peso": 0.25,
+        "claves": ["failover", "transferencia automatica", "componente alternativo", "menor tiempo de inactividad", "continuidad del servicio", "nodo secundario"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Menciona el monitoreo o el latido periódico como mecanismo de detección temprana que dispara el cambio",
+        "peso": 0.25,
+        "claves": ["monitoreo", "heartbeat", "latido", "deteccion temprana", "alerta", "saber que la instancia esta caida", "chequeo de salud"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Reconoce un costo o límite del enfoque: más complejidad operativa, costo de las réplicas o necesidad de balancear la carga",
+        "peso": 0.2,
+        "claves": ["mayor complejidad", "costo de infraestructura", "mas servidores", "balanceo de carga", "costo significativo", "requiere operacion"]
+      }
+    ],
+    "respuesta_modelo": "La redundancia mantiene componentes duplicados y su beneficio directo es eliminar puntos únicos de falla: si hay dos instancias del servicio, la caída de una no detiene la operación. El failover completa la táctica porque transfiere de forma automática las operaciones hacia el componente alternativo, con lo que se reduce el tiempo de inactividad y se mantiene la continuidad del servicio. En el Black Friday conviene sumar balanceo de carga, que además reparte las solicitudes y mejora el rendimiento y la escalabilidad. Para que el failover no se dispare por una demora momentánea hace falta monitoreo, típicamente un heartbeat o latido periódico: si el monitor deja de recibirlo, deduce que la instancia está caída. El costo de este esquema es mayor complejidad operativa y más infraestructura, por eso el nivel de disponibilidad se negocia con el negocio y no se lleva al máximo por defecto.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 28 },
+    "tiempo_sugerido_min": 7,
+    "tags": ["disponibilidad", "spof", "heartbeat"]
+  },
+  {
+    "id": "arq-tac-dev-004",
+    "tema": "arquitectura",
+    "subtema": "rendimiento",
+    "dificultad": "media",
+    "pregunta": "Un equipo debe lograr respuestas en menos de dos segundos para un catálogo con muchas más lecturas que escrituras. Explicá cómo contribuyen la caché, el balanceo de carga y el procesamiento asíncrono, y qué costo o riesgo introduce cada uno.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Explica la caché como almacenamiento de resultados ya calculados, con menor acceso a la base y menor latencia",
+        "peso": 0.3,
+        "claves": ["cache", "resultados previamente calculados", "menor acceso a la base", "menor latencia", "redis", "memcached", "menos uso de recursos"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Explica el balanceo de carga como distribución de solicitudes entre instancias y su aporte a rendimiento, disponibilidad y escalabilidad",
+        "peso": 0.25,
+        "claves": ["balanceo de carga", "distribuye solicitudes", "varias instancias", "mejor rendimiento", "escalabilidad", "mayor disponibilidad"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Explica el procesamiento asíncrono: separar la solicitud del procesamiento y reducir el tiempo percibido",
+        "peso": 0.25,
+        "claves": ["procesamiento asincrono", "separar la solicitud del procesamiento", "tiempo de respuesta percibido", "encolar", "responder primero", "enviar el correo despues"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Señala al menos un costo o riesgo: datos desactualizados e invalidación de caché, o mayor complejidad de la asincronía",
+        "peso": 0.2,
+        "claves": ["datos desactualizados", "invalidacion", "vencimiento de la cache", "consistencia", "mayor complejidad", "monitorear la cola", "reintentos"]
+      }
+    ],
+    "respuesta_modelo": "La caché guarda resultados ya calculados, de modo que la mayoría de las lecturas se resuelven sin ir a la base: eso baja la latencia, reduce el uso de recursos y disminuye el acceso al motor de datos. El balanceo de carga distribuye las solicitudes entre varias instancias y aporta mejor rendimiento, mayor disponibilidad y mejor escalabilidad, aunque exige administrar la sesión y mantener las instancias sincronizadas. El procesamiento asíncrono separa la solicitud del procesamiento, por ejemplo respondiendo al usuario y enviando la confirmación después, con lo que baja el tiempo percibido. El costo de la caché es que las copias pueden quedar desactualizadas y hay que definir vencimientos e invalidación. El de la asincronía es la complejidad operativa: colas, reintentos y un modelo de consistencia que el equipo debe entender y monitorear.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 24 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["rendimiento", "cache", "asincronia"]
+  },
+  {
+    "id": "arq-tac-dev-005",
+    "tema": "arquitectura",
+    "subtema": "modificabilidad",
+    "dificultad": "media",
+    "pregunta": "Una empresa de seguros recibe cambios regulatorios varias veces por año y hoy cada cambio obliga a tocar muchos módulos. Explicá qué tácticas de diseño facilitan esas modificaciones y qué tensión aparece con el rendimiento cuando se agregan capas de abstracción.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Define la modificabilidad como capacidad de adaptarse al cambio y advierte el costo de una arquitectura rígida",
+        "peso": 0.25,
+        "claves": ["modificabilidad", "capacidad de adaptarse al cambio", "arquitectura rigida", "costos futuros", "cambios regulatorios", "nuevos requisitos"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Propone encapsular las reglas que cambian y reducir el acoplamiento entre módulos",
+        "peso": 0.3,
+        "claves": ["encapsulamiento", "encapsular las reglas", "bajo acoplamiento", "desacoplar", "modulo aislado", "separar la regla de negocio", "un solo lugar"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Explica la tensión: la abstracción facilita el cambio pero agrega intermediarios y puede aumentar el tiempo de respuesta",
+        "peso": 0.25,
+        "claves": ["capa de abstraccion", "agrega intermediarios", "puede aumentar el tiempo de respuesta", "costo de rendimiento", "indireccion", "sacrifica velocidad"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Resuelve con el criterio de equilibrio según el contexto del negocio y no maximizando un atributo",
+        "peso": 0.2,
+        "claves": ["equilibrio", "balance", "depende del contexto", "no maximizar", "deuda tecnica", "decidir con el negocio"]
+      }
+    ],
+    "respuesta_modelo": "La modificabilidad es la capacidad del sistema para adaptarse al cambio, y el material advierte que una arquitectura rígida incrementa significativamente los costos futuros. La primera táctica es encapsular las reglas que cambian seguido, de modo que una reforma regulatoria se resuelva en un único módulo y no en todos los canales. La segunda es reducir el acoplamiento: si los módulos dependen de abstracciones estables y no de detalles concretos, cada cambio queda contenido y no arrastra al resto. Esas capas de abstracción, sin embargo, agregan intermediarios y pueden aumentar el tiempo de respuesta, sobre todo en caminos muy transitados. Por eso la decisión se resuelve con el criterio de equilibrio del material: no se maximiza el rendimiento ni la flexibilidad, se busca la combinación adecuada para el contexto del negocio y para la frecuencia real de los cambios.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 15 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["modificabilidad", "tradeoff"]
+  }
+]

@@ -1,0 +1,74 @@
+{
+  "archivo": "03-03-tais-PersistenciaNoRelacional-03-03.pdf",
+  "carpeta": "",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Curso\nTendencias Aplicadas de \nIngenería de Software\nMongoDB\nComparación práctica entre \n:PostgreSQL y MongoDB\n1"
+    },
+    {
+      "n": 2,
+      "texto": "Análisis de caso: MongoDB\n• En sistemas modernos de alta escala es común \nencontrar arquitecturas que combinan múltiples \ntecnologías de persistencia para resolver distintos tipos \nde necesidades dentro de un mismo sistema.\n• Un caso muy frecuente es la combinación de:\n– Bases de datos documentales como MongoDB\n• Este enfoque responde a un principio clave de la \ningeniería de software moderna: no existe una única \nbase de datos óptima para todos los tipos de consulta.\n2"
+    },
+    {
+      "n": 3,
+      "texto": "Rol de MongoDB en la arquitectura\n• Sus características principales incluyen:\n– Modelo documental basado en JSON y BSON.\n– Flexibilidad de esquema.\n– Escalabilidad horizontal mediante sharding.\n– Replicación para alta disponibilidad.\n– Consultas estructuradas y agregaciones.\n3"
+    },
+    {
+      "n": 4,
+      "texto": "Rol de MongoDB en la arquitectura\n• En este contexto, MongoDB se encarga de:\n– Almacenamiento de entidades de negocio.\n– Actualizaciones transaccionales a nivel de \ndocumento.\n– Operaciones CRUD del sistema.\n• Sin embargo, no está optimizado para búsquedas \ntextuales avanzadas \n• Por este motivo se complementa con motores \nespecializados.\n4"
+    },
+    {
+      "n": 5,
+      "texto": "MongoDB \n• MongoDB es una base de datos NoSQL documental diseñada para \nalmacenar información en estructuras tipo JSON (internamente \nBSON), optimizada para escalabilidad horizontal y flexibilidad de \nesquema.\n• A diferencia de los sistemas relacionales, MongoDB no organiza la \ninformación en tablas rígidas, sino en colecciones de documentos \nindependientes. \n• Cada documento puede tener una estructura distinta, lo que \npermite una evolución ágil del modelo de datos sin migraciones \ncomplejas.\n• Este enfoque está alineado con arquitecturas modernas basadas \nen microservicios, donde cada servicio puede definir su propio \nmodelo de datos sin depender de un esquema global centralizado.\n5"
+    },
+    {
+      "n": 6,
+      "texto": "MongoDB - Modelos de Datos Documental \n• El núcleo del modelo de MongoDB es el documento, que \nrepresenta una entidad completa del dominio.\n• Ejemplo\n{\n\"cliente\": \"Ana\",\n\"documento\": \"3333333\",\n\"direccion\": {\n\"ciudad\": \"Montevideo\",\n\"pais\": \"Uruguay\"\n  },\n\"compras\": [\n{ \"producto\": \"Laptop\", \"precio\": 1200 },\n{ \"producto\": \"Mouse\", \"precio\": 25 }\n ]\n}\n6"
+    },
+    {
+      "n": 7,
+      "texto": "MongoDB - Modelos de Datos Documental \n•\nEvolución sin migraciones rígidas\n•\nUna de las características más importantes de MongoDB es la ausencia \nde un esquema fijo obligatorio.\n•\nEsto permite:\n–\nAgregar nuevos campos sin modificar toda la colección.\n–\nManejar múltiples versiones de documentos simultáneamente.\n–\nEvolución incremental del sistema.\n•\nEjemplo:\n{ \"nombre\": \"Carlos\", \"edad\": 30 }\n{ \"nombre\": \"Carlos\", \"edad\": 30, \"suscripcion\": \"premium\" }\n•\nSin embargo, esta flexibilidad implica responsabilidad a nivel de \naplicación, ya que no existe un control estructural fuerte como en bases \nrelacionales.\n7"
+    },
+    {
+      "n": 8,
+      "texto": "MongoDB - Índices\n• MongoDB soporta múltiples tipos de índices para mejorar \nel rendimiento de consultas.\n• Tipos principales:\n– Índices simples (un campo).\n– Índices compuestos.\n– Índices de texto.\n• Los índices permiten reducir drásticamente el tiempo de \nbúsqueda, pero introducen costos en:\n– Escritura (cada inserción actualiza índices).\n– Uso de memoria.\n– Complejidad de mantenimiento.\n• La correcta definición de índices es crítica para el \nrendimiento del sistema.\n8"
+    },
+    {
+      "n": 9,
+      "texto": "MongoDB - Replicación\n• MongoDB implementa replicación mediante Replica Sets, que \nconsisten en múltiples nodos:\n–\nPrimary node (escrituras)\n–\nSecondary nodes (réplicas)\n• El flujo típico es:\nCliente → Primary → Secondaries\n• Características:\n–\nFailover automático.\n–\nElección de nuevo primary.\n–\nReplicación asíncrona.\n–\nAlta disponibilidad.\n9"
+    },
+    {
+      "n": 10,
+      "texto": "MongoDB - Sharding\n•\nEscalabilidad horizontal nativa\n•\nMongoDB soporta sharding para distribuir datos entre múltiples servidores.\n•\nArquitectura:\n–\nShards: almacenan datos.\n–\nMongos: enruta consultas (decide a que shard enviar la consulta)\n–\nConfig servers: metadata del cluster (información de los shards)\n•\nEjemplo:\n–\nShard A → usuarios A-F\n–\nShard B → usuarios G-M\n–\nShard C → usuarios N-Z\n•\nVentajas:\n–\nEscalabilidad prácticamente ilimitada.\n–\nDistribución de carga.\n–\nSoporte para grandes volúmenes de datos.\n•\nRiesgo principal:\n–\nElección incorrecta de shard key y sobrecarga de nodos\n10"
+    },
+    {
+      "n": 11,
+      "texto": "MongoDB - Consistencia\n• MongoDB permite diferentes niveles de consistencia \ndependiendo de la configuración del sistema.\n• Opciones:\n– Lecturas desde primary (consistencia fuerte).\n– Lecturas desde secondary (consistencia eventual).\n• Esto permite ajustar el trade-off entre:\n– Consistencia.\n– Latencia.\n– Disponibilidad.\n• En sistemas distribuidos, esta flexibilidad es clave para \nadaptarse a distintos requisitos de negocio.\n11"
+    },
+    {
+      "n": 12,
+      "texto": "Comparación: PostgreSQL vs MongoDB\n• La comparación entre PostgreSQL y MongoDB \nrepresenta uno de los debates más importantes en \narquitectura de software moderna.\n• No se trata de tecnologías equivalentes, sino de \nparadigmas diferentes de modelado de datos.\n12"
+    },
+    {
+      "n": 13,
+      "texto": "Comparación: PostgreSQL vs MongoDB\nModel de Datos\n• PostgreSQL\n– Modelo relacional.\n– Esquema rígido.\n– Normalización.\n– Tablas con relaciones explícitas.\n• MongoDB\n– Modelo documental.\n– Esquema flexible.\n– Datos embebidos.\n– Estructuras jerárquicas (JSON).\n• Conclusión:\n– PostgreSQL prioriza consistencia y estructura.\n– MongoDB prioriza flexibilidad.\n13"
+    },
+    {
+      "n": 14,
+      "texto": "Comparación: PostgreSQL vs MongoDB\nConsultas y Rendimiento\n• PostgreSQL\n– Ventajas:\n SQL potente.\n JOINs optimizados.\n Consultas complejas.\n Integridad referencial.\n– Limitaciones:\n Escalabilidad horizontal más compleja.\n JOINs costosos a gran escala.\n14"
+    },
+    {
+      "n": 15,
+      "texto": "Comparación: PostgreSQL vs MongoDB\nConsultas y Rendimiento\n• MongoDB\n– Ventajas:\n Acceso directo a documentos.\n Alto rendimiento en lectura simple.\n Escalabilidad horizontal.\n Menor necesidad de JOINs.\n– Limitaciones:\n Consultas relacionales complejas más difíciles.\n Posible duplicación de datos.\n15"
+    },
+    {
+      "n": 16,
+      "texto": "Comparación: PostgreSQL vs MongoDB\nEscalabilidad\n• PostgreSQL\n– Escalamiento principalmente vertical.\n– Replicación posible, pero más compleja.\n– Escalabilidad horizontal limitada sin extensiones.\n• MongoDB\n– Escalamiento horizontal nativo (sharding).\n– Replicación automática.\n– Diseñado para cloud y distribución global.\n16"
+    },
+    {
+      "n": 17,
+      "texto": "Comparación: PostgreSQL vs MongoDB\n• MongoDB y PostgreSQL representan paradigmas \ndistintos.\n• Los sistemas modernos son inherentemente híbridos.\n• La elección tecnológica depende del tipo de consulta, y \nlos requerimientos, no de la popularidad de la \nherramienta.\n17"
+    }
+  ]
+}

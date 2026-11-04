@@ -1,0 +1,622 @@
+[
+  {
+    "id": "nosql-columnar-021",
+    "tema": "nosql",
+    "subtema": "column-family",
+    "dificultad": "facil",
+    "pregunta": "Una plataforma debe absorber millones de eventos por segundo y luego consultarlos por rangos de tiempo. ¿Por qué un modelo column-family es una opción natural?",
+    "opciones": [
+      {
+        "texto": "Porque su organización física está optimizada para escrituras masivas, consultas por rangos y procesamiento distribuido.",
+        "correcta": true
+      },
+      {
+        "texto": "Porque almacena las relaciones entre entidades como elementos de primera clase del modelo.",
+        "correcta": false,
+        "porque_no": "Eso describe a las bases de grafos; el modelo column-family se orienta a volumen de datos y rendimiento."
+      },
+      {
+        "texto": "Porque impone un esquema fijo de filas y columnas equivalente al del modelo relacional.",
+        "correcta": false,
+        "porque_no": "En column-family cada registro puede contener distintos conjuntos de columnas, a diferencia de las filas de estructura fija del relacional."
+      },
+      {
+        "texto": "Porque evita definir una clave de fila y así elimina el costo de identificar cada registro.",
+        "correcta": false,
+        "porque_no": "El modelo se organiza justamente con una row key que identifica cada registro, además de las familias de columnas."
+      }
+    ],
+    "explicacion": "Las bases Column-Family fueron diseñadas para volúmenes masivos de información distribuidos en múltiples servidores. Su organización física prioriza escrituras masivas, consultas por rangos, procesamiento distribuido y escalabilidad horizontal. Por eso se usan en aplicaciones que generan enormes cantidades de eventos, métricas o registros temporales.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 17 },
+    "tags": ["column-family", "eventos", "rendimiento"]
+  },
+  {
+    "id": "nosql-columnar-022",
+    "tema": "nosql",
+    "subtema": "column-family",
+    "dificultad": "media",
+    "pregunta": "En una base column-family, ¿qué papel cumple el timestamp que muchas implementaciones guardan junto al dato?",
+    "opciones": [
+      {
+        "texto": "Permite almacenar múltiples versiones temporales de un mismo valor dentro del registro.",
+        "correcta": true
+      },
+      {
+        "texto": "Identifica de manera única cada registro dentro de la estructura de la tabla.",
+        "correcta": false,
+        "porque_no": "Ese es el rol de la row key; el timestamp agrega versionado temporal sobre los valores."
+      },
+      {
+        "texto": "Agrupa funcionalmente las columnas que pertenecen a un mismo conjunto de atributos.",
+        "correcta": false,
+        "porque_no": "Eso corresponde a las familias de columnas, que agrupan columnas relacionadas desde el punto de vista funcional."
+      },
+      {
+        "texto": "Define el orden en que los nodos replican cada familia de columnas del clúster.",
+        "correcta": false,
+        "porque_no": "El timestamp no ordena la replicación entre nodos: versiona los valores de un mismo dato a lo largo del tiempo."
+      }
+    ],
+    "explicacion": "El modelo column-family organiza los datos en clave de fila, familias de columnas, columnas y timestamp. La row key identifica el registro y las familias agrupan columnas relacionadas. El timestamp permite conservar varias versiones temporales de un mismo dato, y las columnas pueden variar entre registros.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 18 },
+    "tags": ["column-family", "modelo-de-datos", "timestamp"]
+  },
+  {
+    "id": "nosql-columnar-023",
+    "tema": "nosql",
+    "subtema": "column-family",
+    "dificultad": "media",
+    "pregunta": "Un equipo elige column-family para un tablero cuyas consultas cambian todo el tiempo y nadie previó. ¿Qué desventaja debería haber sopesado?",
+    "opciones": [
+      {
+        "texto": "El diseño exige conocer los patrones de consulta desde el inicio y las consultas no previstas pueden resultar costosas.",
+        "correcta": true
+      },
+      {
+        "texto": "El modelo no soporta altos volúmenes de escritura y se satura con las inserciones.",
+        "correcta": false,
+        "porque_no": "El rendimiento de escritura es una de sus fortalezas: procesa enormes volúmenes de inserciones."
+      },
+      {
+        "texto": "El modelo obliga a que todos los registros tengan exactamente las mismas columnas definidas.",
+        "correcta": false,
+        "porque_no": "Al contrario, las columnas pueden variar entre registros, lo que permite aprovechar mejor el espacio de almacenamiento."
+      },
+      {
+        "texto": "El modelo no admite replicación, por lo que no tolera fallas de hardware en los nodos.",
+        "correcta": false,
+        "porque_no": "La replicación distribuida es parte del modelo y permite tolerar fallos de hardware."
+      }
+    ],
+    "explicacion": "Entre las desventajas del modelo column-family la cátedra menciona el diseño más complejo, la menor flexibilidad para consultas ad hoc y una curva de aprendizaje elevada. La modelización requiere comprender los patrones de consulta desde el inicio. Por eso se usa en proyectos de gran escala donde las ventajas justifican la complejidad adicional.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 21 },
+    "tags": ["column-family", "consultas-ad-hoc", "diseno"]
+  },
+  {
+    "id": "nosql-grafos-024",
+    "tema": "nosql",
+    "subtema": "grafos",
+    "dificultad": "facil",
+    "pregunta": "¿Qué rasgo distingue a las bases de grafos de los modelos relacional y documental, según la cátedra?",
+    "opciones": [
+      {
+        "texto": "Consideran que las relaciones entre entidades son elementos de primera clase, no un atributo secundario.",
+        "correcta": true
+      },
+      {
+        "texto": "Almacenan documentos completos dentro de cada nodo del grafo para evitar operaciones de JOIN.",
+        "correcta": false,
+        "porque_no": "El grafo se compone de nodos, relaciones y propiedades; no es un almacén de documentos embebidos."
+      },
+      {
+        "texto": "Priorizan las escrituras masivas y las consultas por rangos de tiempo sobre otros criterios.",
+        "correcta": false,
+        "porque_no": "Ese perfil de uso corresponde al modelo column-family."
+      },
+      {
+        "texto": "Trabajan solo con datos sin estructura y no admiten propiedades asociadas a sus elementos.",
+        "correcta": false,
+        "porque_no": "El modelo admite propiedades tanto en los nodos como en las relaciones."
+      }
+    ],
+    "explicacion": "Mientras los modelos relacionales y documentales se enfocan en entidades y atributos, las bases de grafos consideran las relaciones como elementos de primera clase. Un grafo se compone de nodos, relaciones y propiedades. Ese diseño resulta especialmente eficaz cuando las consultas involucran múltiples niveles de relaciones complejas.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 22 },
+    "tags": ["grafos", "relaciones", "modelo-de-datos"]
+  },
+  {
+    "id": "nosql-grafos-025",
+    "tema": "nosql",
+    "subtema": "grafos",
+    "dificultad": "media",
+    "pregunta": "Un sistema de recomendaciones quiere responder qué amigos de mis amigos compraron un producto. ¿Por qué conviene un grafo frente a una base relacional?",
+    "opciones": [
+      {
+        "texto": "Porque almacena las relaciones de forma explícita y permite recorrerlas sin JOINs recursivos costosos.",
+        "correcta": true
+      },
+      {
+        "texto": "Porque normaliza las relaciones en tablas intermedias más pequeñas y rápidas de combinar.",
+        "correcta": false,
+        "porque_no": "Ese es el enfoque relacional que justamente genera JOINs recursivos; el grafo evita esa reconstrucción en cada consulta."
+      },
+      {
+        "texto": "Porque reemplaza las relaciones por documentos embebidos que se leen en una sola operación.",
+        "correcta": false,
+        "porque_no": "El modelo de grafos mantiene las relaciones como elementos propios y las recorre; no las esconde dentro de documentos."
+      },
+      {
+        "texto": "Porque calcula las recomendaciones con agregaciones sobre familias de columnas del mismo registro.",
+        "correcta": false,
+        "porque_no": "Las agregaciones por familia de columnas corresponden al modelo column-family, no al recorrido de relaciones."
+      }
+    ],
+    "explicacion": "En las bases relacionales estas consultas suelen requerir múltiples JOINs recursivos cuyo costo crece rápidamente. Las bases de grafos almacenan las relaciones explícitamente y permiten recorrerlas de manera eficiente. Por eso son valiosas cuando las conexiones entre entidades son tan importantes como los datos, por ejemplo en análisis social, logística y recomendaciones.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 25 },
+    "tags": ["grafos", "recomendaciones", "joins"]
+  },
+  {
+    "id": "nosql-desnorm-026",
+    "tema": "nosql",
+    "subtema": "desnormalizacion",
+    "dificultad": "facil",
+    "pregunta": "Un equipo decide guardar la ciudad y el país del cliente dentro de cada pedido, aunque esos datos ya existan en el registro del cliente. ¿Qué táctica está aplicando y para qué?",
+    "opciones": [
+      {
+        "texto": "Desnormalización: almacena datos redundantes para reducir accesos y evitar JOINs en las consultas.",
+        "correcta": true
+      },
+      {
+        "texto": "Sharding: reparte los pedidos entre nodos distintos según el cliente que los generó.",
+        "correcta": false,
+        "porque_no": "El sharding divide datos entre nodos; acá se trata de duplicar atributos dentro del registro para simplificar la consulta."
+      },
+      {
+        "texto": "Replicación: mantiene copias de la misma fila en varios nodos del clúster.",
+        "correcta": false,
+        "porque_no": "La replicación copia conjuntos de datos completos entre nodos para ganar disponibilidad, no atributos dentro de un registro."
+      },
+      {
+        "texto": "CQRS: separa el modelo de escritura del modelo de lectura dentro del sistema.",
+        "correcta": false,
+        "porque_no": "CQRS separa responsabilidades de comando y consulta; este caso es duplicación de atributos en un mismo modelo."
+      }
+    ],
+    "explicacion": "La desnormalización es uno de los principios más importantes del diseño NoSQL. En sistemas distribuidos las operaciones JOIN pueden convertirse en cuellos de botella significativos, por eso muchas soluciones almacenan datos redundantes. Los beneficios son menor cantidad de accesos, consultas más rápidas y menor dependencia de operaciones distribuidas.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 26 },
+    "tags": ["desnormalizacion", "redundancia", "lecturas"]
+  },
+  {
+    "id": "nosql-desnorm-027",
+    "tema": "nosql",
+    "subtema": "desnormalizacion",
+    "dificultad": "media",
+    "pregunta": "Tras desnormalizar, el equipo descubre que cambiar la ciudad de un cliente exige actualizar miles de pedidos. ¿Qué trade-off está viendo?",
+    "opciones": [
+      {
+        "texto": "La duplicación acelera las lecturas pero vuelve más complejas las actualizaciones y puede generar inconsistencias.",
+        "correcta": true
+      },
+      {
+        "texto": "La desnormalización degrada la velocidad de lectura y obliga a usar JOINs distribuidos.",
+        "correcta": false,
+        "porque_no": "La desnormalización busca exactamente lo contrario: consultas más rápidas y menos dependencia de operaciones distribuidas."
+      },
+      {
+        "texto": "La desnormalización impide crear índices sobre los campos que se duplicaron.",
+        "correcta": false,
+        "porque_no": "Se pueden indexar los campos duplicados; el costo aparece en la actualización y el espacio, no en la imposibilidad de indexar."
+      },
+      {
+        "texto": "La desnormalización solo funciona en bases relacionales, donde las claves foráneas propagan los cambios.",
+        "correcta": false,
+        "porque_no": "Es una táctica propia del diseño NoSQL y precisamente prescinde de la propagación automática de las claves foráneas."
+      }
+    ],
+    "explicacion": "La desnormalización tiene beneficios claros: menor cantidad de accesos, consultas más rápidas y menor dependencia de operaciones distribuidas. El costo es mayor duplicación de datos y actualizaciones más complejas, con riesgo de inconsistencias. La decisión debe basarse en los patrones reales de lectura y escritura del sistema.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 27 },
+    "tags": ["desnormalizacion", "trade-offs", "actualizaciones"]
+  },
+  {
+    "id": "nosql-sharding-028",
+    "tema": "nosql",
+    "subtema": "sharding",
+    "dificultad": "facil",
+    "pregunta": "Una base ya no entra en un servidor y el equipo reparte los clientes en tres nodos: de A a F, de G a M y de N a Z. ¿Qué táctica aplicó?",
+    "opciones": [
+      {
+        "texto": "Sharding: cada shard almacena solo una parte del conjunto total de datos.",
+        "correcta": true
+      },
+      {
+        "texto": "Replicación: cada nodo guarda una copia completa del conjunto total de datos.",
+        "correcta": false,
+        "porque_no": "En la replicación cada copia contiene los mismos datos; acá cada nodo conserva un subconjunto distinto."
+      },
+      {
+        "texto": "Desnormalización: los datos se duplican dentro de cada nodo para evitar JOINs.",
+        "correcta": false,
+        "porque_no": "La desnormalización duplica atributos dentro de los registros; el sharding divide el conjunto de datos entre nodos."
+      },
+      {
+        "texto": "Consistencia eventual: los nodos convergen al mismo estado después de un período.",
+        "correcta": false,
+        "porque_no": "La consistencia eventual es un modelo de sincronización; no describe cómo se particionan los datos."
+      }
+    ],
+    "explicacion": "El sharding consiste en dividir los datos entre múltiples nodos independientes. Cada shard almacena solo una parte del conjunto total. Eso reduce la presión sobre un único servidor, amplía la capacidad de almacenamiento y permite agregar nodos a medida que crece la carga.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 28 },
+    "tags": ["sharding", "particionamiento"]
+  },
+  {
+    "id": "nosql-sharding-029",
+    "tema": "nosql",
+    "subtema": "sharding",
+    "dificultad": "dificil",
+    "pregunta": "Un servicio particiona sus datos por país y el 70% de los usuarios está en un solo país. ¿Qué riesgo concreto introduce esa shard key?",
+    "opciones": [
+      {
+        "texto": "Desbalanceo: un shard concentra casi toda la carga y se convierte en el cuello de botella del clúster.",
+        "correcta": true
+      },
+      {
+        "texto": "Pérdida de la tolerancia a particiones, porque el sharding reemplaza a la replicación.",
+        "correcta": false,
+        "porque_no": "El sharding y la replicación son mecanismos distintos y complementarios; particionar no elimina la tolerancia a fallas de red."
+      },
+      {
+        "texto": "Imposibilidad de agregar nuevos nodos al clúster en el futuro.",
+        "correcta": false,
+        "porque_no": "El objetivo del sharding es justamente poder agregar nodos; el problema es cómo se distribuye la carga entre ellos."
+      },
+      {
+        "texto": "Duplicación masiva de datos, porque cada shard copia el contenido de los demás nodos.",
+        "correcta": false,
+        "porque_no": "Cada shard guarda solo una parte del conjunto; la duplicación es propia de la replicación, no del particionado."
+      }
+    ],
+    "explicacion": "El sharding distribuye datos para reducir la presión sobre un único servidor y permitir que el sistema crezca. Pero una clave de particionamiento mal elegida genera desbalanceo y afecta el rendimiento. La cátedra lo marca como riesgo principal: la elección incorrecta de la shard key y la sobrecarga de algunos nodos.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 29 },
+    "tags": ["sharding", "shard-key", "desbalanceo"]
+  },
+  {
+    "id": "nosql-sharding-030",
+    "tema": "nosql",
+    "subtema": "sharding",
+    "dificultad": "media",
+    "pregunta": "En un clúster shardeado de MongoDB, un cliente envía una consulta al clúster. ¿Qué componente decide a qué shard enviarla?",
+    "opciones": [
+      {
+        "texto": "El mongos, que enruta las consultas usando la metadata que mantienen los config servers.",
+        "correcta": true
+      },
+      {
+        "texto": "El primary del replica set, que distribuye las lecturas entre los shards disponibles.",
+        "correcta": false,
+        "porque_no": "El primary atiende escrituras y replica hacia los secondary dentro de un replica set; el ruteo entre shards lo hace mongos."
+      },
+      {
+        "texto": "Los config servers, que reciben la consulta y devuelven los documentos solicitados.",
+        "correcta": false,
+        "porque_no": "Los config servers guardan la metadata del clúster; no ejecutan las consultas de los clientes."
+      },
+      {
+        "texto": "El secondary más cercano al cliente, elegido por el balanceador del sistema operativo.",
+        "correcta": false,
+        "porque_no": "El enrutamiento es lógico y lo resuelve mongos a partir de la metadata, no un balanceador de sistema operativo."
+      }
+    ],
+    "explicacion": "La arquitectura de sharding de MongoDB distingue tres piezas: los shards almacenan los datos, los mongos enrutan las consultas y los config servers mantienen la metadata del clúster. Con esa información el mongos decide a qué shard enviar cada consulta. Las ventajas son escalabilidad prácticamente ilimitada, distribución de carga y soporte para grandes volúmenes.",
+    "fuente": { "archivo": "03-03-tais-PersistenciaNoRelacional-03-03.pdf", "pagina": 10 },
+    "tags": ["mongodb", "sharding", "mongos"]
+  },
+  {
+    "id": "nosql-replicacion-031",
+    "tema": "nosql",
+    "subtema": "replicacion",
+    "dificultad": "facil",
+    "pregunta": "¿Qué objetivos persigue mantener varias copias de los mismos datos en nodos distintos?",
+    "opciones": [
+      {
+        "texto": "Alta disponibilidad, recuperación ante desastres y balanceo de lecturas entre las réplicas.",
+        "correcta": true
+      },
+      {
+        "texto": "Reducir el espacio total ocupado y evitar la duplicación de información.",
+        "correcta": false,
+        "porque_no": "La replicación aumenta el espacio ocupado: busca disponibilidad y resiliencia, no ahorro de almacenamiento."
+      },
+      {
+        "texto": "Garantizar consistencia fuerte sin importar el costo de latencia que tenga.",
+        "correcta": false,
+        "porque_no": "La replicación por sí sola no garantiza consistencia fuerte; de hecho la asíncrona prioriza disponibilidad y rendimiento."
+      },
+      {
+        "texto": "Eliminar la necesidad de sharding en clústeres de gran escala.",
+        "correcta": false,
+        "porque_no": "Replicación y sharding resuelven problemas distintos: copias para disponibilidad frente a partición para capacidad."
+      }
+    ],
+    "explicacion": "La replicación mantiene múltiples copias de los mismos datos en nodos diferentes. Sus objetivos principales son la alta disponibilidad, la recuperación ante desastres y el balanceo de lectura. Es uno de los mecanismos que permiten construir sistemas resilientes a gran escala.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 30 },
+    "tags": ["replicacion", "disponibilidad"]
+  },
+  {
+    "id": "nosql-replicacion-032",
+    "tema": "nosql",
+    "subtema": "replicacion",
+    "dificultad": "media",
+    "pregunta": "Al comparar replicación síncrona y asíncrona, ¿qué compromiso describe la cátedra?",
+    "opciones": [
+      {
+        "texto": "La síncrona garantiza consistencia fuerte; la asíncrona prioriza disponibilidad y rendimiento.",
+        "correcta": true
+      },
+      {
+        "texto": "La síncrona prioriza disponibilidad y la asíncrona garantiza consistencia fuerte.",
+        "correcta": false,
+        "porque_no": "La relación está invertida: la consistencia fuerte corresponde a la replicación síncrona."
+      },
+      {
+        "texto": "Las dos técnicas garantizan consistencia fuerte y solo difieren en el protocolo de red que usan.",
+        "correcta": false,
+        "porque_no": "La asíncrona no garantiza consistencia fuerte; justamente resigna esa garantía para ganar disponibilidad y rendimiento."
+      },
+      {
+        "texto": "La síncrona se usa para respaldos nocturnos y la asíncrona para el tráfico en línea.",
+        "correcta": false,
+        "porque_no": "La diferencia no está en el horario de uso sino en si la escritura espera o no la confirmación de las réplicas."
+      }
+    ],
+    "explicacion": "La replicación síncrona espera la confirmación de las réplicas y por eso garantiza consistencia fuerte. La replicación asíncrona prioriza disponibilidad y rendimiento. La mayoría de las bases NoSQL combinan estrategias híbridas para equilibrar consistencia, rendimiento y disponibilidad.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 31 },
+    "tags": ["replicacion", "sincronica", "asincronica"]
+  },
+  {
+    "id": "nosql-replicacion-033",
+    "tema": "nosql",
+    "subtema": "replicacion",
+    "dificultad": "dificil",
+    "pregunta": "Un equipo envía todos los reportes a los secondary nodes para aliviar al primary. Un usuario actualiza su dirección y el reporte recién la muestra diez minutos después. ¿Qué explica esa demora?",
+    "opciones": [
+      {
+        "texto": "La replicación es asíncrona: leer de un secondary implica consistencia eventual y datos que pueden estar desactualizados.",
+        "correcta": true
+      },
+      {
+        "texto": "Los secondary no reciben las escrituras porque el primary las rechaza por falta de capacidad.",
+        "correcta": false,
+        "porque_no": "El flujo es cliente, primary y luego secondary: el primary acepta la escritura y después la propaga a las réplicas."
+      },
+      {
+        "texto": "El failover automático todavía no eligió un nuevo primary y el clúster quedó bloqueado.",
+        "correcta": false,
+        "porque_no": "No hay una falla de nodo en el escenario; el retraso aparece por la propagación asíncrona hacia las réplicas."
+      },
+      {
+        "texto": "La base está operando en modo consistente, y por eso las réplicas difieren del primary.",
+        "correcta": false,
+        "porque_no": "En un modo consistente el sistema rechazaría o haría esperar solicitudes; acá responde con datos que todavía no llegaron a la réplica."
+      }
+    ],
+    "explicacion": "En MongoDB las escrituras se dirigen al primary y desde allí se replican a los secondary de forma asíncrona. Leer de un secondary brinda consistencia eventual: el dato puede estar atrasado respecto del primary. Si se necesita consistencia fuerte, la lectura debe hacerse contra el primary, aceptando más carga y mayor latencia.",
+    "fuente": { "archivo": "03-03-tais-PersistenciaNoRelacional-03-03.pdf", "pagina": 11 },
+    "tags": ["mongodb", "replicacion-asincrona", "consistencia-eventual"]
+  },
+  {
+    "id": "nosql-mongodb-034",
+    "tema": "nosql",
+    "subtema": "replicacion",
+    "dificultad": "facil",
+    "pregunta": "¿Cómo organiza MongoDB la replicación para lograr alta disponibilidad?",
+    "opciones": [
+      {
+        "texto": "Con replica sets: un primary que recibe las escrituras y varios secondary que replican, con failover automático.",
+        "correcta": true
+      },
+      {
+        "texto": "Con un único nodo primario que reparte las colecciones entre shards sin copias adicionales.",
+        "correcta": false,
+        "porque_no": "Ese sería un esquema de particionado sin réplicas; la replicación se organiza con replica sets."
+      },
+      {
+        "texto": "Con dos primaries que aceptan escrituras al mismo tiempo y se sincronizan por turnos.",
+        "correcta": false,
+        "porque_no": "El esquema que describe la cátedra tiene un primary para las escrituras y varios secondary que replican."
+      },
+      {
+        "texto": "Con config servers que almacenan los documentos y los entregan a los clientes del clúster.",
+        "correcta": false,
+        "porque_no": "Los config servers almacenan la metadata del clúster de sharding, no los datos de negocio."
+      }
+    ],
+    "explicacion": "MongoDB implementa replicación mediante Replica Sets, formados por un primary y varios secondary nodes. El flujo típico es cliente, primary y luego secondary. Sus características son failover automático, elección de un nuevo primary, replicación asíncrona y alta disponibilidad.",
+    "fuente": { "archivo": "03-03-tais-PersistenciaNoRelacional-03-03.pdf", "pagina": 9 },
+    "tags": ["mongodb", "replica-set", "failover"]
+  },
+  {
+    "id": "nosql-cqrs-035",
+    "tema": "nosql",
+    "subtema": "cqrs",
+    "dificultad": "facil",
+    "pregunta": "¿Qué propone el patrón CQRS en un sistema que hoy usa la misma estructura de datos para leer y escribir?",
+    "opciones": [
+      {
+        "texto": "Separar de forma explícita las operaciones que modifican datos de aquellas que los consultan.",
+        "correcta": true
+      },
+      {
+        "texto": "Duplicar la base de datos en dos regiones para tolerar las particiones de red.",
+        "correcta": false,
+        "porque_no": "Eso es replicación geográfica; CQRS separa responsabilidades de comando y de consulta, no regiones."
+      },
+      {
+        "texto": "Dividir los datos en shards para repartir la carga de escritura entre nodos.",
+        "correcta": false,
+        "porque_no": "El sharding particiona datos; CQRS propone modelos distintos según el tipo de operación."
+      },
+      {
+        "texto": "Guardar copias normalizadas de los datos para eliminar toda la redundancia del modelo.",
+        "correcta": false,
+        "porque_no": "CQRS no busca eliminar redundancia: admite modelos y tecnologías distintos para lectura y escritura."
+      }
+    ],
+    "explicacion": "CQRS propone separar explícitamente las operaciones que modifican datos de las que los consultan. En un sistema tradicional una misma estructura suele usarse para ambas, aunque los requisitos de cada tipo de operación difieren. La separación permite construir un modelo de comandos y otro de consultas, cada uno optimizado para su propósito.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 32 },
+    "tags": ["cqrs", "comandos", "consultas"]
+  },
+  {
+    "id": "nosql-cqrs-036",
+    "tema": "nosql",
+    "subtema": "cqrs",
+    "dificultad": "media",
+    "pregunta": "¿Por qué tiene sentido construir modelos distintos para escritura y lectura en CQRS?",
+    "opciones": [
+      {
+        "texto": "Porque las escrituras priorizan validaciones, control transaccional e integridad, y las lecturas priorizan rapidez, escalabilidad y agregaciones.",
+        "correcta": true
+      },
+      {
+        "texto": "Porque las escrituras necesitan agregaciones y tableros, mientras las lecturas necesitan validaciones de negocio.",
+        "correcta": false,
+        "porque_no": "Los requisitos están invertidos: las agregaciones, los reportes y los tableros son necesidades de lectura."
+      },
+      {
+        "texto": "Porque el modelo de lectura debe ser siempre relacional y el de escritura siempre documental.",
+        "correcta": false,
+        "porque_no": "CQRS no impone tecnologías fijas; justamente permite elegir la más adecuada para cada propósito."
+      },
+      {
+        "texto": "Porque un único modelo de datos no puede almacenar información de negocio sin duplicarla.",
+        "correcta": false,
+        "porque_no": "Un único modelo puede almacenar los datos; lo que no optimiza son dos perfiles de uso con requisitos opuestos."
+      }
+    ],
+    "explicacion": "Las escrituras generalmente requieren validaciones de negocio, control transaccional, consistencia y reglas de integridad. Las lecturas suelen priorizar rapidez, escalabilidad, consultas complejas y agregaciones. CQRS construye un modelo de comandos y otro de consultas para atender cada necesidad por separado.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 33 },
+    "tags": ["cqrs", "requisitos", "rendimiento"]
+  },
+  {
+    "id": "nosql-cqrs-037",
+    "tema": "nosql",
+    "subtema": "cqrs",
+    "dificultad": "dificil",
+    "pregunta": "Una tienda implementa CQRS con PostgreSQL para las escrituras y Elasticsearch para el catálogo de consulta. ¿Qué problema debe gestionar el equipo?",
+    "opciones": [
+      {
+        "texto": "Mantener sincronizado el modelo de lectura: entre la escritura y su proyección hay una ventana de desactualización.",
+        "correcta": true
+      },
+      {
+        "texto": "El modelo de comandos deja de poder validar reglas de negocio porque las lecturas usan otro motor.",
+        "correcta": false,
+        "porque_no": "El modelo de comandos conserva sus validaciones y su control transaccional; son modelos separados a propósito."
+      },
+      {
+        "texto": "Los clientes deben conectarse directo a PostgreSQL para poder consultar el catálogo actualizado.",
+        "correcta": false,
+        "porque_no": "La consulta se resuelve contra el modelo de lectura; obligar a ir al de escritura anularía el beneficio de la separación."
+      },
+      {
+        "texto": "Elasticsearch no permite indexar documentos, por lo que el catálogo deja de ser consultable.",
+        "correcta": false,
+        "porque_no": "Los motores de búsqueda como Elasticsearch están pensados justamente para indexar y consultar documentos."
+      }
+    ],
+    "explicacion": "CQRS permite usar tecnologías diferentes para cada propósito, por ejemplo PostgreSQL para escrituras y Elasticsearch para consultas. Esa separación exige proyectar los cambios del modelo de comandos hacia el modelo de lectura. Mientras la proyección no llega, el modelo de lectura está desactualizado: es una situación de consistencia eventual que hay que asumir y monitorear.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 35 },
+    "tags": ["cqrs", "consistencia-eventual", "proyeccion"]
+  },
+  {
+    "id": "nosql-poliglota-038",
+    "tema": "nosql",
+    "subtema": "persistencia-poliglota",
+    "dificultad": "media",
+    "pregunta": "¿Qué sostiene la persistencia políglota frente a la idea de una única base corporativa para todo el sistema?",
+    "opciones": [
+      {
+        "texto": "Que no existe una tecnología de persistencia adecuada para todos los problemas y conviene elegir la mejor para cada necesidad.",
+        "correcta": true
+      },
+      {
+        "texto": "Que conviene unificar todo en una sola base NoSQL para simplificar la operación del sistema.",
+        "correcta": false,
+        "porque_no": "La propuesta es lo contrario: usar la tecnología adecuada para cada necesidad, incluso combinando varias."
+      },
+      {
+        "texto": "Que cada equipo debe adoptar la base más popular del mercado para reducir el riesgo técnico.",
+        "correcta": false,
+        "porque_no": "La cátedra advierte contra elegir por popularidad; la decisión debe basarse en patrones de acceso y requisitos."
+      },
+      {
+        "texto": "Que la base relacional debe desaparecer de las arquitecturas modernas de microservicios.",
+        "correcta": false,
+        "porque_no": "La persistencia políglota combina tecnologías según el caso; el modelo relacional sigue siendo válido para varios de ellos."
+      }
+    ],
+    "explicacion": "Polyglot Persistence parte de que no existe una única tecnología de persistencia adecuada para todos los problemas. Propone seleccionar la base de datos más adecuada para cada necesidad específica. Cada componente usa la tecnología que mejor se adapta a sus requisitos, algo especialmente frecuente en arquitecturas de microservicios.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 36 },
+    "tags": ["persistencia-poliglota", "microservicios"]
+  },
+  {
+    "id": "nosql-poliglota-039",
+    "tema": "nosql",
+    "subtema": "seleccion-de-tecnologia",
+    "dificultad": "facil",
+    "pregunta": "Un equipo elige una base NoSQL solo porque está de moda, sin analizar las consultas que va a necesitar. ¿Qué error señala el curso?",
+    "opciones": [
+      {
+        "texto": "Seleccionar por popularidad sin analizar los patrones de acceso y los requisitos de negocio.",
+        "correcta": true
+      },
+      {
+        "texto": "Elegir una base que no sea relacional, ya que el modelo relacional siempre es la opción correcta.",
+        "correcta": false,
+        "porque_no": "El curso no afirma eso: sostiene que NoSQL es adecuado para ciertos escenarios y que la decisión depende de los requisitos."
+      },
+      {
+        "texto": "Elegir una base NoSQL sin antes migrar todos los datos históricos al nuevo motor.",
+        "correcta": false,
+        "porque_no": "El error señalado es la falta de análisis de patrones y requisitos, no el orden en que se hace la migración."
+      },
+      {
+        "texto": "Elegir una base que soporte escalabilidad horizontal cuando el sistema va a crecer mucho.",
+        "correcta": false,
+        "porque_no": "Esa es una decisión coherente con el crecimiento esperado, no el error que advierte la cátedra."
+      }
+    ],
+    "explicacion": "Cada modelo NoSQL responde a necesidades arquitectónicas distintas. El error más común consiste en seleccionar una base NoSQL únicamente por popularidad, sin analizar previamente los patrones de acceso y los requisitos de negocio. Comprender los modelos permite aplicar el principio de usar la herramienta adecuada para el problema adecuado.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 3 },
+    "tags": ["seleccion", "patrones-de-acceso", "requisitos"]
+  },
+  {
+    "id": "nosql-comparacion-040",
+    "tema": "nosql",
+    "subtema": "comparacion-sql-nosql",
+    "dificultad": "dificil",
+    "pregunta": "Un sistema necesita integridad referencial estricta y consultas complejas, pero proyecta un crecimiento distribuido muy grande. ¿Cómo encara el curso la decisión entre PostgreSQL y MongoDB?",
+    "opciones": [
+      {
+        "texto": "Son paradigmas distintos: PostgreSQL prioriza consistencia y estructura, MongoDB flexibilidad y escalabilidad horizontal; la elección depende del tipo de consulta y los requerimientos.",
+        "correcta": true
+      },
+      {
+        "texto": "MongoDB es superior porque permite escalar horizontalmente con sharding nativo en cualquier escenario.",
+        "correcta": false,
+        "porque_no": "La escalabilidad horizontal es una ventaja de MongoDB, pero no la vuelve superior para todo: la integridad y las consultas complejas favorecen a PostgreSQL."
+      },
+      {
+        "texto": "PostgreSQL es superior porque el modelo relacional tiene fundamento teórico y propiedades ACID.",
+        "correcta": false,
+        "porque_no": "El fundamento teórico es una ventaja, pero la decisión depende de los requisitos, no de una jerarquía fija entre tecnologías."
+      },
+      {
+        "texto": "Los dos motores son equivalentes y solo se diferencian en el lenguaje de consulta que ofrecen.",
+        "correcta": false,
+        "porque_no": "No son tecnologías equivalentes: representan paradigmas diferentes de modelado de datos."
+      }
+    ],
+    "explicacion": "El curso plantea que PostgreSQL y MongoDB no son tecnologías equivalentes sino paradigmas distintos de modelado. PostgreSQL prioriza la consistencia y la estructura; MongoDB prioriza la flexibilidad y el escalamiento horizontal nativo. Los sistemas modernos son inherentemente híbridos y la elección depende del tipo de consulta y de los requerimientos, no de la popularidad de la herramienta.",
+    "fuente": { "archivo": "03-03-tais-PersistenciaNoRelacional-03-03.pdf", "pagina": 17 },
+    "tags": ["comparacion", "postgresql", "mongodb"]
+  }
+]

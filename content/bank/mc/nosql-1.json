@@ -1,0 +1,622 @@
+[
+  {
+    "id": "nosql-limites-001",
+    "tema": "nosql",
+    "subtema": "limites-modelo-relacional",
+    "dificultad": "facil",
+    "pregunta": "Un equipo necesita agregar un atributo obligatorio a una tabla central que ya tiene cientos de millones de registros. ¿Qué limitación del modelo relacional describe mejor esta situación?",
+    "opciones": [
+      {
+        "texto": "El esquema rígido obliga a modificar tablas, índices y restricciones, y a migrar los registros existentes, lo que puede afectar la disponibilidad y el rendimiento.",
+        "correcta": true
+      },
+      {
+        "texto": "La ausencia de integridad referencial obliga a validar las relaciones dentro de la aplicación.",
+        "correcta": false,
+        "porque_no": "La integridad referencial es una fortaleza del modelo relacional: el motor la gestiona con claves foráneas. El problema descripto es el cambio de esquema."
+      },
+      {
+        "texto": "La imposibilidad de ejecutar JOINs impide reconstruir las relaciones entre las tablas.",
+        "correcta": false,
+        "porque_no": "El modelo relacional sí permite JOINs; en tablas enormes esos JOINs se vuelven costosos, pero no inexistentes."
+      },
+      {
+        "texto": "La falta de transacciones ACID impide aplicar el cambio de forma atómica.",
+        "correcta": false,
+        "porque_no": "ACID es una propiedad característica del modelo relacional; el enunciado no plantea una falla transaccional sino un cambio estructural."
+      }
+    ],
+    "explicacion": "La cátedra señala que uno de los principales problemas del modelo relacional es la dependencia de esquemas rígidos. Cualquier modificación estructural exige tocar tablas, índices y restricciones y, muchas veces, migrar millones de registros. Ese proceso puede afectar la disponibilidad y el rendimiento del sistema.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 6 },
+    "tags": ["esquema", "relacional", "migraciones"]
+  },
+  {
+    "id": "nosql-limites-002",
+    "tema": "nosql",
+    "subtema": "limites-modelo-relacional",
+    "dificultad": "media",
+    "pregunta": "En una base relacional con miles de millones de filas, las consultas que reconstruyen relaciones mediante JOINs se vuelven lentas. ¿Cómo explica la cátedra ese fenómeno?",
+    "opciones": [
+      {
+        "texto": "Los JOINs sobre tablas muy grandes se transforman en cuellos de botella porque el motor debe combinar enormes volúmenes de registros en cada consulta.",
+        "correcta": true
+      },
+      {
+        "texto": "Los JOINs degradan la integridad referencial y dejan claves foráneas sin validar.",
+        "correcta": false,
+        "porque_no": "La integridad referencial se mantiene con las restricciones del motor; el problema de los JOINs es de costo de cómputo, no de validación."
+      },
+      {
+        "texto": "Los JOINs obligan a duplicar los datos en cada tabla para poder combinarlos después.",
+        "correcta": false,
+        "porque_no": "La normalización justamente evita la duplicación; los JOINs reconstruyen relaciones a partir de datos ya normalizados."
+      },
+      {
+        "texto": "Los JOINs impiden usar índices, por eso cada consulta recorre todas las tablas completas.",
+        "correcta": false,
+        "porque_no": "Los índices también pueden usarse en consultas con JOINs; el costo aparece por el volumen a combinar, no por una prohibición de índices."
+      }
+    ],
+    "explicacion": "La necesidad de JOINs para reconstruir relaciones complejas es una limitación del modelo relacional. Cuando las tablas contienen millones o miles de millones de registros, esas operaciones se vuelven cuellos de botella significativos. Por eso muchas soluciones NoSQL desnormalizan y evitan combinar tablas en tiempo de consulta.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 7 },
+    "tags": ["joins", "rendimiento", "relacional"]
+  },
+  {
+    "id": "nosql-limites-003",
+    "tema": "nosql",
+    "subtema": "escalamiento",
+    "dificultad": "media",
+    "pregunta": "Una empresa relacional quiere absorber un pico de tráfico comprando un servidor con más CPU, más memoria y más disco. ¿Qué límite de esa estrategia destaca el curso?",
+    "opciones": [
+      {
+        "texto": "El escalamiento vertical tiene límites físicos y económicos: cada salto de hardware cuesta más y no permite crecer de forma indefinida.",
+        "correcta": true
+      },
+      {
+        "texto": "El escalamiento vertical obliga a repartir los datos entre varios nodos, lo que agrega coordinación entre ellos.",
+        "correcta": false,
+        "porque_no": "Repartir datos entre nodos es escalamiento horizontal; el vertical concentra todo en un único servidor más potente."
+      },
+      {
+        "texto": "El escalamiento vertical degrada la consistencia transaccional porque replica los datos en varias máquinas.",
+        "correcta": false,
+        "porque_no": "El escalamiento vertical no implica replicación ni cambia el modelo transaccional; su problema es el techo de hardware."
+      },
+      {
+        "texto": "El escalamiento vertical exige reescribir el esquema cada vez que se agrega hardware al servidor.",
+        "correcta": false,
+        "porque_no": "Agregar hardware al mismo servidor no modifica el esquema; los cambios de esquema son un problema independiente."
+      }
+    ],
+    "explicacion": "Los sistemas relacionales suelen crecer incorporando más memoria, procesadores o almacenamiento al mismo servidor. La cátedra remarca que esa vía presenta límites físicos y económicos. Frente a eso, NoSQL propone la escalabilidad horizontal agregando nuevos servidores.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 7 },
+    "tags": ["escalamiento-vertical", "hardware", "costos"]
+  },
+  {
+    "id": "nosql-limites-004",
+    "tema": "nosql",
+    "subtema": "nosql-alcance",
+    "dificultad": "facil",
+    "pregunta": "Un gerente propone migrar todas las bases de la compañía a NoSQL porque 'lo relacional ya quedó viejo'. ¿Qué responde la cátedra frente a esa afirmación?",
+    "opciones": [
+      {
+        "texto": "NoSQL no reemplaza por completo al modelo relacional: ofrece alternativas para ciertos escenarios y la elección depende de los requisitos.",
+        "correcta": true
+      },
+      {
+        "texto": "NoSQL reemplaza al relacional en cuanto la aplicación empieza a crecer en cantidad de usuarios.",
+        "correcta": false,
+        "porque_no": "El curso no fija umbrales de crecimiento; sostiene que la decisión se basa en requisitos funcionales y no funcionales del sistema."
+      },
+      {
+        "texto": "NoSQL es una versión más nueva del modelo relacional, con mejor rendimiento y menos costos.",
+        "correcta": false,
+        "porque_no": "NoSQL es una familia de tecnologías con modelos de datos distintos, no una evolución del modelo relacional."
+      },
+      {
+        "texto": "NoSQL sirve solo para prototipos, porque no ofrece persistencia de datos en producción.",
+        "correcta": false,
+        "porque_no": "Las bases NoSQL son tecnologías de persistencia en producción; lo que cambian son los compromisos de consistencia y de modelado."
+      }
+    ],
+    "explicacion": "La cátedra subraya que NoSQL no pretende reemplazar completamente al modelo relacional. Propone alternativas que resultan más adecuadas para determinados escenarios arquitectónicos. La selección debe considerar requisitos funcionales, no funcionales y restricciones operativas y de negocio.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 3 },
+    "tags": ["nosql", "seleccion", "requisitos"]
+  },
+  {
+    "id": "nosql-motivacion-005",
+    "tema": "nosql",
+    "subtema": "escalabilidad-horizontal",
+    "dificultad": "facil",
+    "pregunta": "El tráfico de una plataforma crece y el equipo decide sumar servidores nuevos en lugar de agrandar el existente. ¿Qué motivación de NoSQL está aplicando?",
+    "opciones": [
+      {
+        "texto": "Escalabilidad horizontal: crecer incorporando nuevos servidores en vez de depender de hardware cada vez más potente y costoso.",
+        "correcta": true
+      },
+      {
+        "texto": "Flexibilidad estructural: permitir cambios de esquema sin migraciones complejas.",
+        "correcta": false,
+        "porque_no": "La flexibilidad estructural se refiere a la evolución del modelo de datos, no a la forma de agregar capacidad de cómputo."
+      },
+      {
+        "texto": "Distribución geográfica: replicar los datos en distintas regiones para reducir la latencia.",
+        "correcta": false,
+        "porque_no": "La distribución geográfica busca acercar los datos a los usuarios; sumar servidores locales es escalado de capacidad."
+      },
+      {
+        "texto": "Rendimiento: optimizar las operaciones para procesar millones de transacciones por segundo.",
+        "correcta": false,
+        "porque_no": "El rendimiento es otro de los objetivos, pero agregar nodos para absorber crecimiento es específicamente escalabilidad horizontal."
+      }
+    ],
+    "explicacion": "Entre las motivaciones fundamentales de NoSQL, la cátedra ubica la escalabilidad horizontal. Consiste en permitir el crecimiento mediante la incorporación de nuevos servidores. Así se evita depender exclusivamente de hardware cada vez más potente y costoso.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 10 },
+    "tags": ["escalabilidad-horizontal", "motivaciones"]
+  },
+  {
+    "id": "nosql-flexibilidad-006",
+    "tema": "nosql",
+    "subtema": "flexibilidad-esquema",
+    "dificultad": "media",
+    "pregunta": "Un equipo aprovecha la flexibilidad de esquema para que cada documento tenga campos distintos y nadie revisa el modelo. ¿Qué riesgo advierte el curso?",
+    "opciones": [
+      {
+        "texto": "Sin restricciones estructurales estrictas pueden aparecer inconsistencias, duplicación de datos y dificultades de mantenimiento.",
+        "correcta": true
+      },
+      {
+        "texto": "El motor deja de persistir los documentos que no respetan un esquema fijo predefinido.",
+        "correcta": false,
+        "porque_no": "Justamente la base documental acepta documentos heterogéneos; el riesgo es de calidad de datos, no de rechazo del motor."
+      },
+      {
+        "texto": "Se pierde la posibilidad de crear índices sobre los campos que varían entre documentos.",
+        "correcta": false,
+        "porque_no": "Se pueden crear índices simples, compuestos o de texto; el problema señalado es la falta de control estructural."
+      },
+      {
+        "texto": "Cada cambio de esquema exige una migración masiva de toda la colección de documentos.",
+        "correcta": false,
+        "porque_no": "La ventaja de la flexibilidad es evitar migraciones masivas; el riesgo que se advierte es la inconsistencia, no la migración."
+      }
+    ],
+    "explicacion": "La flexibilidad reduce el costo de evolución del sistema y facilita los enfoques ágiles, pero también introduce desafíos. La ausencia de restricciones estrictas puede provocar inconsistencias, duplicación de datos o dificultades de mantenimiento. Por eso la flexibilidad no debe interpretarse como ausencia de diseño: exige comprender los patrones de acceso y los requisitos del dominio.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 13 },
+    "tags": ["esquema", "flexibilidad", "riesgos"]
+  },
+  {
+    "id": "nosql-ventajas-007",
+    "tema": "nosql",
+    "subtema": "trade-offs",
+    "dificultad": "dificil",
+    "pregunta": "Un equipo abandona el modelo relacional para ganar escalabilidad y consultas sin JOINs. ¿Qué costo asume según la cátedra?",
+    "opciones": [
+      {
+        "texto": "Suele resignar consistencia fuerte, transacciones complejas e integridad referencial estricta.",
+        "correcta": true
+      },
+      {
+        "texto": "Pierde la capacidad de almacenar datos semiestructurados, como documentos JSON.",
+        "correcta": false,
+        "porque_no": "Al contrario: las bases NoSQL trabajan con datos semiestructurados y no estructurados de forma más natural que las relacionales."
+      },
+      {
+        "texto": "Debe mantener un esquema global centralizado que todos los servicios comparten.",
+        "correcta": false,
+        "porque_no": "La flexibilidad de esquema y la autonomía por servicio son parte de la propuesta NoSQL, no un costo que se asuma."
+      },
+      {
+        "texto": "Renuncia a la replicación y a la recuperación automática frente a fallas de nodos.",
+        "correcta": false,
+        "porque_no": "Muchas tecnologías NoSQL incorporan replicación y recuperación automática como parte de su diseño distribuido."
+      }
+    ],
+    "explicacion": "Las ventajas de NoSQL suelen obtenerse a costa de sacrificar aspectos del modelo relacional. La lista que da la cátedra incluye la consistencia fuerte, las transacciones complejas y la integridad referencial estricta. Por eso la elección entre SQL y NoSQL debe basarse en los requisitos específicos del sistema y no en tendencias tecnológicas.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 15 },
+    "tags": ["trade-offs", "consistencia", "integridad"]
+  },
+  {
+    "id": "nosql-distribuidos-008",
+    "tema": "nosql",
+    "subtema": "sistemas-distribuidos",
+    "dificultad": "facil",
+    "pregunta": "En una arquitectura distribuida cada nodo tiene una visión parcial del sistema. ¿Qué problemas obliga a resolver esa situación?",
+    "opciones": [
+      {
+        "texto": "Replicación de datos, sincronización, consistencia, recuperación ante fallas y balanceo de carga.",
+        "correcta": true
+      },
+      {
+        "texto": "Normalización de tablas, definición de claves foráneas y control de transacciones ACID.",
+        "correcta": false,
+        "porque_no": "Esos son temas del modelo relacional centralizado; la visión parcial de los nodos plantea problemas de coordinación distribuida."
+      },
+      {
+        "texto": "Compilación de microservicios, empaquetado de imágenes y despliegue continuo.",
+        "correcta": false,
+        "porque_no": "Esos son temas de contenerización y CI/CD, no consecuencias de la visión parcial de los nodos."
+      },
+      {
+        "texto": "Diseño de interfaces uniformes y versionado de los recursos de una API.",
+        "correcta": false,
+        "porque_no": "El diseño de APIs REST es otro tema del curso; la visión parcial obliga a resolver replicación, sincronización y consistencia."
+      }
+    ],
+    "explicacion": "A diferencia de un sistema centralizado, en una arquitectura distribuida cada nodo posee una visión parcial del sistema. Eso obliga a resolver replicación de datos, sincronización, consistencia, recuperación ante fallas y balanceo de carga. Muchas tecnologías NoSQL incorporan particionamiento y replicación nativos para afrontar esos desafíos.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 9 },
+    "tags": ["distribuidos", "replicacion", "consistencia"]
+  },
+  {
+    "id": "nosql-cap-009",
+    "tema": "nosql",
+    "subtema": "cap",
+    "dificultad": "facil",
+    "pregunta": "Dentro del teorema CAP, ¿qué significa que un sistema garantice Availability?",
+    "opciones": [
+      {
+        "texto": "Que toda solicitud recibe una respuesta válida, aunque algunos nodos del sistema hayan fallado.",
+        "correcta": true
+      },
+      {
+        "texto": "Que el servicio permanece encendido la mayor parte del tiempo, según una métrica operativa de uptime.",
+        "correcta": false,
+        "porque_no": "Availability en CAP no es una métrica de tiempo encendido: es la garantía de que toda solicitud recibe una respuesta válida pese a la falla de algunos nodos."
+      },
+      {
+        "texto": "Que todos los nodos observan exactamente la misma información al mismo tiempo.",
+        "correcta": false,
+        "porque_no": "Esa es la definición de Consistency, no la de Availability."
+      },
+      {
+        "texto": "Que el sistema sigue operando cuando hay fallas de comunicación entre grupos de nodos.",
+        "correcta": false,
+        "porque_no": "Eso describe Partition Tolerance; Availability se refiere a que cada solicitud obtiene respuesta válida."
+      }
+    ],
+    "explicacion": "En CAP, Availability significa que toda solicitud recibe una respuesta válida aunque algunos nodos hayan fallado. Consistency, en cambio, exige que todos los nodos observen la misma información y que una lectura posterior a una escritura devuelva el valor más reciente. Partition Tolerance es la capacidad de seguir funcionando ante fallas de comunicación entre grupos de nodos.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 16 },
+    "tags": ["cap", "disponibilidad"]
+  },
+  {
+    "id": "nosql-cap-010",
+    "tema": "nosql",
+    "subtema": "cap",
+    "dificultad": "media",
+    "pregunta": "Un colega afirma que 'elegir CP' implica que la base nunca podrá dar disponibilidad total, ni siquiera cuando la red funciona bien. ¿Cómo se corrige esa lectura desde la cátedra?",
+    "opciones": [
+      {
+        "texto": "CAP no obliga a elegir dos propiedades para siempre: el compromiso entre consistencia y disponibilidad aparece durante la partición.",
+        "correcta": true
+      },
+      {
+        "texto": "La lectura es correcta: la propiedad descartada queda inhabilitada de manera permanente en esa base.",
+        "correcta": false,
+        "porque_no": "La cátedra aclara expresamente que el teorema no implica elegir solo dos propiedades de forma permanente, sino comprometer durante la partición."
+      },
+      {
+        "texto": "La lectura es incorrecta porque un sistema distribuido puede garantizar las tres propiedades a la vez, sin excepciones.",
+        "correcta": false,
+        "porque_no": "Cuando ocurre una partición no se pueden garantizar las tres propiedades simultáneamente; lo que cambia es que el compromiso es situacional."
+      },
+      {
+        "texto": "La lectura es correcta si el sistema usa replicación asíncrona, porque esa técnica anula la disponibilidad.",
+        "correcta": false,
+        "porque_no": "La replicación asíncrona prioriza disponibilidad y rendimiento; no anula ninguna de las propiedades del teorema."
+      }
+    ],
+    "explicacion": "En ambientes distribuidos reales las particiones de red son inevitables, por eso los arquitectos deben decidir qué priorizar cuando ocurren. Pero el teorema no implica que una base de datos deba elegir permanentemente solo dos propiedades. Durante una partición será necesario comprometer consistencia o disponibilidad; fuera de ella el sistema puede ofrecer las tres.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 17 },
+    "tags": ["cap", "particion", "compromisos"]
+  },
+  {
+    "id": "nosql-cap-011",
+    "tema": "nosql",
+    "subtema": "cap",
+    "dificultad": "media",
+    "pregunta": "Dos centros de datos quedan incomunicados por un corte de red y el equipo decide mantener la consistencia. ¿Qué consecuencias debe aceptar?",
+    "opciones": [
+      {
+        "texto": "Algunas solicitudes se rechazan o quedan en espera hasta poder garantizar que todos los nodos tengan la misma información.",
+        "correcta": true
+      },
+      {
+        "texto": "Los nodos seguirán respondiendo, pero algunos usuarios verán información desactualizada.",
+        "correcta": false,
+        "porque_no": "Eso corresponde a priorizar la disponibilidad; al mantener la consistencia se prefiere no responder antes que responder con datos viejos."
+      },
+      {
+        "texto": "Los datos dejarán de ser confiables porque se permitirán escrituras divergentes en cada centro de datos.",
+        "correcta": false,
+        "porque_no": "Al priorizar la consistencia se gana confiabilidad de los datos; la divergencia entre nodos es el riesgo del camino opuesto."
+      },
+      {
+        "texto": "La partición se resolverá sola y no hará falta ningún mecanismo de reconciliación posterior.",
+        "correcta": false,
+        "porque_no": "La reconciliación posterior es necesaria cuando se prioriza la disponibilidad; en el camino consistente el sistema espera o rechaza solicitudes."
+      }
+    ],
+    "explicacion": "Con los dos centros de datos incomunicados, mantener la consistencia implica rechazar algunas solicitudes hasta poder garantizar que todos los nodos poseen la misma información. Las consecuencias son menor disponibilidad, mayor confiabilidad de los datos y posibles tiempos de espera. Es el camino clásico de los sistemas que privilegian la corrección por sobre la respuesta inmediata.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 18 },
+    "tags": ["cap", "consistencia", "particion"]
+  },
+  {
+    "id": "nosql-cap-012",
+    "tema": "nosql",
+    "subtema": "cap",
+    "dificultad": "dificil",
+    "pregunta": "Una red social prefiere seguir publicando durante una partición de red aunque algunos usuarios vean información desactualizada. ¿Qué decisión tomó y qué costo asume?",
+    "opciones": [
+      {
+        "texto": "Priorizó la disponibilidad; gana experiencia de usuario pero necesita mecanismos de reconciliación posteriores.",
+        "correcta": true
+      },
+      {
+        "texto": "Priorizó la consistencia; gana confiabilidad de los datos pero rechaza solicitudes durante el corte.",
+        "correcta": false,
+        "porque_no": "La situación descripta es la opuesta: los nodos siguen respondiendo. Rechazar solicitudes es el camino de la consistencia."
+      },
+      {
+        "texto": "Renunció a la tolerancia a particiones; el sistema deja de funcionar hasta que vuelva la red.",
+        "correcta": false,
+        "porque_no": "Seguir respondiendo pese al corte es precisamente tolerar la partición, no renunciar a ella."
+      },
+      {
+        "texto": "Eliminó el teorema CAP aplicando replicación asíncrona entre los nodos del sistema.",
+        "correcta": false,
+        "porque_no": "La replicación asíncrona no elimina el teorema: es el mecanismo que suele acompañar la elección de disponibilidad."
+      }
+    ],
+    "explicacion": "Si cada nodo sigue respondiendo aunque no pueda sincronizarse con los demás, se está priorizando la disponibilidad. Las consecuencias que enumera la cátedra son mejor experiencia de usuario, riesgo de lecturas desactualizadas y necesidad de mecanismos posteriores de reconciliación. Muchos sistemas NoSQL favorecen justamente este camino.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 19 },
+    "tags": ["cap", "disponibilidad", "reconciliacion"]
+  },
+  {
+    "id": "nosql-cap-013",
+    "tema": "nosql",
+    "subtema": "cap",
+    "dificultad": "media",
+    "pregunta": "¿Qué relación plantea el curso entre las bases relacionales tradicionales y los sistemas NoSQL respecto de CAP?",
+    "opciones": [
+      {
+        "texto": "Las relacionales suelen privilegiar la consistencia; muchos NoSQL favorecen disponibilidad y tolerancia a particiones.",
+        "correcta": true
+      },
+      {
+        "texto": "Las dos familias privilegian la consistencia y se diferencian solo en el lenguaje de consulta.",
+        "correcta": false,
+        "porque_no": "La diferencia que señala la cátedra está en qué propiedad priorizan, no en la sintaxis de consulta."
+      },
+      {
+        "texto": "Las relacionales no pueden distribuirse entre regiones y los NoSQL tampoco toleran particiones.",
+        "correcta": false,
+        "porque_no": "Las dos familias pueden distribuirse; lo que cambia es qué propiedad priorizan cuando ocurre una partición."
+      },
+      {
+        "texto": "Los NoSQL garantizan siempre las tres propiedades y las relacionales solo dos de ellas.",
+        "correcta": false,
+        "porque_no": "Ninguna familia puede garantizar las tres propiedades simultáneamente durante una partición de red."
+      }
+    ],
+    "explicacion": "La cátedra contrasta las dos familias en términos de prioridades. Las bases relacionales tradicionales suelen privilegiar la consistencia. Muchos sistemas NoSQL, en cambio, fueron diseñados para favorecer la disponibilidad y la tolerancia a particiones, aceptando para eso consistencia eventual.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 19 },
+    "tags": ["cap", "relacional", "nosql"]
+  },
+  {
+    "id": "nosql-eventual-014",
+    "tema": "nosql",
+    "subtema": "consistencia-eventual",
+    "dificultad": "facil",
+    "pregunta": "Un usuario edita su perfil, el cambio se registra en un nodo y las réplicas lo reciben de forma gradual. ¿Qué describe esa situación?",
+    "opciones": [
+      {
+        "texto": "Consistencia eventual: durante un tiempo conviven versiones distintas y luego todas las réplicas convergen.",
+        "correcta": true
+      },
+      {
+        "texto": "Consistencia fuerte: cualquier lectura posterior devuelve de inmediato el valor más reciente.",
+        "correcta": false,
+        "porque_no": "La consistencia fuerte exige que la lectura posterior a una escritura devuelva el valor nuevo en todos los nodos; el enunciado describe propagación gradual."
+      },
+      {
+        "texto": "Una partición de red que impide de forma definitiva la propagación del cambio.",
+        "correcta": false,
+        "porque_no": "No se describe un corte de comunicación: la actualización llega a las réplicas de forma gradual y todas terminan convergiendo."
+      },
+      {
+        "texto": "Una violación de CAP que obliga a apagar las réplicas que quedaron atrasadas.",
+        "correcta": false,
+        "porque_no": "La consistencia eventual es un modelo de consistencia aceptado, no una falla que obligue a apagar nodos."
+      }
+    ],
+    "explicacion": "La consistencia eventual acepta que distintos nodos contengan versiones diferentes de un mismo dato durante un período limitado. Finalmente todas las réplicas convergen al mismo estado. Ese comportamiento permite reducir latencias, mejorar la disponibilidad e incrementar la capacidad de escalamiento.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 23 },
+    "tags": ["consistencia-eventual", "replicas"]
+  },
+  {
+    "id": "nosql-eventual-015",
+    "tema": "nosql",
+    "subtema": "consistencia-eventual",
+    "dificultad": "dificil",
+    "pregunta": "Un equipo adopta consistencia eventual y detecta que dos réplicas recibieron escrituras simultáneas sobre el mismo registro. ¿Qué debe prever el diseño?",
+    "opciones": [
+      {
+        "texto": "Escenarios de lecturas desactualizadas, escrituras concurrentes y conflictos entre réplicas que requieren resolución.",
+        "correcta": true
+      },
+      {
+        "texto": "Nada en especial: la consistencia eventual garantiza que no existan escrituras concurrentes.",
+        "correcta": false,
+        "porque_no": "Justamente la cátedra advierte que hay que considerar escrituras concurrentes y conflictos entre réplicas."
+      },
+      {
+        "texto": "Basta con leer siempre desde el nodo primario para eliminar la consistencia eventual del sistema.",
+        "correcta": false,
+        "porque_no": "Leer del primario es una configuración posible, pero no elimina el modelo eventual ni resuelve los conflictos ya producidos entre réplicas."
+      },
+      {
+        "texto": "Hay que desactivar la replicación para que los nodos dejen de contradecirse entre sí.",
+        "correcta": false,
+        "porque_no": "La salida es diseñar la resolución de conflictos y elegir variantes de consistencia; desactivar la replicación elimina la alta disponibilidad."
+      }
+    ],
+    "explicacion": "La consistencia eventual también introduce desafíos: una lectura puede devolver información antigua y pueden aparecer escrituras concurrentes y conflictos entre réplicas. Por eso muchos sistemas implementan variantes como read-after-write consistency, session consistency o strong eventual consistency. Comprender esos modelos resulta esencial para diseñar aplicaciones distribuidas confiables.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 24 },
+    "tags": ["consistencia-eventual", "conflictos", "variantes"]
+  },
+  {
+    "id": "nosql-eventual-016",
+    "tema": "nosql",
+    "subtema": "consistencia-eventual",
+    "dificultad": "media",
+    "pregunta": "Una plataforma acepta consistencia eventual para el feed de publicaciones. ¿Qué beneficios obtiene a cambio de ese compromiso?",
+    "opciones": [
+      {
+        "texto": "Reduce latencias, mejora la disponibilidad e incrementa la capacidad de escalamiento.",
+        "correcta": true
+      },
+      {
+        "texto": "Garantiza que todas las lecturas devuelvan la versión más reciente del dato.",
+        "correcta": false,
+        "porque_no": "Eso es lo que se resigna: el modelo eventual admite lecturas que devuelven información antigua."
+      },
+      {
+        "texto": "Simplifica la resolución de conflictos entre escrituras concurrentes.",
+        "correcta": false,
+        "porque_no": "La consistencia eventual agrega ese desafío en lugar de simplificarlo."
+      },
+      {
+        "texto": "Elimina la necesidad de mecanismos de convergencia entre las réplicas.",
+        "correcta": false,
+        "porque_no": "La convergencia sigue siendo necesaria: es la garantía final del modelo eventual."
+      }
+    ],
+    "explicacion": "Aceptar que distintos nodos tengan versiones diferentes durante un lapso permite reducir latencias, mejorar la disponibilidad e incrementar la capacidad de escalamiento. Es el intercambio típico: se gana respuesta rápida y tolerancia a fallas. El costo son lecturas potencialmente desactualizadas y conflictos que hay que resolver.",
+    "fuente": { "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf", "pagina": 23 },
+    "tags": ["consistencia-eventual", "beneficios", "escalabilidad"]
+  },
+  {
+    "id": "nosql-keyval-017",
+    "tema": "nosql",
+    "subtema": "clave-valor",
+    "dificultad": "facil",
+    "pregunta": "Una aplicación necesita recuperar en pocos milisegundos el carrito de un usuario a partir de su identificador. ¿Por qué encaja un modelo clave-valor?",
+    "opciones": [
+      {
+        "texto": "Porque la clave identifica el valor de forma única y permite recuperarlo de manera extremadamente eficiente.",
+        "correcta": true
+      },
+      {
+        "texto": "Porque permite consultar el carrito por cualquier atributo interno que contenga el valor.",
+        "correcta": false,
+        "porque_no": "El modelo no necesita comprender la estructura del valor: recupera por clave. Buscar por atributos internos requiere estructuras adicionales."
+      },
+      {
+        "texto": "Porque garantiza integridad referencial entre el carrito y el resto de las entidades del sistema.",
+        "correcta": false,
+        "porque_no": "El modelo clave-valor no ofrece relaciones complejas ni integridad referencial; esa es una limitación conocida."
+      },
+      {
+        "texto": "Porque permite hacer agregaciones analíticas sobre todos los carritos con una sola consulta.",
+        "correcta": false,
+        "porque_no": "El análisis ad hoc y las búsquedas avanzadas son justamente puntos débiles del modelo clave-valor."
+      }
+    ],
+    "explicacion": "Las bases clave-valor se basan en una asociación directa entre clave y valor. La clave funciona como identificador único y permite recuperar el valor asociado de manera extremadamente eficiente. Esa simplicidad es la que habilita tiempos de respuesta muy bajos.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 4 },
+    "tags": ["clave-valor", "rendimiento"]
+  },
+  {
+    "id": "nosql-keyval-018",
+    "tema": "nosql",
+    "subtema": "clave-valor",
+    "dificultad": "media",
+    "pregunta": "El área de negocio pide reportes que crucen información de usuarios por cualquier combinación de atributos sobre una base clave-valor. ¿Qué problema anticipa el curso?",
+    "opciones": [
+      {
+        "texto": "Que el modelo carece de relaciones complejas y tiene poca flexibilidad para búsquedas avanzadas y análisis ad hoc.",
+        "correcta": true
+      },
+      {
+        "texto": "Que el modelo no soporta claves únicas y obliga a duplicar los registros para identificarlos.",
+        "correcta": false,
+        "porque_no": "La clave es precisamente el identificador único del modelo; la limitación está en las consultas, no en las claves."
+      },
+      {
+        "texto": "Que el modelo exige un esquema rígido y migraciones masivas para agregar campos nuevos.",
+        "correcta": false,
+        "porque_no": "La rigidez de esquema es una limitación del modelo relacional; el clave-valor no impone estructura al valor almacenado."
+      },
+      {
+        "texto": "Que el modelo no puede almacenar valores binarios ni estructuras de datos complejas.",
+        "correcta": false,
+        "porque_no": "El sistema no necesita interpretar el valor y puede almacenar estructuras variadas; el problema es consultarlas."
+      }
+    ],
+    "explicacion": "Entre las desventajas del modelo clave-valor la cátedra menciona la ausencia de relaciones complejas, la dificultad para análisis ad hoc y la poca flexibilidad para búsquedas avanzadas. Recuperar un usuario por correo electrónico, por ejemplo, puede requerir estructuras adicionales. Por eso es ideal para problemas específicos y poco adecuado para analítica compleja.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 7 },
+    "tags": ["clave-valor", "analitica", "limitaciones"]
+  },
+  {
+    "id": "nosql-documental-019",
+    "tema": "nosql",
+    "subtema": "documental",
+    "dificultad": "facil",
+    "pregunta": "Un equipo que programa orientado a objetos sufre al traducir sus entidades a tablas y mantener herramientas ORM. ¿Qué ventaja documental destaca la cátedra?",
+    "opciones": [
+      {
+        "texto": "El documento se alinea con los objetos del lenguaje y reduce el Object-Relational Impedance Mismatch.",
+        "correcta": true
+      },
+      {
+        "texto": "El documento garantiza la integridad referencial automática entre las distintas colecciones.",
+        "correcta": false,
+        "porque_no": "En muchas bases documentales las validaciones de integridad referencial deben implementarse a nivel de aplicación."
+      },
+      {
+        "texto": "El documento elimina por completo la posibilidad de duplicar datos entre colecciones.",
+        "correcta": false,
+        "porque_no": "La tendencia a la desnormalización provoca lo contrario: la misma información puede aparecer replicada en varios documentos."
+      },
+      {
+        "texto": "El documento obliga a definir un esquema global antes de escribir el primer registro.",
+        "correcta": false,
+        "porque_no": "Las bases documentales se caracterizan por la flexibilidad de esquema y la evolución sin migraciones rígidas."
+      }
+    ],
+    "explicacion": "Las bases documentales almacenan documentos autónomos y permiten guardar datos relacionados dentro del mismo documento. Ese enfoque se alinea naturalmente con los objetos de los lenguajes modernos. Como resultado se reduce el Object-Relational Impedance Mismatch que históricamente motivó la aparición de herramientas ORM.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 11 },
+    "tags": ["documental", "orm", "modelado"]
+  },
+  {
+    "id": "nosql-documental-020",
+    "tema": "nosql",
+    "subtema": "documental",
+    "dificultad": "dificil",
+    "pregunta": "Un equipo portó un modelo relacional con claves foráneas a una base documental y asumió que el motor seguiría validando las relaciones. ¿Qué debe corregir?",
+    "opciones": [
+      {
+        "texto": "En muchas bases documentales la integridad referencial no la gestiona el motor: hay que implementarla en la aplicación.",
+        "correcta": true
+      },
+      {
+        "texto": "Debe normalizar todos los documentos para que el motor vuelva a validar las referencias entre colecciones.",
+        "correcta": false,
+        "porque_no": "El motor documental no valida referencias por el hecho de normalizar; esa verificación queda del lado de la aplicación."
+      },
+      {
+        "texto": "Debe definir un esquema rígido de colecciones para habilitar el uso de claves foráneas.",
+        "correcta": false,
+        "porque_no": "La flexibilidad de esquema es una característica del modelo; el problema es que la integridad referencial no es automática."
+      },
+      {
+        "texto": "Debe eliminar los datos embebidos para que las referencias se resuelvan con JOINs del motor.",
+        "correcta": false,
+        "porque_no": "El modelo documental no resuelve las referencias con JOINs; la verificación de integridad debe hacerla la aplicación."
+      }
+    ],
+    "explicacion": "En una base relacional las claves foráneas las gestiona automáticamente el motor. En muchas bases documentales esas validaciones deben implementarse a nivel de aplicación. Si el equipo no lo hace, quedan referencias huérfanas que nadie detecta. A eso se suma el riesgo de inconsistencias cuando la misma información se replica en varios documentos.",
+    "fuente": { "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf", "pagina": 15 },
+    "tags": ["documental", "integridad-referencial", "aplicacion"]
+  }
+]

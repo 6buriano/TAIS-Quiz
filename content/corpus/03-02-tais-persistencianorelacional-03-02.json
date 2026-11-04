@@ -1,0 +1,178 @@
+{
+  "archivo": "03-02-tais-PersistenciaNoRelacional-03-02.pdf",
+  "carpeta": "",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Curso\nTendencias Aplicadas de \nIngenería de Software\nPersistencia de Datos No Relacional \nBases de datos más comunes\nTácticas Posibles de Persistencias\n1"
+    },
+    {
+      "n": 2,
+      "texto": "Clasificación General de las Bases NoSQL\n•\nAunque frecuentemente se habla de NoSQL como una única categoría, \nen realidad se trata de una familia de tecnologías con modelos de datos \nmuy diferentes.\n•\nLas cuatro categorías más relevantes son:\n•\nBases de datos Key-Value\n–\nOptimizadas para accesos extremadamente rápidos mediante \nclaves únicas.\n•\nBases documentales\n–\nOrientadas al almacenamiento de documentos JSON o estructuras \nsemiestructuradas.\n•\nBases Column-Family\n–\nDiseñadas para manejar enormes volúmenes de datos distribuidos.\n2"
+    },
+    {
+      "n": 3,
+      "texto": "Clasificación General de las Bases NoSQL\n• Bases de grafos\n–\nEspecializadas en representar relaciones complejas \nentre entidades.\n• Cada modelo responde a necesidades arquitectónicas \ndistintas.\n• Por este motivo, uno de los errores más comunes consiste en \nseleccionar una base NoSQL únicamente por popularidad sin \nanalizar previamente los patrones de acceso y los requisitos \nde negocio.\n• La comprensión profunda de estos modelos permite aplicar el \nprincipio de \"usar la herramienta adecuada para el problema \nadecuado\".\n3"
+    },
+    {
+      "n": 4,
+      "texto": "Bases de Datos Key-Value\n• Las bases de datos Key-Value representan la forma más \nsencilla de almacenamiento distribuido.\n• Su estructura se basa en una asociación directa:\n–\nClave → Valor\n• La clave funciona como identificador único y permite \nrecuperar el valor asociado de manera extremadamente \neficiente.\n• Ejemplo:\n–\nUsuario:123 → Datos del usuario\n–\nProducto:456 → Datos del producto\n–\nSesion:789 → Información de sesión\n4"
+    },
+    {
+      "n": 5,
+      "texto": "Bases de Datos Key-Value\n• Conceptualmente se asemejan a una tabla hash \ndistribuida.\n• La simplicidad del modelo permite optimizaciones en \ntérminos de rendimiento y escalabilidad.\n• En muchos casos, el sistema no necesita comprender la \nestructura interna del valor almacenado, limitándose a \nrecuperarlo utilizando la clave correspondiente.\n• Esta característica convierte a las bases Key-Value en \nuna excelente opción para aplicaciones que requieren \ntiempos de respuesta extremadamente bajos.\n5"
+    },
+    {
+      "n": 6,
+      "texto": "Ventajas y Desventajas de Key-Value\n• Ventajas, las bases Key-Value destacan por:\n– Simplicidad conceptual.\n– Excelente rendimiento.\n– Escalabilidad horizontal sencilla.\n– Baja latencia.\n– Alta disponibilidad.\n– Implementación eficiente de cachés distribuidas.\n• Muchas aplicaciones pueden procesar millones de \noperaciones por segundo utilizando este modelo.\n6"
+    },
+    {
+      "n": 7,
+      "texto": "Características, Ventajas y Desventajas de \nKey-Value\n• Desventajas, no obstante, presentan limitaciones \nimportantes:\n– Ausencia de relaciones complejas.\n– Dificultad para realizar análisis ad hoc.\n– Poca flexibilidad para búsquedas avanzadas.\n• Por ejemplo, si un sistema almacena usuarios mediante \nidentificadores únicos, recuperar un usuario por correo \nelectrónico podría requerir estructuras adicionales.\n• Estas restricciones hacen que las bases Key-Value sean \nideales para algunos problemas muy específicos, pero \npoco adecuadas para aplicaciones analíticas complejas.\n7"
+    },
+    {
+      "n": 8,
+      "texto": "Sistemas Key-Value Representativos\n• Redis es probablemente la base Key-Value más \nconocida del mercado.\n• Sus características incluyen:\n– Almacenamiento en memoria.\n– Replicación.\n– Persistencia opcional.\n– Estructuras de datos avanzadas.\n– Publicación y suscripción.\n8"
+    },
+    {
+      "n": 9,
+      "texto": "Sistemas Key-Value Representativos\n• Se utiliza frecuentemente como:\n– Caché distribuida.\n– Gestor de sesiones.\n– Cola de mensajes.\n– Almacenamiento temporal.\n9"
+    },
+    {
+      "n": 10,
+      "texto": "Bases de Datos Documentales\n•\nLas bases documentales almacenan información en forma de documentos \nautónomos, generalmente utilizando formatos como JSON, BSON o XML.\n•\nA diferencia del modelo relacional, los datos relacionados pueden almacenarse \njuntos dentro del mismo documento.\n•\nEjemplo:\n{\n\"cliente\":\"Juan\",\n\"direccion\": {\n   \n\"ciudad\":\"Montevideo\",\n   \n\"pais\":\"Uruguay\"\n  }\n}\n10"
+    },
+    {
+      "n": 11,
+      "texto": "Bases de Datos Documentales\n• Este enfoque se alinea naturalmente con los objetos \nutilizados en los lenguajes de programación modernos.\n• Como resultado, se reduce el fenómeno conocido como \n\"Object-Relational Impedance Mismatch\", que \nhistóricamente motivó la aparición de herramientas ORM.\n• Desde la perspectiva de la ingeniería de software, las \nbases documentales facilitan el desarrollo de \naplicaciones ágiles y favorecen la evolución rápida de \nmodelos de negocio.\n11"
+    },
+    {
+      "n": 12,
+      "texto": "Ventajas de las Bases Documentales\n• Flexibilidad y adaptación al dominio\n–\nLas bases documentales se han convertido en una de las \ncategorías más populares dentro del universo NoSQL.\n• Entre sus principales ventajas se encuentran:\nFlexibilidad de esquema\n Los documentos pueden evolucionar sin requerir \nmigraciones masivas.\nModelado cercano al dominio\n La estructura de almacenamiento suele reflejar \ndirectamente las entidades utilizadas por la aplicación.\n12"
+    },
+    {
+      "n": 13,
+      "texto": "Ventajas de las Bases Documentales\n• Menor necesidad de JOINs\n La información relacionada puede almacenarse \ndentro del mismo documento.\n• Escalabilidad horizontal\n Muchas plataformas documentales incorporan \nparticionamiento distribuido nativo.\n• Desarrollo más ágil\n La evolución funcional del sistema suele requerir \nmenos cambios en la infraestructura de \npersistencia.\n13"
+    },
+    {
+      "n": 14,
+      "texto": "Desventajas de las Bases Documentales\n• Asimismo, ciertas consultas analíticas complejas pueden \nresultar menos eficientes que en sistemas relacionales \noptimizados.\n• Por esta razón, el diseño documental requiere \ncomprender cuidadosamente los patrones de acceso y \nlas necesidades de consulta del sistema.\n14"
+    },
+    {
+      "n": 15,
+      "texto": "Desventajas de las Bases Documentales\n•\nA pesar de sus ventajas, las bases documentales presentan algunas \nlimitaciones importantes.\n•\nLa más relevante es la tendencia a la desnormalización.\n•\nCuando una misma información aparece replicada en múltiples \ndocumentos:\n–\nAumenta el consumo de almacenamiento.\n–\nSe incrementa la complejidad de actualización.\n–\nPueden aparecer inconsistencias.\n•\nOtro desafío importante es la integridad referencial.\n•\nMientras que en una base relacional las claves foráneas son gestionadas \nautomáticamente por el motor, en muchas bases documentales estas \nvalidaciones deben implementarse a nivel de aplicación.\n15"
+    },
+    {
+      "n": 16,
+      "texto": "Bases de Datos Column-Family\n• Las bases de datos Column-Family (también \ndenominadas Wide Column Stores) fueron diseñadas \npara resolver problemas asociados al almacenamiento y \nprocesamiento de volúmenes masivos de información \ndistribuidos en múltiples servidores.\n• A diferencia del modelo relacional, donde las filas poseen \nuna estructura fija, en una base Column-Family cada \nregistro puede contener diferentes conjuntos de \ncolumnas.\n16"
+    },
+    {
+      "n": 17,
+      "texto": "Bases de Datos Column-Family\n• La organización física de los datos está optimizada para:\n– Escrituras masivas.\n– Consultas por rangos.\n– Procesamiento distribuido.\n– Escalabilidad horizontal.\n• Este modelo resulta especialmente adecuado para \naplicaciones que generan enormes cantidades de \neventos, métricas o registros temporales.\n• Desde una perspectiva arquitectónica, las bases \nColumn-Family se orientan a maximizar el rendimiento.\n17"
+    },
+    {
+      "n": 18,
+      "texto": "Estructura y Modelo de Datos \nColumn-Family\n• En este modelo los datos se estructuran utilizando varios niveles \nde organización.\n• Clave de fila (Row Key)\n–\nIdentifica de manera única cada registro.\n• Familias de columnas\n–\nAgrupan columnas relacionadas funcionalmente.\n• Columnas\n–\nRepresentan atributos específicos asociados a cada fila.\n• Timestamp\n–\nMuchas implementaciones almacenan múltiples versiones \ntemporales de un mismo dato.\n18"
+    },
+    {
+      "n": 19,
+      "texto": "Estructura y Modelo de Datos \nColumn-Family\n• Una diferencia importante respecto a los modelos \nrelacionales es que las columnas pueden variar entre \nregistros.\n• Esta flexibilidad permite optimizar el almacenamiento y \nreducir espacio desperdiciado cuando los datos \npresentan estructuras heterogéneas.\n• Sin embargo, el diseño del esquema requiere una \ncomprensión profunda de los patrones de acceso, ya que \nel rendimiento depende significativamente de cómo se \norganizan las claves y las familias de columnas.\n19"
+    },
+    {
+      "n": 20,
+      "texto": "Ventajas y Desventajas de las Bases \nColumn-Family\n• Ventajas, Las bases Column-Family destacan por:\n– Escalabilidad masiva\n– Pueden distribuir datos entre cientos o miles de \nnodos.\n– Excelente rendimiento de escritura\n– Son capaces de procesar enormes volúmenes de \ninserciones.\n– Alta disponibilidad\n– La replicación distribuida permite tolerar fallos de \nhardware.\n20"
+    },
+    {
+      "n": 21,
+      "texto": "Ventajas y Desventajas de las Bases \nColumn-Family\n• Desventajas\n– Diseño más complejo\n– La modelización requiere comprender los patrones \nde consulta desde el inicio.\n– Menor flexibilidad para consultas ad hoc\n– Las consultas no previstas pueden resultar costosas.\n– Curva de aprendizaje elevada\n• El diseño efectivo exige conocimientos avanzados de \nsistemas distribuidos.\n• Por esta razón, suelen utilizarse en proyectos de gran \nescala donde las ventajas justifican la complejidad \nadicional.\n21"
+    },
+    {
+      "n": 22,
+      "texto": "Bases de Datos de Grafos\n•\nLas bases de datos de grafos representan una aproximación \ncompletamente diferente al almacenamiento de información.\n•\nMientras que los modelos relacionales y documentales se enfocan \nprincipalmente en entidades y atributos, las bases de grafos consideran \nque las relaciones constituyen elementos de primera clase.\n•\nUn grafo está compuesto por:\n–\nNodos: que representan entidades.\n•\nEjemplos:\n–\nPersonas.\n–\nEmpresas.\n–\nProductos.\n–\nDocumentos.\n–\nRelaciones\n22"
+    },
+    {
+      "n": 23,
+      "texto": "Bases de Datos de Grafos\n• Relaciones: conectan nodos, por ejemplo:\n– AMIGO_DE\n– COMPRA\n– SIGUE_A\n– TRABAJA_EN\n– Propiedades\n• Propiedades:Información asociada tanto a nodos como \na relaciones.\n• Este modelo resulta especialmente eficaz cuando las \nconsultas involucran múltiples niveles de relaciones \ncomplejas.\n23"
+    },
+    {
+      "n": 24,
+      "texto": "¿Por qué utilizar una base de grafos?\n• Muchas aplicaciones modernas requieren explorar \nrelaciones profundas entre entidades.\n• Por ejemplo:\n– ¿Qué amigos de mis amigos compraron este \nproducto?\n– ¿Cuál es el camino más corto entre dos personas?\n– ¿Qué dependencias existen entre microservicios?\n• En bases relacionales estas consultas suelen requerir \nmúltiples JOINs recursivos, cuyo costo crece \nrápidamente.\n24"
+    },
+    {
+      "n": 25,
+      "texto": "¿Por qué utilizar una base de grafos?\n• Las bases de grafos almacenan explícitamente las \nrelaciones, permitiendo recorrerlas de forma eficiente.\n• Los modelos de grafos suelen ser valiosos cuando las \nconexiones entre entidades son tan importantes como \nlos datos mismos.\n• Por este motivo se han convertido en una tecnología \nfundamental en áreas como análisis social, logística y \nsistemas de recomendación.\n• Ejemplo: Neo4j\n25"
+    },
+    {
+      "n": 26,
+      "texto": "Táctica Arquitectónica: Desnormalización\n•\nUno de los principios más importantes del diseño NoSQL es la desnormalización.\n•\nEn bases relacionales, la normalización busca eliminar redundancias y evitar \ninconsistencias.\n•\nSin embargo, en sistemas distribuidos las operaciones JOIN pueden convertirse \nen cuellos de botella significativos.\n•\nPor este motivo, muchas soluciones NoSQL optan por almacenar datos \nredundantes.\n•\nEjemplo:\n{\n\"cliente\":\"Juan\",\n\"ciudad\":\"Montevideo\",\n \n\"pais\":\"Uruguay\"\n}\n26"
+    },
+    {
+      "n": 27,
+      "texto": "Táctica Arquitectónica: Denormalización\n• Aunque la ciudad y el país existan en otros registros, se \nalmacenan nuevamente para simplificar las consultas.\n• Beneficios:\n– Menor cantidad de accesos.\n– Consultas más rápidas.\n– Menor dependencia de operaciones distribuidas.\n• Costo:\n– Mayor duplicación.\n– Actualizaciones más complejas.\n• La decisión debe basarse en los patrones reales de \nlectura y escritura del sistema.\n27"
+    },
+    {
+      "n": 28,
+      "texto": "Táctica Arquitectónica: Sharding\n• El sharding consiste en dividir los datos entre múltiples nodos \nindependientes.\n• Por ejemplo:\n–\nShard 1 → Clientes A–F\n–\nShard 2 → Clientes G–M\n–\nShard 3 → Clientes N–Z\n• Cada shard almacena sólo una parte del conjunto total de datos.\n• Beneficios:\n–\nEscalabilidad horizontal\n–\nPermite agregar nuevos nodos a medida que aumenta la \ncarga.\n28"
+    },
+    {
+      "n": 29,
+      "texto": "Táctica Arquitectónica: Sharding\n• Distribución de recursos\n– Reduce la presión sobre un único servidor.\n– Mayor capacidad de almacenamiento\n• El sistema puede crecer prácticamente sin límites \nteóricos.\n• No obstante, seleccionar incorrectamente la clave de \nparticionamiento puede generar problemas de \ndesbalanceo y afectar significativamente el rendimiento.\n29"
+    },
+    {
+      "n": 30,
+      "texto": "Táctica Arquitectónica: Replicación\n• La replicación consiste en mantener múltiples copias de los \nmismos datos en diferentes nodos.\n• Objetivos principales:\n–\nAlta disponibilidad\n–\nSi un nodo falla, otro puede continuar prestando servicio.\n–\nRecuperación ante desastres\n–\nReduce riesgos de pérdida de información.\n–\nBalanceo de lectura\n–\nLas consultas pueden distribuirse entre varias réplicas.\n30"
+    },
+    {
+      "n": 31,
+      "texto": "Táctica Arquitectónica: Replicación\n•\nExisten diversos enfoques:\n•\nReplicación síncrona\n–\nGarantiza consistencia fuerte.\n•\nReplicación asíncrona\n–\nPrioriza disponibilidad y rendimiento.\n•\nLa mayoría de las bases NoSQL utilizan estrategias híbridas para \nequilibrar consistencia, rendimiento y disponibilidad.\n•\nLa replicación es uno de los mecanismos que permiten construir sistemas \nresilientes a gran escala.\n31"
+    },
+    {
+      "n": 32,
+      "texto": "Táctica Arquitectónica: CQRS (Command \nQuery Responsibility Segregation)\n• CQRS (Command Query Responsibility Segregation) es un \npatrón arquitectónico que propone separar explícitamente las \noperaciones que modifican datos de aquellas que los \nconsultan.\n• En un sistema tradicional, una misma estructura de datos \nsuele utilizarse tanto para lectura como para escritura. Sin \nembargo, los requisitos de ambos tipos de operaciones \nsuelen ser diferentes.\n32"
+    },
+    {
+      "n": 33,
+      "texto": "Táctica Arquitectónica: CQRS (Command \nQuery Responsibility Segregation)\n•\nLas escrituras generalmente requieren:\n–\nValidaciones de negocio.\n–\nControl transaccional.\n–\nConsistencia.\n–\nReglas de integridad.\n•\nLas lecturas suelen priorizar:\n–\nRapidez.\n–\nEscalabilidad.\n–\nConsultas complejas.\n–\nAgregaciones.\n•\n33"
+    },
+    {
+      "n": 34,
+      "texto": "Táctica Arquitectónica: CQRS (Command \nQuery Responsibility Segregation)\n• CQRS propone construir modelos distintos para cada necesidad.\n–\nModelo de Comandos Responsable de:\n Crear datos.\n Modificar datos.\n Eliminar datos.\n–\nModelo de Consultas, pptimizado para:\n Búsquedas.\n Reportes.\n Dashboards.\n Consultas analíticas.\n34"
+    },
+    {
+      "n": 35,
+      "texto": "Táctica Arquitectónica: CQRS (Command \nQuery Responsibility Segregation)\n• Esta separación permite utilizar tecnologías diferentes para cada \npropósito.\n• Por ejemplo:\n–\nEscrituras → PostgreSQL\n–\nLecturas → MongoDB\nu otro ejemplo:\n–\nEscrituras → SQL Server\n–\nConsultas → Elasticsearch\n35"
+    },
+    {
+      "n": 36,
+      "texto": "Persistencia Políglota (Polyglot \nPersistence)\n• Utilizando múltiples tecnologías de persistencia\n• Uno de los conceptos más importantes de la arquitectura \nmoderna es que no existe una única tecnología de \npersistencia adecuada para todos los problemas.\n• Polyglot Persistence propone seleccionar la base de \ndatos más adecuada para cada necesidad específica.\n36"
+    },
+    {
+      "n": 37,
+      "texto": "Persistencia Políglota (Polyglot \nPersistence)\n• Cada componente utiliza la tecnología que mejor se adapta a \nsus requisitos.\n• Esta estrategia resulta especialmente frecuente en \narquitecturas de microservicios, donde cada servicio puede \ngestionar su propia persistencia.\n• La persistencia políglota representa una evolución natural \nrespecto al paradigma tradicional de una única base de datos \ncorporativa.\n37"
+    },
+    {
+      "n": 38,
+      "texto": "Consistencia en Sistemas NoSQL\n•\nUno de los cambios conceptuales más importantes al trabajar con NoSQL es \ncomprender que la consistencia puede definirse de múltiples maneras.\n•\nEn sistemas relacionales clásicos predominan las propiedades ACID:\n–\nAtomicity\n Las operaciones se ejecutan completamente o no se ejecutan.\n–\nConsistency\n Las restricciones de integridad siempre se mantienen.\n–\nIsolation\n Las transacciones concurrentes no interfieren incorrectamente.\n–\nDurability\n Los cambios persisten incluso ante fallas.\n38"
+    },
+    {
+      "n": 39,
+      "texto": "Consistencia en Sistemas NoSQL\n• Muchos sistemas NoSQL alivianan algunos de estos \nrequisitos para obtener:\n– Mejor rendimiento.\n– Mayor disponibilidad.\n– Escalabilidad horizontal.\n• La consistencia deja de ser una propiedad absoluta para \nconvertirse en un conjunto de compromisos \ncuidadosamente diseñados.\n39"
+    },
+    {
+      "n": 40,
+      "texto": "NoSQL y Microservicios\n• Una combinación frecuente, la adopción de microservicios impulsó \nsignificativamente el crecimiento de las bases NoSQL.\n• Cada microservicio:\n–\nPosee responsabilidades específicas.\n–\nGestiona su propio ciclo de vida.\n–\nMantiene su propia persistencia.\n• Esto permite seleccionar tecnologías distintas para cada contexto.\n40"
+    },
+    {
+      "n": 41,
+      "texto": "NoSQL y Microservicios\n•\nEjemplo:\n–\nUsuarios → PostgreSQL\n–\nCatálogo → MongoDB\n–\nCaché → Redis\n–\nRecomendaciones → Neo4j\n•\nEsta independencia favorece:\n–\nEscalabilidad.\n–\nDespliegues autónomos.\n–\nEvolución tecnológica.\n•\nLa persistencia políglota se convierte así en una consecuencia natural de las \narquitecturas basadas en microservicios.\n41"
+    },
+    {
+      "n": 42,
+      "texto": "Conclusiones\n•\nLas bases de datos NoSQL surgieron como respuesta a los desafíos de \nescalabilidad, disponibilidad y distribución que caracterizan a las \naplicaciones modernas.\n•\nNoSQL no reemplaza completamente al modelo relacional.\n•\nExisten múltiples familias de bases de datos con objetivos diferentes.\n•\nLos sistemas distribuidos obligan a realizar compromisos entre \nconsistencia y disponibilidad.\n•\nLa elección de la persistencia constituye una decisión arquitectónica \nestratégica.\n42"
+    },
+    {
+      "n": 43,
+      "texto": "Conclusiones\n• Tácticas como sharding, replicación, CQRS permiten construir \nsistemas altamente escalables.\n• La persistencia políglota representa una tendencia dominante en \narquitecturas modernas.\n• Finalmente, una de las enseñanzas más importantes de \nKleppmann y Sommerville es que el éxito de una arquitectura no \ndepende de la tecnología elegida, sino de qué tan bien dicha \ntecnología satisface los requisitos funcionales y no funcionales del \nsistema que se está construyendo.\n43"
+    }
+  ]
+}

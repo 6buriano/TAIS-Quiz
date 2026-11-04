@@ -1,0 +1,194 @@
+[
+  {
+    "id": "rest-dev-estilo-001",
+    "tema": "rest",
+    "subtema": "estilo",
+    "dificultad": "media",
+    "pregunta": "Explicá por qué REST se considera un estilo arquitectónico y no un protocolo, y qué consecuencias prácticas tiene esa distinción a la hora de diseñar una API.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Define REST como estilo arquitectónico de restricciones propuesto por Roy Fielding, no como protocolo ni tecnología",
+        "peso": 0.35,
+        "claves": ["estilo arquitectonico", "roy fielding", "conjunto de restricciones", "no es un protocolo", "no es una tecnologia", "forma de disenar apis"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Explica que REST se apoya en la infraestructura existente (HTTP, URIs, códigos de estado, caché) en lugar de crear un protocolo propio",
+        "peso": 0.35,
+        "claves": ["usa http", "aprovecha http", "infraestructura existente", "uris", "codigos de estado", "no define un protocolo nuevo"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Deriva una consecuencia de diseño: no hay que instalar una tecnología y la calidad se juzga por el cumplimiento de las restricciones",
+        "peso": 0.3,
+        "claves": ["no requiere instalar", "cumplir restricciones", "reglas simples", "organizar la comunicacion", "http de manera consistente", "no es una libreria"]
+      }
+    ],
+    "respuesta_modelo": "REST es un estilo arquitectónico propuesto por Roy Fielding en 2000 para sistemas distribuidos, y consiste en un conjunto de restricciones, no en un protocolo ni en una tecnología. Eso significa que no hay que instalar nada para hacer una API REST: se trata de una forma de diseñar la comunicación. En cambio, se apoya en la infraestructura que ya existe en Internet: HTTP, las URIs, los códigos de estado y la caché. La consecuencia práctica es que una API se evalúa por cuánto respeta esas restricciones y por el uso ordenado y consistente de HTTP, no por la herramienta con la que se implementó. Por eso dos equipos con lenguajes y frameworks distintos pueden producir APIs REST igualmente válidas.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 3 },
+    "tiempo_sugerido_min": 5,
+    "tags": ["rest", "estilo", "arquitectura"]
+  },
+  {
+    "id": "rest-dev-stateless-002",
+    "tema": "rest",
+    "subtema": "stateless",
+    "dificultad": "media",
+    "pregunta": "Un equipo espera atender picos de tráfico agregando instancias de su API. Explicá por qué la restricción stateless facilita ese escalado y qué costo introduce la decisión.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Define stateless: cada solicitud contiene toda la información necesaria y el servidor no mantiene contexto de sesión",
+        "peso": 0.35,
+        "claves": ["no guarda estado", "no mantiene estado de sesion", "toda la informacion necesaria", "sin contexto de sesion", "cada request es independiente"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Relaciona stateless con el escalado horizontal y el balanceo de carga entre instancias equivalentes",
+        "peso": 0.35,
+        "claves": ["cualquier instancia", "escalabilidad horizontal", "balanceo de carga", "no requiere afinidad de sesion", "agregar instancias", "tolerancia a fallos"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Menciona el costo o trade-off: más datos por solicitud o estado trasladado al cliente con su validación",
+        "peso": 0.3,
+        "claves": ["mayor volumen de datos", "mas datos en cada request", "estado en el cliente", "token", "crece el payload"]
+      }
+    ],
+    "respuesta_modelo": "Una API es stateless cuando cada solicitud contiene toda la información necesaria para procesarla y el servidor no conserva contexto de sesión entre peticiones. Por eso cualquier instancia puede atender cualquier solicitud: no hace falta afinidad de sesión ni replicar estado, el balanceador reparte la carga y se pueden agregar o quitar instancias sin coordinación. El material agrega que también mejora la tolerancia a fallos y simplifica el balanceo de carga. El costo es que la información de contexto viaja en cada petición, lo que aumenta el volumen de datos transmitidos. Además, si el estado se traslada al cliente en forma de token, hay que resolver su firma, su vencimiento y su revocación.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 7 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["rest", "stateless", "escalabilidad"]
+  },
+  {
+    "id": "rest-dev-recurso-003",
+    "tema": "rest",
+    "subtema": "recursos",
+    "dificultad": "media",
+    "pregunta": "Explicá la diferencia entre un recurso y su representación en REST y por qué la URI debe identificar al recurso y no a la operación.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Define el recurso como concepto abstracto del dominio, con identidad, atributos y relaciones",
+        "peso": 0.35,
+        "claves": ["concepto abstracto", "entidad del negocio", "identidad unica", "atributos", "relaciones", "existe independientemente"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Define la representación como la forma concreta en que el recurso viaja al cliente, por ejemplo JSON, XML o YAML",
+        "peso": 0.35,
+        "claves": ["forma concreta", "representacion json", "xml", "yaml", "cambia el formato", "el recurso no cambia"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Justifica que la URI identifica al recurso y que la acción la aporta el método HTTP, no la ruta",
+        "peso": 0.3,
+        "claves": ["identifican recursos", "no operaciones", "el metodo expresa la accion", "sin verbos en la uri", "uri unica y permanente"]
+      }
+    ],
+    "respuesta_modelo": "El recurso es un concepto abstracto del dominio, como el pedido 1001, con identidad única, atributos y relaciones, y existe independientemente de cómo se lo transmita. La representación es la forma concreta en que ese recurso se envía al cliente, por ejemplo un documento JSON, XML o YAML: puede cambiar el formato sin que el recurso cambie. Por eso la URI identifica al recurso y no a la operación: /orders/1001 nombra al pedido, mientras que la acción la aporta el método HTTP. Si la ruta incluyera el verbo, como /getOrder, cada operación nueva obligaría a inventar una URI y se perdería la idea de identidad permanente. Además, la restricción de interfaz uniforme y la consistencia entre recursos dependen de que todas las URIs sigan el mismo criterio.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 40 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["rest", "recursos", "representacion"]
+  },
+  {
+    "id": "rest-dev-contrato-004",
+    "tema": "rest",
+    "subtema": "microservicios",
+    "dificultad": "media",
+    "pregunta": "En una arquitectura de microservicios, explicá por qué el material afirma que la API es el contrato formal del servicio y no un detalle de implementación, y qué consecuencias arquitectónicas tiene equivocarse en ese contrato.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Define la API como contrato formal y frontera entre sistemas, que declara recursos, operaciones, formato y reglas de acceso",
+        "peso": 0.3,
+        "claves": ["contrato formal", "frontera entre sistemas", "no es un detalle de implementacion", "que recursos ofrece", "que operaciones", "reglas de acceso"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Explica que la arquitectura emerge de las interacciones entre APIs y que el sistema queda como una red de contratos",
+        "peso": 0.4,
+        "claves": ["red de contratos", "la arquitectura emerge", "interacciones entre apis", "comportamiento global", "disenar apis es disenar el sistema"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Deriva consecuencias: los errores de API se vuelven problemas arquitectónicos, aparece acoplamiento y se pierde independencia",
+        "peso": 0.3,
+        "claves": ["problemas arquitectonicos", "acoplamiento entre servicios", "distributed monolith", "obliga a modificar varios servicios", "pierde independencia"]
+      }
+    ],
+    "respuesta_modelo": "En microservicios la API no es un detalle de implementación: es el contrato formal del servicio y la frontera entre sistemas independientes, porque declara qué recursos ofrece, qué operaciones admite, qué formato de datos usa y qué reglas de acceso aplica. El material sostiene que la arquitectura emerge de las interacciones entre APIs, de modo que el sistema termina siendo una red de contratos. Por eso el diseño de las APIs define el comportamiento global y un error de contrato se convierte en un problema arquitectónico, no en una falla local del servicio. Cuando muchos servicios dependen del mismo endpoint, cuando un cambio obliga a modificar varios o cuando se depende de la estructura de datos ajena, aparece el acoplamiento y con él un distributed monolith. En ese punto los servicios parecen independientes pero no lo son, y se pierde justamente el objetivo de la arquitectura.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 37 },
+    "tiempo_sugerido_min": 7,
+    "tags": ["rest", "microservicios", "contrato"]
+  },
+  {
+    "id": "rest-dev-uri-005",
+    "tema": "rest",
+    "subtema": "uri",
+    "dificultad": "dificil",
+    "pregunta": "Justificá por qué el material recomienda sustantivos en plural y no verbos en las URIs, y aplicá el criterio para listar las facturas de un cliente y consultar una factura puntual.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Explica que las URIs identifican recursos y no acciones, y que la acción la expresa el método HTTP",
+        "peso": 0.35,
+        "claves": ["identifican recursos", "no operaciones", "el verbo lo aporta el metodo", "get consulta", "post crea", "delete elimina"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Propone URIs concretas y consistentes: colección en plural y jerarquía para la relación, con el identificador de la factura puntual",
+        "peso": 0.35,
+        "claves": ["customers 123 invoices", "invoices 9001", "sustantivo en plural", "jerarquia", "anidar la coleccion", "coleccion de recursos"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Justifica el beneficio de la convención: coherencia, facilidad de adopción y menor costo de integración",
+        "peso": 0.3,
+        "claves": ["consistencia", "convenciones homogeneas", "facilidad de adopcion", "menor costo de integracion", "claridad para el cliente"]
+      }
+    ],
+    "respuesta_modelo": "El material insiste en que las URIs identifican recursos y no operaciones, porque la operación ya la expresa el método HTTP aplicado sobre ese recurso. Por eso conviene nombrar los recursos con sustantivos en plural, como /customers, /products o /orders, y evitar verbos en la ruta como /getCustomerOrders. Cuando dos recursos se relacionan, la colección dependiente se anida debajo del recurso dueño y la jerarquía refleja la estructura lógica del dominio. Con ese criterio, para listar las facturas de un cliente se usa GET /customers/123/invoices, y para consultar una factura puntual se usa GET /invoices/9001. La ventaja es la coherencia: el mismo estilo para toda la API facilita la adopción y reduce el costo de integración para los clientes.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 9 },
+    "tiempo_sugerido_min": 7,
+    "tags": ["rest", "uri", "diseno"]
+  },
+  {
+    "id": "rest-dev-openapi-006",
+    "tema": "rest",
+    "subtema": "openapi",
+    "dificultad": "media",
+    "pregunta": "Explicá qué es OpenAPI, qué información incluye una especificación de API y qué problemas evita contar con ese documento antes de implementar el servicio.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Define OpenAPI como estándar para describir APIs REST en un formato estructurado como YAML o JSON",
+        "peso": 0.3,
+        "claves": ["estandar", "describir apis rest", "yaml", "json", "formato estructurado"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Enumera los componentes del contrato: endpoints, métodos, parámetros, request body, responses y códigos HTTP",
+        "peso": 0.35,
+        "claves": ["endpoints", "metodos http", "query params", "path params", "request body", "responses", "codigos http"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Explica los beneficios: documentación, mocks, pruebas automáticas, validación de contratos y desarrollo en paralelo",
+        "peso": 0.2,
+        "claves": ["generar documentacion", "mocks", "pruebas automaticas", "validar contratos", "desarrollo en paralelo", "reduce la deuda tecnica"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Menciona el problema que evita: cada equipo interpreta distinto, errores de integración y documentación desactualizada",
+        "peso": 0.15,
+        "claves": ["cada equipo interpreta distinto", "errores de integracion", "documentacion desactualizada", "ambiguedad", "contrato entre sistemas"]
+      }
+    ],
+    "respuesta_modelo": "OpenAPI es un estándar para describir APIs REST en un formato estructurado, ya sea YAML o JSON. La especificación funciona como contrato entre sistemas porque describe qué hace la API, cómo se usa, qué datos recibe y qué devuelve. Incluye los endpoints disponibles, los métodos HTTP de cada uno, los parámetros de query y de path, el request body y las responses con su formato y sus códigos. A partir de ese documento se puede generar documentación, generar mocks, ejecutar pruebas automáticas y validar contratos, lo que reduce la deuda técnica de las integraciones. Sin especificación cada equipo interpreta la API a su manera y aparecen errores de integración y documentación desactualizada; con especificación todos entienden lo mismo, se puede automatizar el desarrollo y baja la ambigüedad.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 17 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["rest", "openapi", "documentacion"]
+  }
+]

@@ -1,0 +1,250 @@
+[
+  {
+    "id": "asinc-dev-001",
+    "tema": "asincronia",
+    "subtema": "modelo-sincrono-vs-asincrono",
+    "dificultad": "facil",
+    "pregunta": "Explicá la diferencia entre el modelo de ejecución síncrono y el asincrónico, y qué problema de rendimiento resuelve el segundo en operaciones de entrada y salida.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Describe el modelo síncrono como bloqueante: el hilo espera el resultado antes de continuar",
+        "peso": 0.35,
+        "claves": [
+          "el hilo queda bloqueado",
+          "espera la respuesta",
+          "bloquea el hilo",
+          "no atiende otras solicitudes",
+          "ejecucion secuencial"
+        ]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Explica el modelo asincrónico: se delega la operación y el hilo sigue con otras tareas hasta recibir la notificación",
+        "peso": 0.35,
+        "claves": [
+          "delega en un componente externo",
+          "continua ejecutando otras tareas",
+          "no bloquea el flujo principal",
+          "recibe el resultado despues",
+          "evento o callback"
+        ]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Identifica el problema de rendimiento: espera improductiva, uso ineficiente de recursos y baja escalabilidad bajo carga",
+        "peso": 0.3,
+        "claves": [
+          "espera improductiva",
+          "desperdicia el hilo",
+          "uso ineficiente de recursos",
+          "baja escalabilidad",
+          "cuello de botella",
+          "mayor latencia percibida"
+        ]
+      }
+    ],
+    "respuesta_modelo": "En el modelo síncrono cada operación bloquea el hilo de ejecución hasta completar su tarea: el servidor lanza la consulta a la base y espera. Durante esa espera el hilo no puede atender otras solicitudes, así que bajo carga la capacidad del sistema se agota. El modelo asincrónico delega la operación a un componente externo y el hilo principal continúa ejecutando otras tareas hasta que recibe el resultado como evento, callback o mensaje. El problema de rendimiento que resuelve es la espera improductiva: el CPU deja de estar ocioso mientras se espera la entrada y salida, lo que reduce el cuello de botella, mejora la escalabilidad bajo carga y evita la mayor latencia percibida. Lo que no cambia es la latencia propia de la operación de entrada y salida.",
+    "fuente": { "archivo": "05-01-ProgAsincronica-05-01.pdf", "pagina": 4 },
+    "tiempo_sugerido_min": 5,
+    "tags": ["asincronia", "modelo-ejecucion", "bloqueo"]
+  },
+  {
+    "id": "asinc-dev-002",
+    "tema": "asincronia",
+    "subtema": "acoplamiento-temporal",
+    "dificultad": "media",
+    "pregunta": "Explicá qué es el acoplamiento temporal entre dos servicios, por qué la mensajería asincrónica lo reduce y qué dependencia sigue existiendo aunque se use un broker.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Define acoplamiento temporal: exige que ambos componentes estén activos al mismo tiempo para comunicarse",
+        "peso": 0.35,
+        "claves": [
+          "deben estar activos al mismo tiempo",
+          "simultaneidad",
+          "dependencia temporal",
+          "espera la respuesta del otro"
+        ]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Explica cómo la mensajería lo rompe: el productor publica y continúa, el consumidor procesa cuando puede",
+        "peso": 0.35,
+        "claves": [
+          "envia el mensaje y continua",
+          "procesa cuando puede",
+          "no espera la respuesta",
+          "desacopla temporalmente",
+          "broker intermediario"
+        ]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Reconoce la dependencia que persiste: el resultado se necesita en algún momento y alguien debe procesar el mensaje",
+        "peso": 0.3,
+        "claves": [
+          "sigue necesitando el resultado",
+          "tarde o temprano",
+          "dependencia de negocio",
+          "no elimina la dependencia",
+          "alguien debe procesar el mensaje"
+        ]
+      }
+    ],
+    "respuesta_modelo": "El acoplamiento temporal aparece cuando dos componentes deben estar activos al mismo tiempo para comunicarse: A envía una solicitud y necesita la respuesta de B para continuar. Si B falla o está lento, A también se degrada, porque su avance depende de esa respuesta. La mensajería rompe esa dependencia estricta: A publica el mensaje en un broker y sigue su ejecución, y B lo procesa cuando puede. Aun así, la dependencia de negocio persiste: tarde o temprano alguien tiene que consumir el mensaje y producir el resultado que A esperaba. Lo que cambia es el momento y el ritmo del intercambio, no la necesidad del resultado.",
+    "fuente": { "archivo": "05-01-ProgAsincronica-05-01.pdf", "pagina": 7 },
+    "tiempo_sugerido_min": 5,
+    "tags": ["asincronia", "acoplamiento", "mensajeria"]
+  },
+  {
+    "id": "asinc-dev-003",
+    "tema": "asincronia",
+    "subtema": "canales-vs-pubsub",
+    "dificultad": "media",
+    "pregunta": "Se necesita que inventario, facturación y notificaciones reaccionen a la misma orden creada. Compará el patrón de canales con pub/sub, justificá cuál conviene y qué se pierde con la alternativa descartada.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Define canal: cola de trabajo donde cada mensaje lo procesa un solo consumidor",
+        "peso": 0.3,
+        "claves": [
+          "un solo consumidor",
+          "un consumidor por mensaje",
+          "cola de trabajo",
+          "se reparte entre workers",
+          "orden fifo"
+        ]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Define pub/sub: varios suscriptores reciben el mismo evento según el tema",
+        "peso": 0.3,
+        "claves": [
+          "multiples consumidores",
+          "todos los suscriptores",
+          "mismo evento",
+          "suscripcion a un topico",
+          "el publicador no conoce a los consumidores"
+        ]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Justifica pub/sub para el caso y explica que con un canal solo uno de los servicios se enteraría",
+        "peso": 0.4,
+        "claves": [
+          "los tres deben recibir",
+          "solo uno lo procesaria",
+          "se perderia el evento para los demas",
+          "no alcanza un canal",
+          "acoplamiento bajo"
+        ]
+      }
+    ],
+    "respuesta_modelo": "Un canal es una cola de trabajo: cada mensaje lo procesa un único consumidor, que puede ser cualquiera de los workers disponibles. Pub/sub, en cambio, entrega el mismo evento a todos los consumidores suscriptos al tema, sin que el publicador sepa quiénes son. Para el caso planteado conviene pub/sub, porque los tres servicios tienen que reaccionar a la misma orden y con un canal solo uno de ellos la recibiría. Si se insistiera con canales habría que armar uno por servicio, con lo que el productor pasaría a conocer a cada destinatario y se perdería el desacoplamiento. La tabla del material resume la diferencia: cola con acoplamiento medio para procesar tareas, evento con acoplamiento bajo para sistemas de eventos.",
+    "fuente": { "archivo": "05-01-ProgAsincronica-05-01.pdf", "pagina": 14 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["asincronia", "pubsub", "canales"]
+  },
+  {
+    "id": "asinc-dev-004",
+    "tema": "asincronia",
+    "subtema": "colas-consistencia",
+    "dificultad": "dificil",
+    "pregunta": "Un sistema de pagos quiere reemplazar sus llamadas síncronas por una cola con workers para escalar. Explicá los beneficios y los riesgos que introduce en consistencia y confiabilidad, y qué garantías habría que exigirle al broker.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Beneficios: absorción de picos, desacoplamiento temporal y workers que escalan de forma independiente",
+        "peso": 0.3,
+        "claves": [
+          "absorbe picos",
+          "buffer",
+          "desacopla",
+          "escala con workers",
+          "no bloquea la aplicacion principal"
+        ]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Riesgo de consistencia: la respuesta ya no confirma el pago, quedan estados intermedios y hay que reconciliar",
+        "peso": 0.35,
+        "claves": [
+          "queda pendiente",
+          "no confirma el pago",
+          "estado intermedio",
+          "consistencia eventual",
+          "reconciliar",
+          "ventana de tiempo"
+        ]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Riesgo de confiabilidad: pérdida o duplicación de mensajes y necesidad de persistencia, ACK y reintentos",
+        "peso": 0.35,
+        "claves": [
+          "perdida de mensajes",
+          "procesar dos veces",
+          "persistencia del broker",
+          "ack",
+          "reintentos",
+          "duplicados"
+        ]
+      }
+    ],
+    "respuesta_modelo": "Con una cola, el servicio de pagos responde sin esperar el procesamiento y los workers escalan de forma independiente, de modo que la cola absorbe los picos de demanda y desacopla temporalmente a los servicios. El riesgo de consistencia es que la respuesta al cliente ya no confirma el pago: entre el encolado y el registro hay una ventana en la que la operación está pendiente, aparecen estados intermedios y hace falta reconciliar. El riesgo de confiabilidad es que un mensaje se pierda o se procese dos veces, sobre todo si el worker falla después de cobrar y antes de confirmar. Por eso hay que exigirle al broker persistencia durable de los mensajes, confirmación explícita del consumidor y políticas de reintento. La decisión mejora la escalabilidad y permite seguir operando si un consumidor está caído, pero traslada el problema a la consistencia del proceso de pago.",
+    "fuente": { "archivo": "05-01-ProgAsincronica-05-01.pdf", "pagina": 10 },
+    "tiempo_sugerido_min": 8,
+    "tags": ["asincronia", "colas", "consistencia", "confiabilidad"]
+  },
+  {
+    "id": "asinc-dev-005",
+    "tema": "asincronia",
+    "subtema": "control-de-flujo",
+    "dificultad": "dificil",
+    "pregunta": "Explicá cómo un canal funciona como buffer y mecanismo de control de flujo frente a un pico de carga, y qué ocurre si la producción supera de forma sostenida la capacidad de los consumidores.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Explica el buffer: el canal retiene los mensajes y desacopla el ritmo del productor del ritmo del consumidor",
+        "peso": 0.3,
+        "claves": [
+          "retiene mensajes",
+          "buffer",
+          "ritmos distintos",
+          "no espera al consumidor",
+          "cola intermedia"
+        ]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Explica la absorción del pico: la aplicación principal sigue respondiendo y los consumidores procesan a su ritmo",
+        "peso": 0.35,
+        "claves": [
+          "absorbe picos",
+          "no sobrecarga a los consumidores",
+          "no bloquea la aplicacion principal",
+          "procesan a su propio ritmo",
+          "control de flujo"
+        ]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Analiza el caso sostenido: la cola crece, aumenta la latencia de procesamiento y hay que escalar consumidores o acotar la entrada",
+        "peso": 0.35,
+        "claves": [
+          "la cola crece",
+          "backlog",
+          "aumenta la latencia",
+          "escalar los workers",
+          "limitar la produccion",
+          "rechazar mensajes"
+        ]
+      }
+    ],
+    "respuesta_modelo": "El canal actúa como cola o buffer entre productor y consumidor: el productor deposita el mensaje y sigue, y el consumidor lo retira a su propio ritmo. Frente a un pico, esa capacidad de retención absorbe la demanda extra sin sobrecargar a los consumidores ni bloquear a la aplicación principal. El material lo resume como control de flujo y buffer de mensajes, y es lo que permite manejar grandes volúmenes sin degradar la aplicación que produce. Si la producción supera de forma sostenida la capacidad de los consumidores, el buffer deja de alcanzar: la cola crece, la latencia de procesamiento aumenta y el pico se convierte en atraso permanente. En ese punto hay que escalar los workers o acotar la entrada, porque el canal amortigua la diferencia de ritmos, no la resuelve.",
+    "fuente": { "archivo": "05-01-ProgAsincronica-05-01.pdf", "pagina": 10 },
+    "tiempo_sugerido_min": 7,
+    "tags": ["asincronia", "canales", "control-de-flujo"]
+  }
+]

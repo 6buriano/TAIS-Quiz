@@ -1,0 +1,193 @@
+[
+  {
+    "id": "arq-est-dev-001",
+    "tema": "arquitectura",
+    "subtema": "capas",
+    "dificultad": "media",
+    "pregunta": "Un equipo debe decidir si estructura en capas jerárquicas un sistema de gestión de pedidos que va a cambiar seguido. Explicá cómo organiza el sistema ese estilo, qué ventajas aporta y qué dos dificultades advierten las diapositivas, y justificá si lo adoptarías.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Describe la organización en capas: cada capa provee servicios a las superiores y requiere servicios de las inferiores",
+        "peso": 0.25,
+        "claves": ["organiza el sistema en capas", "cada capa provee servicios", "requiere servicios de las capas inferiores", "niveles de abstraccion", "servicios a las capas superiores"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Menciona las ventajas del estilo: comprensión, mantenimiento, reutilización y portabilidad",
+        "peso": 0.3,
+        "claves": ["facilita la comprension", "facilita el mantenimiento", "facilita la reutilizacion", "facilita la portabilidad", "mas facil de mantener"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Señala las dos dificultades: estructurar e identificar niveles de abstracción desde los requisitos, y el impacto en desempeño por interpretar comandos en varios niveles",
+        "peso": 0.3,
+        "claves": ["no es facil estructurar en capas", "identificar los niveles de abstraccion", "depende de los requisitos", "afecta el desempeno", "interpretacion de comandos en multiples niveles"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Justifica la decisión para un sistema que cambia seguido y propone ajustes o refinamientos",
+        "peso": 0.15,
+        "claves": ["prioriza la mantenibilidad", "conviene como punto de partida", "refinar con criterios de diseno", "capas relajadas", "revisar el desempeno", "ajustar el numero de capas"]
+      }
+    ],
+    "respuesta_modelo": "El estilo de capas jerárquicas organiza el sistema en niveles: cada capa ofrece un conjunto de servicios a las capas superiores y consume servicios de las inferiores. Sus ventajas son que facilita la comprensión, el mantenimiento, la reutilización y la portabilidad, lo que encaja con un sistema que cambia seguido. Las dificultades son que no siempre resulta fácil estructurar el sistema en capas ni identificar los niveles de abstracción a partir de los requisitos, y que la interpretación de comandos en múltiples niveles puede afectar el desempeño. Por eso lo adoptaría como punto de partida, con capas coherentes y un número de capas ajustado al caso. Si la latencia resulta crítica, revisaría el esquema o admitiría un modelo relajado en los puntos necesarios.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 30 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["capas", "mantenibilidad", "seleccion"]
+  },
+  {
+    "id": "arq-est-dev-002",
+    "tema": "arquitectura",
+    "subtema": "microservicios",
+    "dificultad": "media",
+    "pregunta": "Una plataforma de streaming necesita escalar de forma independiente sus componentes de video, autenticación, recomendaciones y pagos. Explicá qué estilo elegirías, por qué permite ese escalado y qué exige del proceso de desarrollo según las diapositivas.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Define microservicios como un sistema complejo modelado como unidades desplegadas individualmente",
+        "peso": 0.3,
+        "claves": ["unidades desplegadas individualmente", "conjunto de unidades desplegables", "sistema modelado como servicios", "despliegue independiente"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Relaciona el despliegue individual con el escalado autónomo de cada capacidad del negocio",
+        "peso": 0.3,
+        "claves": ["escalar cada componente por separado", "escalado independiente", "no replicar toda la aplicacion", "cada unidad escala segun su demanda", "escalar video y pagos por separado"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Explica que el estilo favorece pipelines de CI/CD y el despliegue continuo de cada unidad",
+        "peso": 0.25,
+        "claves": ["pipelines de ci cd", "integracion y despliegue continuo", "desplegar cada unidad", "automatizar el despliegue"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Ubica a microservicios como evolución que combina conceptos de monolito y SOA aplicando REST",
+        "peso": 0.15,
+        "claves": ["evolucion del monolito y soa", "combina monolito y soa", "aplica rest", "hereda conceptos de soa"]
+      }
+    ],
+    "respuesta_modelo": "Elegiría microservicios, que las diapositivas definen como un sistema complejo modelado como un conjunto de unidades desplegadas individualmente. Como cada unidad se despliega por su cuenta, video, autenticación, recomendaciones y pagos pueden escalarse según su propia demanda sin replicar toda la aplicación. Esa misma independencia favorece los pipelines de CI/CD, porque cada unidad se construye y despliega por separado. El material ubica al estilo como una evolución que combina conceptos de la arquitectura monolítica y de SOA, aplicando REST. La contrapartida es que el equipo debe sostener la operación de varias unidades desplegables en lugar de una sola.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 57 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["microservicios", "escalabilidad", "despliegue"]
+  },
+  {
+    "id": "arq-est-dev-003",
+    "tema": "arquitectura",
+    "subtema": "documentacion",
+    "dificultad": "dificil",
+    "pregunta": "Un arquitecto debe documentar la arquitectura de un sistema nuevo. Explicá para quién escribe, qué contenidos debe incluir según las diapositivas y por qué conviene dejar registradas las alternativas consideradas y descartadas.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Identifica los destinatarios: interesados, equipo que construye y equipos que mantienen y evolucionan el sistema",
+        "peso": 0.25,
+        "claves": ["interesados", "equipo que construye", "equipos que mantienen y evolucionan", "escribir para destinatarios concretos", "audiencia"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Incluye atributos de calidad y la justificación de las decisiones con patrones o estilos y tácticas activadas",
+        "peso": 0.3,
+        "claves": ["atributos de calidad", "justificacion de las decisiones", "patrones y estilos aplicados", "tacticas activadas", "por que se eligio"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Explica el valor de registrar las alternativas consideradas y descartadas y el balance entre ellas",
+        "peso": 0.3,
+        "claves": ["alternativas consideradas y descartadas", "balance entre alternativas", "por que se descarto", "decisiones y contexto", "evitar revisar lo ya evaluado"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Menciona las vistas, su relación y la variabilidad prevista para la implementación o evolución",
+        "peso": 0.15,
+        "claves": ["descripcion de vistas", "relacion entre las vistas", "variabilidad posible", "vistas desde distintas perspectivas", "modelo 4+1"]
+      }
+    ],
+    "respuesta_modelo": "La documentación se escribe para destinatarios concretos: los interesados que deben entender el impacto de la arquitectura, el equipo que construye el sistema y los equipos que lo mantienen y evolucionan. Debe incluir contexto, decisiones, el balance entre alternativas y la descripción de vistas que capturen aspectos relevantes desde distintas perspectivas. Además de los atributos de calidad, corresponde justificar las decisiones indicando patrones o estilos aplicados y tácticas activadas. Registrar las alternativas consideradas y descartadas evita que futuros equipos repitan el análisis y deja explícito por qué se eligió esa solución y no otra. También conviene documentar la relación entre las vistas y la variabilidad prevista para la implementación o la evolución.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 76 },
+    "tiempo_sugerido_min": 7,
+    "tags": ["documentacion", "vistas", "decisiones"]
+  },
+  {
+    "id": "arq-est-dev-004",
+    "tema": "arquitectura",
+    "subtema": "cliente-servidor",
+    "dificultad": "media",
+    "pregunta": "Un banco debe elegir entre cliente fino, cliente grueso y tres capas para un home banking cuya lógica de negocio cambia con frecuencia. Compará las tres opciones en tráfico de red, complejidad de gestión y facilidad de actualización, y justificá cuál conviene.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Explica el cliente fino: el servidor procesa y gestiona los datos y el cliente solo ejecuta la presentación, con mayor tráfico de red",
+        "peso": 0.25,
+        "claves": ["cliente fino", "el cliente solo ejecuta la presentacion", "el servidor procesa", "mayor trafico de red"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Explica el cliente grueso: el cliente ejecuta la lógica y la presentación, con mayor complejidad de gestión",
+        "peso": 0.25,
+        "claves": ["cliente grueso", "el cliente ejecuta la logica", "mayor complejidad de gestion", "administracion del sistema"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Explica las tres capas: presentación, procesamiento y gestión de datos, que escala con mayor facilidad y es más fácil de actualizar",
+        "peso": 0.3,
+        "claves": ["tres capas", "presentacion procesamiento y gestion de datos", "escala con mayor facilidad", "mas facil de actualizar", "gestion centralizada"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Justifica la elección para un contexto de cambios frecuentes en la lógica de negocio",
+        "peso": 0.2,
+        "claves": ["conviene tres capas", "la logica cambia seguido", "mantener la logica centralizada", "evitar distribuir la logica", "actualizacion centralizada"]
+      }
+    ],
+    "respuesta_modelo": "El cliente fino concentra el procesamiento y la gestión de datos en el servidor y deja al cliente solo la presentación, lo que genera mayor tráfico de red. El cliente grueso hace lo contrario: el cliente ejecuta la lógica de la aplicación y la presentación, mientras el servidor solo gestiona los datos, y la comparación de las diapositivas le atribuye mayor complejidad de gestión. La arquitectura de tres capas separa presentación, procesamiento y gestión de datos, y por eso escala con mayor facilidad y mantiene la lógica con gestión centralizada, lo que la vuelve más fácil de actualizar. Para un home banking con reglas de negocio cambiantes conviene tres capas, porque los cambios se aplican en un punto central y no en cada puesto de cliente. Cliente fino obligaría a más tráfico y cliente grueso a distribuir actualizaciones y administración.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 47 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["cliente-servidor", "capas", "seleccion"]
+  },
+  {
+    "id": "arq-est-dev-005",
+    "tema": "arquitectura",
+    "subtema": "publish-subscribe",
+    "dificultad": "dificil",
+    "pregunta": "Un sistema debe procesar miles de eventos por segundo provenientes de sensores y avisar a varios consumidores interesados en distintos tipos de lectura. Explicá por qué publicación y suscripción es un estilo adecuado, qué rol cumple el middleware y qué acoplamiento se evita frente al control centralizado.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Describe componentes independientes que se comunican mediante mensajes o eventos",
+        "peso": 0.2,
+        "claves": ["componentes independientes", "comunicacion por mensajes", "interaccion via eventos", "publican eventos", "desacoplados"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Explica que quien publica no sabe cuántos consumidores hay registrados",
+        "peso": 0.2,
+        "claves": ["el publicador no sabe cuantos consumidores", "no conoce a los suscriptores", "no depende de la cantidad de consumidores", "publica sin saber quien escucha"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Menciona que los suscriptores declaran su interés y que los tópicos permiten agrupar temas",
+        "peso": 0.2,
+        "claves": ["los suscriptores indican su interes", "suscripcion por topico", "topicos", "solo reciben lo que les interesa"]
+      },
+      {
+        "id": "c4",
+        "descripcion": "Explica el rol del middleware de mensajería: entregar a todos los suscriptores con retención, reintentos y transaccionalidad",
+        "peso": 0.2,
+        "claves": ["middleware de mensajeria", "retencion de mensajes", "reintentos", "entrega a todos los suscriptores", "condiciones transaccionales"]
+      },
+      {
+        "id": "c5",
+        "descripcion": "Contrasta con el control centralizado, donde un componente dirige el flujo y los consumidores dependen de él",
+        "peso": 0.2,
+        "claves": ["control centralizado", "un componente dirige el flujo", "modelo gerente", "evita depender de un coordinador", "control guiado por eventos externos"]
+      }
+    ],
+    "respuesta_modelo": "Publicación y suscripción encaja porque los sensores publican eventos y los consumidores se registran según su interés, sin que el emisor dependa de ellos. En este estilo los componentes son independientes y se comunican mediante mensajes o eventos, y quien publica no sabe cuántos consumidores hay registrados. Los suscriptores indican en qué mensajes están interesados y los tópicos permiten organizar los temas. El middleware de mensajería se ocupa de que los mensajes lleguen a todos los suscriptores en condiciones diversas, incluyendo transaccionalidad, retención y reintentos cuando un consumidor está caído. Frente al control centralizado, donde un componente decide y coordina los procesos del resto, este esquema evita que todos los consumidores dependan de un único coordinador y se apoya en eventos generados externamente.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 39 },
+    "tiempo_sugerido_min": 7,
+    "tags": ["publish-subscribe", "eventos", "middleware"]
+  }
+]

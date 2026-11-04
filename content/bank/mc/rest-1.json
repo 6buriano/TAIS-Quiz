@@ -1,0 +1,622 @@
+[
+  {
+    "id": "rest-api-001",
+    "tema": "rest",
+    "subtema": "api",
+    "dificultad": "facil",
+    "pregunta": "Una billetera digital publica su servicio de pagos para que otras empresas lo integren. Según el material del curso, ¿qué define una API en ese escenario?",
+    "opciones": [
+      {
+        "texto": "Un contrato que establece cómo interactúan componentes o sistemas de software.",
+        "correcta": true
+      },
+      {
+        "texto": "Una biblioteca que cada cliente debe instalar para invocar el servicio.",
+        "correcta": false,
+        "porque_no": "El material no define la API como una biblioteca instalable: la presenta como un contrato que expone funcionalidades e intercambia datos entre sistemas."
+      },
+      {
+        "texto": "Un documento de especificación que reemplaza a la implementación del servicio.",
+        "correcta": false,
+        "porque_no": "La especificación describe el contrato, pero la API es la interfaz que expone capacidades de negocio; el documento no sustituye al servicio."
+      },
+      {
+        "texto": "Una interfaz gráfica para que las personas operen el sistema desde el navegador.",
+        "correcta": false,
+        "porque_no": "La API es una interfaz entre sistemas, no una pantalla de usuario, aunque existan clientes gráficos como Postman para probarla."
+      }
+    ],
+    "explicacion": "Una API es un contrato que define cómo interactúan componentes o sistemas de software: expone funcionalidades, intercambia datos e integra sistemas. No es solamente una interfaz técnica, porque representa capacidades de negocio que distintos consumidores pueden reutilizar.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 2 },
+    "tags": ["rest", "api", "contrato"]
+  },
+  {
+    "id": "rest-api-002",
+    "tema": "rest",
+    "subtema": "api",
+    "dificultad": "media",
+    "pregunta": "Un banco abre su API de cuentas para que fintechs construyan productos sobre ella y además cobra por volumen de uso. ¿Qué dos argumentos del material respaldan esa decisión?",
+    "opciones": [
+      {
+        "texto": "La expansión de ecosistemas y la monetización de la API.",
+        "correcta": true
+      },
+      {
+        "texto": "La reducción de la latencia de red y el menor costo de serialización.",
+        "correcta": false,
+        "porque_no": "Son efectos de eficiencia técnica asociados a las llamadas REST, no argumentos estratégicos para abrir la API a terceros."
+      },
+      {
+        "texto": "La eliminación del versionado y de la consistencia distribuida.",
+        "correcta": false,
+        "porque_no": "El versionado y la consistencia distribuida son desafíos propios de los sistemas distribuidos; abrir la API no los elimina."
+      },
+      {
+        "texto": "La delegación de la autenticación en los desarrolladores externos.",
+        "correcta": false,
+        "porque_no": "El material no propone delegar la seguridad: la autenticación figura como componente esencial de la documentación de la API."
+      }
+    ],
+    "explicacion": "El rol estratégico de las APIs incluye la expansión de ecosistemas (Open Banking, marketplaces, plataformas de pagos) y la monetización, porque la API puede convertirse en una fuente directa de ingresos. En ambos casos desarrolladores externos construyen aplicaciones nuevas sobre capacidades que ya existen.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 12 },
+    "tags": ["rest", "api", "negocio"]
+  },
+  {
+    "id": "rest-api-003",
+    "tema": "rest",
+    "subtema": "api",
+    "dificultad": "media",
+    "pregunta": "Un equipo prueba su API desde la terminal con curl, desde Postman y desde una aplicación móvil, sin tocar el servidor entre una prueba y otra. ¿Qué principio del material explica esa situación?",
+    "opciones": [
+      {
+        "texto": "La API es independiente del cliente que la consume.",
+        "correcta": true
+      },
+      {
+        "texto": "El servidor abre una sesión distinta para cada tipo de cliente.",
+        "correcta": false,
+        "porque_no": "La API es stateless: el servidor no mantiene contexto de sesión, así que no hay sesiones por tipo de cliente."
+      },
+      {
+        "texto": "Cada cliente usa un protocolo diferente del HTTP para conectarse.",
+        "correcta": false,
+        "porque_no": "Todos los clientes invocan la API con peticiones HTTP y reciben una respuesta estructurada, normalmente en JSON."
+      },
+      {
+        "texto": "La especificación OpenAPI genera el cliente del lado del servidor.",
+        "correcta": false,
+        "porque_no": "OpenAPI permite generar documentación, mocks y pruebas, pero no es lo que permite que clientes distintos consuman la API."
+      }
+    ],
+    "explicacion": "Invocar una API consiste en enviar una petición HTTP y recibir una respuesta estructurada, y por eso curl, Postman, el navegador, una app móvil o un backend pueden consumir el mismo contrato. Cada cliente resuelve una necesidad distinta, como pruebas rápidas en terminal, testing visual o integración entre sistemas.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 22 },
+    "tags": ["rest", "api", "clientes"]
+  },
+  {
+    "id": "rest-estilo-004",
+    "tema": "rest",
+    "subtema": "estilo",
+    "dificultad": "facil",
+    "pregunta": "Un compañero sostiene que para hacer una API REST hay que instalar una tecnología específica. ¿Qué responde el material sobre la naturaleza de REST?",
+    "opciones": [
+      {
+        "texto": "Que REST es un estilo arquitectónico de restricciones, no un protocolo ni una tecnología.",
+        "correcta": true
+      },
+      {
+        "texto": "Que REST es un protocolo de transporte que reemplaza a HTTP.",
+        "correcta": false,
+        "porque_no": "REST se apoya en HTTP en lugar de reemplazarlo: usa sus métodos, sus URIs y sus códigos de estado."
+      },
+      {
+        "texto": "Que REST es una librería que se agrega al proyecto para serializar JSON.",
+        "correcta": false,
+        "porque_no": "El material aclara que REST no es una librería, sino un conjunto de reglas para organizar la comunicación."
+      },
+      {
+        "texto": "Que REST es una certificación que valida la calidad del diseño de una API.",
+        "correcta": false,
+        "porque_no": "No se menciona ninguna certificación: REST es una forma de diseñar APIs propuesta por Roy Fielding en 2000."
+      }
+    ],
+    "explicacion": "REST (Representational State Transfer) es un estilo arquitectónico propuesto por Roy Fielding en 2000 para sistemas distribuidos. No es un protocolo ni una tecnología, sino un conjunto de restricciones y reglas simples que ordenan el uso de HTTP al diseñar una API.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 3 },
+    "tags": ["rest", "estilo", "arquitectura"]
+  },
+  {
+    "id": "rest-estilo-005",
+    "tema": "rest",
+    "subtema": "estilo",
+    "dificultad": "media",
+    "pregunta": "El equipo debe justificar ante la gerencia por qué adopta REST en lugar de definir un protocolo propio. ¿Qué ventaja del material sostiene esa elección?",
+    "opciones": [
+      {
+        "texto": "REST aprovecha la infraestructura existente de Internet: HTTP, URI, códigos de estado y caché.",
+        "correcta": true
+      },
+      {
+        "texto": "REST define un formato binario propio, más eficiente que JSON.",
+        "correcta": false,
+        "porque_no": "El material no define un formato propio: las representaciones habituales son JSON, XML o YAML."
+      },
+      {
+        "texto": "REST garantiza consistencia fuerte entre todos los servicios distribuidos.",
+        "correcta": false,
+        "porque_no": "Al contrario: el material advierte que usar REST en sistemas distribuidos implica aceptar consistencia eventual."
+      },
+      {
+        "texto": "REST elimina la latencia de red porque evita las llamadas entre servicios.",
+        "correcta": false,
+        "porque_no": "Cada llamada REST atraviesa la red y su latencia se acumula cuando las llamadas se encadenan; REST no la elimina."
+      }
+    ],
+    "explicacion": "REST reutiliza la infraestructura que ya existe en Internet: HTTP, las URIs, los códigos de estado y la caché. Eso evita inventar un protocolo propio y facilita la interoperabilidad con clientes y organizaciones que ya hablan HTTP.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 3 },
+    "tags": ["rest", "estilo", "http"]
+  },
+  {
+    "id": "rest-estilo-006",
+    "tema": "rest",
+    "subtema": "estilo",
+    "dificultad": "facil",
+    "pregunta": "¿Qué combinación de ideas usa el material para explicar cuándo una API es efectivamente REST?",
+    "opciones": [
+      {
+        "texto": "Usa HTTP correctamente, trabaja con recursos, es stateless y tiene URLs claras y consistentes.",
+        "correcta": true
+      },
+      {
+        "texto": "Usa JSON, autentica con token, publica un documento OpenAPI y responde en pocos milisegundos.",
+        "correcta": false,
+        "porque_no": "Son prácticas valiosas de una buena API, pero el material no las usa para definir cuándo una API es REST."
+      },
+      {
+        "texto": "Expone un endpoint por caso de uso y nombra la acción al final de cada URL.",
+        "correcta": false,
+        "porque_no": "El material pide lo contrario: trabajar con recursos y no con acciones, sin verbos en las URLs."
+      },
+      {
+        "texto": "Guarda el contexto de cada usuario en el servidor y lo recupera con cookies.",
+        "correcta": false,
+        "porque_no": "REST exige stateless: el servidor no mantiene contexto de sesión entre solicitudes."
+      }
+    ],
+    "explicacion": "El material resume las ideas que hacen REST a una API: usar HTTP correctamente, trabajar con recursos y no con acciones, ser stateless y usar URLs claras y consistentes. El formato de datos o una tecnología puntual no alcanzan por sí solos.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 5 },
+    "tags": ["rest", "estilo", "recursos"]
+  },
+  {
+    "id": "rest-cliente-007",
+    "tema": "rest",
+    "subtema": "cliente-servidor",
+    "dificultad": "facil",
+    "pregunta": "El equipo de frontend renueva su aplicación cada mes y el de backend despliega dos veces por semana, sin coordinarse entre sí. ¿Qué restricción de REST habilita esa evolución independiente?",
+    "opciones": [
+      {
+        "texto": "Cliente-Servidor, que separa presentación, procesamiento de negocio y persistencia.",
+        "correcta": true
+      },
+      {
+        "texto": "Uniform Interface, que estandariza la forma de interactuar con los recursos.",
+        "correcta": false,
+        "porque_no": "La interfaz uniforme da coherencia al contrato, pero la evolución independiente se explica por la separación de responsabilidades entre las dos partes."
+      },
+      {
+        "texto": "Cacheable, que permite reutilizar respuestas ya calculadas por el servidor.",
+        "correcta": false,
+        "porque_no": "La caché reduce trabajo y latencia, pero no separa las responsabilidades de cada lado de la comunicación."
+      },
+      {
+        "texto": "Layered System, que organiza la comunicación en capas de intermediarios.",
+        "correcta": false,
+        "porque_no": "Las capas permiten interponer intermediarios, no dividir la presentación del procesamiento de negocio."
+      }
+    ],
+    "explicacion": "La restricción Cliente-Servidor separa presentación, procesamiento de negocio y persistencia. Gracias a esa separación cada parte evoluciona por su cuenta, la mantenibilidad mejora y las capacidades del servidor se reutilizan desde varios clientes.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 6 },
+    "tags": ["rest", "cliente-servidor", "restricciones"]
+  },
+  {
+    "id": "rest-stateless-008",
+    "tema": "rest",
+    "subtema": "stateless",
+    "dificultad": "facil",
+    "pregunta": "Un desarrollador propone guardar en memoria del servidor el último filtro que usó cada usuario, para no volver a pedirlo. ¿Qué restricción de REST se incumple con esa decisión?",
+    "opciones": [
+      {
+        "texto": "Stateless: cada solicitud debe contener toda la información y el servidor no conserva contexto de sesión.",
+        "correcta": true
+      },
+      {
+        "texto": "Cliente-Servidor: el cliente no debería enviar información propia al servidor.",
+        "correcta": false,
+        "porque_no": "El cliente sí envía información; lo que la restricción prohíbe es que el servidor recuerde contexto entre solicitudes."
+      },
+      {
+        "texto": "Layered System: el estado de cada usuario debería guardarse en un intermediario.",
+        "correcta": false,
+        "porque_no": "La organización en capas no autoriza a delegar el estado de sesión: ese estado simplemente no debe quedar en el servidor."
+      },
+      {
+        "texto": "Uniform Interface: los filtros deberían viajar en el cuerpo de la petición GET.",
+        "correcta": false,
+        "porque_no": "La interfaz uniforme no se ocupa de dónde se guarda el estado, y el cuerpo tampoco es el lugar habitual para un filtro."
+      }
+    ],
+    "explicacion": "Stateless significa que cada solicitud contiene toda la información necesaria para procesarla y que el servidor no mantiene contexto de sesión. Recordar el último filtro de cada usuario en la memoria del servidor convierte a la API en stateful y rompe la restricción.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 7 },
+    "tags": ["rest", "stateless", "restricciones"]
+  },
+  {
+    "id": "rest-stateless-009",
+    "tema": "rest",
+    "subtema": "stateless",
+    "dificultad": "media",
+    "pregunta": "Con la API ya stateless, el equipo nota que cada petición creció porque repite datos de contexto. ¿Cómo evalúa el material esa consecuencia?",
+    "opciones": [
+      {
+        "texto": "Es la desventaja esperada de stateless, compensada por escalabilidad horizontal y balanceo sencillo.",
+        "correcta": true
+      },
+      {
+        "texto": "Es un error de diseño que se corrige guardando el contexto en una variable del servidor.",
+        "correcta": false,
+        "porque_no": "Guardar el contexto en el servidor reintroduce el estado y anula el beneficio de la restricción."
+      },
+      {
+        "texto": "Se resuelve comprimiendo la respuesta, porque el volumen de datos no forma parte del análisis.",
+        "correcta": false,
+        "porque_no": "El material señala explícitamente el mayor volumen de datos transmitidos como la desventaja de stateless."
+      },
+      {
+        "texto": "Indica que la API dejó de ser REST y debe migrar a un protocolo binario propio.",
+        "correcta": false,
+        "porque_no": "Que cada petición transporte más datos no rompe el estilo: es el costo de cumplir la restricción."
+      }
+    ],
+    "explicacion": "El material lista como desventaja de stateless el mayor volumen de datos transmitidos, porque cada solicitud debe llevar todo lo necesario. A cambio se obtienen escalabilidad horizontal, tolerancia a fallos y balanceo de carga sencillo, ya que cualquier instancia puede atender cualquier petición.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 7 },
+    "tags": ["rest", "stateless", "escalabilidad"]
+  },
+  {
+    "id": "rest-cache-010",
+    "tema": "rest",
+    "subtema": "cache",
+    "dificultad": "media",
+    "pregunta": "Una tienda online sirve el mismo catálogo de productos a miles de clientes y el origen responde lento en cada consulta. ¿Qué restricción de REST habilita que un intermediario guarde esa respuesta y reduzca la latencia?",
+    "opciones": [
+      {
+        "texto": "Cacheable",
+        "correcta": true
+      },
+      {
+        "texto": "Stateless",
+        "correcta": false,
+        "porque_no": "Stateless elimina el estado de sesión en el servidor, pero no habilita el almacenamiento de respuestas por parte de intermediarios."
+      },
+      {
+        "texto": "Layered System",
+        "correcta": false,
+        "porque_no": "La organización en capas permite interponer intermediarios, pero lo que habilita reutilizar una respuesta es que esté declarada como cacheable."
+      },
+      {
+        "texto": "Uniform Interface",
+        "correcta": false,
+        "porque_no": "La interfaz uniforme estandariza la forma de interactuar con los recursos; no define el almacenamiento de respuestas."
+      }
+    ],
+    "explicacion": "La restricción Cacheable indica que las respuestas deben declararse como cacheables o no. Si la respuesta del catálogo se declara cacheable, un intermediario puede reutilizarla y evitar ir al origen, con lo que baja la latencia y se reduce la carga del servidor.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 4 },
+    "tags": ["rest", "cache", "http"]
+  },
+  {
+    "id": "rest-cache-011",
+    "tema": "rest",
+    "subtema": "cache",
+    "dificultad": "dificil",
+    "pregunta": "El catálogo de productos cambia pocas veces por día, pero la CDN consulta al origen en cada petición. ¿Qué debe hacer la API para que la respuesta se pueda reutilizar sin resignar frescura?",
+    "opciones": [
+      {
+        "texto": "Declarar la respuesta como cacheable y sumar cabeceras de caché que fijen frescura y validación.",
+        "correcta": true
+      },
+      {
+        "texto": "Responder 200 con el catálogo completo en cada consulta y sin cabeceras de caché.",
+        "correcta": false,
+        "porque_no": "Sin declaración de cacheabilidad el intermediario no puede reutilizar la respuesta de forma segura y vuelve a consultar al origen."
+      },
+      {
+        "texto": "Servir el catálogo con POST para que la CDN pueda almacenarlo.",
+        "correcta": false,
+        "porque_no": "POST no es el método de consulta y su respuesta no se trata como la lectura de un recurso."
+      },
+      {
+        "texto": "Quitar el estado del servidor y dejar que el cliente decida la frescura.",
+        "correcta": false,
+        "porque_no": "Stateless no resuelve la frescura: el intermediario necesita que la respuesta declare cuánto vale y cómo revalidarla."
+      }
+    ],
+    "explicacion": "Cacheable exige que cada respuesta se declare como cacheable o no. Para aprovechar una CDN, la API debe declarar la respuesta como cacheable y acompañarla con cabeceras de frescura y validación, como Cache-Control y ETag, de modo que el intermediario reutilice el cuerpo guardado o lo revalide en lugar de pedirlo entero al origen.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 4 },
+    "tags": ["rest", "cache", "cdn"]
+  },
+  {
+    "id": "rest-capas-012",
+    "tema": "rest",
+    "subtema": "capas",
+    "dificultad": "facil",
+    "pregunta": "La arquitectura interpone un balanceador, un gateway de API y un proxy de caché entre el cliente y el servicio. ¿Qué restricción de REST describe esa organización?",
+    "opciones": [
+      {
+        "texto": "Layered System",
+        "correcta": true
+      },
+      {
+        "texto": "Cliente-Servidor",
+        "correcta": false,
+        "porque_no": "Cliente-Servidor separa presentación, procesamiento de negocio y persistencia; no describe la interposición de intermediarios."
+      },
+      {
+        "texto": "Code on Demand",
+        "correcta": false,
+        "porque_no": "El material no incluye esa restricción entre los principios fundamentales que enumera para una API REST."
+      },
+      {
+        "texto": "Uniform Interface",
+        "correcta": false,
+        "porque_no": "La interfaz uniforme se refiere a la forma homogénea de interactuar con los recursos, no a la cantidad de capas."
+      }
+    ],
+    "explicacion": "La restricción Layered System organiza la comunicación en capas: el cliente no necesita saber si habla con el servicio o con un intermediario. Eso permite sumar balanceadores, gateways o cachés sin modificar el contrato de la API.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 4 },
+    "tags": ["rest", "capas", "restricciones"]
+  },
+  {
+    "id": "rest-uniforme-013",
+    "tema": "rest",
+    "subtema": "interfaz-uniforme",
+    "dificultad": "media",
+    "pregunta": "Tres servicios del mismo producto se consumen distinto: uno usa verbos en la URL, otro devuelve XML y otro inventa códigos de estado propios. ¿Qué restricción de REST se está descuidando?",
+    "opciones": [
+      {
+        "texto": "Uniform Interface, porque la interacción con los recursos debe ser homogénea.",
+        "correcta": true
+      },
+      {
+        "texto": "Stateless, porque el servidor está recordando el formato de cada cliente.",
+        "correcta": false,
+        "porque_no": "El caso no describe estado de sesión en el servidor, sino falta de convenciones comunes entre servicios."
+      },
+      {
+        "texto": "Cacheable, porque las respuestas no se están almacenando en ningún intermediario.",
+        "correcta": false,
+        "porque_no": "El material no relaciona este escenario con la caché: el desorden está en las convenciones de la interfaz."
+      },
+      {
+        "texto": "Cliente-Servidor, porque los tres servicios comparten la misma base de datos.",
+        "correcta": false,
+        "porque_no": "El enunciado no menciona acceso compartido a datos; el problema visible es la inconsistencia del contrato."
+      }
+    ],
+    "explicacion": "Uniform Interface pide una forma homogénea de interactuar con los recursos: mismas convenciones de URIs, métodos y códigos de estado. Sin esa uniformidad cada servicio se consume de manera distinta y crece el costo de integración para todos los clientes.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 4 },
+    "tags": ["rest", "interfaz-uniforme", "contrato"]
+  },
+  {
+    "id": "rest-recursos-014",
+    "tema": "rest",
+    "subtema": "recursos",
+    "dificultad": "facil",
+    "pregunta": "El pedido 1001 se devuelve como { \"id\": 1001, \"status\": \"confirmed\", \"total\": 150.00 }. ¿Cómo distingue el material el recurso de su representación?",
+    "opciones": [
+      {
+        "texto": "El recurso es un concepto abstracto con identidad propia y la representación es la forma concreta en que se envía.",
+        "correcta": true
+      },
+      {
+        "texto": "El recurso es el documento JSON y la representación es la fila guardada en la base de datos.",
+        "correcta": false,
+        "porque_no": "El JSON es justamente una representación; el recurso existe independientemente de cómo se lo represente."
+      },
+      {
+        "texto": "El recurso es la URL y la representación es el método HTTP que se usó para pedirlo.",
+        "correcta": false,
+        "porque_no": "La URL identifica al recurso, pero el método HTTP no es su representación."
+      },
+      {
+        "texto": "Recurso y representación son sinónimos: cambian juntos cuando cambia el formato de salida.",
+        "correcta": false,
+        "porque_no": "El material remarca que el recurso existe independientemente de cómo se represente, en JSON, XML o YAML."
+      }
+    ],
+    "explicacion": "REST modela entidades del dominio como recursos: conceptos abstractos con identidad única, atributos y relaciones. La representación es la forma concreta en que ese recurso viaja al cliente, por ejemplo un documento JSON, y puede cambiar sin que el recurso cambie.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 40 },
+    "tags": ["rest", "recursos", "representacion"]
+  },
+  {
+    "id": "rest-recursos-015",
+    "tema": "rest",
+    "subtema": "recursos",
+    "dificultad": "media",
+    "pregunta": "Un cliente pide GET /products y recibe una lista con varios productos. ¿Qué representa esa respuesta en el modelo REST del material?",
+    "opciones": [
+      {
+        "texto": "Una colección: múltiples instancias del mismo recurso.",
+        "correcta": true
+      },
+      {
+        "texto": "Un recurso único cuyos atributos mezclan los datos de todos los productos.",
+        "correcta": false,
+        "porque_no": "Una colección no es un recurso individual con atributos mezclados: agrupa instancias del mismo tipo de recurso."
+      },
+      {
+        "texto": "Una representación de la base de datos completa del servicio.",
+        "correcta": false,
+        "porque_no": "La colección expone instancias del recurso, no la estructura interna de la persistencia del servicio."
+      },
+      {
+        "texto": "Una operación de búsqueda que el servidor ejecutó sobre sus tablas.",
+        "correcta": false,
+        "porque_no": "Presentar la respuesta como operación contradice el enfoque orientado a recursos que propone el material."
+      }
+    ],
+    "explicacion": "Las APIs suelen exponer colecciones además de recursos individuales: una colección representa múltiples instancias de un mismo recurso. Se identifica con una URI en plural, como /products, y se distingue del recurso individual, que se consulta con su identidad, por ejemplo /products/50.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 46 },
+    "tags": ["rest", "recursos", "colecciones"]
+  },
+  {
+    "id": "rest-uri-016",
+    "tema": "rest",
+    "subtema": "uri",
+    "dificultad": "media",
+    "pregunta": "El equipo fija /orders/1001 como identificador del pedido. ¿Qué características deseables de una URI menciona el material?",
+    "opciones": [
+      {
+        "texto": "Que sea única, permanente e independiente de las reglas de negocio.",
+        "correcta": true
+      },
+      {
+        "texto": "Que sea corta, numérica y que incluya el método HTTP en la ruta.",
+        "correcta": false,
+        "porque_no": "Las URIs identifican recursos y no operaciones, así que el material no pide incluir el método en la ruta."
+      },
+      {
+        "texto": "Que sea versionada, cacheable y que lleve el identificador del cliente en la ruta.",
+        "correcta": false,
+        "porque_no": "Ninguna de esas tres condiciones aparece como característica deseable del identificador del recurso."
+      },
+      {
+        "texto": "Que sea temporal, legible y reutilizable entre recursos distintos.",
+        "correcta": false,
+        "porque_no": "El material pide permanencia y unicidad, no temporalidad ni reutilización entre recursos diferentes."
+      }
+    ],
+    "explicacion": "Todo recurso debe tener una identidad única y, normalmente, se la expresa con una URI como /orders/1001. Las características deseables son que sea única, permanente e independiente de las reglas de negocio, porque las URIs identifican recursos y no operaciones.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 41 },
+    "tags": ["rest", "uri", "identidad"]
+  },
+  {
+    "id": "rest-uri-017",
+    "tema": "rest",
+    "subtema": "uri",
+    "dificultad": "facil",
+    "pregunta": "Un equipo propone /getCustomerOrders para listar los pedidos de un cliente. ¿Qué corrección propone el material?",
+    "opciones": [
+      {
+        "texto": "Usar un diseño orientado a recursos: /customers/123/orders.",
+        "correcta": true
+      },
+      {
+        "texto": "Conservar el verbo y escribir el nombre del recurso en mayúsculas.",
+        "correcta": false,
+        "porque_no": "El problema es el verbo en la URI, no la capitalización del nombre del recurso."
+      },
+      {
+        "texto": "Mover la acción al cuerpo del GET y dejar solamente /customers.",
+        "correcta": false,
+        "porque_no": "La operación la expresa el método HTTP aplicado sobre el recurso, no el cuerpo de un GET."
+      },
+      {
+        "texto": "Renombrar la ruta a /customerOrdersList para que sea más explícita.",
+        "correcta": false,
+        "porque_no": "El material rechaza los nombres con sufijos como List o Data y prefiere el sustantivo en plural."
+      }
+    ],
+    "explicacion": "El material contrasta /customers/123/orders, correcto, con /getCustomerOrders, incorrecto, porque las URIs identifican recursos y no acciones. El verbo lo aporta el método HTTP y la relación entre cliente y pedidos se expresa con una jerarquía de sustantivos.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 9 },
+    "tags": ["rest", "uri", "diseno"]
+  },
+  {
+    "id": "rest-uri-018",
+    "tema": "rest",
+    "subtema": "uri",
+    "dificultad": "media",
+    "pregunta": "Al revisar el catálogo de endpoints aparecen /customers, /productsData y /orderManagement. ¿Qué observación corresponde al material?",
+    "opciones": [
+      {
+        "texto": "Hay que homogeneizar las convenciones y usar /customers, /products y /orders.",
+        "correcta": true
+      },
+      {
+        "texto": "Los sufijos Data y Management son válidos porque aclaran el contenido de la ruta.",
+        "correcta": false,
+        "porque_no": "El material los muestra justamente como ejemplos de lo que no conviene hacer al nombrar recursos."
+      },
+      {
+        "texto": "Cada recurso puede tener su propia convención si está documentada.",
+        "correcta": false,
+        "porque_no": "La consistencia de recursos exige convenciones homogéneas para todos los recursos de la API."
+      },
+      {
+        "texto": "Solo /customers es incorrecto, porque los recursos se nombran en singular.",
+        "correcta": false,
+        "porque_no": "El material usa /customers como ejemplo correcto: los recursos se exponen en plural."
+      }
+    ],
+    "explicacion": "La consistencia de recursos pide que todos los recursos sigan convenciones homogéneas. El material muestra /customers, /products y /orders como forma correcta, y /customerList, /productsData y /orderManagement como ejemplos a evitar por mezclar sufijos y estilos.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 10 },
+    "tags": ["rest", "uri", "consistencia"]
+  },
+  {
+    "id": "rest-uri-019",
+    "tema": "rest",
+    "subtema": "uri",
+    "dificultad": "dificil",
+    "pregunta": "Un cliente quiere ver los productos de un pedido y otro quiere ver los pedidos de un cliente. ¿Qué par de URIs es el más consistente con el estilo del material?",
+    "opciones": [
+      {
+        "texto": "GET /orders/1001/products y GET /customers/123/orders",
+        "correcta": true
+      },
+      {
+        "texto": "GET /orders/1001/getProducts y GET /customers/123/getOrders",
+        "correcta": false,
+        "porque_no": "Incluyen verbos en la URI, que es exactamente el patrón que el material señala como incorrecto."
+      },
+      {
+        "texto": "GET /productList?order=1001 y GET /orderList?customer=123",
+        "correcta": false,
+        "porque_no": "Los sufijos List no son convención del material: la relación se expresa con una jerarquía de sustantivos."
+      },
+      {
+        "texto": "GET /orders/products/1001 y GET /customers/orders/123",
+        "correcta": false,
+        "porque_no": "Invierten la jerarquía: el identificador del recurso dueño debe ir antes que la colección relacionada."
+      }
+    ],
+    "explicacion": "Las relaciones entre recursos se expresan anidando la colección relacionada debajo del recurso dueño: /customers/123/orders y /orders/1001/products. Esa jerarquía refleja la estructura lógica del dominio y permite navegar entre recursos sin inventar verbos ni sufijos.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 43 },
+    "tags": ["rest", "uri", "relaciones"]
+  },
+  {
+    "id": "rest-info-020",
+    "tema": "rest",
+    "subtema": "modelo-informacion",
+    "dificultad": "media",
+    "pregunta": "Antes de escribir endpoints, el equipo discute qué entidades existen (Cliente, Pedido, Pago), qué atributos tienen y cómo se relacionan. ¿Qué está definiendo según el material?",
+    "opciones": [
+      {
+        "texto": "El modelo de información de la API.",
+        "correcta": true
+      },
+      {
+        "texto": "El plan de versionado de los endpoints.",
+        "correcta": false,
+        "porque_no": "El versionado aparece como un desafío de los sistemas distribuidos, no como el paso previo de entidades y relaciones."
+      },
+      {
+        "texto": "La política de caché de las respuestas.",
+        "correcta": false,
+        "porque_no": "La caché se ocupa del reuso de respuestas; la discusión descripta trata conceptos del negocio."
+      },
+      {
+        "texto": "El esquema de autenticación de los consumidores.",
+        "correcta": false,
+        "porque_no": "La autenticación es un componente de la documentación, mientras que acá se discuten las entidades del dominio."
+      }
+    ],
+    "explicacion": "El modelo de información define cómo los conceptos del negocio se representan dentro de la API: qué entidades existen, qué atributos tienen, cómo se relacionan y qué puede consultar o modificar un cliente. Se define antes de diseñar endpoints o escribir código, y OpenAPI permite formalizarlo como esquema del recurso.",
+    "fuente": { "archivo": "06-01-APIs REST-06-01.pdf", "pagina": 38 },
+    "tags": ["rest", "modelo-informacion", "diseno"]
+  }
+]

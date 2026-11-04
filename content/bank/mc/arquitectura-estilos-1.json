@@ -1,0 +1,560 @@
+[
+  {
+    "id": "arq-est-001",
+    "tema": "arquitectura",
+    "subtema": "definicion",
+    "dificultad": "facil",
+    "pregunta": "Según la definición que citan las diapositivas, ¿qué compone la arquitectura de un sistema?",
+    "opciones": [
+      {
+        "texto": "La estructura o estructuras del sistema: sus elementos, sus propiedades visibles externamente y las relaciones entre ellos.",
+        "correcta": true
+      },
+      {
+        "texto": "El detalle de cada clase, método y algoritmo que implementa el sistema.",
+        "correcta": false,
+        "porque_no": "Ese es el terreno del diseño detallado; la definición de arquitectura se queda en los elementos y en sus propiedades visibles externamente."
+      },
+      {
+        "texto": "El conjunto de requisitos funcionales acordados con el cliente y su priorización.",
+        "correcta": false,
+        "porque_no": "Los requisitos funcionales son una entrada del diseño, no la estructura que resulta de las decisiones arquitectónicas."
+      },
+      {
+        "texto": "La infraestructura de servidores, redes y balanceadores donde se despliega el sistema.",
+        "correcta": false,
+        "porque_no": "El despliegue es una vista posible de la arquitectura, no la definición completa de su estructura."
+      }
+    ],
+    "explicacion": "La definición que las diapositivas toman de 'Documenting software architectures, views and beyond' habla de la estructura o estructuras del sistema, compuestas por elementos, sus propiedades visibles externamente y las relaciones entre ellos. Lo interno de cada elemento queda fuera: por eso el diseño detallado no es arquitectura. Tampoco los requisitos ni la infraestructura alcanzan para definirla.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 5 },
+    "tags": ["arquitectura", "definicion", "estructura"]
+  },
+  {
+    "id": "arq-est-002",
+    "tema": "arquitectura",
+    "subtema": "valor",
+    "dificultad": "facil",
+    "pregunta": "La dirección de una empresa duda de invertir tiempo en diseñar y documentar explícitamente la arquitectura. ¿Qué ventajas de esa práctica enumeran las diapositivas?",
+    "opciones": [
+      {
+        "texto": "Comunicación entre interesados, decisiones tempranas de diseño y reúso a gran escala.",
+        "correcta": true
+      },
+      {
+        "texto": "Reducción del alcance funcional y eliminación de los cambios de requisitos.",
+        "correcta": false,
+        "porque_no": "Documentar la arquitectura no recorta funcionalidad ni elimina cambios; ayuda a decidir temprano y a comunicar esas decisiones."
+      },
+      {
+        "texto": "Menor necesidad de verificar el sistema y de evaluar su calidad.",
+        "correcta": false,
+        "porque_no": "La arquitectura documentada no reemplaza la verificación ni la evaluación: son actividades distintas y siguen siendo necesarias."
+      },
+      {
+        "texto": "Desplazamiento de las decisiones de diseño hacia el final del proyecto.",
+        "correcta": false,
+        "porque_no": "Las diapositivas destacan lo contrario: la arquitectura habilita decisiones tempranas de diseño."
+      }
+    ],
+    "explicacion": "Las ventajas que se mencionan son comunicación entre interesados, decisiones tempranas de diseño y reúso a gran escala, tomadas de Bass et al. Ninguna de ellas implica recortar alcance ni saltear la verificación. Documentar permite que los interesados comprendan y validen las características que la arquitectura determina en la solución.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 6 },
+    "tags": ["arquitectura", "documentacion", "valor"]
+  },
+  {
+    "id": "arq-est-003",
+    "tema": "arquitectura",
+    "subtema": "atributos",
+    "dificultad": "facil",
+    "pregunta": "En una aplicación de salud hay que distinguir entre proteger al paciente de accidentes no intencionales y protegerlo de ataques maliciosos. ¿Cómo nombran las diapositivas a esas dos preocupaciones?",
+    "opciones": [
+      {
+        "texto": "Safety para los peligros y accidentes no intencionales, y security para las amenazas y los actos intencionales maliciosos.",
+        "correcta": true
+      },
+      {
+        "texto": "Security para los accidentes no intencionales y safety para los actos intencionales maliciosos.",
+        "correcta": false,
+        "porque_no": "Invierte los términos: las diapositivas reservan safety para lo no intencional y security para lo intencional malicioso."
+      },
+      {
+        "texto": "Rendimiento para los accidentes no intencionales y disponibilidad para los ataques maliciosos.",
+        "correcta": false,
+        "porque_no": "Performance y disponibilidad son otros atributos de calidad y no distinguen la intencionalidad del daño."
+      },
+      {
+        "texto": "Confiabilidad para los accidentes no intencionales y auditabilidad para los ataques maliciosos.",
+        "correcta": false,
+        "porque_no": "La confiabilidad y la auditabilidad no son los términos que las diapositivas usan para esa distinción."
+      }
+    ],
+    "explicacion": "Las diapositivas separan dos ideas dentro de la seguridad: safety, la protección contra peligros y accidentes no intencionales, y security, la protección contra amenazas y actos intencionales maliciosos. La arquitectura impacta en ambas, además de en performance, disponibilidad y mantenibilidad. La distinción importa porque los riesgos y las tácticas asociadas a cada una son diferentes.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 7 },
+    "tags": ["arquitectura", "seguridad", "atributos"]
+  },
+  {
+    "id": "arq-est-004",
+    "tema": "arquitectura",
+    "subtema": "patrones",
+    "dificultad": "facil",
+    "pregunta": "Un equipo quiere registrar en un catálogo interno un patrón de software probado. ¿Qué elementos debe documentar para que otro equipo pueda reutilizarlo?",
+    "opciones": [
+      {
+        "texto": "Nombre, contexto, problema que considera, solución y consecuencias positivas y negativas.",
+        "correcta": true
+      },
+      {
+        "texto": "Solo el diagrama de clases y el código de referencia de la solución.",
+        "correcta": false,
+        "porque_no": "El diagrama y el código no alcanzan: sin nombre, contexto, problema y consecuencias el patrón no se puede decidir ni reutilizar."
+      },
+      {
+        "texto": "El nombre del autor, la fecha de creación y el lenguaje en que se implementó.",
+        "correcta": false,
+        "porque_no": "Esos datos de origen no forman parte de los elementos que las diapositivas atribuyen a un patrón."
+      },
+      {
+        "texto": "El listado de interesados y el presupuesto estimado de implementación.",
+        "correcta": false,
+        "porque_no": "La gestión del proyecto no define al patrón: los elementos se centran en el problema y en su solución."
+      }
+    ],
+    "explicacion": "Las diapositivas definen como elementos de un patrón el nombre, el contexto, el problema que considera, la solución y las consecuencias, tanto positivas como negativas. Esa forma estándar es la que permite reutilizarlo sin repetir el análisis completo. Las consecuencias forman parte del patrón, no son un anexo opcional.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 13 },
+    "tags": ["patrones", "documentacion", "reuso"]
+  },
+  {
+    "id": "arq-est-005",
+    "tema": "arquitectura",
+    "subtema": "capas",
+    "dificultad": "facil",
+    "pregunta": "En un sistema de facturación se define por norma interna que la capa de aplicación solo puede invocar a la capa inmediatamente inferior. ¿A qué variante del estilo de capas jerárquicas corresponde esa regla?",
+    "opciones": [
+      {
+        "texto": "Al modelo estricto, en el que una capa solo utiliza servicios de la inmediata inferior.",
+        "correcta": true
+      },
+      {
+        "texto": "Al modelo relajado, en el que se pueden saltear capas.",
+        "correcta": false,
+        "porque_no": "El modelo relajado es el que habilita saltar capas, justamente lo que esta norma interna prohíbe."
+      },
+      {
+        "texto": "Al estilo de tubos y filtros, donde cada filtro desconoce a los demás.",
+        "correcta": false,
+        "porque_no": "Tubos y filtros organiza el sistema como transformaciones sucesivas de un flujo de datos, no como capas con acceso restringido."
+      },
+      {
+        "texto": "Al estilo cliente-servidor de dos niveles, con clientes que hablan directo con el servidor.",
+        "correcta": false,
+        "porque_no": "La restricción descrita es entre capas de un mismo sistema, no entre clientes y servidores."
+      }
+    ],
+    "explicacion": "El estilo de capas jerárquicas admite dos variantes: en el modelo estricto cada capa solo utiliza servicios de la inmediata inferior, mientras que en el relajado se pueden saltear capas. La norma del escenario es la definición del modelo estricto. El ejemplo clásico que mencionan las diapositivas es el modelo OSI.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 29 },
+    "tags": ["capas", "estilos", "estricto"]
+  },
+  {
+    "id": "arq-est-006",
+    "tema": "arquitectura",
+    "subtema": "capas",
+    "dificultad": "media",
+    "pregunta": "Un equipo adopta capas jerárquicas en un servicio que debe responder en pocos milisegundos y descubre que cada pedido atraviesa cuatro niveles de interpretación de comandos. ¿Qué desventaja del estilo están sufriendo?",
+    "opciones": [
+      {
+        "texto": "La interpretación de comandos en múltiples niveles puede afectar el desempeño.",
+        "correcta": true
+      },
+      {
+        "texto": "La obligación de que todos los subsistemas acuerden un modelo de datos común.",
+        "correcta": false,
+        "porque_no": "Ese costo pertenece al estilo de datos compartidos, no a las capas jerárquicas."
+      },
+      {
+        "texto": "La imposibilidad de reemplazar una capa sin afectar a las demás.",
+        "correcta": false,
+        "porque_no": "El estilo de capas busca lo contrario: facilita el mantenimiento y la portabilidad entre capas."
+      },
+      {
+        "texto": "La dificultad de construir sistemas interactivos con este estilo.",
+        "correcta": false,
+        "porque_no": "Esa dificultad se asocia a tubos y filtros, donde el flujo se arma como una secuencia de transformaciones."
+      }
+    ],
+    "explicacion": "Entre las desventajas de las capas jerárquicas, las diapositivas señalan que no siempre es fácil estructurar el sistema en capas ni identificar los niveles de abstracción a partir de los requisitos, y que la interpretación de comandos en múltiples niveles puede afectar el desempeño. El escenario describe ese segundo costo. Sus ventajas, en cambio, son comprensión, mantenimiento, reutilización y portabilidad.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 30 },
+    "tags": ["capas", "performance", "desventajas"]
+  },
+  {
+    "id": "arq-est-007",
+    "tema": "arquitectura",
+    "subtema": "cliente-servidor",
+    "dificultad": "media",
+    "pregunta": "En un sistema de turnos médicos se propone que el servidor abra conexiones hacia los clientes para avisarles de cambios en la agenda. ¿Por qué esa propuesta se aparta del estilo cliente-servidor tal como lo describen las diapositivas?",
+    "opciones": [
+      {
+        "texto": "Porque en el estilo los servidores responden a requerimientos de los clientes y no inician interacciones, y los clientes no se comunican entre sí.",
+        "correcta": true
+      },
+      {
+        "texto": "Porque el estilo exige que los clientes ofrezcan servicios a otros clientes.",
+        "correcta": false,
+        "porque_no": "Al contrario: en cliente-servidor los clientes no interactúan directamente con otros clientes."
+      },
+      {
+        "texto": "Porque el estilo prohíbe usar la red como mecanismo de comunicación entre las partes.",
+        "correcta": false,
+        "porque_no": "El mecanismo de comunicación entre clientes y servidores es parte del estilo; la red aparece cuando la distribución lo requiere."
+      },
+      {
+        "texto": "Porque el estilo obliga a que exista un único servidor para todos los clientes.",
+        "correcta": false,
+        "porque_no": "Las diapositivas muestran ejemplos con múltiples servidores idénticos para escalabilidad y tolerancia a fallas."
+      }
+    ],
+    "explicacion": "El estilo descompone el sistema en servidores que ofrecen servicios y clientes que los usan, con un mecanismo de comunicación entre ambos. Los clientes no interactúan directamente con otros clientes y los servidores no inician interacciones: responden a requerimientos. Que el servidor tome la iniciativa invierte esa relación, así que el aviso a los clientes debe resolverse con otro mecanismo.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 26 },
+    "tags": ["cliente-servidor", "estilos", "roles"]
+  },
+  {
+    "id": "arq-est-008",
+    "tema": "arquitectura",
+    "subtema": "cliente-servidor",
+    "dificultad": "media",
+    "pregunta": "Una empresa decide que sus aplicaciones de escritorio ejecuten la lógica de negocio y la presentación, y que el servidor se ocupe solo de la gestión de los datos. ¿Cómo se denomina esa variante y qué advierte la comparación de las diapositivas?",
+    "opciones": [
+      {
+        "texto": "Cliente grueso, al que la comparación asocia una mayor complejidad de gestión.",
+        "correcta": true
+      },
+      {
+        "texto": "Cliente fino, al que la comparación asocia un mayor tráfico de red.",
+        "correcta": false,
+        "porque_no": "El cliente fino concentra el procesamiento en el servidor y solo ejecuta la presentación; el mayor tráfico de red es su costo, no el de este caso."
+      },
+      {
+        "texto": "Arquitectura de tres capas, que mantiene la lógica junto a la gestión centralizada.",
+        "correcta": false,
+        "porque_no": "En el escenario la lógica vive en el cliente y los datos en el servidor: son dos capas, no tres."
+      },
+      {
+        "texto": "Objetos distribuidos, más simples de diseñar que cliente-servidor.",
+        "correcta": false,
+        "porque_no": "Las diapositivas señalan que los objetos distribuidos son más complejos de diseñar que cliente-servidor, y además el escenario no elimina la distinción de roles."
+      }
+    ],
+    "explicacion": "En cliente-servidor de dos niveles la funcionalidad se reparte de dos maneras. Con cliente fino, el servidor procesa y gestiona los datos y el cliente solo ejecuta la presentación; con cliente grueso, el servidor solo gestiona los datos y el cliente ejecuta la lógica de la aplicación y la presentación. La comparación de las diapositivas asocia al cliente fino mayor tráfico de red y al cliente grueso mayor complejidad de gestión.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 47 },
+    "tags": ["cliente-servidor", "cliente-grueso", "compromisos"]
+  },
+  {
+    "id": "arq-est-009",
+    "tema": "arquitectura",
+    "subtema": "capas",
+    "dificultad": "dificil",
+    "pregunta": "Un home banking con arquitectura de tres capas necesita que otras entidades consuman sus servicios de cuenta y que se sumen nuevos tipos de clientes. ¿Qué cambio propone el ejemplo de las diapositivas y con qué propósito?",
+    "opciones": [
+      {
+        "texto": "Pasar a cuatro capas, incorporando servicios REST y SOAP que puedan invocar los otros bancos y los distintos clientes.",
+        "correcta": true
+      },
+      {
+        "texto": "Mantener tres capas y permitir que cualquier cliente hable directamente con la capa de gestión de datos.",
+        "correcta": false,
+        "porque_no": "Eso acoplaría a los clientes externos con los datos y no es la salida que muestran las diapositivas."
+      },
+      {
+        "texto": "Eliminar la capa de presentación para concentrar todo en la lógica de negocios.",
+        "correcta": false,
+        "porque_no": "La presentación sigue existiendo para los clientes web y mobile; lo que se agrega es una capa de servicios."
+      },
+      {
+        "texto": "Reemplazar el servidor de base de datos por un repositorio compartido entre las entidades.",
+        "correcta": false,
+        "porque_no": "Compartir el repositorio con otras entidades agravaría el acoplamiento en lugar de resolver la integración."
+      }
+    ],
+    "explicacion": "Con tres capas aparece la pregunta de con qué capa hablan los clientes nuevos y los sistemas de otros bancos. El ejemplo de cuatro capas agrega lógica de negocios y transaccional más una capa de servicios REST y SOAP, de modo que los consumidores externos y los distintos tipos de cliente se integren contra servicios y no contra la base. Así se gana flexibilidad para distribuir la funcionalidad y se evita exponer los datos.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 49 },
+    "tags": ["capas", "cliente-servidor", "integracion"]
+  },
+  {
+    "id": "arq-est-010",
+    "tema": "arquitectura",
+    "subtema": "pipes-filtros",
+    "dificultad": "media",
+    "pregunta": "En un pipeline de procesamiento de imágenes se quiere que varias etapas trabajen al mismo tiempo sobre distintas partes del flujo. ¿Qué propiedad de los filtros habilita ese solapamiento?",
+    "opciones": [
+      {
+        "texto": "Cada filtro es independiente, no conoce la identidad de los otros y puede empezar a transformar antes de terminar de leer la entrada.",
+        "correcta": true
+      },
+      {
+        "texto": "El middleware de mensajería garantiza la retención y los reintentos de cada mensaje.",
+        "correcta": false,
+        "porque_no": "Eso describe el soporte de publicación y suscripción, no el funcionamiento de un filtro dentro del pipeline."
+      },
+      {
+        "texto": "Un repositorio central notifica a los filtros cuándo hay datos nuevos.",
+        "correcta": false,
+        "porque_no": "El aviso de arribo de datos es la variante pizarrón de datos compartidos, no una propiedad de tubos y filtros."
+      },
+      {
+        "texto": "Un componente gerente decide el orden en que se ejecuta cada filtro.",
+        "correcta": false,
+        "porque_no": "En tubos y filtros el orden lo da el grafo de conexiones, y el control centralizado es otro modelo de control."
+      }
+    ],
+    "explicacion": "Las diapositivas describen que cada filtro es independiente del resto, no conoce la identidad de los otros y puede comenzar la transformación antes de terminar de leer la entrada. Respetando el grafo de conexiones, la secuencia no importa y por eso es posible el paralelismo. Un filtro, además, puede recibir datos de varios tubos y enviarlos a varios tubos.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 33 },
+    "tags": ["pipes-filtros", "paralelismo", "estilos"]
+  },
+  {
+    "id": "arq-est-011",
+    "tema": "arquitectura",
+    "subtema": "pipes-filtros",
+    "dificultad": "dificil",
+    "pregunta": "Un área necesita reutilizar las etapas de limpieza y validación de un flujo de datos y sumar transformaciones nuevas cada mes, pero el proceso incluye corrección interactiva con el usuario. ¿Qué estilo conviene y qué tensión aparece?",
+    "opciones": [
+      {
+        "texto": "Tubos y filtros favorece el reúso y la evolución, pero construir sistemas interactivos con ese estilo es difícil.",
+        "correcta": true
+      },
+      {
+        "texto": "Capas jerárquicas, que reutilizan las etapas y agilizan la interacción con el usuario.",
+        "correcta": false,
+        "porque_no": "Las capas no son el estilo pensado para encadenar transformaciones de datos reutilizables, y el escenario destaca el flujo de datos, no la organización por niveles."
+      },
+      {
+        "texto": "Datos compartidos, que permiten reutilizar filtros y garantizar la interacción en tiempo real.",
+        "correcta": false,
+        "porque_no": "El repositorio compartido no ofrece filtros reutilizables ni resuelve por sí mismo la interacción."
+      },
+      {
+        "texto": "Cliente-servidor de dos niveles, que permite sumar transformaciones sin tocar el servidor.",
+        "correcta": false,
+        "porque_no": "El estilo reparte funcionalidad entre clientes y servidores; no organiza el procesamiento como una cadena de transformaciones."
+      }
+    ],
+    "explicacion": "Tubos y filtros tiene como ventajas la reutilización de filtros, la lectura intuitiva como secuencia de procesamiento y la facilidad para agregar transformaciones. Sus desventajas son acordar el formato de los datos, la dificultad para construir sistemas interactivos y la ineficiencia por la descomposición o por chequeos repetidos. El escenario pide reúso y evolución, con una porción interactiva que el estilo vuelve incómoda.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 34 },
+    "tags": ["pipes-filtros", "reuso", "compromisos"]
+  },
+  {
+    "id": "arq-est-012",
+    "tema": "arquitectura",
+    "subtema": "shared-data",
+    "dificultad": "facil",
+    "pregunta": "Dos variantes del estilo de datos compartidos se diferencian por cómo se enteran los consumidores de los datos nuevos. ¿Cómo se llaman y en qué se distinguen?",
+    "opciones": [
+      {
+        "texto": "Repositorio, donde el consumidor busca los datos, y pizarrón, donde se avisa al consumidor del arribo de datos de su interés.",
+        "correcta": true
+      },
+      {
+        "texto": "Repositorio, donde se avisa al consumidor, y pizarrón, donde el consumidor consulta periódicamente.",
+        "correcta": false,
+        "porque_no": "Invierte las variantes: en el repositorio el consumidor busca los datos y en el pizarrón se lo notifica."
+      },
+      {
+        "texto": "Cliente fino, donde el servidor procesa, y cliente grueso, donde el cliente procesa.",
+        "correcta": false,
+        "porque_no": "Cliente fino y grueso son variantes de cliente-servidor de dos niveles, no de datos compartidos."
+      },
+      {
+        "texto": "Modelo estricto, con acceso solo a la capa inferior, y modelo relajado, que saltea capas.",
+        "correcta": false,
+        "porque_no": "Estricto y relajado describen variantes del estilo de capas jerárquicas."
+      }
+    ],
+    "explicacion": "El estilo de datos compartidos se apoya en un almacenamiento central y un conjunto de componentes que operan sobre él. En la variante repositorio el consumidor va a buscar los datos; en la variante pizarrón se avisa al consumidor cuando arriban datos de su interés. Ambas comparten la idea de múltiples accesos a un almacenamiento común.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 23 },
+    "tags": ["shared-data", "pizarron", "estilos"]
+  },
+  {
+    "id": "arq-est-013",
+    "tema": "arquitectura",
+    "subtema": "shared-data",
+    "dificultad": "media",
+    "pregunta": "Tres equipos escriben y leen del mismo repositorio central de una plataforma logística. ¿Qué costo característico de ese estilo deben asumir?",
+    "opciones": [
+      {
+        "texto": "Todos los subsistemas deben acordar el modelo de datos del repositorio.",
+        "correcta": true
+      },
+      {
+        "texto": "Los datos deben transmitirse de un componente a otro en cada operación.",
+        "correcta": false,
+        "porque_no": "La ventaja del estilo es que los datos no se transmiten de un componente a otro: se comparten en el almacenamiento."
+      },
+      {
+        "texto": "Los componentes que producen datos deben conocer cómo se usarán esos datos.",
+        "correcta": false,
+        "porque_no": "Ocurre lo contrario: quien produce datos no necesita conocer el uso que se les dará."
+      },
+      {
+        "texto": "Los respaldos y el control de acceso quedan dispersos en cada componente.",
+        "correcta": false,
+        "porque_no": "En este estilo esas actividades están centralizadas; el riesgo es que componentes distintos necesiten políticas diferentes."
+      }
+    ],
+    "explicacion": "Compartir un almacenamiento es eficiente para grandes volúmenes porque los datos no se transmiten entre componentes y quien produce no necesita saber cómo se usarán. El precio es que todos los subsistemas deben acordar el modelo de datos del repositorio. Además, si bien respaldos, seguridad, control de acceso y recuperación quedan centralizados, distintos componentes podrían requerir políticas diferentes.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 25 },
+    "tags": ["shared-data", "acoplamiento", "compromisos"]
+  },
+  {
+    "id": "arq-est-014",
+    "tema": "arquitectura",
+    "subtema": "monolito",
+    "dificultad": "media",
+    "pregunta": "Una startup lanza su producto como una aplicación que se despliega entera y que cubre varias funciones del negocio. Al mes dos clientes piden un cambio en un módulo. ¿Qué le ocurre según las diapositivas?",
+    "opciones": [
+      {
+        "texto": "Debe reconstruir y desplegar toda la solución, porque el monolito se despliega como unidad indivisible.",
+        "correcta": true
+      },
+      {
+        "texto": "Solo redespliega el módulo modificado, porque cada módulo se despliega por separado.",
+        "correcta": false,
+        "porque_no": "Eso describe unidades desplegadas individualmente, propio de microservicios, no del monolito."
+      },
+      {
+        "texto": "Pierde la baja complejidad de comunicación que tenía al inicio.",
+        "correcta": false,
+        "porque_no": "El monolito justamente tiene baja complejidad de comunicación; ese rasgo no se pierde con el cambio."
+      },
+      {
+        "texto": "Queda obligada a migrar a SOA antes de poder aplicar el cambio.",
+        "correcta": false,
+        "porque_no": "Las diapositivas no plantean esa obligación: el cambio se puede hacer, con el costo de reconstruir y desplegar todo."
+      }
+    ],
+    "explicacion": "La arquitectura monolítica se define como una aplicación desplegada como unidad indivisible que no es responsable de una única función. Sus ventajas son el desarrollo ágil en etapas tempranas y la baja complejidad de comunicación. Entre sus desventajas, cambiar un módulo obliga a reconstruir y desplegar toda la solución, además de las limitaciones para escalar y la posible baja flexibilidad.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 40 },
+    "tags": ["monolito", "despliegue", "estilos"]
+  },
+  {
+    "id": "arq-est-015",
+    "tema": "arquitectura",
+    "subtema": "microservicios",
+    "dificultad": "media",
+    "pregunta": "Una plataforma de streaming necesita escalar de forma independiente sus componentes de video, autenticación, recomendaciones y pagos. ¿Qué estilo responde mejor a ese requisito y por qué?",
+    "opciones": [
+      {
+        "texto": "Microservicios, porque el sistema se modela como unidades desplegadas individualmente.",
+        "correcta": true
+      },
+      {
+        "texto": "Capas jerárquicas, porque cada capa se escala por separado según su función.",
+        "correcta": false,
+        "porque_no": "Las capas separan responsabilidades, pero no son unidades que se despliegan de forma individual."
+      },
+      {
+        "texto": "Tubos y filtros, porque cada etapa del flujo escala de manera autónoma.",
+        "correcta": false,
+        "porque_no": "El estilo encadena transformaciones de datos; no está pensado para desplegar y escalar capacidades de negocio por separado."
+      },
+      {
+        "texto": "Cliente-servidor de dos niveles, porque permite agregar servidores idénticos detrás del cliente.",
+        "correcta": false,
+        "porque_no": "Agregar servidores idénticos replica la aplicación completa; no permite escalar cada capacidad de negocio por su cuenta."
+      }
+    ],
+    "explicacion": "Las diapositivas definen microservicios como un sistema complejo modelado como un conjunto de unidades desplegadas individualmente, lo que favorece los pipelines de CI/CD. Esa descomposición permite escalar y evolucionar cada unidad según su demanda, en lugar de replicar toda la aplicación. Por eso encaja con el requisito de escalar video, autenticación, recomendaciones y pagos de forma independiente.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 57 },
+    "tags": ["microservicios", "escalabilidad", "seleccion"]
+  },
+  {
+    "id": "arq-est-016",
+    "tema": "arquitectura",
+    "subtema": "microservicios",
+    "dificultad": "dificil",
+    "pregunta": "Un arquitecto afirma que microservicios es un estilo totalmente nuevo que abandona el monolito y SOA. ¿Qué dice al respecto la diapositiva que define microservicios?",
+    "opciones": [
+      {
+        "texto": "Que se lo puede ver como una evolución que combina conceptos de arquitectura monolítica y de SOA, aplicando REST.",
+        "correcta": true
+      },
+      {
+        "texto": "Que reemplaza a SOA porque elimina la idea de servicio como unidad de lógica.",
+        "correcta": false,
+        "porque_no": "El microservicio sigue siendo una unidad de lógica y de despliegue; lo que cambia es el grano y la forma de desplegarlo."
+      },
+      {
+        "texto": "Que es una variante de cliente-servidor de dos niveles que no necesita pipelines de CI/CD.",
+        "correcta": false,
+        "porque_no": "La definición destaca justamente las unidades desplegadas individualmente y el favor que da a los pipelines de CI/CD."
+      },
+      {
+        "texto": "Que solo aplica a sistemas pequeños, porque no admite descomposición.",
+        "correcta": false,
+        "porque_no": "Se define para sistemas complejos, modelados como un conjunto de unidades desplegadas individualmente."
+      }
+    ],
+    "explicacion": "La diapositiva presenta a microservicios como un sistema complejo modelado como un conjunto de unidades desplegadas individualmente, que favorece los pipelines de CI/CD. Agrega que se lo puede ver como una evolución de los conceptos de arquitectura monolítica y de SOA combinados, aplicando REST. No es una ruptura total con esos antecedentes, sino una recombinación de sus ideas.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 57 },
+    "tags": ["microservicios", "soa", "monolito"]
+  },
+  {
+    "id": "arq-est-017",
+    "tema": "arquitectura",
+    "subtema": "soa",
+    "dificultad": "facil",
+    "pregunta": "¿Qué rasgo define a una arquitectura orientada a servicios según las diapositivas?",
+    "opciones": [
+      {
+        "texto": "El sistema resulta de la composición de servicios, entendidos como unidades de lógica de una solución.",
+        "correcta": true
+      },
+      {
+        "texto": "El sistema se despliega como una unidad indivisible que cubre varias funciones del negocio.",
+        "correcta": false,
+        "porque_no": "Esa es la definición de arquitectura monolítica, no de SOA."
+      },
+      {
+        "texto": "El servicio se implementa de forma obligatoria con WSDL, SOAP y XML.",
+        "correcta": false,
+        "porque_no": "Esos son estándares de los servicios web, una tecnología posible; no definen el estilo."
+      },
+      {
+        "texto": "Un componente gerente coordina los procesos de todos los demás.",
+        "correcta": false,
+        "porque_no": "Ese es el modelo gerente del control centralizado."
+      }
+    ],
+    "explicacion": "En SOA el sistema es el resultado de la composición de servicios, y un servicio es una unidad de lógica a la que se aplicó orientación a servicios en medida significativa. El material agrega que el servicio es independiente de las aplicaciones que lo usan, así que aplicaciones distintas pueden compartirlo. Los servicios web con WSDL, SOAP, XML y HTTP son una forma de llevarlo a la práctica, no la definición del estilo.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 53 },
+    "tags": ["soa", "servicios", "estilos"]
+  },
+  {
+    "id": "arq-est-018",
+    "tema": "arquitectura",
+    "subtema": "servicios-web",
+    "dificultad": "dificil",
+    "pregunta": "Un equipo expone un servicio web y confunde el rol de sus estándares. ¿Cuál es la asignación que describen las diapositivas?",
+    "opciones": [
+      {
+        "texto": "WSDL para la interfaz del servicio, SOAP para los mensajes, XML para serializarlos y HTTP como protocolo de intercambio.",
+        "correcta": true
+      },
+      {
+        "texto": "WSDL para los mensajes, SOAP para la interfaz y XML como protocolo de transporte.",
+        "correcta": false,
+        "porque_no": "Invierte los roles: WSDL describe la interfaz y SOAP define los mensajes intercambiados."
+      },
+      {
+        "texto": "SOAP para serializar, XML para la interfaz y HTTP para la descripción del servicio.",
+        "correcta": false,
+        "porque_no": "XML se ocupa de la serialización, WSDL de la interfaz y HTTP es el protocolo sobre el que se intercambian los mensajes."
+      },
+      {
+        "texto": "HTTP para la interfaz, WSDL para el transporte y SOAP para serializar.",
+        "correcta": false,
+        "porque_no": "Ninguno de esos roles coincide con los que las diapositivas asignan a cada estándar."
+      }
+    ],
+    "explicacion": "Las diapositivas presentan al servicio web como una tecnología que usa un conjunto de protocolos y estándares para intercambiar datos entre aplicaciones. WSDL describe la interfaz del servicio, SOAP define los mensajes intercambiados, XML se ocupa de la serialización y el intercambio ocurre sobre HTTP. Confundir esos roles lleva a diseñar contratos y transportes inconsistentes.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 55 },
+    "tags": ["servicios-web", "soap", "wsdl"]
+  }
+]

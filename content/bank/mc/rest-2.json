@@ -1,0 +1,762 @@
+[
+  {
+    "id": "rest-metodos-021",
+    "tema": "rest",
+    "subtema": "metodos-http",
+    "dificultad": "facil",
+    "pregunta": "La API debe dar de alta un usuario nuevo con nombre y correo. ¿Qué método y qué forma de envío muestra el ejemplo del material?",
+    "opciones": [
+      {
+        "texto": "POST sobre /users, con los datos del usuario en el cuerpo de la petición.",
+        "correcta": true
+      },
+      {
+        "texto": "GET sobre /users, con los datos del usuario en la query string.",
+        "correcta": false,
+        "porque_no": "GET se usa para consultar, y el material no envía los datos de un alta en la URL."
+      },
+      {
+        "texto": "PUT sobre /users, con el identificador vacío dentro del cuerpo.",
+        "correcta": false,
+        "porque_no": "PUT se usa para la actualización total de un recurso existente, no para darlo de alta."
+      },
+      {
+        "texto": "DELETE sobre /users y después POST sobre /users para confirmar.",
+        "correcta": false,
+        "porque_no": "El material no encadena operaciones para crear: POST es el método de creación de recursos."
+      }
+    ],
+    "explicacion": "Los ejemplos con curl muestran POST para crear recursos, enviando el cuerpo en JSON con la cabecera Content-Type: application/json. El recurso nuevo se crea dentro de la colección y la respuesta típica de una creación es 201 Created.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 26
+    },
+    "tags": [
+      "rest",
+      "metodos",
+      "post"
+    ]
+  },
+  {
+    "id": "rest-metodos-022",
+    "tema": "rest",
+    "subtema": "metodos-http",
+    "dificultad": "facil",
+    "pregunta": "El usuario 10 solo cambió su correo electrónico y el equipo quiere enviar únicamente ese campo. ¿Qué método corresponde según el material?",
+    "opciones": [
+      {
+        "texto": "PATCH, porque aplica una actualización parcial del recurso.",
+        "correcta": true
+      },
+      {
+        "texto": "PUT, porque reemplaza el recurso completo con lo que se envía.",
+        "correcta": false,
+        "porque_no": "PUT envía el recurso completo; usarlo para un cambio parcial haría perder los campos que no se envían."
+      },
+      {
+        "texto": "POST, porque es el método que modifica datos existentes.",
+        "correcta": false,
+        "porque_no": "El material reserva POST para crear y distingue PUT y PATCH como los métodos de actualización."
+      },
+      {
+        "texto": "GET con el correo nuevo como parámetro de la query string.",
+        "correcta": false,
+        "porque_no": "GET consulta y no debe modificar el estado del recurso."
+      }
+    ],
+    "explicacion": "PATCH aplica una actualización parcial: se envían solo los campos que cambian, como el correo del usuario 10. El material lo diferencia de PUT, que se usa para la actualización total del recurso, y de POST, que se usa para crear.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 28
+    },
+    "tags": [
+      "rest",
+      "metodos",
+      "patch"
+    ]
+  },
+  {
+    "id": "rest-metodos-023",
+    "tema": "rest",
+    "subtema": "metodos-http",
+    "dificultad": "media",
+    "pregunta": "El cliente reemplaza el registro completo del usuario 10 con todos los campos del recurso. ¿Por qué el material usa PUT y no PATCH en ese caso?",
+    "opciones": [
+      {
+        "texto": "Porque PUT se usa para la actualización total del recurso existente.",
+        "correcta": true
+      },
+      {
+        "texto": "Porque PUT permite modificar un solo campo y descartar el resto.",
+        "correcta": false,
+        "porque_no": "Es lo contrario de lo que hace PUT: la actualización de un único campo es el caso de PATCH."
+      },
+      {
+        "texto": "Porque PUT crea recursos nuevos y PATCH no modifica nada.",
+        "correcta": false,
+        "porque_no": "El material presenta a PUT como el método de actualización total de un recurso que ya existe."
+      },
+      {
+        "texto": "Porque PUT viaja en la URL y PATCH envía los datos en el cuerpo.",
+        "correcta": false,
+        "porque_no": "Ambos métodos envían el contenido en el cuerpo; el material no los distingue por ese criterio."
+      }
+    ],
+    "explicacion": "El ejemplo con curl muestra PUT sobre /users/10 con el cuerpo completo del usuario, porque PUT representa el reemplazo total del recurso. Cuando el cambio es parcial, como un nuevo correo electrónico, el método indicado es PATCH.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 27
+    },
+    "tags": [
+      "rest",
+      "metodos",
+      "put"
+    ]
+  },
+  {
+    "id": "rest-idem-024",
+    "tema": "rest",
+    "subtema": "idempotencia",
+    "dificultad": "media",
+    "pregunta": "El cliente reitera la misma petición y el estado del servidor queda igual que después del primer envío. ¿Qué propiedad de la operación describe esa situación?",
+    "opciones": [
+      {
+        "texto": "Que la operación es idempotente.",
+        "correcta": true
+      },
+      {
+        "texto": "Que la operación es stateless.",
+        "correcta": false,
+        "porque_no": "Stateless describe la ausencia de estado de sesión en el servidor, no la repetibilidad de una operación."
+      },
+      {
+        "texto": "Que la operación es cacheable.",
+        "correcta": false,
+        "porque_no": "Cacheable indica que la respuesta puede reutilizarse, no que repetir la operación no altere el estado."
+      },
+      {
+        "texto": "Que la operación es de interfaz uniforme.",
+        "correcta": false,
+        "porque_no": "La interfaz uniforme habla de convenciones homogéneas entre recursos, no de repetir una petición."
+      }
+    ],
+    "explicacion": "Una operación HTTP es idempotente cuando repetirla deja el servidor en el mismo estado que la primera aplicación, y por eso los reintentos son seguros. Las actualizaciones totales y los borrados sobre la misma URI, como PUT y DELETE, cumplen esa propiedad; POST no la cumple. El práctico 6 retoma la idempotencia justamente para distinguir POST de PUT en los reintentos.",
+    "fuente": {
+      "archivo": "06-00-Practico 06 APIs Rest.pdf",
+      "pagina": 1
+    },
+    "tags": [
+      "rest",
+      "idempotencia",
+      "metodos"
+    ]
+  },
+  {
+    "id": "rest-idem-025",
+    "tema": "rest",
+    "subtema": "idempotencia",
+    "dificultad": "dificil",
+    "pregunta": "La red corta la respuesta después de un POST /orders y el cliente reintenta sin saber si el pedido se creó. ¿Qué consecuencia describe mejor la diferencia entre POST y PUT?",
+    "opciones": [
+      {
+        "texto": "El reintento de POST puede crear un pedido duplicado; el de PUT sobre la misma URI no duplica el recurso.",
+        "correcta": true
+      },
+      {
+        "texto": "El reintento de POST es seguro porque el servidor descarta la segunda petición.",
+        "correcta": false,
+        "porque_no": "Sin un mecanismo explícito, el servidor no distingue un reintento de una creación nueva."
+      },
+      {
+        "texto": "El reintento de PUT genera una segunda versión del recurso con otro identificador.",
+        "correcta": false,
+        "porque_no": "PUT apunta a una URI con identidad propia: repetirlo vuelve a dejar el mismo recurso en el mismo estado."
+      },
+      {
+        "texto": "Ambos métodos se comportan igual porque los dos llevan un cuerpo en JSON.",
+        "correcta": false,
+        "porque_no": "El formato del cuerpo no define la semántica; lo que cambia es si repetir la operación altera el estado."
+      }
+    ],
+    "explicacion": "PUT es idempotente porque el recurso destino está identificado en la URI y cada repetición lo vuelve a dejar en el estado representado. POST no lo es porque cada envío puede generar una instancia nueva, así que ante un corte el cliente no puede reintentar a ciegas sin arriesgar un duplicado. El práctico 6 retoma la idempotencia justamente para distinguir POST de PUT en los reintentos.",
+    "fuente": {
+      "archivo": "06-00-Practico 06 APIs Rest.pdf",
+      "pagina": 1
+    },
+    "tags": [
+      "rest",
+      "idempotencia",
+      "reintentos"
+    ]
+  },
+  {
+    "id": "rest-codigos-026",
+    "tema": "rest",
+    "subtema": "codigos-estado",
+    "dificultad": "facil",
+    "pregunta": "El cliente envía la creación de un pedido y el servidor lo persiste correctamente. ¿Qué código de estado corresponde según el material?",
+    "opciones": [
+      {
+        "texto": "201 Created",
+        "correcta": true
+      },
+      {
+        "texto": "200 OK, porque la petición se procesó sin errores.",
+        "correcta": false,
+        "porque_no": "El material reserva 201 para la creación de un recurso y usa 200 para respuestas exitosas de consulta."
+      },
+      {
+        "texto": "400 Bad Request, porque la petición incluyó un cuerpo con datos.",
+        "correcta": false,
+        "porque_no": "Enviar un cuerpo es normal al crear; 400 indica que la petición está mal formada."
+      },
+      {
+        "texto": "500 Internal Server Error, porque el servidor escribió en la base de datos.",
+        "correcta": false,
+        "porque_no": "Escribir correctamente no es una falla: 500 se reserva para errores internos del servidor."
+      }
+    ],
+    "explicacion": "El material enumera 201 Created entre los códigos típicos para la creación exitosa de un recurso. Responder 200 para todos los casos, incluida la creación, es justamente la mala práctica que el material señala.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 11
+    },
+    "tags": [
+      "rest",
+      "codigos",
+      "201"
+    ]
+  },
+  {
+    "id": "rest-codigos-027",
+    "tema": "rest",
+    "subtema": "codigos-estado",
+    "dificultad": "facil",
+    "pregunta": "El cliente pide GET /customers/123 y ese cliente no existe. ¿Qué código corresponde y por qué?",
+    "opciones": [
+      {
+        "texto": "404 Not Found, porque el recurso solicitado no existe.",
+        "correcta": true
+      },
+      {
+        "texto": "400 Bad Request, porque el cliente cometió un error al armar la petición.",
+        "correcta": false,
+        "porque_no": "La petición está bien formada; lo que no existe es el recurso que se pidió."
+      },
+      {
+        "texto": "409 Conflict, porque el identificador entra en conflicto con otro recurso.",
+        "correcta": false,
+        "porque_no": "409 se usa cuando la operación choca con el estado actual del recurso, no cuando el recurso no existe."
+      },
+      {
+        "texto": "500 Internal Server Error, porque el servidor no pudo completar la búsqueda.",
+        "correcta": false,
+        "porque_no": "El servidor respondió bien: el problema está en el recurso pedido, no en una falla interna."
+      }
+    ],
+    "explicacion": "404 Not Found comunica que el recurso solicitado no existe, y es el código que el material usa en el ejemplo de GET /users/{id}. Conviene acompañarlo con un cuerpo de error estructurado que explique el motivo.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 11
+    },
+    "tags": [
+      "rest",
+      "codigos",
+      "404"
+    ]
+  },
+  {
+    "id": "rest-codigos-028",
+    "tema": "rest",
+    "subtema": "codigos-estado",
+    "dificultad": "media",
+    "pregunta": "Un cliente intenta reservar stock de un producto que ya no tiene disponibilidad y la operación se rechaza por el estado actual del recurso. ¿Qué código del material refleja ese caso?",
+    "opciones": [
+      {
+        "texto": "409 Conflict",
+        "correcta": true
+      },
+      {
+        "texto": "404 Not Found, porque el producto ya no está disponible.",
+        "correcta": false,
+        "porque_no": "El producto existe: la falta de disponibilidad es un conflicto con el estado actual, no una ausencia de recurso."
+      },
+      {
+        "texto": "400 Bad Request, porque el cuerpo enviado está mal formado.",
+        "correcta": false,
+        "porque_no": "El cuerpo puede ser válido: el rechazo proviene del estado del recurso, no de la sintaxis de la petición."
+      },
+      {
+        "texto": "500 Internal Server Error, porque falló la lógica de inventario.",
+        "correcta": false,
+        "porque_no": "El servidor funcionó bien al detectar el conflicto; 500 se reserva para fallas internas."
+      }
+    ],
+    "explicacion": "409 Conflict expresa que la operación no puede aplicarse porque entra en conflicto con el estado actual del recurso, como un stock agotado. El material lo incluye entre los códigos típicos, junto con 200, 201, 400, 404 y 500.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 11
+    },
+    "tags": [
+      "rest",
+      "codigos",
+      "409"
+    ]
+  },
+  {
+    "id": "rest-errores-029",
+    "tema": "rest",
+    "subtema": "errores",
+    "dificultad": "dificil",
+    "pregunta": "Una API responde 200 en todos los casos y coloca el error en el cuerpo, con mensajes genéricos como \"Error al procesar\". ¿Cómo evalúa el material ese diseño?",
+    "opciones": [
+      {
+        "texto": "Como una mala práctica: corresponde el código HTTP correcto más un mensaje estructurado.",
+        "correcta": true
+      },
+      {
+        "texto": "Como un diseño correcto, porque el cliente puede leer el campo message en cada respuesta.",
+        "correcta": false,
+        "porque_no": "El cliente debe poder distinguir el resultado por el código; con un 200 está obligado a interpretar el cuerpo en todos los casos."
+      },
+      {
+        "texto": "Como un diseño correcto si el cuerpo incluye un campo error con un código propio.",
+        "correcta": false,
+        "porque_no": "Un código propio dentro de un 200 no reemplaza al código HTTP, que forma parte del contrato de la API."
+      },
+      {
+        "texto": "Como una decisión aceptable si está versionada y documentada en OpenAPI.",
+        "correcta": false,
+        "porque_no": "Documentar una mala práctica no la corrige: el material pide responder con el código HTTP adecuado."
+      }
+    ],
+    "explicacion": "El material marca como mala práctica usar HTTP 200 para todos los casos y propone responder con el código correcto más un mensaje estructurado, con campos como error y message. Ese contrato permite que el cliente reaccione distinto ante un 400, un 404, un 409 o un 500 y mejora la experiencia del desarrollador.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 11
+    },
+    "tags": [
+      "rest",
+      "errores",
+      "anti-patrones"
+    ]
+  },
+  {
+    "id": "rest-versionado-031",
+    "tema": "rest",
+    "subtema": "versionado",
+    "dificultad": "facil",
+    "pregunta": "El documento OpenAPI de ejemplo declara como servidor la URL https://api.ejemplo.com/v1. ¿Qué indica el segmento v1 en esa dirección?",
+    "opciones": [
+      {
+        "texto": "Que la versión de la API viaja en la URL base del contrato.",
+        "correcta": true
+      },
+      {
+        "texto": "Que v1 es un recurso del dominio y se consulta con GET /v1.",
+        "correcta": false,
+        "porque_no": "El segmento no es un recurso del dominio, sino la versión bajo la cual se publican los endpoints."
+      },
+      {
+        "texto": "Que la API acepta una sola versión del formato JSON.",
+        "correcta": false,
+        "porque_no": "El segmento no habla del formato de las representaciones, sino de la versión de la API."
+      },
+      {
+        "texto": "Que el servidor rechaza a los clientes escritos para otras versiones.",
+        "correcta": false,
+        "porque_no": "El material no describe ese comportamiento: solo muestra dónde se declara la versión de la API."
+      }
+    ],
+    "explicacion": "En el ejemplo de OpenAPI la URL base incluye /v1, de modo que la versión forma parte de la ruta bajo la cual se publican los endpoints. Esa convención permite que una versión nueva conviva con la anterior mientras los clientes existentes siguen apuntando a la ruta que ya conocen.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 18
+    },
+    "tags": [
+      "rest",
+      "versionado",
+      "openapi"
+    ]
+  },
+  {
+    "id": "rest-acoplamiento-032",
+    "tema": "rest",
+    "subtema": "microservicios",
+    "dificultad": "dificil",
+    "pregunta": "Muchos servicios consumen el mismo endpoint, cualquier cambio obliga a modificarlos a todos y además dependen de la estructura de datos de un servicio ajeno. ¿Cómo nombra el material ese problema?",
+    "opciones": [
+      {
+        "texto": "Acoplamiento entre servicios que produce un distributed monolith.",
+        "correcta": true
+      },
+      {
+        "texto": "Consistencia eventual, porque los datos tardan en replicarse.",
+        "correcta": false,
+        "porque_no": "La consistencia eventual es una consecuencia de los sistemas distribuidos, no el patrón de dependencia descripto."
+      },
+      {
+        "texto": "Layered System, porque hay demasiadas capas entre los servicios.",
+        "correcta": false,
+        "porque_no": "La organización en capas no explica la dependencia fuerte sobre el contrato y los datos ajenos."
+      },
+      {
+        "texto": "Data ownership, porque cada servicio es dueño exclusivo de sus datos.",
+        "correcta": false,
+        "porque_no": "Data ownership es el principio que evita el problema, no el nombre del problema."
+      }
+    ],
+    "explicacion": "El material advierte que el acoplamiento ocurre cuando muchos servicios dependen del mismo endpoint, cuando un cambio en la API obliga a modificar varios o cuando se depende de la estructura de datos de otro servicio. El resultado es un distributed monolith: servicios que parecen independientes pero no lo son, y eso contradice el objetivo de los microservicios.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 33
+    },
+    "tags": [
+      "rest",
+      "microservicios",
+      "acoplamiento"
+    ]
+  },
+  {
+    "id": "rest-filtrado-034",
+    "tema": "rest",
+    "subtema": "filtrado",
+    "dificultad": "media",
+    "pregunta": "El cliente necesita ver solo los pedidos confirmados. ¿Cuál es la forma más consistente con el material para expresar ese filtro?",
+    "opciones": [
+      {
+        "texto": "GET /orders?status=confirmed, con el filtro como query param.",
+        "correcta": true
+      },
+      {
+        "texto": "GET /orders/confirmed, como si confirmed fuera un pedido.",
+        "correcta": false,
+        "porque_no": "confirmed describe un criterio de búsqueda, no la identidad de un recurso concreto."
+      },
+      {
+        "texto": "POST /orders/filter con el estado dentro del cuerpo.",
+        "correcta": false,
+        "porque_no": "Agrega un verbo a la URI y usa POST para una consulta, en contra del diseño orientado a recursos."
+      },
+      {
+        "texto": "GET /getConfirmedOrders para que el criterio quede visible en la ruta.",
+        "correcta": false,
+        "porque_no": "Vuelve al patrón con verbo en la URI que el material señala como incorrecto."
+      }
+    ],
+    "explicacion": "La especificación de una API incluye los query params entre sus parámetros, y el material insiste en que las URIs identifican recursos y no operaciones. Filtrar una colección con ?status=confirmed conserva el recurso /orders y deja el criterio como parámetro de la consulta.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 15
+    },
+    "tags": [
+      "rest",
+      "filtrado",
+      "query-params"
+    ]
+  },
+  {
+    "id": "rest-openapi-035",
+    "tema": "rest",
+    "subtema": "openapi",
+    "dificultad": "facil",
+    "pregunta": "El equipo decide describir su API en YAML con OpenAPI. ¿Qué aporta ese estándar según el material?",
+    "opciones": [
+      {
+        "texto": "Describir la API en un formato estructurado del que se generan documentación, mocks, pruebas y validación de contratos.",
+        "correcta": true
+      },
+      {
+        "texto": "Reemplazar HTTP por un protocolo propio que garantiza el tipado de los datos.",
+        "correcta": false,
+        "porque_no": "OpenAPI describe APIs que siguen viajando por HTTP; no reemplaza al protocolo."
+      },
+      {
+        "texto": "Ejecutar la API en producción sin necesidad de implementar el backend.",
+        "correcta": false,
+        "porque_no": "Permite generar mocks para trabajar en paralelo, pero no reemplaza a la implementación real."
+      },
+      {
+        "texto": "Certificar el rendimiento de la API ante miles de clientes concurrentes.",
+        "correcta": false,
+        "porque_no": "El material no atribuye a OpenAPI ninguna medición ni certificación de rendimiento."
+      }
+    ],
+    "explicacion": "OpenAPI es un estándar para describir APIs REST en YAML o JSON. A partir de ese documento estructurado se puede generar documentación, generar mocks, ejecutar pruebas automáticas y validar contratos, lo que reduce la deuda técnica asociada a las integraciones.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 17
+    },
+    "tags": [
+      "rest",
+      "openapi",
+      "documentacion"
+    ]
+  },
+  {
+    "id": "rest-espec-036",
+    "tema": "rest",
+    "subtema": "especificacion",
+    "dificultad": "facil",
+    "pregunta": "Un equipo entrega un documento que enumera endpoints y métodos, pero no indica qué parámetros recibe cada uno ni qué códigos devuelve. ¿Qué le falta a esa especificación según el material?",
+    "opciones": [
+      {
+        "texto": "Parámetros, request body y responses con sus códigos HTTP.",
+        "correcta": true
+      },
+      {
+        "texto": "El código fuente del servidor y el detalle del motor de base de datos.",
+        "correcta": false,
+        "porque_no": "La especificación describe el contrato de uso, no la implementación interna del servicio."
+      },
+      {
+        "texto": "La lista de clientes que ya consumen la API en producción.",
+        "correcta": false,
+        "porque_no": "El material no incluye la cartera de clientes entre los componentes del contrato."
+      },
+      {
+        "texto": "El diagrama de despliegue de la infraestructura de servidores.",
+        "correcta": false,
+        "porque_no": "La infraestructura no forma parte de la especificación de la API."
+      }
+    ],
+    "explicacion": "La especificación describe qué hace la API, cómo se usa, qué datos recibe y qué devuelve, y funciona como contrato entre sistemas. Una API REST bien especificada incluye endpoints, métodos, parámetros de query y de path, request body y responses con su formato y sus códigos HTTP.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 15
+    },
+    "tags": [
+      "rest",
+      "especificacion",
+      "contrato"
+    ]
+  },
+  {
+    "id": "rest-docs-037",
+    "tema": "rest",
+    "subtema": "documentacion",
+    "dificultad": "facil",
+    "pregunta": "La API funciona bien, pero los desarrolladores externos tardan semanas en integrarla. ¿Qué plantea el material sobre ese problema?",
+    "opciones": [
+      {
+        "texto": "Que una API técnicamente excelente puede fracasar si es difícil de comprender, porque la experiencia del desarrollador es crítica.",
+        "correcta": true
+      },
+      {
+        "texto": "Que es un problema de infraestructura y se resuelve agregando más servidores.",
+        "correcta": false,
+        "porque_no": "El material ubica el problema en la comprensión y la experiencia del desarrollador, no en la capacidad de cómputo."
+      },
+      {
+        "texto": "Que conviene restringir la documentación para que los equipos consulten al soporte.",
+        "correcta": false,
+        "porque_no": "El material propone lo contrario: documentar con introducción, casos de uso, autenticación y ejemplos ejecutables."
+      },
+      {
+        "texto": "Que la documentación solo importa en las APIs internas, no en las públicas.",
+        "correcta": false,
+        "porque_no": "El material no hace esa distinción: la experiencia del desarrollador es crítica en cualquier API."
+      }
+    ],
+    "explicacion": "El material sostiene que una API técnicamente excelente puede fracasar si resulta difícil de comprender, y que la experiencia del desarrollador se vuelve crítica. Por eso la documentación debe incluir introducción funcional, casos de uso, autenticación, modelos de datos, ejemplos ejecutables y errores comunes.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 13
+    },
+    "tags": [
+      "rest",
+      "documentacion",
+      "dx"
+    ]
+  },
+  {
+    "id": "rest-apifirst-038",
+    "tema": "rest",
+    "subtema": "api-first",
+    "dificultad": "dificil",
+    "pregunta": "Tres equipos deben construir servicios que se consumen entre sí y ninguno quiere quedar bloqueado esperando a los otros. ¿Cómo aplica el material el enfoque API-first?",
+    "opciones": [
+      {
+        "texto": "Definir primero la especificación OpenAPI, validarla con los consumidores y generar mocks para desarrollar en paralelo.",
+        "correcta": true
+      },
+      {
+        "texto": "Implementar cada servicio completo y después acordar el contrato entre los equipos.",
+        "correcta": false,
+        "porque_no": "Es el orden inverso: el material propone acordar el contrato antes de la implementación."
+      },
+      {
+        "texto": "Documentar la API recién al final, cuando los endpoints ya están estables.",
+        "correcta": false,
+        "porque_no": "La documentación posterior no evita que cada equipo interprete la API a su manera durante el desarrollo."
+      },
+      {
+        "texto": "Compartir la base de datos entre los servicios para acordar el modelo de datos.",
+        "correcta": false,
+        "porque_no": "Compartir datos contradice el principio de data ownership que el material defiende."
+      }
+    ],
+    "explicacion": "API-first consiste en diseñar primero el contrato y después la implementación: definir la especificación OpenAPI, validarla con los equipos consumidores, generar mocks y desarrollar los servicios en paralelo. Así el trabajo se distribuye entre equipos independientes sin que uno tenga que esperar a que el otro servicio esté terminado.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 36
+    },
+    "tags": [
+      "rest",
+      "api-first",
+      "openapi"
+    ]
+  },
+  {
+    "id": "rest-ownership-039",
+    "tema": "rest",
+    "subtema": "microservicios",
+    "dificultad": "media",
+    "pregunta": "Un servicio necesita datos de clientes que pertenecen a otro servicio. ¿Qué indica el principio de data ownership del material?",
+    "opciones": [
+      {
+        "texto": "Que debe pedirlos por la API del servicio dueño, sin acceder a su base de datos.",
+        "correcta": true
+      },
+      {
+        "texto": "Que puede consultar directamente la base del otro servicio si solo hace lecturas.",
+        "correcta": false,
+        "porque_no": "El material prohíbe el acceso directo a bases de datos ajenas, incluso para lecturas."
+      },
+      {
+        "texto": "Que conviene replicar la base completa para no depender de ningún otro servicio.",
+        "correcta": false,
+        "porque_no": "Esa dependencia de datos es justamente lo que el principio busca evitar."
+      },
+      {
+        "texto": "Que la propiedad de los datos la define el equipo que los consume con más frecuencia.",
+        "correcta": false,
+        "porque_no": "La propiedad es exclusiva del servicio que expone la capacidad, no de quien más la consume."
+      }
+    ],
+    "explicacion": "En microservicios cada servicio es dueño exclusivo de sus datos: no se accede directamente a bases de datos de otros servicios y todo acceso a datos externos se hace mediante APIs. Sin ese principio los servicios dejan de ser independientes y aparece el acoplamiento a nivel de datos.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 35
+    },
+    "tags": [
+      "rest",
+      "microservicios",
+      "data-ownership"
+    ]
+  },
+  {
+    "id": "rest-microservicios-041",
+    "tema": "rest",
+    "subtema": "microservicios",
+    "dificultad": "media",
+    "pregunta": "Un equipo migra su monolito a microservicios y elige REST para que los servicios se comuniquen entre sí. Según el material, ¿qué restricciones debe aceptar por esa decisión?",
+    "opciones": [
+      {
+        "texto": "Comunicación stateless, latencia de red y consistencia eventual en el sistema distribuido.",
+        "correcta": true
+      },
+      {
+        "texto": "Mayor acoplamiento entre servicios y despliegues conjuntos obligatorios.",
+        "correcta": false,
+        "porque_no": "REST en microservicios busca bajo acoplamiento e independencia de despliegue; el material no plantea lo contrario."
+      },
+      {
+        "texto": "Perder la infraestructura de HTTP y definir un protocolo propietario para cada servicio.",
+        "correcta": false,
+        "porque_no": "Al contrario: REST se apoya en la infraestructura existente de HTTP, las URI y los códigos de estado."
+      },
+      {
+        "texto": "Renunciar a la interoperabilidad entre equipos y organizaciones.",
+        "correcta": false,
+        "porque_no": "La interoperabilidad es una de las razones por las que se elige REST en microservicios."
+      }
+    ],
+    "explicacion": "El material enumera las restricciones que implica usar REST en microservicios: comunicación stateless, latencia de red y consistencia eventual en sistemas distribuidos. A cambio se apoya en HTTP, es simple de implementar, interoperable y facilita la integración entre equipos.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 32
+    },
+    "tags": [
+      "rest",
+      "microservicios",
+      "tradeoffs"
+    ]
+  },
+  {
+    "id": "rest-latencia-042",
+    "tema": "rest",
+    "subtema": "latencia",
+    "dificultad": "media",
+    "pregunta": "Una pantalla necesita datos de cinco microservicios y las llamadas REST se encadenan una tras otra. ¿Por qué el tiempo de respuesta crece tanto según el material?",
+    "opciones": [
+      {
+        "texto": "Porque cada llamada suma serialización, transmisión por red, procesamiento y deserialización, y en cadenas de llamadas la latencia se acumula.",
+        "correcta": true
+      },
+      {
+        "texto": "Porque el cliente HTTP del navegador permite un máximo de cinco llamadas simultáneas.",
+        "correcta": false,
+        "porque_no": "El material no menciona ese límite: el problema es la acumulación de costos por cada llamada."
+      },
+      {
+        "texto": "Porque JSON tarda más en serializarse que cualquier formato binario.",
+        "correcta": false,
+        "porque_no": "La serialización es uno de los costos, pero el material no compara JSON con formatos binarios."
+      },
+      {
+        "texto": "Porque los microservicios quedan bloqueados esperando al anterior y no atienden otros pedidos.",
+        "correcta": false,
+        "porque_no": "La diapositiva atribuye la degradación a los costos de cada llamada, no a un bloqueo entre servicios."
+      }
+    ],
+    "explicacion": "Cada llamada REST en un sistema distribuido implica serializar los datos, transmitirlos por la red, procesarlos en el servidor y deserializar la respuesta. Cuando las llamadas se encadenan esos costos se suman, y el rendimiento deja de depender solo del código: depende del número de llamadas entre servicios.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 34
+    },
+    "tags": [
+      "rest",
+      "latencia",
+      "microservicios"
+    ]
+  },
+  {
+    "id": "rest-openapi-043",
+    "tema": "rest",
+    "subtema": "openapi",
+    "dificultad": "media",
+    "pregunta": "El equipo quiere que la especificación OpenAPI describa formalmente el recurso Product y el tipo de cada uno de sus atributos. ¿Dónde queda esa definición en el documento?",
+    "opciones": [
+      {
+        "texto": "En components.schemas, con el objeto Product y el tipo de cada propiedad.",
+        "correcta": true
+      },
+      {
+        "texto": "En paths, porque allí se declaran los atributos de cada recurso.",
+        "correcta": false,
+        "porque_no": "paths describe rutas y operaciones; los atributos del recurso se formalizan en los schemas."
+      },
+      {
+        "texto": "En servers, junto a la URL base donde se publica la API.",
+        "correcta": false,
+        "porque_no": "servers indica las URL base de la API, no la estructura de los datos."
+      },
+      {
+        "texto": "En info, dentro de la descripción general de la API.",
+        "correcta": false,
+        "porque_no": "info contiene metadatos como título, versión y descripción; no define el esquema de un recurso."
+      }
+    ],
+    "explicacion": "OpenAPI permite formalizar el modelo de información: en components.schemas se define el objeto Product con el tipo de cada propiedad, y ese esquema se convierte en la descripción formal del recurso dentro de la especificación.",
+    "fuente": {
+      "archivo": "06-01-APIs REST-06-01.pdf",
+      "pagina": 47
+    },
+    "tags": [
+      "rest",
+      "openapi",
+      "modelo-informacion"
+    ]
+  }
+]

@@ -1,0 +1,194 @@
+{
+  "archivo": "06-01-APIs REST-06-01.pdf",
+  "carpeta": "",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Curso\nTendencias Aplicadas de \nIngenería de Software\nAPIs REST\n1"
+    },
+    {
+      "n": 2,
+      "texto": "¿Qué es una API?\n•\nUna API (Application Programming Interface) es un contrato que define \ncómo interactúan componentes o sistemas de software.\n•\nFunciones principales\n–\nExposición de funcionalidades.\n–\nIntercambio de datos.\n–\nIntegración entre sistemas.\n•\nEjemplos\n–\nSistemas de pagos.\n–\nPlataformas de e-commerce.\n–\nArquitecturas de microservicios.\n•\nUna API no es solamente una interfaz técnica; representa capacidades \nde negocio que pueden ser reutilizadas por distintos consumidores.\n2"
+    },
+    {
+      "n": 3,
+      "texto": "Introducción a REST\n•\nREST (Representational State Transfer), es un estilo arquitectónico propuesto \npor Roy Fielding (2000) para sistemas distribuidos.\n•\nREST no es un protocolo ni una tecnología.\n•\nREST es una forma de diseñar APIs.\n•\nEs un conjunto de reglas simples para organizar la comunicación.\n•\nREST usa HTTP de manera ordenada y consistente.\n•\nEs un conjunto de restricciones arquitectónicas que permiten construir sistemas:\n–\nEscalables.\n–\nEvolucionables.\n–\nIndependientes.\n–\nInteroperables.\n•\nREST aprovecha la infraestructura existente de Internet:\n–\nHTTP\n–\nURI\n–\nCódigos de estado\n–\nCaché\n3"
+    },
+    {
+      "n": 4,
+      "texto": "Introducción a REST\n• Principios fundamentales\n– Cliente-Servidor.\n– Stateless.\n– Cacheable.\n– Uniform Interface.\n– Layered System.\n• Beneficios\n– Simplicidad.\n– Escalabilidad.\n– Interoperabilidad.\n– Bajo acoplamiento.\n4"
+    },
+    {
+      "n": 5,
+      "texto": "¿Qué hace que una API sea REST?\n• Una API es REST si sigue estas ideas:\n– Usa HTTP correctamente\n– Trabaja con recursos (no acciones)\n– Es stateless (sin memoria de sesión)\n– Usa URLs claras y consistentes\n5"
+    },
+    {
+      "n": 6,
+      "texto": "Restricciones REST y Propiedades \nArquitectónicas\n• Restricción 1: Cliente-Servidor\n• Separación entre:\n– Presentación\n– Procesamiento de negocio\n– Persistencia\n• Beneficios\n– Evolución independiente.\n– Mejor mantenibilidad.\n– Reutilización.\n6"
+    },
+    {
+      "n": 7,
+      "texto": "Restricciones REST y Propiedades \nArquitectónicas\n•\nRestricción 2: Stateless\n•\nCada solicitud debe contener toda la información necesaria.\n•\nEl servidor no mantiene contexto de sesión.\n•\nBeneficios\n–\nEscalabilidad horizontal.\n–\nTolerancia a fallos.\n–\nBalanceo de carga sencillo.\n•\nDesventaja\n–\nMayor volumen de datos transmitidos.\n7"
+    },
+    {
+      "n": 8,
+      "texto": "Recursos y Representaciones\n•\nREST modela entidades del dominio como recursos.\n•\nEjemplos\n–\n/api/customers/123\n–\n/api/orders/456\n–\n/api/products/789\n•\nRepresentaciones\n–\nJSON\n–\nXML\n–\nYAML\n•\nEjemplo JSON\n{\n\"id\": 123,\n\"name\": \"Juan P\",\n\"email\": \"juan@domain.com\"\n}\n8"
+    },
+    {
+      "n": 9,
+      "texto": "Tácticas de Diseño REST\n•\nDiseño orientado a recursos\n✔ Correcto:\n/customers/123/orders\n✖ Incorrecto:\n/getCustomerOrders\n•\nUso consistente de HTTP\n–\nGET: para consultar\n–\nPOST: para crear\n–\nPUT: para actualizar\n–\nPATCH: para actualizar parcialmente\n–\nDELETE: para Eliminar\n•\nBeneficio\n–\nMayor coherencia y facilidad de adopción.\n9"
+    },
+    {
+      "n": 10,
+      "texto": "Tácticas de Diseño REST\n•\nConsistencia de Recursos\n•\nTodos los recursos deben seguir convenciones homogéneas.\n•\nEjemplo:\n–\n/customers\n–\n/products\n–\n/orders\n•\nNo:\n–\n/customerList\n–\n/productsData\n–\n/orderManagement\n10"
+    },
+    {
+      "n": 11,
+      "texto": "Tácticas de Diseño: Manejo de Errores\n•\nMala práctica:  HTTP 200 para todos los casos.\n•\nBuena práctica: HTTP correcto + mensaje estructurado.\n•\nEjemplos código HTTP:\n–\n200 OK\n–\n201 Created\n–\n400 Bad Request\n–\n404 Not Found\n–\n409 Conflict\n–\n500 Internal Server Error\n•\nRespuesta estandarizada\n{\n\"error\": \"CustomerNotFound\",\n\"message\": \"Customer 123 does not exist\"\n}\n•\nBeneficio\n–\nMejor experiencia para desarrolladores.\n11"
+    },
+    {
+      "n": 12,
+      "texto": "Rol Estratégico de las APIs\n•\nLas APIs permiten:\n•\nExpansión de Ecosistemas\n•\nEjemplos:\n–\nOpen Banking.\n–\nMarketplaces.\n–\nPlataformas de pagos.\n•\nDesarrolladores externos construyen nuevas aplicaciones usando \ncapacidades existentes.\n•\nMonetización\n–\nLa API puede convertirse en una fuente directa de ingresos.\n12"
+    },
+    {
+      "n": 13,
+      "texto": "Documentación como Activo Estratégico\n• Una API técnicamente excelente puede fracasar si es \ndifícil de comprender.\n• La experiencia del desarrollador (Developer Experience \n- DX) se vuelve crítica.\n• Componentes esenciales\n– Introducción funcional.\n– Casos de uso.\n– Autenticación.\n– Modelos de datos.\n– Ejemplos ejecutables.\n– Errores comunes.\n13"
+    },
+    {
+      "n": 14,
+      "texto": "¿Qué es la especificación de una API?\n• La especificación es un documento que describe:\n– Qué hace la API\n– Cómo se usa\n– Qué datos recibe\n– Qué datos devuelve\n• Es un contrato entre sistemas.\n• Una API REST bien especificada incluye:\n– 1. Endpoints: URLs disponibles\n Ej: /users, /orders\n– 2. Métodos HTTP\n GET, POST, PUT, DELETE\n14"
+    },
+    {
+      "n": 15,
+      "texto": "¿Qué es la especificación de una API?\n• 3. Parámetros\n– Query params\n– Path params\n• 4. Request body\n– Datos enviados\n• 5. Responses\n– Formato de respuesta\n– Códigos HTTP\n15"
+    },
+    {
+      "n": 16,
+      "texto": "Ejemplo simple de especificación\n•\nEndpoint: GET /users/{id}\n•\nDescripción:\n–\nObtiene información de un usuario\n•\nParámetros:\n–\nid (path): identificador del usuario\n•\nRespuesta:\n{\n\"id\": 1,\n\"name\": \"Ana\",\n\"email\": \"ana@email.com\"\n}\n•\nCódigos:\n–\n200 OK\n–\n404 Not Found\n16"
+    },
+    {
+      "n": 17,
+      "texto": "OpenAPI\n•\nOpenAPI es un estándar para describir APIs REST.\n•\nPermite escribir la API en formato estructurado (YAML o JSON).\n•\nA partir de un documento OpenAPI es posible:\n–\nGenerar documentación.\n–\nGenerar mocks.\n–\nEjecutar pruebas automáticas.\n–\nValidar contratos.\n•\nImpacto Organizacional\n–\nReduce significativamente la deuda técnica asociada a \nintegraciones.\n17"
+    },
+    {
+      "n": 18,
+      "texto": "Ejemplo simple de OpenAPI\ninfo:\n  title: User API\n  version: 1.0.0\n  description: API simple para gestión de usuarios\nservers:\n  - url: https://api.ejemplo.com/v1\npaths:\n  /users/{id}:\n    get:\n      summary: Obtener usuario por ID\n      description: Retorna la información de un usuario específico\n      operationId: getUserById\n      parameters:\n        - name: id\n          in: path\n          required: true\n          description: Identificador único del usuario\n          schema:\n            type: integer\n            example: 1\n18"
+    },
+    {
+      "n": 19,
+      "texto": "Ejemplo simple de OpenAPI\n     responses:\n        \"200\":\n          description: Usuario encontrado correctamente\n          content:\n            application/json:\n              schema:\n                type: object\n                properties:\n                  id:\n                    type: integer\n                    example: 1\n                  name:\n                    type: string\n                    example: Ana \n                  email:\n                    type: string\n                    example: ana@email.com\n        \"404\":\n          description: Usuario no encontrado\n          content:\n            application/json:\n              schema:\n                type: object\n                properties:\n                  error:\n                    type: string\n                    example: USER_NOT_FOUND\n                  message:\n                    type: string\n                    example: No se encontró el usuario con ese ID\n19"
+    },
+    {
+      "n": 20,
+      "texto": "OpenAPI\n• info: información general de la API\n• servers: dónde vive la API\n• paths: endpoints disponibles\n• /users/{id}: recurso con parámetro dinámico\n• get: operación HTTP\n• parameters: entradas de la API\n• responses: posibles salidas\n20"
+    },
+    {
+      "n": 21,
+      "texto": "¿Por qué es importante la especificación?\n• Sin especificación:\n– Cada equipo interpreta diferente la API\n– Errores de integración\n– Documentación desactualizada\n• Con especificación:\n– Todos entienden lo mismo\n– Se puede automatizar desarrollo\n– Se reduce ambigüedad\n21"
+    },
+    {
+      "n": 22,
+      "texto": "¿Qué significa invocar una API?\n•\nInvocar una API significa:\n–\nEnviar una petición HTTP a un servidor\n–\nRecibir una respuesta estructurada (normalmente JSON)\nEjemplo de flujo:\n–\nCliente -> API  Servidor -> Respuesta\n•\nEjemplos de clientes:\n–\ncurl (terminal)\n–\nPostman (GUI)\n–\nNavegador web (GET requests)\n–\nAplicaciones móviles\n–\nBackend servers (Java, Python, Node.js)\n•\nUna API no depende de una sola herramienta, puede ser consumida por \nmuchos tipos de clientes.\n22"
+    },
+    {
+      "n": 23,
+      "texto": "¿Por qué existen varios clientes de API?\n• Porque cada contexto necesita algo distinto:\n• La API es independiente del cliente\n23\nCliente\nUso principal\ncurl\npruebas rápidas en terminal\nPostman\nTesting Visual\nBrowser\nTesting o acceso a APIs\nMobile app\nUso de API para funcionalidad requerida en \napp\nBackend\nIdem a la anterior (integración entre \nsistemas)"
+    },
+    {
+      "n": 24,
+      "texto": "¿Qué es curl?\n•\ncurl (Client URL) es una herramienta de línea de comandos que \npermite:\n–\nEnviar requests HTTP\n–\nProbar APIs sin interfaz gráfica\n–\nSimular clientes reales\n•\nEn simple:\n–\nEs una forma de “hablar con una API desde la terminal”.\n•\nMuy usada en:\n–\nBackend\n–\nDevOps\n–\nTesting\n–\nDebugging\n24"
+    },
+    {
+      "n": 25,
+      "texto": "Ejemplo básico GET con curl\n• curl -X GET https://api.ejemplo.com/users/10\n• Respuesta:\n{\n  \"id\": 10,\n  \"name\": \"Ana P\",\n  \"email\": \"ana@email.com\"\n}\n• GET con headers\n– curl -X GET https://api.ejemplo.com/v1/users/10 \\ \n-H \"Accept: application/json\" \n25"
+    },
+    {
+      "n": 26,
+      "texto": "Ejemplo básico POST con curl\n• POST para crear recursos, en este caso un usuario\n• curl -X POST https://api.ejemplo.com/users \\ \n-H \"Content-Type: application/json\" \\\n-d '{\n      \"name\": \"Carlos L\",\n       \"email\": \"carlos@email.com\" \n  }'\n26"
+    },
+    {
+      "n": 27,
+      "texto": "Ejemplo básico PUT con curl\n• POST para actualización total de recursos, en este caso \nel usuario de identificador 10\ncurl -X PUT https://api.ejemplo.com/users/10 \\ \n-H \"Content-Type: application/json\" \\ \n-d '{ \n     \"name\": \"Ana P, \n      \"email\": \"ana.nuevo@email.com\" \n}'\n27"
+    },
+    {
+      "n": 28,
+      "texto": "Ejemplo básico PATCH con curl\n• PATCH para actualizar parcial de recursos, en este caso \nel usuario de identificador 10\ncurl -X PATCH https://api.ejemplo.com/users/10 \\ \n-H \"Content-Type: application/json\" \\ \n-d '{\n      \"email\": \"nuevo@email.com\" \n}'\n28"
+    },
+    {
+      "n": 29,
+      "texto": "Ejemplo básico DELETE con curl\n• PATCH para eliminar recursos, en este caso el usuario \nde identificador 10\ncurl -X DELETE https://api.ejemplo.com/users/10 \n29"
+    },
+    {
+      "n": 30,
+      "texto": "REST en Arquitecturas de Microservicios\n• Cada microservicio expone capacidades mediante APIs.\n• Beneficios:\n– Bajo acoplamiento.\n– Independencia de despliegue.\n– Escalabilidad independiente.\n• Desafíos:\n– Latencia.\n– Versionado.\n– Consistencia distribuida.\n30"
+    },
+    {
+      "n": 31,
+      "texto": "REST en Arquitecturas de Microservicios\n•\nLas REST APIs son el mecanismo más común de comunicación \nsíncrona entre microservicios.\n•\nCada microservicio expone una API que define:\n–\nQué recursos ofrece (usuarios, órdenes, productos)\n–\nQué operaciones se pueden realizar (GET, POST, PUT, DELETE)\n–\nQué formato de datos se utiliza (JSON en la mayoría de los casos)\n–\nQué reglas de acceso existen\n•\nLa API no es un detalle de implementación, es el contrato formal del \nservicio.\n•\nEn este contexto, la API define la frontera entre sistemas \nindependientes.\n31"
+    },
+    {
+      "n": 32,
+      "texto": "REST en Arquitecturas de Microservicios\n•\nREST no es un protocolo ni una librería, sino un estilo \narquitectónico basado en restricciones.\n•\nEn microservicios, REST se usa porque:\n–\nse apoya en HTTP (infraestructura existente)\n–\nes simple de implementar\n–\nes ampliamente interoperable\n–\nfacilita integración entre equipos y organizaciones\n•\nSin embargo, su uso implica aceptar restricciones importantes:\n–\ncomunicación stateless\n–\nlatencia de red\n–\nconsistencia eventual en sistemas distribuidos\n32"
+    },
+    {
+      "n": 33,
+      "texto": "Problemas de acoplamiento en APIs REST\n•\nUno de los mayores riesgos en microservicios es el acoplamiento \nentre servicios a través de APIs.\n•\nEsto ocurre cuando:\n–\nmuchos servicios dependen de un mismo endpoint\n–\nlos cambios en una API obligan a modificar múltiples servicios\n–\nexiste dependencia fuerte en la estructura de datos de otro \nservicio\n•\nSe forma un “distributed monolith”, donde los servicios parecen \nindependientes pero no lo son realmente.\n•\nEsto contradice el objetivo principal de microservicios: \nindependencia.\n33"
+    },
+    {
+      "n": 34,
+      "texto": "Latencia y costo de llamadas REST\n• Cada llamada REST en un sistema distribuido implica:\n– serialización de datos (JSON)\n– transmisión por red\n– procesamiento en el servidor\n– deserialización de respuesta\n• Cuando existen cadenas de llamadas la latencia se \nacumula progresivamente.\n• En microservicios, el rendimiento no depende solo del \ncódigo, sino del número de llamadas entre servicios.\n34"
+    },
+    {
+      "n": 35,
+      "texto": "REST APIs y propiedad de datos\n•\nEn microservicios se aplica el principio de data ownership:\n–\nCada servicio es dueño exclusivo de sus datos.\n•\nEsto significa: no se accede directamente a bases de datos \nde otros servicios\n•\ncualquier acceso a datos externos debe hacerse mediante \nAPIs\n•\nEsto es clave para mantener independencia y evitar \nacoplamiento a nivel de datos.\n•\nSin este principio, los microservicios dejan de ser \nindependientes.\n35"
+    },
+    {
+      "n": 36,
+      "texto": "API-first en microservicios\n• El enfoque API-first consiste en diseñar primero el \ncontrato antes de la implementación.\n• Proceso:\n– definir OpenAPI specification\n– validar con equipos consumidores\n– generar mocks\n– desarrollar servicios en paralelo\n• Permite desarrollo distribuido entre equipos \nindependientes.\n36"
+    },
+    {
+      "n": 37,
+      "texto": "REST APIs como arquitectura del sistema\n• En microservicios:\n–  la arquitectura emerge de las interacciones entre \nAPIs\n• Esto significa:\n– el sistema es una red de contratos\n– el diseño de APIs define el comportamiento global\n– los errores de API se convierten en problemas \narquitectónicos\n• En microservicios, diseñar APIs es diseñar el sistema \ncompleto.\n37"
+    },
+    {
+      "n": 38,
+      "texto": "¿Qué es el modelo de información de una \nAPI?\n•\nEl modelo de información define cómo los conceptos del negocio son \nrepresentados dentro de una API.\n•\nAntes de diseñar endpoints o escribir código, es necesario responder:\n–\n¿Qué entidades existen?\n–\n¿Qué atributos tienen?\n–\n¿Cómo se relacionan?\n–\n¿Qué información puede consultar o modificar un cliente?\n•\nPor ejemplo, en un sistema de e-commerce, las entidades principales son:\n–\nCliente\n–\nProducto\n–\nPedido\n–\nPago\n•\nLa API debe representar estos conceptos de forma consistente.\n38"
+    },
+    {
+      "n": 39,
+      "texto": "Dominio de negocio y recursos REST\n•\nREST modela el dominio mediante recursos.\n•\nDominio:  Cliente realiza un pedido.\n•\nRecursos\n–\nCustomer\n–\nOrder\n–\nProduct\n–\nPayment\n•\nCada recurso posee:\n–\nidentidad única\n–\natributos\n–\nrelaciones con otros recursos\n•\nEjemplo:\n{\n  \"id\": 1001,\n  \"status\": \"confirmed\",\n  \"total\": 150.00\n}\n•\nUn recurso es una abstracción de una entidad del negocio.\n39"
+    },
+    {
+      "n": 40,
+      "texto": "Recursos vs Representaciones\n•\nUna de las ideas más importantes de REST: es el Recurso\n•\nConcepto abstracto.\n•\nEjemplo:\n–\nOrder #1001\n•\nRepresentación: forma concreta en que se envía al cliente.\n•\nEjemplo JSON:\n{\n  \"id\": 1001,\n  \"status\": \"confirmed\"\n}\n•\nEl recurso existe independientemente de cómo se represente.\n40"
+    },
+    {
+      "n": 41,
+      "texto": "Identificación de recursos\n•\nTodo recurso debe tener una identidad única.\n•\nNormalmente se utiliza una URI:\n–\n/orders/1001\n–\n/products/50\n–\n/customers/123\n•\nCaracterísticas deseables:\n–\núnica\n–\npermanente\n–\nindependiente de reglas de negocio\n•\nLas URIs identifican recursos, no operaciones.\n41"
+    },
+    {
+      "n": 42,
+      "texto": "Atributos de un recurso\n• Cada recurso contiene información relevante.\n• Ejemplo: Producto\n{\n  \"id\": 10,\n  \"name\": \"Notebook\",\n  \"price\": 1200,\n  \"stock\": 15\n}\n42"
+    },
+    {
+      "n": 43,
+      "texto": "Identificación de recursos\n•\nLos recursos rara vez existen aislados.\n•\nEjemplo: Un Customer realiza muchas ordenes (Orders) que tienen muchos \nproductos (Productos)\n•\nRelaciones típicas:\n–\nOne to One\n–\nOne To Many\n–\nMany to Many\n•\nEjemplos REST:\n–\n/customers/123/orders\n–\n/orders/1001/products\n•\nEl modelo de información incluye tanto entidades como relaciones.\n43"
+    },
+    {
+      "n": 44,
+      "texto": "Navegación entre recursos\n•\nREST permite navegar entre recursos relacionados.\n•\nEjemplo: GET /customers/123\n•\nRespuesta:\n{\n  \"id\": 123,\n  \"name\": \"Ana\"\n}\n•\nLuego: GET /customers/123/orders\n•\nLa API refleja la estructura lógica del dominio.\n44"
+    },
+    {
+      "n": 45,
+      "texto": "Representación en JSON\n•\nJSON es el formato más utilizado en APIs REST.\n•\nEjemplo:\n{\n  \"id\": 1001,\n  \"status\": \"confirmed\",\n  \"total\": 150.00\n}\n•\nVentajas:\n–\nlegible\n–\ncompacto\n–\nampliamente soportado\n•\nPor esta razón se convirtió en el estándar de facto para APIs modernas.\n45"
+    },
+    {
+      "n": 46,
+      "texto": "Colecciones de recursos\n•\nLas APIs suelen exponer colecciones.\n•\nEjemplo: GET /products\n•\nRespuesta:\n[\n  {\n    \"id\": 1,\n    \"name\": \"Mouse\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Keyboard\"\n  }\n]\n•\nUna colección representa múltiples instancias de un mismo recurso.\n46"
+    },
+    {
+      "n": 47,
+      "texto": "Modelo de información y OpenAPI\n•\nOpenAPI permite formalizar el modelo de información.\n•\nEjemplo:\ncomponents:\n  schemas:\n    Product:\n      type: object\n      properties:\n        id:\n          type: integer\n        name:\n          type: string\n        price:\n          type: number\n•\nEl esquema se convierte en una descripción formal del recurso.\n47"
+    }
+  ]
+}

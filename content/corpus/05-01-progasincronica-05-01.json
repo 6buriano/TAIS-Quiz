@@ -1,0 +1,70 @@
+{
+  "archivo": "05-01-ProgAsincronica-05-01.pdf",
+  "carpeta": "",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Curso\nTendencias Aplicadas de \nIngenería de Software\nProgramación Asincrónica\n1"
+    },
+    {
+      "n": 2,
+      "texto": "Programación asincrónica: concepto \ngeneral\n•\nLa programación asincrónica es un modelo de ejecución \ndonde las tareas no bloquean el flujo principal del programa \nmientras esperan la finalización de una operación. \n•\nEn lugar de ejecutar instrucciones de manera secuencial y \nesperar resultados inmediatos, el sistema puede continuar \nprocesando otras tareas y manejar el resultado de la \noperación en un momento posterior.\n•\nEste modelo es especialmente importante en sistemas \ndistribuidos y aplicaciones modernas basadas en \nmicroservicios, donde las operaciones de entrada/salida \n(I/O), comunicación por red y acceso a bases de datos \npueden introducir latencias significativas.\n2"
+    },
+    {
+      "n": 3,
+      "texto": "Programación asincrónica: concepto \ngeneral\n• En lugar de pensar en un flujo lineal de ejecución, el \nsistema asincrónico se basa en eventos, callbacks, o \nmecanismos de mensajería que permiten desacoplar la \nproducción de trabajo de su consumo.\n• Desde la perspectiva de la Arq. de Software, este \nmodelo permite mejorar atributos de calidad como:\n– Rendimiento\n– Escalabilidad\n– Responsividad\n3"
+    },
+    {
+      "n": 4,
+      "texto": "Problema del modelo síncrono\n•\nEn un modelo síncrono tradicional, cada operación bloquea el hilo de ejecución \nhasta completar su tarea.\n•\nEjemplo típico:\n–\nSolicitud HTTP llega al servidor.\n–\nEl servidor consulta base de datos.\n–\nEl servidor espera respuesta.\n–\nEl servidor responde al cliente.\n•\nProblema:\n–\nDurante el tiempo de espera, el hilo queda bloqueado, reduciendo la \ncapacidad del sistema para atender otras solicitudes.\n•\nEsto genera:\n–\nBaja escalabilidad bajo carga.\n–\nUso ineficiente de recursos.\n–\nMayor latencia percibida.\n•\nEn sistemas modernos con alta concurrencia, este modelo se vuelve un cuello \nde botella significativo.\n4"
+    },
+    {
+      "n": 5,
+      "texto": "Modelo asincrónico: idea fundamental\n•\nEn el modelo asincrónico, la operación se delega a un componente \nexterno y el hilo principal continúa ejecutando otras tareas.\n•\nCuando el resultado está disponible, el sistema es notificado mediante \nun evento, callback o mensaje.\n•\nFlujo conceptual:\n–\nSe inicia operación.\n–\nSe delega ejecución.\n–\nEl sistema continúa operando.\n–\nSe recibe resultado posteriormente.\n•\nEste modelo permite maximizar el uso del CPU y reducir tiempos de \nespera improductivos.\n•\nEn términos de Arq. de Software, este enfoque es fundamental en \nsistemas distribuidos donde la latencia de red es inevitable y debe ser \ngestionada mediante desacoplamiento.\n5"
+    },
+    {
+      "n": 6,
+      "texto": "Rol del asincronismo en arquitectura de \nsoftware\n•\nEl asincronismo no es solo una técnica de programación, sino un \nprincipio arquitectónico.\n•\nPermite construir sistemas:\n–\nDesacoplados\n–\nEscalables\n–\nBasados en eventos\n•\nEn arquitecturas modernas, el asincronismo aparece en:\n–\nMicroservicios\n–\nSistemas event-driven\n–\nColas de mensajes\n•\nSu principal contribución es permitir que los componentes del \nsistema no dependan de la respuesta inmediata de otros \ncomponentes.\n•\nEsto reduce el acoplamiento temporal entre servicios.\n6"
+    },
+    {
+      "n": 7,
+      "texto": "Acoplamiento temporal y asincronismo\n•\nUno de los problemas clave en sistemas distribuidos es el acoplamiento \ntemporal, que ocurre cuando dos componentes deben estar activos al \nmismo tiempo para comunicarse.\n•\nEjemplo síncrono:\n–\nServicio A → espera respuesta de Servicio B\n•\nProblema:\n–\nSi B falla o está lento, A también se degrada.\n•\nEn asincronismo:\n–\nServicio A → envía mensaje → continúa ejecución\n–\nServicio B procesa cuando puede\n•\nEsto elimina la dependencia temporal estricta.\n•\nKleppmann destaca que el desacoplamiento temporal es una de las \nclaves para construir sistemas altamente escalables.\n7"
+    },
+    {
+      "n": 8,
+      "texto": "Mensajería como base del asincronismo\n•\nEn sistemas distribuidos, el asincronismo se implementa comúnmente mediante \nsistemas de mensajería.\n•\nLa mensajería es el paraguas general. Dentro de ella viven los patrones como:\n–\nCanales (queues)\n–\nPub/sub\n–\nEtc\n•\nComponentes:\n–\nProductores (generan mensajes)\n–\nBrokers (intermediarios)\n–\nConsumidores (procesan mensajes)\n•\nEste modelo permite desacoplar completamente los servicios.\n•\nEjemplo:\n–\nServicio de pagos → envía evento “pago realizado”\n–\nServicio de notificaciones → procesa evento\n–\nServicio de analítica → almacena evento\n•\nNingún servicio necesita conocer a los demás.\n8"
+    },
+    {
+      "n": 9,
+      "texto": "Patrón Canales (Channels)\n•\nEl patrón de canales consiste en una comunicación asincrónica donde \nlos mensajes se envían a través de un canal intermedio.\n•\nUn canal es un modelo de mensajería donde los mensajes se envían a \nuna cola compartida y son consumidos normalmente por un solo \nconsumidor por mensaje.\n•\nUn canal actúa como una cola o buffer entre productor y consumidor.\n•\nEs como una fila de trabajo.\n–\nProductor -> [ COLA / CANAL ] -> Consumidor\n•\nPropiedades clave\n–\nCada mensaje es procesado por un solo consumidor\n–\nSe comporta como una cola (queue)\n–\nOrden generalmente FIFO (primero en entrar, primero en salir)\n9"
+    },
+    {
+      "n": 10,
+      "texto": "Patrón Canales (Channels)\n•\nEjemplo real:  Sistema de procesamiento de pedidos:\n–\nPedidos -> Canal -> Worker 1 / Worker 2 / Worker 3\n•\nCada pedido lo procesa solo un worker, no todos.\n•\nUso típico:\n–\nProcesamiento de tareas\n–\nJobs en background\n–\nColas de emails\n•\nCaracterísticas:\n–\nComunicación indirecta\n–\nDesacoplamiento temporal\n–\nControl de flujo\n–\nBuffer de mensajes\n•\nEjemplo conceptual:\n–\nProducción -> Canal -> Consumo\n•\nLos canales permiten absorber picos de carga sin sobrecargar los \nconsumidores.\n10"
+    },
+    {
+      "n": 11,
+      "texto": "Ejemplo conceptual de canales\n• Imaginemos un sistema de procesamiento de pedidos:\n• Usuario realiza compra.\n– Pedido se envía a un canal.\n• Servicios independientes procesan:\n– Inventario\n– Facturación\n– Envío\n• Cada servicio consume del canal a su propio ritmo.\n• Ventaja:\n– El sistema puede manejar grandes volúmenes sin \nbloquear la aplicación principal.\n11"
+    },
+    {
+      "n": 12,
+      "texto": "Publish / Subscribe (Pub/Sub)\n• El patrón publish/subscribe es un modelo donde los \nproductores publican eventos sin conocer a los \nconsumidores.\n• Pub/Sub es un modelo diferente donde un mensaje es \nenviado a múltiples consumidores interesados. Es como \nsi fuese “un publicador de noticias”\n• Propiedades clave\n– Un mensaje puede llegar a muchos consumidores\n– Los consumidores se “suscriben” a un tema (topic)\n– Productor no sabe quién consume\n– Alto desacoplamiento\n12"
+    },
+    {
+      "n": 13,
+      "texto": "Publish / Subscribe (Pub/Sub)\n• Componentes:\n– Publisher: emite eventos\n– Broker: distribuye eventos\n– Subscribers: reciben eventos\n• A diferencia de los canales, múltiples consumidores \npueden recibir el mismo evento.\n13"
+    },
+    {
+      "n": 14,
+      "texto": "Diferencias entre canales y Pub/Sub\n• Ejemplo de canal (Queue): un ticket de atención en un \nbanco. Cada ticket lo atiende un solo empleado\n– Ticket 1 → Cajero A\n– Ticket 2 → Cajero B\n14\nCaracterística\nCanales\nPub/Sub\nEntrega\nUn Consumidor\nMultiplies consumidores\nModelo\nCola\nEvento\nAcoplamiento\nMedio\nBajo\nUso\nProcesamiento de tareas\nSistema de Eventos"
+    },
+    {
+      "n": 15,
+      "texto": "Diferencias entre canales y Pub/Sub\n• Pub/Sub: un canal de YouTube. Se sube un video \n(evento)\n– Todos los suscriptores lo reciben\n– Video nuevo -> todos los suscriptores\n15"
+    },
+    {
+      "n": 16,
+      "texto": "Asincronismo en microservicios\n• En arquitecturas de microservicios, el asincronismo \npermite:\n– Evitar dependencias directas entre servicios\n– Mejorar tolerancia a fallos\n– Escalar servicios de forma independiente\n• Ejemplo:\n– Servicio de pedidos no espera respuesta del servicio \nde envío, sino que emite un evento.\n• Esto permite que el sistema continúe funcionando \nincluso si un servicio está temporalmente caído\n16"
+    }
+  ]
+}

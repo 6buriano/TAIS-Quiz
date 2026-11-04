@@ -1,0 +1,14 @@
+{
+  "archivo": "06-00-Practico 06 APIs Rest.pdf",
+  "carpeta": "Practicos",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Práctico 6: APIs Rest \n \n1.​ ¿Qué es una API y cuál es su principal objetivo dentro de un sistema de software? \n \n2.​ ¿Qué significa REST ? \n \n3.​ ¿Cuál es la diferencia entre una API y una API REST? \n \n4.​  ¿Qué es un recurso en una API REST? \n \n5.​ ¿Por qué REST se considera un estilo arquitectónico y no una tecnología? \n \n6.​  ¿Qué significa que una API REST sea stateless? \n \n7.​  ¿Cuáles son las principales ventajas de una arquitectura stateless? \n \n8.​ ¿Cuál es la diferencia entre un recurso y su representación? \n \n9.​ ¿Qué métodos HTTP son los más utilizados en una API REST y qué función cumple \ncada uno? \n \n10.​¿Qué significa que una operación HTTP sea idempotente? \n \n11.​¿Por qué POST generalmente no es idempotente? \n \n12.​¿Qué son los códigos de estado HTTP y por qué son importantes? \n \n13.​¿En qué situaciones deberían utilizarse los códigos 200, 201, 404 y 500? \n \n14.​¿Qué características debería tener una URI bien diseñada en una API REST? \n \n15.​¿Por qué se recomienda utilizar sustantivos y no verbos en las URIs REST? \n \n16.​¿Qué es JSON y por qué se utiliza ampliamente en APIs REST? \n \n17.​¿Qué es OpenAPI y cuál es su propósito principal? \n \n18.​¿Qué ventajas ofrece el enfoque API-First o Contract-First? \n \n19.​¿Qué información suele incluir una especificación OpenAPI? \n \n20.​¿Qué es el modelo de información de una API? \n \n21.​¿Por qué el modelo de información es importante antes de diseñar endpoints? \n \n22.​¿Qué son las relaciones entre recursos? Proporcione un ejemplo. \n \n23.​¿Cuál es la diferencia entre una colección de recursos y un recurso individual?"
+    },
+    {
+      "n": 2,
+      "texto": "24.​¿Qué papel cumplen las APIs dentro de una arquitectura de microservicios? \n \n25.​¿Qué problemas pueden surgir cuando existe un exceso de llamadas REST entre \nmicroservicios? \n \n26.​¿Qué significa el principio de Data Ownership en microservicios? \n \n27.​¿Por qué el diseño de APIs es considerado una decisión arquitectónica crítica en \nuna arquitectura de microservicios?"
+    }
+  ]
+}

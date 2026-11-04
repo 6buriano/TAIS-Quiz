@@ -1,0 +1,14 @@
+{
+  "archivo": "01-00 - Practico 1 - Tacticas de Ing Software.pdf",
+  "carpeta": "Practicos",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Práctico 1: Tácticas de Ingeniería de Software \n \n \nEjercicio 1 \nSelección de tácticas para mejorar disponibilidad \n \nUna empresa de comercio electrónico opera una plataforma de ventas online que debe \nestar disponible las 24 horas. Durante eventos de alta demanda, como el Black Friday, los \nservidores suelen saturarse provocando interrupciones del servicio. \n \n¿Qué tácticas de diseño podrían aplicarse para mejorar la disponibilidad del sistema? \n \nEjercicio 2 \nBalance entre rendimiento y mantenibilidad \n \nUn equipo propone optimizar una aplicación eliminando capas de abstracción y escribiendo \ncódigo altamente especializado para mejorar la velocidad de ejecución. \n \n¿Qué atributo de calidad podría verse afectado y por qué? \n \nEjercicio 3 \nIdentificación de un patrón arquitectónico \n \nUn sistema está organizado en tres componentes: \nInterfaz de usuario. \nLógica de negocio. \nAcceso a datos. \n \nCada componente se comunica únicamente con la capa inmediatamente inferior. \n \n¿Qué estilo arquitectónico se está utilizando? \n \nEjercicio 4 \nSelección de estilo arquitectónico \n \nUna empresa necesita construir una plataforma de streaming capaz de escalar \nindependientemente sus componentes de video, autenticación, recomendaciones y pagos. \n \n¿Qué estilo arquitectónico sería el más adecuado? \n \nEjercicio 5 \nTácticas para mejorar modificabilidad \n \nUn sistema requiere frecuentes cambios en las reglas de negocio debido a modificaciones \nregulatorias. \n \n¿Qué tácticas de diseño facilitarían estos cambios?"
+    },
+    {
+      "n": 2,
+      "texto": "Ejercicio 6 \nEvaluación de disponibilidad \nUn sistema bancario utiliza un único servidor de base de datos. \n \n¿Qué riesgo arquitectónico presenta esta decisión? \n \n¿Qué táctica puede mitigarlo? \n \nEjercicio 7 \nAplicación de patrones arquitectónicos \nUn sistema necesita procesar miles de eventos por segundo provenientes de sensores IoT. \n \n¿Qué patrón arquitectónico sería apropiado? \n \nEjercicio 8 \nDiseño Arquitectónico Integrador \nDiseñe una arquitectura para una plataforma universitaria que permita: \n \n●​ Gestión de estudiantes. \n●​ Inscripciones. \n●​ Pagos. \n●​ Aulas virtuales. \n \nLa plataforma debe: \n●​ Ser escalable. \n●​ Tener alta disponibilidad. \n●​ Facilitar futuras modificaciones. \n \n¿Qué estilo arquitectónico y qué tácticas utilizaría?"
+    }
+  ]
+}

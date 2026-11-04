@@ -1,0 +1,290 @@
+[
+  {
+    "id": "arq-tac-019",
+    "tema": "arquitectura",
+    "subtema": "caso-bancario",
+    "dificultad": "facil",
+    "pregunta": "Para un sistema bancario, el comité de arquitectura define prioridades de disponibilidad, seguridad, integridad, consistencia y rendimiento. ¿Qué tácticas son coherentes con ese perfil según el material?",
+    "opciones": [
+      { "texto": "MFA, auditoría y replicación síncrona de los datos.", "correcta": true },
+      { "texto": "Caché distribuida, consistencia eventual y replicación asíncrona.", "correcta": false, "porque_no": "Ese conjunto corresponde al caso de la red social, donde la consistencia eventual es un costo aceptable." },
+      { "texto": "Balanceo de carga, compresión de imágenes y paginación de listados.", "correcta": false, "porque_no": "Son optimizaciones de rendimiento y de presentación; no cubren la seguridad ni la integridad de las operaciones." },
+      { "texto": "Procesamiento asíncrono de transferencias sin registro de auditoría.", "correcta": false, "porque_no": "Omitir la auditoría contradice la prioridad de integridad y trazabilidad que fija el caso bancario." }
+    ],
+    "explicacion": "El caso bancario prioriza disponibilidad, seguridad, integridad, consistencia y rendimiento. Sus tácticas habituales son MFA, auditoría y replicación síncrona. La replicación síncrona se explica porque el banco no puede aceptar lecturas desactualizadas de un saldo.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 21 },
+    "tags": ["casos", "bancario"]
+  },
+  {
+    "id": "arq-tac-020",
+    "tema": "arquitectura",
+    "subtema": "rendimiento-tacticas",
+    "dificultad": "facil",
+    "pregunta": "Un equipo lista tácticas para reducir el tiempo de respuesta de su portal de turnos médicos. ¿Qué objetivo persigue ese conjunto de tácticas y cuáles son ejemplos del material?",
+    "opciones": [
+      { "texto": "Reducir tiempos de respuesta mediante caché, balanceo, procesamiento asíncrono o pool de conexiones.", "correcta": true },
+      { "texto": "Aumentar la seguridad mediante autenticación, autorización y cifrado de datos.", "correcta": false, "porque_no": "Esas son tácticas de seguridad; en el enunciado el objetivo declarado es el tiempo de respuesta." },
+      { "texto": "Aumentar la disponibilidad mediante redundancia, replicación y failover.", "correcta": false, "porque_no": "La redundancia y el failover buscan mantener el servicio operativo, no bajar la latencia de cada respuesta." },
+      { "texto": "Mejorar la modificabilidad mediante encapsulamiento y abstracción de módulos.", "correcta": false, "porque_no": "El encapsulamiento facilita el cambio y no es una táctica de rendimiento del sistema." }
+    ],
+    "explicacion": "El material agrupa bajo rendimiento a las tácticas cuyo objetivo es reducir tiempos de respuesta. Entre ellas menciona caché, balanceo, procesamiento asíncrono y pool de conexiones. Cada una ataca una causa distinta del tiempo de respuesta, por eso suelen combinarse en lugar de elegir una sola.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 23 },
+    "tags": ["rendimiento", "tacticas"]
+  },
+  {
+    "id": "arq-tac-021",
+    "tema": "arquitectura",
+    "subtema": "balanceo-de-carga",
+    "dificultad": "facil",
+    "pregunta": "El portal de una tienda recibe el doble de tráfico en fechas de descuento y hoy corre en un único servidor. Al sumar un balanceador con varias instancias, ¿qué beneficios obtiene según el material?",
+    "opciones": [
+      { "texto": "Mejor rendimiento, mayor disponibilidad y mejor escalabilidad del servicio.", "correcta": true },
+      { "texto": "Mejor rendimiento, pero menor disponibilidad por tener más componentes.", "correcta": false, "porque_no": "Agregar instancias detrás de un balanceador no reduce la disponibilidad: evita depender de un único servidor." },
+      { "texto": "Mayor consistencia de los datos y menores costos de almacenamiento.", "correcta": false, "porque_no": "El balanceo reparte solicitudes; no cambia el modelo de consistencia ni el costo de almacenamiento." },
+      { "texto": "Mayor seguridad de las cuentas y cumplimiento de las normas de auditoría.", "correcta": false, "porque_no": "El balanceo no autentica usuarios ni registra operaciones: solo distribuye la carga entre instancias." }
+    ],
+    "explicacion": "El balanceo de carga distribuye solicitudes entre múltiples instancias de un componente. El material le atribuye tres beneficios: mejor rendimiento, mayor disponibilidad y mejor escalabilidad. Es una de las pocas tácticas que mejora varios atributos al mismo tiempo.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 25 },
+    "tags": ["balanceo", "disponibilidad"]
+  },
+  {
+    "id": "arq-tac-022",
+    "tema": "arquitectura",
+    "subtema": "procesamiento-asincrono",
+    "dificultad": "facil",
+    "pregunta": "Al registrarse en un portal, el usuario espera ocho segundos porque el envío del correo de bienvenida se hace dentro de la misma operación. ¿Qué táctica del material reduce el tiempo percibido?",
+    "opciones": [
+      { "texto": "Procesamiento asíncrono: separar la solicitud del procesamiento y enviar el correo después.", "correcta": true },
+      { "texto": "Replicación síncrona de la base de datos que guarda las cuentas.", "correcta": false, "porque_no": "La replicación asegura copias consistentes de los datos, pero no saca el envío del correo del camino crítico." },
+      { "texto": "Failover automático hacia un nodo de respaldo del portal.", "correcta": false, "porque_no": "El failover entra en acción ante la caída de un componente y no ante una operación que simplemente es lenta." },
+      { "texto": "Cifrado de los datos del formulario antes de almacenarlos.", "correcta": false, "porque_no": "El cifrado protege la información y no altera el momento en que se ejecuta el envío del correo." }
+    ],
+    "explicacion": "El procesamiento asíncrono separa la solicitud del procesamiento: se responde al usuario y la tarea pesada se ejecuta después. El material lo ejemplifica con el registro de usuario que crea la cuenta y envía el correo más tarde. El beneficio central es el menor tiempo de respuesta percibido.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 26 },
+    "tags": ["asincronia", "rendimiento"]
+  },
+  {
+    "id": "arq-tac-023",
+    "tema": "arquitectura",
+    "subtema": "disponibilidad-tacticas",
+    "dificultad": "facil",
+    "pregunta": "Un servicio de salud debe seguir operativo frente a fallas de hardware y de red. ¿Qué conjunto de tácticas de disponibilidad reconoce el material?",
+    "opciones": [
+      { "texto": "Redundancia, replicación, failover y monitoreo de los componentes.", "correcta": true },
+      { "texto": "Caché, balanceo, procesamiento asíncrono y pool de conexiones.", "correcta": false, "porque_no": "Ese conjunto pertenece a las tácticas de rendimiento, aunque el balanceo también ayude a la disponibilidad." },
+      { "texto": "Autenticación, autorización, validación de entradas y cifrado.", "correcta": false, "porque_no": "Son tácticas de seguridad y no evitan que una instancia caída deje sin servicio a los usuarios." },
+      { "texto": "Encapsulamiento, abstracción y bajo acoplamiento entre módulos.", "correcta": false, "porque_no": "Son mecanismos de modificabilidad y no de continuidad operativa frente a fallas." }
+    ],
+    "explicacion": "El material agrupa las tácticas de disponibilidad con un objetivo explícito: mantener el sistema operativo frente a fallas. Las enumera como redundancia, replicación, failover y monitoreo. Cada una ataca un momento distinto: evitar la caída, conservar los datos, recuperar el servicio o detectar el problema a tiempo.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 27 },
+    "tags": ["disponibilidad", "tacticas"]
+  },
+  {
+    "id": "arq-tac-024",
+    "tema": "arquitectura",
+    "subtema": "seguridad-tacticas",
+    "dificultad": "facil",
+    "pregunta": "El equipo de seguridad de un nuevo home banking propone cuatro controles antes de la salida a producción. ¿Cuáles corresponden a las tácticas de seguridad del material?",
+    "opciones": [
+      { "texto": "Autenticación, autorización, validación de entradas y cifrado de datos.", "correcta": true },
+      { "texto": "Redundancia, replicación, failover y monitoreo de los nodos.", "correcta": false, "porque_no": "Son tácticas de disponibilidad, centradas en la continuidad del servicio y no en el control de accesos." },
+      { "texto": "Caché, balanceo de carga y procesamiento asíncrono de operaciones.", "correcta": false, "porque_no": "Son tácticas de rendimiento y no controlan quién accede ni qué puede hacer cada usuario." },
+      { "texto": "Encapsulamiento, abstracción y bajo acoplamiento entre los módulos.", "correcta": false, "porque_no": "Apuntan a la modificabilidad del sistema y no a la protección de los activos del negocio." }
+    ],
+    "explicacion": "El material agrupa las tácticas de seguridad con el objetivo de reducir riesgos y vulnerabilidades. La lista incluye autenticación, autorización, validación y cifrado. La propia diapositiva aclara que son herramientas a modo de ejemplo dentro de una lista acotada.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 30 },
+    "tags": ["seguridad", "tacticas"]
+  },
+  {
+    "id": "arq-tac-025",
+    "tema": "arquitectura",
+    "subtema": "autenticacion-autorizacion",
+    "dificultad": "facil",
+    "pregunta": "En el backoffice de una clínica, una recepcionista accede con su clave y solo ve los turnos del día, mientras la auditora puede consultar el historial completo de cualquier paciente. ¿Qué explica esa diferencia?",
+    "opciones": [
+      { "texto": "La autenticación valida quién es cada una y la autorización define qué puede hacer; las dos son necesarias.", "correcta": true },
+      { "texto": "La autenticación alcanza para los dos casos, porque las dos ingresaron con su propia clave.", "correcta": false, "porque_no": "Saber quién es no alcanza: el permiso sobre el historial completo es una decisión de autorización." },
+      { "texto": "La autorización valida la identidad de cada usuaria y la autenticación fija sus permisos.", "correcta": false, "porque_no": "El material invierte los términos: autenticación es quién eres y autorización es qué puedes hacer." },
+      { "texto": "El acceso desde la red interna del edificio no requiere controles de autorización.", "correcta": false, "porque_no": "La ubicación en la red no reemplaza los controles de acceso; el material insiste en que las dos tácticas son necesarias." }
+    ],
+    "explicacion": "El material define la autenticación como la pregunta por la identidad, con MFA como ejemplo, y la autorización como la pregunta por lo que cada usuario puede hacer. Señala además que las dos tácticas son necesarias y no se sustituyen entre sí. Un inicio de sesión exitoso sin control de permisos deja a cualquier usuario con acceso total.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 31 },
+    "tags": ["seguridad", "autorizacion"]
+  },
+  {
+    "id": "arq-tac-026",
+    "tema": "arquitectura",
+    "subtema": "cache",
+    "dificultad": "media",
+    "pregunta": "El catálogo de una concesionaria tarda tres segundos porque cada visita consulta la base de datos. Al introducir una caché con Redis, ¿qué beneficios obtiene el equipo y qué riesgo debe gestionar?",
+    "opciones": [
+      { "texto": "Menor acceso a la base, menor latencia y menor uso de recursos, con el riesgo de servir datos desactualizados.", "correcta": true },
+      { "texto": "Menor latencia y consistencia fuerte garantizada por el motor de la caché.", "correcta": false, "porque_no": "La caché guarda resultados ya calculados; esas copias pueden quedar desactualizadas frente al origen." },
+      { "texto": "Mayor disponibilidad y eliminación de la necesidad de mantener la base de datos.", "correcta": false, "porque_no": "La caché reduce accesos, pero no reemplaza a la fuente de verdad ni elimina la persistencia." },
+      { "texto": "Mejor seguridad, porque los datos dejan de viajar a la base en cada visita.", "correcta": false, "porque_no": "El ahorro de accesos no equivale a un control de seguridad; la exposición de los datos no cambia por cachear." }
+    ],
+    "explicacion": "El material define la caché como el almacenamiento de resultados previamente calculados, con Redis y Memcached como ejemplos. Sus beneficios son menor acceso a la base de datos, menor latencia y menor uso de recursos. El costo es que la copia guardada puede quedar desactualizada, lo que obliga a definir vencimientos y reglas de invalidación.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 24 },
+    "tags": ["cache", "rendimiento"]
+  },
+  {
+    "id": "arq-tac-027",
+    "tema": "arquitectura",
+    "subtema": "punto-unico-de-falla",
+    "dificultad": "media",
+    "pregunta": "Un sistema bancario mantiene un único servidor de base de datos y no tiene réplicas. ¿Qué riesgo arquitectónico presenta esa decisión y qué táctica lo mitiga?",
+    "opciones": [
+      { "texto": "Es un punto único de falla y se mitiga con redundancia de componentes.", "correcta": true },
+      { "texto": "Es un problema de rendimiento y se mitiga agregando índices a las consultas.", "correcta": false, "porque_no": "Los índices mejoran tiempos de consulta, pero no evitan que la caída del servidor deje al banco sin servicio." },
+      { "texto": "Es un problema de seguridad y se mitiga con cifrado de los datos en reposo.", "correcta": false, "porque_no": "El cifrado protege el contenido y no aporta una segunda instancia que tome el relevo." },
+      { "texto": "Es un problema de modificabilidad y se mitiga encapsulando el acceso a datos.", "correcta": false, "porque_no": "Encapsular el acceso ordena el código, pero no elimina la dependencia de un único servidor." }
+    ],
+    "explicacion": "Tener un solo servidor de base de datos lo convierte en un punto único de falla: si cae, el servicio completo se detiene. La redundancia mantiene componentes duplicados y su beneficio declarado es eliminar puntos únicos de falla. Como complemento, el failover permite transferir la operación a la instancia alternativa.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 28 },
+    "tags": ["disponibilidad", "spof"]
+  },
+  {
+    "id": "arq-tac-028",
+    "tema": "arquitectura",
+    "subtema": "replicacion",
+    "dificultad": "media",
+    "pregunta": "El equipo de un diario digital quiere que las noticias se lean desde varias copias y que la caída de un nodo no interrumpa las consultas. ¿Qué aporta la replicación según el material?",
+    "opciones": [
+      { "texto": "Mayor disponibilidad y mejor rendimiento de lectura al mantener múltiples copias de los datos.", "correcta": true },
+      { "texto": "Consistencia fuerte y eliminación de la necesidad de failover en el sistema.", "correcta": false, "porque_no": "La replicación mantiene copias, pero no elimina la necesidad de transferir la operación cuando un nodo cae." },
+      { "texto": "Menor uso de almacenamiento al compartir un único archivo de datos entre nodos.", "correcta": false, "porque_no": "Replicar implica justamente mantener varias copias de los datos y no un único almacenamiento compartido." },
+      { "texto": "Mejor seguridad, porque cada copia se cifra con una clave distinta y rotativa.", "correcta": false, "porque_no": "El cifrado es una táctica de seguridad independiente; la replicación busca disponibilidad y lectura." }
+    ],
+    "explicacion": "El material distingue la replicación de la redundancia: la primera mantiene múltiples copias de los datos y la segunda componentes duplicados. Los beneficios declarados de la replicación son mayor disponibilidad y mejor rendimiento de lectura. Ese beneficio de lectura es el que aprovechan los sistemas con muchas consultas y pocas escrituras.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 28 },
+    "tags": ["replicacion", "disponibilidad"]
+  },
+  {
+    "id": "arq-tac-029",
+    "tema": "arquitectura",
+    "subtema": "failover",
+    "dificultad": "media",
+    "pregunta": "El nodo principal del sistema de turnos deja de responder a las tres de la mañana y el servicio continúa en un nodo secundario sin intervención humana. ¿Qué táctica de disponibilidad se aplicó?",
+    "opciones": [
+      { "texto": "Failover: la transferencia automática de operaciones hacia un componente alternativo.", "correcta": true },
+      { "texto": "Replicación, entendida como el mantenimiento de copias actualizadas de los datos.", "correcta": false, "porque_no": "La replicación sostiene las copias, pero lo que devuelve el servicio es la transferencia de la operación al otro nodo." },
+      { "texto": "Monitoreo, que consiste en detectar los problemas de manera temprana.", "correcta": false, "porque_no": "El monitoreo detecta la falla, pero no ejecuta por sí mismo el cambio de nodo que describe el caso." },
+      { "texto": "Balanceo de carga, que reparte las solicitudes entre instancias activas.", "correcta": false, "porque_no": "El balanceo distribuye tráfico entre instancias sanas y no contempla el reemplazo automático de la caída." }
+    ],
+    "explicacion": "El material define el failover como la transferencia automática de operaciones a un componente alternativo. Sus beneficios son la continuidad del servicio y el menor tiempo de inactividad. Para que funcione hacen falta componentes redundantes y algún mecanismo de detección, como el monitoreo.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 29 },
+    "tags": ["failover", "disponibilidad"]
+  },
+  {
+    "id": "arq-tac-030",
+    "tema": "arquitectura",
+    "subtema": "monitoreo",
+    "dificultad": "media",
+    "pregunta": "El equipo quiere que el failover se dispare solo cuando una instancia dejó de estar viva, y no ante una demora momentánea de la red. ¿Qué mecanismo concreto implementa la táctica de monitoreo en ese caso?",
+    "opciones": [
+      { "texto": "Un heartbeat o latido periódico: cada instancia avisa que está viva y el monitor actúa cuando deja de recibirlo.", "correcta": true },
+      { "texto": "Un registro de auditoría que anota cada operación que hacen los usuarios.", "correcta": false, "porque_no": "La auditoría deja trazabilidad de las operaciones, pero no informa si el proceso sigue vivo en este momento." },
+      { "texto": "Una réplica síncrona que confirma cada escritura en el nodo secundario.", "correcta": false, "porque_no": "La réplica protege los datos y no sirve como señal de vida del proceso que atiende las solicitudes." },
+      { "texto": "Un balanceador que reparte las solicitudes entre las instancias disponibles.", "correcta": false, "porque_no": "El balanceador enruta tráfico y suele consumir el resultado del monitoreo, pero no reemplaza la señal de vida." }
+    ],
+    "explicacion": "El material incluye el monitoreo entre las tácticas de disponibilidad, con el objetivo de detectar problemas tempranamente. El latido o heartbeat es el mecanismo típico: cada instancia emite una señal periódica y el monitor usa su ausencia para decidir que está caída. Con esa señal, el failover se dispara por falta de latidos y no por una demora puntual.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 29 },
+    "tags": ["monitoreo", "heartbeat"]
+  },
+  {
+    "id": "arq-tac-031",
+    "tema": "arquitectura",
+    "subtema": "validacion-de-entradas",
+    "dificultad": "media",
+    "pregunta": "En el formulario de comentarios de un portal aparecen scripts inyectados y en el buscador se detectan intentos de SQL injection. ¿Qué tácticas del material atacan esos riesgos y en qué ámbitos se aplica el cifrado?",
+    "opciones": [
+      { "texto": "Validación de entradas contra SQL injection y XSS, más cifrado de datos en tránsito y en reposo.", "correcta": true },
+      { "texto": "Autenticación con doble factor y autorización por roles en el panel de administración.", "correcta": false, "porque_no": "El doble factor y los roles controlan el acceso, pero no neutralizan un script inyectado en un comentario público." },
+      { "texto": "Balanceo de carga y pool de conexiones para absorber los intentos maliciosos.", "correcta": false, "porque_no": "Son tácticas de rendimiento: reparten carga y no validan el contenido que ingresa al sistema." },
+      { "texto": "Replicación de la base y failover automático ante intentos de inyección de código.", "correcta": false, "porque_no": "La replicación y el failover protegen la continuidad y no la integridad del contenido que se procesa." }
+    ],
+    "explicacion": "El material menciona la validación de entradas como protección contra SQL injection y XSS. También ubica el cifrado en dos ámbitos: datos en tránsito y datos en reposo. La diapositiva aclara que estas herramientas son ejemplos dentro de una lista acotada y no agotan el tema.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 32 },
+    "tags": ["seguridad", "validacion"]
+  },
+  {
+    "id": "arq-tac-032",
+    "tema": "arquitectura",
+    "subtema": "tradeoffs",
+    "dificultad": "media",
+    "pregunta": "El equipo de una fintech discute dos propuestas: una prioriza la velocidad de respuesta y la otra la facilidad de cambio. ¿Qué criterio propone el material para resolver esa tensión?",
+    "opciones": [
+      { "texto": "Buscar el equilibrio adecuado para el contexto del negocio, sin maximizar todos los atributos.", "correcta": true },
+      { "texto": "Maximizar el rendimiento por encima de cualquier otro atributo del sistema.", "correcta": false, "porque_no": "El material sostiene que la arquitectura no consiste en maximizar un atributo ni todos a la vez." },
+      { "texto": "Elegir la propuesta que requiera la menor cantidad de código escrito.", "correcta": false, "porque_no": "El volumen de código no es el criterio de balance: el eje es el contexto y las prioridades del negocio." },
+      { "texto": "Aplicar todas las tácticas disponibles para cubrir cada atributo por igual.", "correcta": false, "porque_no": "Aplicar todo agrega costo y complejidad; la arquitectura es una elección de equilibrio y no una suma." }
+    ],
+    "explicacion": "El material plantea la arquitectura como un balance: no se trata de maximizar todos los atributos, sino de encontrar el equilibrio adecuado para el contexto del negocio. Un banco y una red social llegan a equilibrios distintos porque priorizan atributos distintos. El criterio de decisión es el negocio y no una preferencia técnica aislada.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 20 },
+    "tags": ["tradeoff", "arquitectura"]
+  },
+  {
+    "id": "arq-tac-033",
+    "tema": "arquitectura",
+    "subtema": "consistencia-eventual",
+    "dificultad": "dificil",
+    "pregunta": "Una red social elige caché distribuida y consistencia eventual para sostener millones de lecturas de publicaciones por minuto. ¿Qué trade-off acepta ese diseño?",
+    "opciones": [
+      { "texto": "Gana disponibilidad y rendimiento, pero durante un tiempo algunos usuarios pueden ver datos no actualizados.", "correcta": true },
+      { "texto": "Gana consistencia fuerte y pierde disponibilidad en cada operación de lectura.", "correcta": false, "porque_no": "La consistencia eventual es lo contrario de la consistencia fuerte: resigna la actualización inmediata de las copias." },
+      { "texto": "Gana seguridad de las cuentas y pierde escalabilidad del sistema completo.", "correcta": false, "porque_no": "La elección descrita apunta a escalabilidad y rendimiento; no interviene sobre la seguridad de las cuentas." },
+      { "texto": "Gana modificabilidad y pierde capacidad de integrarse con otros sistemas.", "correcta": false, "porque_no": "Las tácticas del caso no buscan modificabilidad ni afectan la integración con sistemas externos." }
+    ],
+    "explicacion": "El caso de la red social prioriza disponibilidad, escalabilidad y rendimiento, y para eso usa caché distribuida, replicación y consistencia eventual. La consistencia eventual acepta que las réplicas se actualicen con demora a cambio de responder rápido y seguir en línea. Es una decisión de negocio: en publicaciones resulta tolerable ver un me gusta unos segundos tarde.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 22 },
+    "tags": ["consistencia", "tradeoff"]
+  },
+  {
+    "id": "arq-tac-034",
+    "tema": "arquitectura",
+    "subtema": "fallas-transitorias",
+    "dificultad": "dificil",
+    "pregunta": "El servicio de pagos falla de forma esporádica por timeouts de red de pocos milisegundos. El equipo agrega un mecanismo que repite la misma operación hasta tres veces antes de informar el error. ¿Qué táctica está aplicando y por qué?",
+    "opciones": [
+      { "texto": "Reintentos acotados, que sostienen la operación frente a fallas transitorias sin cambiar de componente.", "correcta": true },
+      { "texto": "Failover, porque transfiere la operación hacia un componente alternativo del servicio.", "correcta": false, "porque_no": "El failover mueve la carga a otro nodo; acá se insiste sobre la misma operación y el mismo componente." },
+      { "texto": "Redundancia, porque duplica los componentes que atienden cada pago.", "correcta": false, "porque_no": "La redundancia implica componentes duplicados y el caso no menciona instancias adicionales sino repeticiones." },
+      { "texto": "Cifrado del canal, porque los timeouts se producen por paquetes corruptos en la red.", "correcta": false, "porque_no": "El cifrado protege el contenido en tránsito y no resuelve la repetición de una operación que no respondió." }
+    ],
+    "explicacion": "El material agrupa entre las tácticas de disponibilidad el objetivo de mantener el sistema operativo frente a fallas. Los reintentos acotados atacan el subconjunto de fallas transitorias, donde el intento siguiente suele tener éxito. El límite de intentos y el espaciado entre ellos evitan amplificar la carga cuando el problema es persistente.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 27 },
+    "tags": ["disponibilidad", "reintentos"]
+  },
+  {
+    "id": "arq-tac-035",
+    "tema": "arquitectura",
+    "subtema": "caso-streaming",
+    "dificultad": "dificil",
+    "pregunta": "Se debe diseñar una plataforma de streaming para cinco millones de usuarios, con disponibilidad de 99,99 %, respuestas en menos de dos segundos y seguridad de las cuentas. ¿Qué combinación atiende los tres requisitos?",
+    "opciones": [
+      { "texto": "Redundancia con failover para la disponibilidad, caché y balanceo para el tiempo de respuesta, y MFA con cifrado para las cuentas.", "correcta": true },
+      { "texto": "Un único servidor muy potente con la base de datos local para reducir la latencia de red.", "correcta": false, "porque_no": "Un único servidor es un punto único de falla y no sostiene una disponibilidad de 99,99 %." },
+      { "texto": "Caché y balanceo solamente, porque el resto se resuelve contratando más ancho de banda.", "correcta": false, "porque_no": "Más ancho de banda no elimina los puntos únicos de falla ni protege las cuentas de los usuarios." },
+      { "texto": "MFA y cifrado solamente, porque la seguridad es el requisito más exigente del enunciado.", "correcta": false, "porque_no": "La seguridad por sí sola no alcanza la disponibilidad de 99,99 % ni el objetivo de dos segundos." }
+    ],
+    "explicacion": "El caso de streaming del material fija cinco millones de usuarios, 99,99 % de disponibilidad, respuestas menores a dos segundos y seguridad de las cuentas. Ese enunciado obliga a combinar familias de tácticas, porque cada atributo requiere mecanismos propios. La disponibilidad se sostiene con redundancia y failover, el tiempo de respuesta con caché y balanceo, y las cuentas con MFA y cifrado.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 33 },
+    "tags": ["caso", "streaming"]
+  },
+  {
+    "id": "arq-tac-036",
+    "tema": "arquitectura",
+    "subtema": "pool-de-conexiones",
+    "dificultad": "dificil",
+    "pregunta": "En el pico de ventas, el servicio abre una conexión nueva a la base por cada request y el motor empieza a rechazar conexiones por haber alcanzado su límite. ¿Qué táctica de rendimiento ataca directamente esa causa?",
+    "opciones": [
+      { "texto": "Un pool de conexiones que reutilice un conjunto acotado de conexiones ya abiertas.", "correcta": true },
+      { "texto": "Una caché de resultados para evitar consultar la base en cada request.", "correcta": false, "porque_no": "La caché reduce la cantidad de consultas, pero no administra el costo de abrir y cerrar conexiones." },
+      { "texto": "Un balanceador que reparta los requests entre más instancias del servicio.", "correcta": false, "porque_no": "Más instancias multiplican las conexiones abiertas y pueden agravar el límite del motor de base de datos." },
+      { "texto": "Procesamiento asíncrono para encolar los requests durante todo el pico de ventas.", "correcta": false, "porque_no": "Encolar cambia el momento del procesamiento y no resuelve la gestión del recurso conexión." }
+    ],
+    "explicacion": "El material incluye el pool de conexiones entre las tácticas de rendimiento, junto con caché, balanceo y procesamiento asíncrono. Su efecto es reutilizar conexiones ya establecidas en lugar de abrir una por request. Eso reduce el costo de conexión y evita saturar el límite que impone el motor de base de datos.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 23 },
+    "tags": ["rendimiento", "pool"]
+  }
+]

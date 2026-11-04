@@ -1,0 +1,188 @@
+[
+  {
+    "id": "cache-dev-001",
+    "tema": "cache",
+    "subtema": "cache-vs-bd-memoria",
+    "dificultad": "media",
+    "pregunta": "Explicá la diferencia entre una caché y una base de datos en memoria, y justificá por qué una base en memoria puede usarse como caché pero una caché no puede actuar como base principal.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Caracteriza la caché como copia temporal de datos derivados, reemplazables y dependientes de un sistema persistente",
+        "peso": 0.35,
+        "claves": ["datos derivados", "informacion reemplazable", "copia temporal", "depende de la base", "acelera accesos", "no es fuente de verdad"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Caracteriza la base en memoria como posible fuente principal: estructuras complejas, replicación, persistencia opcional y procesamiento transaccional",
+        "peso": 0.35,
+        "claves": ["fuente principal", "persistencia opcional", "replicacion", "estructuras complejas", "procesamiento transaccional", "indices en memoria", "ram"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Explica la asimetría entre ambos conceptos: la base en memoria cubre lo que hace una caché, pero la caché no asume durabilidad ni el rol de fuente de verdad",
+        "peso": 0.3,
+        "claves": ["toda base en memoria puede usarse como cache", "no toda cache puede ser base principal", "no garantiza durabilidad", "no puede ser fuente unica", "datos reemplazables"]
+      }
+    ],
+    "respuesta_modelo": "Una caché es un almacenamiento temporal de copias de datos previamente recuperados: su propósito es acelerar el acceso a otra fuente, así que su contenido es derivado, reemplazable y dependiente de un sistema persistente. Una base de datos en memoria, en cambio, guarda sus estructuras principales en RAM y puede constituir la fuente principal de información, porque administra estructuras complejas, replicación, persistencia opcional y procesamiento transaccional. De ahí la asimetría que plantea el material: toda base en memoria puede usarse como caché, porque puede guardar copias temporales para acelerar lecturas. En cambio, una caché no puede actuar como base principal porque no garantiza durabilidad, integridad ni recuperación, y su información se considera descartable. Usar una caché como única fuente de verdad dejaría al sistema sin respaldo ante fallos.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 13 },
+    "tiempo_sugerido_min": 5,
+    "tags": ["cache", "bases-en-memoria", "capas"]
+  },
+  {
+    "id": "cache-dev-002",
+    "tema": "cache",
+    "subtema": "read-through",
+    "dificultad": "media",
+    "pregunta": "Compará cache aside con read through: quién ejecuta la lógica de caché, qué se gana al centralizarla y qué riesgo aparece en cada enfoque.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Describe cache aside: la aplicación consulta la caché, ante un miss va a la base y guarda el resultado, y decide qué cachear",
+        "peso": 0.35,
+        "claves": ["lazy loading", "la aplicacion consulta la cache", "la aplicacion decide", "guarda el resultado", "miss inicial", "no requiere infraestructura"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Describe read through: la caché es intermediario transparente, la aplicación desconoce el almacenamiento y la política se centraliza",
+        "peso": 0.35,
+        "claves": ["intermediario transparente", "la aplicacion deja de conocer", "logica centralizada", "politica uniforme", "capa intermedia", "mantenimiento simplificado"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Compara riesgos: en cache aside la obsolescencia y la invalidación quedan a cargo de la aplicación; en read through crecen la dependencia tecnológica y el rol crítico de la caché",
+        "peso": 0.3,
+        "claves": ["complejidad de invalidacion", "datos obsoletos", "dependencia tecnologica", "componente critico", "mayor complejidad", "la cache se vuelve critica"]
+      }
+    ],
+    "respuesta_modelo": "En cache aside la lógica vive en la aplicación: consulta la caché, si hay hit responde, si hay miss consulta la base, almacena el resultado y devuelve la respuesta. La aplicación decide qué cachear y solo se almacenan los datos efectivamente utilizados, a cambio del miss inicial y de coordinar la invalidación. En read through la caché se convierte en un intermediario transparente entre la aplicación y la base, de modo que la aplicación deja de conocer el mecanismo de almacenamiento. Se gana uniformidad, porque todas las aplicaciones usan la misma política, y mantenimiento simplificado, porque los cambios afectan solo a la capa intermedia. El riesgo es que la caché pasa a ser un componente crítico y crece la dependencia tecnológica de la infraestructura.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 18 },
+    "tiempo_sugerido_min": 5,
+    "tags": ["cache", "cache-aside", "read-through"]
+  },
+  {
+    "id": "cache-dev-003",
+    "tema": "cache",
+    "subtema": "write-patterns",
+    "dificultad": "dificil",
+    "pregunta": "Un sistema de venta de entradas debate entre write through y write back. Explicá el trade-off entre consistencia y rendimiento y justificá en qué tipo de flujo elegirías cada uno.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Explica write through: actualiza persistencia y caché antes de confirmar, con alta consistencia y mayor latencia de escritura",
+        "peso": 0.35,
+        "claves": ["actualiza persistencia y cache", "alta consistencia", "mayor latencia de escritura", "menor throughput", "espera la confirmacion", "cuello de botella", "menor riesgo de obsolescencia"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Explica write back: confirma en caché y persiste de forma asíncrona, con alta velocidad de escritura y riesgo de pérdida de datos",
+        "peso": 0.35,
+        "claves": ["proceso asincrono", "confirma inmediatamente", "mayor velocidad de escritura", "reduccion de io", "perdida de informacion", "consistencia temporal", "escrituras agrupadas"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Justifica la elección con criterios del material: write through para pagos, reservas o inventarios críticos; write back para grandes volúmenes con tolerancia a perder los últimos cambios",
+        "peso": 0.3,
+        "claves": ["pagos electronicos", "reservas", "inventarios criticos", "volumenes transaccionales", "mecanismos de recuperacion", "tolerar perder datos", "prioriza disponibilidad y rendimiento"]
+      }
+    ],
+    "respuesta_modelo": "Write through mantiene sincronizadas la caché y la base: cada escritura actualiza la persistencia, luego la caché y recién entonces confirma al cliente. Eso da alta consistencia, menor riesgo de obsolescencia y sincronización inmediata, pero aumenta la latencia de escritura y baja el throughput, porque las escrituras pueden volverse un cuello de botella. Write back registra la operación en la caché, la confirma al instante y deja que un proceso asíncrono actualice la base después. Gana velocidad de escritura y reduce la entrada/salida porque varias escrituras se agrupan, pero acepta perder información si la caché falla antes de persistir y deja datos momentáneamente desactualizados. Para la venta de entradas, el momento de confirmar la reserva conviene write through, porque un dato viejo implica sobreventa; para métricas, registros de actividad o catálogos con muchas escrituras y baja criticidad, write back es razonable. En cualquier caso, write back exige mecanismos de recuperación y control operativo.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 21 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["cache", "write-through", "write-back"]
+  },
+  {
+    "id": "cache-dev-004",
+    "tema": "cache",
+    "subtema": "invalidacion",
+    "dificultad": "media",
+    "pregunta": "Explicá las tres estrategias de invalidación que presenta el material y analizá qué problemas aparecen cuando el TTL elegido es demasiado corto o demasiado largo.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Enumera y describe las tres estrategias: TTL o expiración automática, invalidación explícita al ocurrir cambios y actualización proactiva del valor",
+        "peso": 0.35,
+        "claves": ["tiempo de vida", "expiracion automatica", "invalidacion explicita", "actualizacion proactiva", "borrar la clave", "eliminar entradas", "reemplazar el valor"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Menciona las ventajas del TTL: implementación simple, bajo acoplamiento y buen funcionamiento en sistemas distribuidos",
+        "peso": 0.3,
+        "claves": ["implementacion simple", "no requiere coordinacion", "funciona en distribuido", "menor acoplamiento", "no depende de eventos externos"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Explica los problemas del plazo: un TTL corto genera muchos misses y más carga sobre la base; un TTL largo deja datos obsoletos",
+        "peso": 0.35,
+        "claves": ["ttl demasiado corto", "muchos misses", "ttl demasiado largo", "datos obsoletos", "seleccion del ttl", "mas carga en la base", "informacion incorrecta"]
+      }
+    ],
+    "respuesta_modelo": "La primera estrategia es el TTL, que asigna a cada elemento una duración máxima y, al terminar ese período, lo elimina o lo considera inválido. La segunda es la invalidación explícita: eliminar las entradas cuando ocurren cambios en la fuente, que es lo que se hace al borrar producto:1 después de actualizar la base. La tercera es la actualización proactiva, que reemplaza el valor inmediatamente en lugar de esperar un miss. El TTL tiene la ventaja de ser simple, no requerir coordinación compleja, funcionar bien en sistemas distribuidos y no depender de eventos externos. El problema es elegir el plazo: si es demasiado corto se producen muchos misses y la base recibe más carga; si es demasiado largo, los usuarios reciben datos obsoletos. Por eso el TTL suele combinarse con invalidación al escribir, sobre todo cuando el dato es sensible al cambio.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 33 },
+    "tiempo_sugerido_min": 6,
+    "tags": ["cache", "invalidacion", "ttl"]
+  },
+  {
+    "id": "cache-dev-005",
+    "tema": "cache",
+    "subtema": "distribucion",
+    "dificultad": "media",
+    "pregunta": "Explicá por qué una caché centralizada es un punto único de falla y qué aporta replicar la información en un nodo primario con réplicas. Indicá qué mejora y qué problema sigue vigente.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Explica el punto único de falla: si el servidor cae se pierde disponibilidad, se pierden datos temporales y la base puede colapsar por sobrecarga",
+        "peso": 0.35,
+        "claves": ["punto unico de falla", "se pierde disponibilidad", "datos temporales", "colapsa la base", "sobrecarga", "un solo servidor"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Explica que la replicación mantiene la información en varios nodos, con un primario y réplicas, para seguir respondiendo",
+        "peso": 0.35,
+        "claves": ["nodo primario", "nodo replica", "varios nodos", "sigue respondiendo", "alta disponibilidad", "replicacion", "varios servidores"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Señala el problema que persiste: la coherencia entre copias y la invalidación siguen siendo responsabilidad del diseño, y la caché no reemplaza la persistencia",
+        "peso": 0.3,
+        "claves": ["consistencia entre replicas", "invalidacion", "sincronizacion", "datos obsoletos", "no reemplaza la persistencia", "duplicacion de informacion"]
+      }
+    ],
+    "respuesta_modelo": "Una caché centralizada concentra toda la información en un servidor: si ese nodo falla se pierde disponibilidad, se pierden los datos temporales que solo estaban en memoria y la base de datos puede colapsar porque recibe de golpe todo el tráfico que la caché absorbía. Para evitarlo, la información se mantiene en múltiples nodos, con un nodo primario y réplicas, de modo que el sistema pueda seguir respondiendo solicitudes ante la caída de uno de ellos. La mejora principal es de disponibilidad y también de elasticidad, porque se puede repartir la carga entre nodos. Lo que sigue vigente es el problema de la coherencia: replicar multiplica las copias y hay que coordinar cómo se invalidan y cómo se sincronizan con la fuente. Además, la caché sigue siendo una optimización y no reemplaza la durabilidad de la capa de persistencia.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 28 },
+    "tiempo_sugerido_min": 5,
+    "tags": ["cache", "replicacion", "disponibilidad"]
+  },
+  {
+    "id": "cache-dev-006",
+    "tema": "cache",
+    "subtema": "redis-estructuras",
+    "dificultad": "facil",
+    "pregunta": "Un equipo debe guardar en Redis productos, una cola de trabajos, un ranking por puntaje y las sesiones de usuario. Justificá qué estructura conviene en cada caso y qué problema aparecería si todo se guardara como un string.",
+    "criterios": [
+      {
+        "id": "c1",
+        "descripcion": "Asigna hashes a los productos y lists a la cola, explicando el motivo: campos del objeto y orden de llegada",
+        "peso": 0.35,
+        "claves": ["hash para productos", "campos del producto", "list para la cola", "orden de llegada", "cola de procesamiento", "hash para el objeto"]
+      },
+      {
+        "id": "c2",
+        "descripcion": "Asigna sorted sets al ranking y strings a las sesiones, justificando el orden por puntaje y el valor único",
+        "peso": 0.3,
+        "claves": ["sorted set para el ranking", "ordenado por puntaje", "string para la sesion", "valor unico", "clave valor", "conjunto ordenado"]
+      },
+      {
+        "id": "c3",
+        "descripcion": "Explica el problema de usar solo strings: habría que serializar todo y se pierden las operaciones propias de cada estructura",
+        "peso": 0.35,
+        "claves": ["serializar todo", "se pierden operaciones", "no hay orden por puntaje", "no hay orden de llegada", "menos eficiente", "una sola estructura"]
+      }
+    ],
+    "respuesta_modelo": "El modelo de datos de Redis permite guardar estructuras distintas por clave, así que conviene elegir la que se ajusta a cada problema. Para los productos, un hash agrupa los campos del objeto bajo una sola clave; para la cola de trabajos, una list mantiene el orden de llegada que la cola necesita. El ranking va en un sorted set, porque el conjunto ordenado admite un puntaje por elemento, y las sesiones se representan con strings, que son valores simples asociados a un identificador. Si todo se guardara como string habría que serializar los objetos y perder las operaciones propias de cada estructura: no habría orden por puntaje ni orden de llegada, y cada acceso obligaría a leer y reescribir el valor completo. Esa capacidad de resolver varios problemas sin incorporar sistemas adicionales es lo que vuelve flexible a Redis.",
+    "fuente": { "archivo": "04-02-Redis-04-02.pdf", "pagina": 7 },
+    "tiempo_sugerido_min": 4,
+    "tags": ["redis", "estructuras", "casos-de-uso"]
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "archivo": "02-00-Practico 02 - Contenerización.pdf",
+  "carpeta": "Practicos",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Práctico 2: Contenerización \n \nEjercicio 1 \nExplique la diferencia entre contenerización y virtualización tradicional.  \n \nEjercicio 2 \nExplique los conceptos de CI/CD \n \nEjercicio 3 \nExplique la diferencia entre Docker y Kubernetes. \n \nEjercicio 4 \nEscalabilidad en contenedores: Una aplicación web experimenta picos de tráfico. ¿Cómo \nayuda la contenerización a escalar el sistema? \n \nEjercicio 5 \nOrquestación de despliegues: ¿Qué problemas resuelve un sistema de orquestación como \nKubernetes que no resuelve Docker por sí solo? \n \nEjercicio 6 \nCaso práctico integrado, escalabilidad con CI/CD + contenedores: Diseñe un flujo CI/CD \nque incluya Docker para una aplicación web escalable."
+    }
+  ]
+}

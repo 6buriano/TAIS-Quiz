@@ -1,0 +1,20 @@
+{
+  "nombre": "Parcial TAIS",
+  "descripcion": "Examen completo: 30 preguntas de múltiple opción + 5 de desarrollo corto",
+  "mc_por_tema": {
+    "arquitectura": 5,
+    "contenedores": 5,
+    "nosql": 5,
+    "cache": 5,
+    "asincronia": 5,
+    "rest": 5
+  },
+  "desarrollo_total": 5,
+  "desarrollo_max_por_tema": 1,
+  "mezclar_opciones": true,
+  "pesos": {
+    "multiple": 0.6,
+    "desarrollo": 0.4
+  },
+  "tiempo_limite_min": 100
+}

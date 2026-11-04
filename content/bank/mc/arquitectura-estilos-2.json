@@ -1,0 +1,560 @@
+[
+  {
+    "id": "arq-est-019",
+    "tema": "arquitectura",
+    "subtema": "control",
+    "dificultad": "facil",
+    "pregunta": "En un sistema de nómina, un componente recibe los pedidos y decide y coordina el proceso de todos los demás componentes. ¿Qué modelo de control describe esa organización?",
+    "opciones": [
+      {
+        "texto": "Control centralizado en su variante de modelo gerente.",
+        "correcta": true
+      },
+      {
+        "texto": "Control centralizado en su variante de llamada y retorno.",
+        "correcta": false,
+        "porque_no": "En llamada y retorno el control se ejerce por invocaciones puntuales; acá hay un componente que coordina los procesos de otros."
+      },
+      {
+        "texto": "Control basado en eventos, guiado por eventos generados externamente.",
+        "correcta": false,
+        "porque_no": "El escenario no describe reacción a eventos externos, sino una coordinación explícita desde un componente."
+      },
+      {
+        "texto": "Publicación y suscripción, con tópicos y suscriptores interesados.",
+        "correcta": false,
+        "porque_no": "En publicación y suscripción los componentes se comunican por mensajes y el publicador no conoce a los consumidores."
+      }
+    ],
+    "explicacion": "Los modelos de control se ocupan del flujo de control entre subsistemas. El control centralizado tiene dos variantes: llamada y retorno, y modelo gerente, donde un componente controla los procesos de otros componentes. El escenario corresponde a esa segunda variante.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 37 },
+    "tags": ["control", "gerente", "estilos"]
+  },
+  {
+    "id": "arq-est-020",
+    "tema": "arquitectura",
+    "subtema": "eventos",
+    "dificultad": "facil",
+    "pregunta": "Una interfaz de escritorio reacciona cuando el usuario hace clic o escribe, y al apagar el sistema se emite un aviso a todos los subsistemas para que detengan su operación. ¿Qué modelo de control ilustran esos casos?",
+    "opciones": [
+      {
+        "texto": "Control basado en eventos, guiado por eventos generados externamente.",
+        "correcta": true
+      },
+      {
+        "texto": "Control centralizado con modelo gerente.",
+        "correcta": false,
+        "porque_no": "No hay un componente que dirija los procesos de los demás: cada uno reacciona a eventos."
+      },
+      {
+        "texto": "Control centralizado con llamada y retorno.",
+        "correcta": false,
+        "porque_no": "Las invocaciones puntuales no explican la reacción a clics ni el aviso general de apagado."
+      },
+      {
+        "texto": "Descomposición orientada a objetos.",
+        "correcta": false,
+        "porque_no": "La orientación a objetos es un estilo de descomposición, no el modelo de control que describe la reacción a eventos."
+      }
+    ],
+    "explicacion": "Las diapositivas contrastan los modelos centralizados, donde el control suele depender de variables de estado, con el control basado en eventos, que se guía por eventos generados externamente. Los ejemplos que dan son las GUIs, donde los eventos representan acciones externas, y el apagado, que emite un evento a todos los subsistemas. El escenario reúne justamente esos dos ejemplos.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 38 },
+    "tags": ["eventos", "control", "estilos"]
+  },
+  {
+    "id": "arq-est-021",
+    "tema": "arquitectura",
+    "subtema": "publish-subscribe",
+    "dificultad": "media",
+    "pregunta": "Una plataforma de sensores publica lecturas y varios equipos se suscriben a distintos tópicos; nadie quiere ocuparse de reintentos ni de retener mensajes cuando un consumidor está caído. ¿Qué rol cumple el middleware de mensajería?",
+    "opciones": [
+      {
+        "texto": "Asegurar la comunicación de los mensajes a todos los suscriptores bajo distintas condiciones, incluidas las transaccionales, la retención y los reintentos.",
+        "correcta": true
+      },
+      {
+        "texto": "Garantizar que el publicador conozca cuántos consumidores están registrados antes de publicar.",
+        "correcta": false,
+        "porque_no": "En publicación y suscripción ocurre lo contrario: quien publica no sabe cuántos consumidores hay registrados."
+      },
+      {
+        "texto": "Definir la interfaz del servicio y serializar los mensajes en XML.",
+        "correcta": false,
+        "porque_no": "Eso corresponde a WSDL y XML en los servicios web, no al middleware de mensajería."
+      },
+      {
+        "texto": "Centralizar los datos en un repositorio que los consumidores consultan.",
+        "correcta": false,
+        "porque_no": "Ese es el estilo de datos compartidos; en publicación y suscripción la interacción es por eventos o mensajes."
+      }
+    ],
+    "explicacion": "En publicación y suscripción los componentes se comunican mediante mensajes o eventos: los suscriptores indican en qué están interesados, los tópicos permiten agrupar temas y quien publica no sabe cuántos consumidores hay. El middleware de mensajería se ocupa de que los mensajes lleguen a todos los suscriptores en condiciones diversas, incluyendo transaccionalidad, retención y reintentos. Por eso el equipo se apoya en esa plataforma en lugar de implementar esas garantías.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 39 },
+    "tags": ["publish-subscribe", "middleware", "eventos"]
+  },
+  {
+    "id": "arq-est-022",
+    "tema": "arquitectura",
+    "subtema": "objetos-distribuidos",
+    "dificultad": "dificil",
+    "pregunta": "Un equipo quiere que cualquier objeto de la red pueda ofrecer y consumir servicios sin distinguir roles de cliente y servidor, y se le advierte que será más complejo que cliente-servidor. ¿De qué estilo se trata y qué middleware lo soporta?",
+    "opciones": [
+      {
+        "texto": "Objetos distribuidos, con un Object Request Broker como middleware.",
+        "correcta": true
+      },
+      {
+        "texto": "Cliente-servidor de dos niveles, con servidores que también inician interacciones.",
+        "correcta": false,
+        "porque_no": "El estilo mantiene la distinción de roles, que es precisamente lo que el equipo quiere eliminar."
+      },
+      {
+        "texto": "SOA, con servicios web descritos en WSDL y mensajes SOAP.",
+        "correcta": false,
+        "porque_no": "SOA compone servicios, pero el escenario describe objetos que se proveen y consumen servicios entre sí mediante un middleware."
+      },
+      {
+        "texto": "Capas jerárquicas en modelo estricto, con acceso solo a la capa inferior.",
+        "correcta": false,
+        "porque_no": "El escenario no organiza el sistema en niveles de abstracción, sino en objetos que ofrecen y consumen servicios."
+      }
+    ],
+    "explicacion": "Las diapositivas plantean los objetos distribuidos como un enfoque más general que cliente-servidor, que remueve la distinción entre clientes y servidores. Los objetos se distribuyen entre nodos y se comunican a través de un middleware llamado Object Request Broker, con CORBA como caso. El mismo material advierte que es más complejo de diseñar que cliente-servidor.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 51 },
+    "tags": ["objetos-distribuidos", "orb", "middleware"]
+  },
+  {
+    "id": "arq-est-023",
+    "tema": "arquitectura",
+    "subtema": "antipatrones",
+    "dificultad": "dificil",
+    "pregunta": "¿Cómo presentan las diapositivas a la 'Arquitectura Accidental'?",
+    "opciones": [
+      {
+        "texto": "Como un anti-patrón que sirve de motivación para SOA.",
+        "correcta": true
+      },
+      {
+        "texto": "Como una variante del estilo de capas jerárquicas.",
+        "correcta": false,
+        "porque_no": "No se la ubica entre las variantes de capas, que son el modelo estricto y el relajado."
+      },
+      {
+        "texto": "Como un modelo de vistas para documentar la arquitectura.",
+        "correcta": false,
+        "porque_no": "El modelo de vistas que aparece es el 4+1, no la arquitectura accidental."
+      },
+      {
+        "texto": "Como un estilo de control centralizado con un componente gerente.",
+        "correcta": false,
+        "porque_no": "El modelo gerente es una variante del control centralizado y no se relaciona con este anti-patrón."
+      }
+    ],
+    "explicacion": "La diapositiva titulada 'La Arquitectura Accidental' la rotula como anti-patrón y como motivación para SOA. Es decir, se la presenta como un resultado no deseado del diseño, del que se deriva la necesidad de un enfoque orientado a servicios. No es un estilo ni un modelo de vistas.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 52 },
+    "tags": ["antipatrones", "soa", "riesgos"]
+  },
+  {
+    "id": "arq-est-024",
+    "tema": "arquitectura",
+    "subtema": "rest",
+    "dificultad": "facil",
+    "pregunta": "Entre las restricciones de REST, las diapositivas mencionan una que permite enviar código ejecutable al cliente para ampliar su funcionalidad. ¿Cómo se llama?",
+    "opciones": [
+      {
+        "texto": "Code on Demand.",
+        "correcta": true
+      },
+      {
+        "texto": "Uniform Interface.",
+        "correcta": false,
+        "porque_no": "Uniform Interface se refiere a recursos y métodos como GET, POST y PUT, no al envío de código."
+      },
+      {
+        "texto": "Layered System.",
+        "correcta": false,
+        "porque_no": "Layered System organiza intermediarios en capas y no implica enviar código al cliente."
+      },
+      {
+        "texto": "Cacheability.",
+        "correcta": false,
+        "porque_no": "Cacheability permite reutilizar respuestas almacenadas; no tiene que ver con ejecutar código en el cliente."
+      }
+    ],
+    "explicacion": "El estilo REST se apoya en un conjunto de restricciones: cliente-servidor, stateless, cacheability, layered system, code on demand y uniform interface. Code on Demand es la que habilita enviar código al cliente. Las demás restricciones mencionadas se ocupan de la interacción, el estado, las capas o la interfaz uniforme de recursos y métodos.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 56 },
+    "tags": ["rest", "restricciones", "estilos"]
+  },
+  {
+    "id": "arq-est-025",
+    "tema": "arquitectura",
+    "subtema": "rest",
+    "dificultad": "media",
+    "pregunta": "Un equipo afirma que toda operación por HTTP es REST porque usa GET y POST. ¿Qué referencia citan las diapositivas para matizar esa afirmación?",
+    "opciones": [
+      {
+        "texto": "El Richardson Maturity Model, que muestra que no todo RPC sobre HTTP es REST.",
+        "correcta": true
+      },
+      {
+        "texto": "El modelo OSI, que define los niveles de la comunicación en red.",
+        "correcta": false,
+        "porque_no": "El modelo OSI aparece como ejemplo del estilo de capas jerárquicas, no para graduar la madurez de una API."
+      },
+      {
+        "texto": "El modelo de vistas 4+1, que ordena la documentación de la arquitectura.",
+        "correcta": false,
+        "porque_no": "El 4+1 sirve para documentar vistas, no para evaluar si una API es REST."
+      },
+      {
+        "texto": "CORBA, que estandariza la invocación de objetos distribuidos.",
+        "correcta": false,
+        "porque_no": "CORBA es un caso de middleware de objetos distribuidos y no se usa para graduar APIs HTTP."
+      }
+    ],
+    "explicacion": "Las diapositivas señalan que no todo RPC sobre HTTP es REST y remiten al Richardson Maturity Model para graduarlo. La distinción importa porque RESTful implica promover los conceptos de REST en la API, no solo transportar llamadas sobre HTTP. El estilo se apoya en restricciones como stateless, cacheability, layered system y uniform interface con recursos y métodos.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 56 },
+    "tags": ["rest", "richardson", "apis"]
+  },
+  {
+    "id": "arq-est-026",
+    "tema": "arquitectura",
+    "subtema": "descomposicion",
+    "dificultad": "facil",
+    "pregunta": "Un equipo llama 'servicio' a un conjunto de componentes que comparten un tema común. ¿Cómo corrige esa denominación el glosario de las diapositivas?",
+    "opciones": [
+      {
+        "texto": "Ese conjunto es un módulo; un servicio es una unidad coherente de funcionalidad.",
+        "correcta": true
+      },
+      {
+        "texto": "Ese conjunto es un componente; un servicio es una unidad de software con nombre que expone una API.",
+        "correcta": false,
+        "porque_no": "Se invierten los términos: el componente es la unidad de software que ofrece servicios, y el módulo agrupa componentes."
+      },
+      {
+        "texto": "Ese conjunto es un estilo; un servicio es un patrón de diseño.",
+        "correcta": false,
+        "porque_no": "El glosario distingue servicio, componente y módulo; estilo y patrón son otra clasificación."
+      },
+      {
+        "texto": "Ese conjunto es un tópico; un servicio es un suscriptor.",
+        "correcta": false,
+        "porque_no": "Tópicos y suscriptores pertenecen a publicación y suscripción, no al glosario de descomposición."
+      }
+    ],
+    "explicacion": "Las diapositivas distinguen tres niveles: el servicio es una unidad coherente de funcionalidad, el componente es una unidad de software con nombre que ofrece uno o más servicios a otros componentes o al usuario, y el módulo es un conjunto de componentes con nombre que tienen algo en común. Por eso agrupar componentes por tema común define un módulo. Los servicios que consume un componente se acceden a través de una API.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 61 },
+    "tags": ["descomposicion", "componentes", "modulos"]
+  },
+  {
+    "id": "arq-est-027",
+    "tema": "arquitectura",
+    "subtema": "descomposicion",
+    "dificultad": "media",
+    "pregunta": "Al descomponer un sistema, ¿dónde pone el foco la arquitectura según las diapositivas?",
+    "opciones": [
+      {
+        "texto": "En los componentes a gran escala, que se analizan y se representan como un conjunto de componentes de grano más fino.",
+        "correcta": true
+      },
+      {
+        "texto": "En las clases y los métodos de cada componente.",
+        "correcta": false,
+        "porque_no": "Ese es el nivel del diseño detallado, no el de la descomposición arquitectónica."
+      },
+      {
+        "texto": "En los casos de uso y los escenarios de usuario.",
+        "correcta": false,
+        "porque_no": "Los escenarios son una vista del modelo 4+1, no el foco de la descomposición."
+      },
+      {
+        "texto": "En las decisiones de infraestructura y de despliegue.",
+        "correcta": false,
+        "porque_no": "La infraestructura condiciona la arquitectura, pero la descomposición se define sobre componentes."
+      }
+    ],
+    "explicacion": "La diapositiva indica que, a nivel de arquitectura, el foco se pone en los componentes a gran escala del sistema. Descomponer implica analizar esos componentes y representarlos como un conjunto de componentes de grano más fino. Ese movimiento es el que permite luego asignar responsabilidades y relaciones.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 60 },
+    "tags": ["descomposicion", "componentes", "arquitectura"]
+  },
+  {
+    "id": "arq-est-028",
+    "tema": "arquitectura",
+    "subtema": "documentacion",
+    "dificultad": "media",
+    "pregunta": "Un arquitecto escribe la documentación pensando solo en el equipo que va a programar. ¿Qué destinatarios adicionales indican las diapositivas?",
+    "opciones": [
+      {
+        "texto": "Los interesados que deben entender el impacto de la arquitectura y los equipos que mantienen y evolucionan el sistema.",
+        "correcta": true
+      },
+      {
+        "texto": "Únicamente la gerencia y el área de compras de la organización.",
+        "correcta": false,
+        "porque_no": "La documentación no se limita a esas áreas: el objetivo incluye a quienes construyen, mantienen y validan el sistema."
+      },
+      {
+        "texto": "Solo los organismos de auditoría externa y los entes reguladores.",
+        "correcta": false,
+        "porque_no": "La auditoría externa no es el destinatario que definen las diapositivas."
+      },
+      {
+        "texto": "Los usuarios finales, que necesitan el detalle de las decisiones de diseño.",
+        "correcta": false,
+        "porque_no": "Los usuarios finales no son el destinatario de la documentación de arquitectura, que apunta a interesados y equipos técnicos."
+      }
+    ],
+    "explicacion": "La documentación de la arquitectura se dirige a los interesados que deben entender su impacto y analizar características a incorporar, al equipo que construye el sistema y a los equipos que lo mantienen y evolucionan. El contenido incluye contexto, decisiones, balance entre alternativas y descripción de vistas. Por eso escribir solo para quien programa deja afuera destinatarios clave.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 75 },
+    "tags": ["documentacion", "interesados", "vistas"]
+  },
+  {
+    "id": "arq-est-029",
+    "tema": "arquitectura",
+    "subtema": "documentacion",
+    "dificultad": "dificil",
+    "pregunta": "La dirección objeta el tiempo dedicado a documentar la arquitectura. ¿Qué argumento ofrece el material?",
+    "opciones": [
+      {
+        "texto": "La documentación debería amortizarse sola haciendo que las actividades de desarrollo sean menos costosas.",
+        "correcta": true
+      },
+      {
+        "texto": "La documentación permite eliminar la fase de verificación del sistema.",
+        "correcta": false,
+        "porque_no": "No reemplaza la verificación: son actividades distintas y ambas siguen existiendo."
+      },
+      {
+        "texto": "La documentación reemplaza la evaluación de la arquitectura antes de implementarla.",
+        "correcta": false,
+        "porque_no": "La evaluación es una actividad propia, que el material recomienda hacer antes de implementar."
+      },
+      {
+        "texto": "La documentación es una exigencia exclusiva de las metodologías ágiles.",
+        "correcta": false,
+        "porque_no": "El material plantea que arquitectura y agilidad no son opuestas, no que la documentación sea un requisito ágil."
+      }
+    ],
+    "explicacion": "Frente a la objeción por el esfuerzo, la diapositiva sostiene que la documentación debería amortizarse sola haciendo que las actividades de desarrollo sean menos costosas. Es una inversión: se escribe para los interesados, para quien construye y para quien mantiene. No reemplaza la verificación ni la evaluación de la arquitectura.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 75 },
+    "tags": ["documentacion", "costos", "decisiones"]
+  },
+  {
+    "id": "arq-est-030",
+    "tema": "arquitectura",
+    "subtema": "vistas",
+    "dificultad": "facil",
+    "pregunta": "El equipo necesita mostrar en qué servidores queda desplegado cada componente de software. ¿Qué vista del modelo 4+1 corresponde?",
+    "opciones": [
+      {
+        "texto": "La vista física, asociada a los diagramas de despliegue.",
+        "correcta": true
+      },
+      {
+        "texto": "La vista lógica, asociada a los diagramas de clases y de estados.",
+        "correcta": false,
+        "porque_no": "La vista lógica muestra las abstracciones clave del sistema, como objetos o clases, no el hardware."
+      },
+      {
+        "texto": "La vista del proceso, asociada a los diagramas de secuencia y de actividad.",
+        "correcta": false,
+        "porque_no": "La vista del proceso describe la interacción de procesos en tiempo de ejecución."
+      },
+      {
+        "texto": "La vista de desarrollo, asociada a los diagramas de componentes y de paquetes.",
+        "correcta": false,
+        "porque_no": "La vista de desarrollo muestra cómo se descompone el software para el desarrollo, no dónde se despliega."
+      }
+    ],
+    "explicacion": "El modelo 4+1 propone cinco vistas. La física se ocupa del hardware del sistema y de los componentes de software desplegados, y se ejemplifica con diagramas de despliegue. La lógica, la del proceso y la de desarrollo cubren abstracciones, interacción en ejecución y descomposición del software, respectivamente, y los escenarios completan el modelo.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 78 },
+    "tags": ["vistas", "4+1", "documentacion"]
+  },
+  {
+    "id": "arq-est-031",
+    "tema": "arquitectura",
+    "subtema": "vistas",
+    "dificultad": "media",
+    "pregunta": "¿Qué propone el modelo de vistas 4+1 según las diapositivas?",
+    "opciones": [
+      {
+        "texto": "Estandarizar la descripción de arquitecturas mediante la selección de vistas.",
+        "correcta": true
+      },
+      {
+        "texto": "Definir un estilo de capas con acceso solo a la capa inmediata inferior.",
+        "correcta": false,
+        "porque_no": "Eso es el modelo estricto del estilo de capas, no un modelo de vistas."
+      },
+      {
+        "texto": "Establecer un catálogo de patrones de diseño reutilizables.",
+        "correcta": false,
+        "porque_no": "El catálogo de patrones es otra cosa: el 4+1 organiza la documentación en vistas."
+      },
+      {
+        "texto": "Fijar las tácticas obligatorias para cada atributo de calidad.",
+        "correcta": false,
+        "porque_no": "Las tácticas se eligen según los atributos priorizados; el 4+1 no las prescribe."
+      }
+    ],
+    "explicacion": "El modelo de vistas 4+1 es una propuesta para estandarizar la descripción de arquitecturas mediante la selección de vistas. Cada vista captura aspectos relevantes del sistema desde una perspectiva distinta: lógica, del proceso, de desarrollo, física y escenarios. Documentar con vistas evita que la descripción dependa de una única mirada.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 77 },
+    "tags": ["vistas", "4+1", "estandarizacion"]
+  },
+  {
+    "id": "arq-est-032",
+    "tema": "arquitectura",
+    "subtema": "evaluacion",
+    "dificultad": "media",
+    "pregunta": "¿Por qué el material recomienda evaluar la arquitectura antes de implementarla por completo?",
+    "opciones": [
+      {
+        "texto": "Porque cambiar la arquitectura de un producto ya construido requiere mucho esfuerzo y conviene verificar los requisitos de calidad antes.",
+        "correcta": true
+      },
+      {
+        "texto": "Porque las evaluaciones posteriores no aportan información útil.",
+        "correcta": false,
+        "porque_no": "El material dice lo contrario: las evaluaciones a posteriori sirven para aprender y detectar mejoras."
+      },
+      {
+        "texto": "Porque la arquitectura no puede documentarse después de implementada.",
+        "correcta": false,
+        "porque_no": "Se puede documentar después; lo que se busca es anticipar la verificación de los requisitos de calidad."
+      },
+      {
+        "texto": "Porque el estilo elegido deja de poder modificarse al comenzar el desarrollo.",
+        "correcta": false,
+        "porque_no": "El material no afirma esa imposibilidad: advierte el costo alto del cambio."
+      }
+    ],
+    "explicacion": "La recomendación se apoya en que cambiar la arquitectura de un producto ya construido requiere mucho esfuerzo, por lo que conviene evaluarla antes de implementarla completamente y verificar los requisitos de calidad establecidos. Las evaluaciones a posteriori también resultan útiles, pero como forma de aprendizaje y de estudio de mejoras para nuevas versiones. Las dos instancias se complementan.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 73 },
+    "tags": ["evaluacion", "calidad", "arquitectura"]
+  },
+  {
+    "id": "arq-est-033",
+    "tema": "arquitectura",
+    "subtema": "decisiones-tecnologicas",
+    "dificultad": "facil",
+    "pregunta": "Un equipo discute si usar una base relacional o NoSQL, si desplegar en un servidor dedicado o en la nube y si desarrollar las APIs o poner un API Gateway. ¿Qué afirman las diapositivas sobre estas decisiones?",
+    "opciones": [
+      {
+        "texto": "Influyen y restringen la arquitectura, y no es fácil cambiarlas.",
+        "correcta": true
+      },
+      {
+        "texto": "Son independientes de la arquitectura y se pueden revertir sin costo.",
+        "correcta": false,
+        "porque_no": "El material subraya lo contrario: condicionan la arquitectura y cambiarlas no es sencillo."
+      },
+      {
+        "texto": "Afectan solo a la capa de presentación del sistema.",
+        "correcta": false,
+        "porque_no": "Alcanzan a la persistencia, el despliegue y las APIs, no solo a la presentación."
+      },
+      {
+        "texto": "Se resuelven recién en la implementación, sin impacto en el diseño.",
+        "correcta": false,
+        "porque_no": "Las diapositivas las ubican durante el diseño, justamente porque influyen en la arquitectura."
+      }
+    ],
+    "explicacion": "Las decisiones de tecnología se toman durante el diseño, influyen y restringen la arquitectura y no son fáciles de cambiar. El material los ejemplifica con bases relacionales o NoSQL, plataforma de interacción web o mobile, servidor dedicado o cloud, y APIs desarrolladas o a través de un API Gateway. Cada opción arrastra consecuencias, como las transacciones ACID frente a modelos alternativos de persistencia.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 68 },
+    "tags": ["decisiones", "tecnologia", "compromisos"]
+  },
+  {
+    "id": "arq-est-034",
+    "tema": "arquitectura",
+    "subtema": "compensaciones",
+    "dificultad": "media",
+    "pregunta": "Un sistema debe ser de alta performance y, a la vez, fácil de mantener. El equipo comprueba que ningún estilo único satisface ambos. ¿Qué salidas plantean las diapositivas?",
+    "opciones": [
+      {
+        "texto": "Buscar una solución de compromiso o usar diferentes estilos para distintas partes del sistema.",
+        "correcta": true
+      },
+      {
+        "texto": "Elegir el estilo que maximice la performance y postergar la mantenibilidad.",
+        "correcta": false,
+        "porque_no": "Eso resuelve un atributo a costa del otro, que es justamente el conflicto que la diapositiva invita a tratar."
+      },
+      {
+        "texto": "Reemplazar los requisitos no funcionales por requisitos funcionales.",
+        "correcta": false,
+        "porque_no": "Los requisitos no funcionales son los que están en conflicto y no se pueden sustituir por funcionales."
+      },
+      {
+        "texto": "Documentar el conflicto y resolverlo durante la implementación.",
+        "correcta": false,
+        "porque_no": "Las decisiones arquitectónicas se toman temprano; postergarlas traslada el problema y encarece el cambio."
+      }
+    ],
+    "explicacion": "La diapositiva plantea el caso de un sistema que debe ser de alta performance y fácil de mantener, y pregunta cuál es el conflicto al elegir el estilo arquitectónico. Las salidas que propone son una solución de compromiso o bien aplicar diferentes estilos en distintas partes del sistema. La arquitectura no maximiza todos los atributos: encuentra un equilibrio para el contexto.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 8 },
+    "tags": ["compromisos", "performance", "mantenibilidad"]
+  },
+  {
+    "id": "arq-est-035",
+    "tema": "arquitectura",
+    "subtema": "patrones",
+    "dificultad": "facil",
+    "pregunta": "En una revisión de diseño un equipo informa que aplicó MVC y microservicios. Según la clase de tácticas, ¿en qué categoría entran esas dos decisiones?",
+    "opciones": [
+      {
+        "texto": "En patrones, entendidos como soluciones estructurales.",
+        "correcta": true
+      },
+      {
+        "texto": "En tácticas, entendidas como mecanismos específicos como la caché.",
+        "correcta": false,
+        "porque_no": "Las tácticas son mecanismos específicos que influyen en un atributo de calidad; MVC y microservicios se presentan como soluciones estructurales."
+      },
+      {
+        "texto": "En requisitos no funcionales, porque definen atributos de calidad.",
+        "correcta": false,
+        "porque_no": "Los requisitos no funcionales describen cómo debe comportarse el sistema, no estructuras de solución."
+      },
+      {
+        "texto": "En la arquitectura completa, porque toda decisión estructural es la arquitectura.",
+        "correcta": false,
+        "porque_no": "La arquitectura es la combinación de múltiples decisiones; estos dos casos son patrones que la componen."
+      }
+    ],
+    "explicacion": "La clase de tácticas ordena los conceptos en niveles: las tácticas son mecanismos específicos, como la caché, que influyen en un atributo de calidad; los patrones son soluciones estructurales y allí se ejemplifica con MVC y microservicios; la arquitectura resulta de combinar múltiples decisiones. Por eso lo que el equipo aplicó son patrones. Confundirlos con tácticas lleva a esperar de ellos un efecto puntual sobre un atributo, que no es lo que ofrecen.",
+    "fuente": { "archivo": "01-02-tais-Tacticas de Ing Soft.pdf", "pagina": 18 },
+    "tags": ["patrones", "tacticas", "mvc"]
+  },
+  {
+    "id": "arq-est-036",
+    "tema": "arquitectura",
+    "subtema": "transversales",
+    "dificultad": "dificil",
+    "pregunta": "Un equipo propone concentrar la seguridad y el logging de todo el sistema en un único componente compartido al que todos los módulos invoquen. ¿Qué objeción plantean las diapositivas?",
+    "opciones": [
+      {
+        "texto": "Resolver temas transversales en un único punto aumenta los riesgos; conviene considerarlos a lo largo del sistema para evitar un único punto de falla.",
+        "correcta": true
+      },
+      {
+        "texto": "Los temas transversales deben resolverse dentro de la capa de presentación.",
+        "correcta": false,
+        "porque_no": "El material no fija esa capa; discute si conviene centralizarlos o distribuirlos a lo largo del sistema."
+      },
+      {
+        "texto": "La seguridad y el logging pertenecen a la capa de gestión de datos.",
+        "correcta": false,
+        "porque_no": "No se los asigna a esa capa, y el logging aparece como necesidad de la API junto con los datos y el monitoreo."
+      },
+      {
+        "texto": "Centralizarlos es correcto porque reduce el acoplamiento entre módulos.",
+        "correcta": false,
+        "porque_no": "Concentrar el tema en un solo punto agrega riesgo de falla, que es lo que el material advierte."
+      }
+    ],
+    "explicacion": "La diapositiva advierte que resolver temas en un único punto aumenta los riesgos. La alternativa que propone es considerarlos a lo largo del sistema, por ejemplo con capas, de modo de evitar un único punto de falla. En la extensión del caso de gestión de pedidos también se pregunta en qué capa ubicar validación y seguridad, señal de que la decisión no es trivial.",
+    "fuente": { "archivo": "01-03-tais-Estilos.pdf", "pagina": 71 },
+    "tags": ["transversales", "riesgos", "seguridad"]
+  }
+]

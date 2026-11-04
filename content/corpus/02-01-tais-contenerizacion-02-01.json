@@ -1,0 +1,126 @@
+{
+  "archivo": "02-01-tais-Contenerizacion-02-01.pdf",
+  "carpeta": "",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Curso\nTendencias Aplicadas de \nIngenería de Software\nContenerización \n1"
+    },
+    {
+      "n": 2,
+      "texto": "Contenerización para Pruebas y Despliegue \nautomatizado\n• Analizar los siguientes temas:\n– Orquestación de despliegues\n– Docker vs Kubernetes\n– On-premises vs Cloud\nAntes:\n• Deploy manual\n– Ambientes inconsistentes\n– “Funciona en mi máquina”\nAhora:\n• CI/CD\n– Infraestructura reproducible\n– Escalabilidad automática\n2"
+    },
+    {
+      "n": 3,
+      "texto": "Problema Clásico\nProblema clásico\n• Diferencias entre ambientes:\n– Dev\n– QA\n– Staging\n– Producción\n• Problemas:\n– Dependencias distintas\n– Versiones incompatibles\n– Configuración manual\n3"
+    },
+    {
+      "n": 4,
+      "texto": "Solución más actualizada\n• Contenerización:\n– Encapsular aplicación + dependencias\n– Entornos reproducibles\n– Portabilidad\n• ¿Qué es un contenedor?\nUn contenedor es: Una unidad ligera y ejecutable que \nempaqueta una aplicación con sus dependencias.\n• No es una VM.\n4"
+    },
+    {
+      "n": 5,
+      "texto": "Contenedores vs Máquinas Virtuales\n•\n5\nCaracterísitca\nVM\nContenedor\nKernel\nCompleto\nCompartido\nPeso\nAlto\nBajo\nInicio\nLento\nRápido\nAislamiento\nFuerte\nMedio"
+    },
+    {
+      "n": 6,
+      "texto": "Contenedores vs Máquinas Virtuales\n6"
+    },
+    {
+      "n": 7,
+      "texto": "Docker Containers\n7"
+    },
+    {
+      "n": 8,
+      "texto": "Beneficios de Contenedores\n• Resuelven dependencias\n– Empaquetamiento y distribución de librerías, etc.\n• Portabilidad entre Clouds\n– Que soporten Docker engine\n• Implementación eficiente de Servicios\n– Buen soporte para SOA.\n• Simplifican adopción de DevOps\n– Mismo equipo responsable del Desarrollo y \nOperación\n8"
+    },
+    {
+      "n": 9,
+      "texto": "Docker\n• Docker permite:\n– Crear imágenes\n– Ejecutar contenedores\n– Distribuir aplicaciones\n• Imagen:\n– Plantilla \n• Contenedor:\n– Instancia en ejecución\n9"
+    },
+    {
+      "n": 10,
+      "texto": "Docker\n•\nDockerfile: Define cómo construir una imagen:\n–\nBase image\n–\nDependencias\n–\nCódigo\n–\nComando de ejecución\nEjemplo de Dockerfile\nFROM maven:3.9.6-eclipse-temurin-17\nWORKDIR /app\nCOPY pom.xml .\nCOPY src ./src\nRUN mvn clean package\nCMD [\"mvn\", \"exec:java\", \"-Dexec.mainClass=com.test.Publisher\"]\n10"
+    },
+    {
+      "n": 11,
+      "texto": "Docker\n• Buenas prácticas Docker\n– Imágenes pequeñas\n– Multi-stage builds\n– Versionado explícito\n• Ventajas de contenerización en pruebas\n– Entornos idénticos\n– Tests reproducibles\n– Eliminación de “works on my machine”\n• Tipos de testing con contenedores\n– Unit tests\n– Integration tests\n– E2E tests\n• Todos pueden ejecutarse en contenedores.\n11"
+    },
+    {
+      "n": 12,
+      "texto": "CI/CD\n•\nCode → Build → Test → Image → Deploy\n•\nLa Integración Continua es una práctica de desarrollo donde los cambios \nde código se integran frecuentemente en un repositorio compartido, y \ncada integración dispara un proceso automático de verificación.\n•\nCaracterísticas clave:\n–\nBuilds automáticos\n–\nEjecución de tests unitarios e integración\n–\nValidación temprana de errores\n–\nReducción de conflictos entre ramas\n•\nHerramienta común:\n–\nGitHub Actions\n–\nJenkins\n•\nBeneficio principal:\n–\nDetectar errores lo antes posible en el ciclo de desarrollo.\n12"
+    },
+    {
+      "n": 13,
+      "texto": "CI/CD\n• Entrega Continua (CD) extiende CI automatizando el \ndespliegue del software en distintos entornos.\n• Diferencia clave:\n– CI → valida el software\n– CD → lo despliega automáticamente\n• Etapas típicas:\n– Build\n– Test\n– Staging\n– Producción\n• Objetivo: Reducir el tiempo entre desarrollo y \ndisponibilidad en producción.\n13"
+    },
+    {
+      "n": 14,
+      "texto": "Despliegue Automatizado\n• El despliegue automatizado elimina la intervención \nmanual en la puesta en producción del software.\n• El objetivo es convertir el despliegue en un proceso \nrepetible, confiable y automático.\n• Problemas del despliegue manual:\n– Errores humanos frecuentes\n– Inconsistencias entre entornos\n– Deploys lentos y riesgosos\n– Dificultad para reproducir fallos\n14"
+    },
+    {
+      "n": 15,
+      "texto": "Contenerización como base del despliegue \nmoderno\n• La contenerización permite empaquetar aplicaciones \njunto con:\n– Dependencias\n– Configuración base\n– Entorno de ejecución\n• Esto permite: “Build once, run anywhere”\n15"
+    },
+    {
+      "n": 16,
+      "texto": "Docker como estándar\n•\nDocker permite:\n–\nConstrucción de contenedores\n–\nEjecución de imagenes\n–\nDistribución de aplicaciones\n–\nReproducibilidad de entornos\n•\nImagen vs Contenedor\nImagen:\n–\nArtefacto inmutable\n–\nPlantilla del sistema\nContenedor:\n–\nInstancia en ejecución\n–\nEstado dinámico\n•\nAnalogía:\n–\nImagen = clase\n–\nContenedor = objeto\n16"
+    },
+    {
+      "n": 17,
+      "texto": "Docker como estándar\n• Un Dockerfile define el proceso de construcción de una \nimagen.\n• Incluye:\n– Imagen base\n– Copia de código\n– Instalación de dependencias\n– Comando de ejecución\n17"
+    },
+    {
+      "n": 18,
+      "texto": "Problema clásico resuelto por contenedores\n•\n“Funciona en mi máquina”\n•\nCausa:\n–\nDependencias locales distintas\n–\nVersiones incompatibles\n–\nConfiguración manual\n•\nSolución:\n–\nContenedores reproducibles.\n•\nCI/CD con contenedores: Pipeline moderno:\n–\nCommit → Build Image → Test Container → Push \nRegistry → Deploy\n18"
+    },
+    {
+      "n": 19,
+      "texto": "Orquestación de contenedores\n• Cuando hay muchos contenedores, surge la necesidad \nde:\n– Coordinación\n– Escalado\n– Balanceo\n– Auto-recuperación\n19"
+    },
+    {
+      "n": 20,
+      "texto": "Kubernetes como orquestador\n• Kubernetes permite:\n– Ejecutar contenedores a escala\n– Gestionar fallos automáticamente\n– Escalar aplicaciones dinámicamente\n– Desplegar sin downtime\n20"
+    },
+    {
+      "n": 21,
+      "texto": "Kubernetes como orquestador\n21"
+    },
+    {
+      "n": 22,
+      "texto": "Kubernetes como orquestador\n•\nPods\n•\nUn Pod es la unidad mínima de ejecución en Kubernetes.\n•\nCaracterísticas:\n–\nUno o más contenedores\n–\nComparten red\n–\nComparten almacenamiento\n–\nPuede contener uno o más contenedores\n–\nComparten almacenamiento (volúmenes)\n–\nSe diseñan como unidad lógica de despliegue\n–\nIdea clave:\n Kubernetes no gestiona contenedores individuales, \nsino Pods.\n22"
+    },
+    {
+      "n": 23,
+      "texto": "Kubernetes como orquestador\n• Ciclo de vida de un Pod\n• Un Pod atraviesa estados:\n– Pending\n– Running\n– Succeeded\n– Failed\n– Unknown\n23"
+    },
+    {
+      "n": 24,
+      "texto": "Kubernetes como orquestador\n• Un Worker Node es un nodo de trabajo que ejecuta \naplicaciones reales.\n• Componentes principales:\n– kubelet\n– kube-proxy\n– container runtime (Docker/containerd)\n24"
+    },
+    {
+      "n": 25,
+      "texto": "Kubernetes como orquestador\n• kubelet (componente clave)  es el agente principal del \nnodo.\n• Funciones:\n– Recibe instrucciones del Control Plane\n– Crea y monitorea Pods\n– Reporta estado del nodo\n– Asegura que los contenedores estén corriendo\n• kubelet es el “ejecutor local” de Kubernetes.\n25"
+    },
+    {
+      "n": 26,
+      "texto": "Kubernetes como orquestador\n• El kubelet:\n– No decide qué ejecutar\n– Solo ejecuta lo que el Control Plane ordena\n– Monitorea salud de contenedores\n• Ejemplo:\n– Si un contenedor falla → kubelet lo reinicia.\n26"
+    },
+    {
+      "n": 27,
+      "texto": "Kubernetes como orquestador\n• kube-proxy (componente de red) maneja la red dentro \ndel cluster.\n• Funciones:\n– Routing de tráfico entre Pods\n– Implementación de Services\n– Load balancing básico\n– Manejo de reglas de red \n• Basicamente:\n– Kubelet ejecuta Pods\n– Kube-proxy gestiona red del cluster\n27"
+    },
+    {
+      "n": 28,
+      "texto": "Kubernetes on-premises\n• Implementación en infraestructura propia.\n• Ventajas:\n– Control total del hardware\n– Cumplimiento regulatorio\n– Seguridad interna\n• Desventajas:\n– Alta complejidad operativa\n– Costos de mantenimiento\n– Escalabilidad limitada física\n28"
+    },
+    {
+      "n": 29,
+      "texto": "Cloud\n• Amazon EKS\n• Google Kubernetes Engine\n• Azure Kubernetes Service\n• Ventajas:\n– Infraestructura gestionada\n– Escalabilidad automática\n– Menor carga operativa\n29"
+    },
+    {
+      "n": 30,
+      "texto": "Puntos Claves\n• Conclusiones\n– kubelet ejecuta contenedores en nodos\n– kube-proxy maneja networking interno\n– Kubernetes automatiza operación de sistemas \ndistribuidos\n• La contenerización ha sido de ayuda en el proceso de \nCI/CD\n30"
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "archivo": "05-02-ProgAsincronica-2-05-02.pdf",
+  "carpeta": "",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Curso\nTendencias Aplicadas de \nIngenería de Software\nFrameworks para aplicar Asincronismo.\nMosquitto (MQTT) / ActiveMQ (JMS) / \nKafka.\n1"
+    },
+    {
+      "n": 2,
+      "texto": "Middleware orientado a mensajes\n•\nUn Message Oriented Middleware (MOM) es una infraestructura de \nsoftware que permite intercambiar mensajes entre aplicaciones de \nmanera desacoplada.\n•\nSu función principal consiste en actuar como intermediario entre \nproductores y consumidores de información.\n•\nLos componentes fundamentales son:\n•\nProductor\n–\nAplicación que genera mensajes o eventos.\n•\nBroker\n–\nComponente encargado de recibir, almacenar y distribuir mensajes.\n2"
+    },
+    {
+      "n": 3,
+      "texto": "Middleware orientado a mensajes\n• Consumidor\n– Aplicación que recibe y procesa mensajes.\n• Canal\n– Mecanismo lógico utilizado para transportar \nmensajes.\n• El uso de un broker permite que productores y \nconsumidores evolucionen independientemente, \nfacilitando la integración de sistemas heterogéneos.\n3"
+    },
+    {
+      "n": 4,
+      "texto": "Criterios para evaluar tecnologías de \nmensajería\n•\nLa selección de una plataforma de mensajería no debe \nrealizarse únicamente por popularidad o tendencias \ntecnológicas.\n•\nEntre los criterios más relevantes se encuentran:\n•\nRendimiento\n–\nCantidad de mensajes procesados por unidad de tiempo.\n•\nLatencia\n–\nTiempo requerido para entregar un mensaje.\n•\nPersistencia\n–\nCapacidad para almacenar mensajes de forma durable.\n4"
+    },
+    {
+      "n": 5,
+      "texto": "Criterios para evaluar tecnologías de \nmensajería\n• Escalabilidad\n– Facilidad para aumentar capacidad mediante la \nincorporación de recursos.\n• Disponibilidad\n– Capacidad del sistema para continuar funcionando \nante fallos.\n• Complejidad operativa\n– Esfuerzo requerido para instalación, monitoreo y \nmantenimiento.\n5"
+    },
+    {
+      "n": 6,
+      "texto": "Introducción a MQTT\n•\nMQTT (Message Queuing Telemetry Transport) es un protocolo de \nmensajería extremadamente ligero diseñado para comunicaciones \nentre dispositivos con recursos limitados.\n•\nFue creado originalmente para entornos donde la conectividad es \ncostosa, inestable o presenta restricciones de ancho de banda.\n•\nSus principales características son:\n–\nBajo consumo de recursos.\n–\nTamaño reducido de encabezados.\n–\nComunicación Publish/Subscribe.\n–\nSoporte para conexiones persistentes.\n•\nActualmente es uno de los protocolos más utilizados en \nsoluciones IoT e Industria\n6"
+    },
+    {
+      "n": 7,
+      "texto": "Mosquitto como broker MQTT\n• Mosquitto es uno de los brokers MQTT más utilizados \nen entornos académicos e industriales.\n• Su función consiste en recibir mensajes publicados por \nproductores y distribuirlos a los suscriptores \ncorrespondientes.\n• Entre sus características destacan:\n– Implementación Open Source.\n– Bajo consumo de memoria.\n– Autenticación de usuarios.\n– Persistencia configurable.\n• Su simplicidad operativa lo convierte en una alternativa \nmuy utilizada para proyectos de telemetría y monitoreo.\n7"
+    },
+    {
+      "n": 8,
+      "texto": "Arquitectura de comunicación en MQTT\n•\nLa arquitectura MQTT está basada completamente en el \npatrón Publish/Subscribe.\n•\nLos dispositivos emisores publican información en tópicos \nespecíficos y los consumidores se suscriben a aquellos \ntópicos de interés.\n Sensor -> Broker MQTT -> Dashboard\n                      \n•\nLos productores y consumidores no necesitan conocerse \nmutuamente.\n•\nEsta característica reduce significativamente el acoplamiento \nentre componentes y facilita la incorporación de nuevos \nconsumidores sin modificar aplicaciones existentes.\n8"
+    },
+    {
+      "n": 9,
+      "texto": "Caso de uso de MQTT en IoT\n•\nConsideremos una organización que opera miles de sensores \ndistribuidos geográficamente para monitorear variables \nambientales.\n•\nCada sensor transmite periódicamente:\n–\nTemperatura.\n–\nHumedad.\n–\nPresión atmosférica.\n–\nCalidad del aire.\n•\nEn este escenario MQTT resulta adecuado debido a:\n–\nBajo consumo de ancho de banda.\n–\nMínimo uso de batería.\n–\nSimplicidad de implementación.\n•\nPor estas razones MQTT se ha convertido en un estándar de facto \npara soluciones IoT.\n9"
+    },
+    {
+      "n": 10,
+      "texto": "Limitaciones de MQTT\n• A pesar de sus ventajas, MQTT no fue diseñado para \nresolver todos los problemas de mensajería \nempresarial.\n• Entre sus principales limitaciones se encuentran:\n– Capacidades limitadas de almacenamiento histórico.\n– Escalabilidad restringida para grandes volúmenes \nhistóricos.\n• Por esta razón suele complementarse con otras \nplataformas especializadas cuando los requisitos de \nnegocio aumentan.\n10"
+    },
+    {
+      "n": 11,
+      "texto": "Introducción a JMS\n• Java Message Service (JMS) es una especificación \nestándar del ecosistema Java que define una interfaz \ncomún para sistemas de mensajería.\n• Es importante destacar que JMS no es un producto ni \nun broker.\n• JMS define:\n– APIs.\n– Modelos de comunicación.\n– Contratos de interoperabilidad.\n• Las implementaciones concretas son proporcionadas \npor plataformas como ActiveMQ, IBM MQ o ActiveMQ \nArtemis.\n11"
+    },
+    {
+      "n": 12,
+      "texto": "ActiveMQ como implementación de JMS\n•\nApache ActiveMQ es una de las implementaciones más \nconocidas del estándar JMS.\n•\nEstá orientada principalmente a entornos empresariales \ndonde la confiabilidad y la integridad de los mensajes son \nrequisitos fundamentales.\n•\nSus capacidades incluyen:\n–\nColas y tópicos.\n–\nPersistencia.\n–\nTransacciones.\n–\nBalanceo de carga.\n–\nClustering.\n•\nEs ampliamente utilizado en sistemas bancarios, \ngubernamentales y corporativos.\n12"
+    },
+    {
+      "n": 13,
+      "texto": "Arquitectura de ActiveMQ\n• ActiveMQ actúa como intermediario entre sistemas \nempresariales que necesitan intercambiar información \nde manera confiable.\n• Cada sistema puede evolucionar independientemente \nmientras el broker garantiza la entrega de los mensajes.\n• Esto reduce considerablemente el impacto de cambios \ntecnológicos y facilita la integración de aplicaciones \nlegadas.\n13"
+    },
+    {
+      "n": 14,
+      "texto": "Caso de uso empresarial de ActiveMQ\n• Supongamos una institución financiera que procesa \nmiles de operaciones diariamente.\n• Cada transacción debe:\n– Registrarse.\n– Validarse.\n– Auditarse.\n– Almacenarse.\n• La pérdida de un único mensaje podría generar \nproblemas legales o financieros.\n• En este contexto ActiveMQ proporciona las garantías \nnecesarias para asegurar la integridad de la información \nintercambiada.\n14"
+    },
+    {
+      "n": 15,
+      "texto": "Ejemplo de ActiveMQ/Producer\n1. Se crea una conexión hacia el broker ActiveMQ.\n2. Se inicia la conexión para permitir intercambio de \nmensajes.\n3. Se crea una sesión JMS.\n4. Se obtiene una referencia a la cola llamada ordenes.\n5. Se crea un productor asociado a dicha cola.\n6. Se construye un mensaje de texto.\n7. El mensaje es enviado al broker.\n8. ActiveMQ almacena el mensaje hasta que algún \nconsumidor lo procese.\nEn este ejemplo se muestra una aplicación que actúa como \nproductor de mensajes. Su responsabilidad es conectarse \nal broker ActiveMQ y enviar una nueva orden a una cola \ndenominada ordenes\n15"
+    },
+    {
+      "n": 16,
+      "texto": "Ejemplo de ActiveMQ/Producer\nimport javax.jms.*;\nimport org.apache.activemq.ActiveMQConnectionFactory;\npublic class Productor {\n    public static void main(String[] args) throws Exception {\n        ConnectionFactory factory =new ActiveMQConnectionFactory(\"tcp://localhost:61616\");\n        Connection connection = factory.createConnection();\n        connection.start();\n        Session session =connection.createSession(false,Session.AUTO_ACKNOWLEDGE);\n        Queue queue = session.createQueue(\"ordenes\");\n        MessageProducer producer = session.createProducer(queue);\n        TextMessage message = session.createTextMessage(\"Nueva orden creada\");\n        producer.send(message);\n        System.out.println(\"Mensaje enviado\");\n        session.close();\n        connection.close();\n    }\n}\n16"
+    },
+    {
+      "n": 17,
+      "texto": "Ejemplo de ActiveMQ/Consumer\n•\nCuando el consumidor ejecuta:\n–\nconsumer.receive();\n•\nqueda esperando hasta que exista un mensaje disponible.\n•\nSi la cola contiene:\n–\nOrden #1\n–\nOrden #2\n–\nOrden #3\n•\nel consumidor recibirá la primera orden disponible.\n•\nUna vez procesada y confirmada mediante ACK, ActiveMQ elimina el mensaje de la cola.\n•\nResultado\n–\nAntes:\n \nOrden #1\n \nOrden #2\n \nOrden #3\n–\nDespués:\n \nOrden #2\n \nOrden #3\n17"
+    },
+    {
+      "n": 18,
+      "texto": "Ejemplo de ActiveMQ/Consumer\nimport javax.jms.*;\nimport org.apache.activemq.ActiveMQConnectionFactory;\npublic class Consumidor {\n    public static void main(String[] args) throws Exception {\n        ConnectionFactory factory = new ActiveMQConnectionFactory(\"tcp://localhost:61616\");\n        Connection connection =  factory.createConnection();\n        connection.start();\n        Session session = connection.createSession(false,Session.AUTO_ACKNOWLEDGE);\n        Queue queue =session.createQueue(\"ordenes\");\n        MessageConsumer consumer = session.createConsumer(queue);\n        while(true){\n            TextMessage message = (TextMessage) consumer.receive();\n            System.out.println(\"Mensaje recibido: \"+ message.getText());\n        }\n    }\n}\n18"
+    },
+    {
+      "n": 19,
+      "texto": "Introducción a Apache Kafka\n•\nApache Kafka es una plataforma distribuida de \nprocesamiento de eventos diseñada para manejar enormes \nvolúmenes de datos en tiempo real.\n•\nA diferencia de los brokers tradicionales, Kafka se basa en el \nconcepto de almacenamiento persistente de eventos.\n•\nSu diseño prioriza:\n–\nEscalabilidad.\n–\nRendimiento.\n–\nDurabilidad.\n–\nProcesamiento distribuido.\n•\nActualmente es una de las tecnologías más utilizadas en \narquitecturas modernas basadas en eventos.\n19"
+    },
+    {
+      "n": 20,
+      "texto": "El concepto de log distribuido\n•\nKafka almacena los eventos en estructuras denominadas logs \ndistribuidos.\n•\nCada evento recibe un identificador secuencial llamado offset.\n–\nOffset 0\n–\nOffset 1\n–\nOffset 2\n–\nOffset 3\n–\nOffset 4\n•\nLos eventos permanecen almacenados durante períodos \nconfigurables independientemente de que hayan sido \nconsumidos.\n•\nEsto permite reprocesar información histórica cuando sea \nnecesario.\n20"
+    },
+    {
+      "n": 21,
+      "texto": "Componentes fundamentales de Kafka\n•\nLa arquitectura de Kafka se compone de varios elementos especializados.\n•\nProducer\n–\nGenera eventos.\n•\nBroker\n–\nAlmacena y distribuye eventos.\n•\nTopic\n–\nRepresenta una categoría lógica de mensajes.\n•\nPartition\n–\nPermite dividir la carga de trabajo.\n•\nConsumer Group\n–\nFacilita el procesamiento paralelo y escalable.\n•\nLa combinación de estos componentes permite alcanzar niveles de rendimiento \nmuy superiores a los brokers tradicionales.\n21"
+    },
+    {
+      "n": 22,
+      "texto": "Caso de uso de Kafka en comercio \nelectrónico\n• Una plataforma global de comercio electrónico puede \ngenerar millones de eventos diarios.\n• Entre ellos:\n– Compras.\n– Pagos.\n– Cancelaciones.\n– Envíos.\n– Consultas de productos.\n• Kafka permite centralizar estos eventos y distribuirlos \nsimultáneamente hacia múltiples sistemas \nconsumidores, como motores analíticos, sistemas \nantifraude y plataformas de monitoreo.\n22"
+    },
+    {
+      "n": 23,
+      "texto": "Selección tecnológica según escenario\n• Utilizar Mosquitto cuando:\n– Existan sensores o dispositivos IoT.\n– La conectividad sea limitada.\n– Se requiera bajo consumo energético.\n• Utilizar ActiveMQ cuando:\n– Se integren aplicaciones empresariales.\n– Existan requerimientos transaccionales.\n– La confiabilidad sea prioritaria.\n• Utilizar Kafka cuando:\n– Existan grandes volúmenes de eventos.\n– Se requiera analítica en tiempo real.\n– Se adopten arquitecturas orientadas a eventos.\n23"
+    },
+    {
+      "n": 24,
+      "texto": "Ejemplo de Kafka/Producer\n• Kafka utiliza un enfoque diferente basado en eventos \npersistentes.\n• El siguiente productor publica una nueva orden en un \ntópico denominado ordenes.\n• El productor:\n– Se conecta al cluster Kafka.\n– Selecciona el tópico ordenes.\n– Construye un evento.\n– Envía el evento al broker.\n– Kafka almacena el evento en un log distribuido.\n• A diferencia de ActiveMQ, el evento no desaparece \ncuando es consumido.\n24"
+    },
+    {
+      "n": 25,
+      "texto": "Ejemplo de Kafka/Producer\n•\nimport org.apache.kafka.clients.producer.*;\n•\nimport java.util.Properties;\n•\n•\npublic class KafkaProducerExample {\n•\n•\n    public static void main(String[] args) {\n•\n•\n        Properties props = new Properties();\n•\n•\n        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,\"localhost:9092\");\n•\n•\n        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,\n•\n            \"org.apache.kafka.common.serialization.StringSerializer\");\n•\n•\n        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,\n•\n            \"org.apache.kafka.common.serialization.StringSerializer\");\n•\n•\n        KafkaProducer<String,String> producer = new KafkaProducer<>(props);\n•\n•\n        ProducerRecord<String,String> record =\n•\n            new ProducerRecord<>(\n•\n                \"ordenes\",\n•\n                \"ORD-001\",\n•\n                \"Nueva orden creada\");\n•\n•\n        producer.send(record);\n•\n•\n        producer.close();\n•\n    }\n•\n}\n25"
+    },
+    {
+      "n": 26,
+      "texto": "Ejemplo de Kafka/Consumer\n• ¿Qué hace el consumidor?\n– Se registra en un Consumer Group.\n– Se suscribe al tópico ordenes.\n– Consulta periódicamente nuevos eventos.\n– Procesa los eventos recibidos.\n• Concepto importante\n– El consumidor no elimina eventos.\n– Simplemente avanza su posición de lectura.\n26"
+    },
+    {
+      "n": 27,
+      "texto": "Ejemplo de Kafka/Consumer\nimport org.apache.kafka.clients.consumer.*;\nimport java.time.Duration;\nimport java.util.*;\npublic class KafkaConsumerExample {\n    public static void main(String[] args) {\n        Properties props = new Properties();\n        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, \"localhost:9092\");\n        props.put(ConsumerConfig.GROUP_ID_CONFIG,\"grupo-facturacion\");\n        props.put( ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,\n        \n\"org.apache.kafka.common.serialization.StringDeserializer\");\n        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,\n            \"org.apache.kafka.common.serialization.StringDeserializer\");\n        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,\"earliest\");\n        KafkaConsumer<String,String> consumer = new KafkaConsumer<>(props);\n        consumer.subscribe(Collections.singletonList(\"ordenes\"));\n        while(true){\n            ConsumerRecords<String,String> records = consumer.poll(Duration.ofMillis(100));\n            for( ConsumerRecord<String,String> record: records){\n                System.out.println(record.value());\n            }\n        }\n    }\n}\n27"
+    },
+    {
+      "n": 28,
+      "texto": "Ejemplo de Kafka/Consumer\n•\nKafka almacena cada evento con un identificador incremental denominado \noffset.\n–\nOffset 0 -> Orden #100\n–\nOffset 1 -> Orden #101\n–\nOffset 2 -> Orden #102\n–\nOffset 3 -> Orden #103\n–\nOffset 4 -> Orden #104\n•\nSupongamos que el consumidor procesó hasta:\n–\nOffset 3\n•\nKafka registra:\n–\nÚltima posición leída = 3\n•\nSin embargo los eventos siguen almacenados.\n•\nEsto permite:\n–\nReprocesamiento.\n–\nRecuperación ante errores.\n–\nAuditoría.\n–\nAnalítica histórica.\n28"
+    },
+    {
+      "n": 29,
+      "texto": "Caso práctico comparativo\n• Supongamos una orden de compra:\n{\n  \"id\": 1001,\n  \"cliente\": \"Juan Perez\",\n  \"monto\": 250\n}\n• Con ActiveMQ: la orden se envía a una cola:\n– cola-pagos\n• Un único consumidor procesa el pago.\n• Cuando finaliza: mensaje eliminado\n29"
+    },
+    {
+      "n": 30,
+      "texto": "Caso práctico comparativo\n• Con Kafka: la orden se publica en:\n– topic ordenes\n• Consumidores independientes:\n– Facturación.\n– Inventario.\n– Dashboard.\n• Todos reciben el mismo evento.\n• Además, pueden releer eventos históricos cuando sea \nnecesario.\n30"
+    }
+  ]
+}

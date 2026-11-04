@@ -1,0 +1,162 @@
+{
+  "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf",
+  "carpeta": "",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Curso\nTendencias Aplicadas de \nIngenería de Software\nCache de Datos \n Bases de Datos en Memoria\n1"
+    },
+    {
+      "n": 2,
+      "texto": "Cache de Datos y Bases de Datos en \nMemoria\n• Durante las últimas dos décadas la evolución del hardware ha \nincrementado significativamente la capacidad de \nprocesamiento de los servidores. \n• Sin embargo, la velocidad de acceso al almacenamiento \npersistente continúa siendo varios órdenes de magnitud más \nlenta que la velocidad de acceso a memoria principal. \n• Esta diferencia genera uno de los principales cuellos de \nbotella en sistemas de software de gran escala.\n• Las aplicaciones modernas —plataformas de comercio \nelectrónico, redes sociales, sistemas financieros, videojuegos \nonline y servicios cloud— deben responder a miles o millones \nde solicitudes por segundo. \n2"
+    },
+    {
+      "n": 3,
+      "texto": "Cache de Datos y Bases de Datos en \nMemoria\n• En estos contextos, consultar permanentemente una \nbase de datos persistente puede provocar latencias \nelevadas y degradación de la experiencia del usuario.\n• Las tecnologías de cache y las bases de datos en \nmemoria surgen como mecanismos arquitectónicos \ndestinados a minimizar estos costos de acceso. Ambas \nbuscan acercar los datos al punto donde serán \nutilizados, reduciendo la necesidad de operaciones de \nentrada/salida (I/O) sobre dispositivos persistentes.\n3"
+    },
+    {
+      "n": 4,
+      "texto": "El Problema del Acceso a Datos\n• Consecuencias arquitectónicas:\n Cuando una aplicación requiere recuperar \ninformación desde almacenamiento persistente:\ni. Debe ejecutarse una consulta.\nii. El motor de base de datos debe localizar los \ndatos.\niii. Los datos deben ser transferidos desde \nalmacenamiento secundario.\niv. Deben enviarse por la red.\nv. Finalmente llegan a la aplicación.\n• Incluso consultas simples pueden consumir varios \nmilisegundos.\n4"
+    },
+    {
+      "n": 5,
+      "texto": "El Problema del Acceso a Datos\n• Impacto acumulativo. Supongamos:\n– 1000 usuarios concurrentes.\n– 20 consultas por transacción.\n• El sistema puede generar decenas de miles de accesos \na la base de datos cada segundo.\n• En estas circunstancias la cache deja de ser una \noptimización y se convierte en una necesidad \narquitectónica.\n5"
+    },
+    {
+      "n": 6,
+      "texto": "Fundamento teórico de las caches\n• La eficacia de las caches se basa en un fenómeno \nobservado en prácticamente todos los sistemas \ncomputacionales: el principio de localidad.\n• Este principio indica que los accesos futuros a los datos \nno son aleatorios.\n• Localidad temporal\n– Si un dato fue utilizado recientemente, existe una \nalta probabilidad de que vuelva a utilizarse en el \ncorto plazo.\n6"
+    },
+    {
+      "n": 7,
+      "texto": "Fundamento teórico de las caches\n• Ejemplos:\n– Productos populares de una tienda online.\n– Sesiones activas.\n– Noticias destacadas.\n– Resultados deportivos recientes.\n• Localidad espacial\n– Si un dato es accedido, los elementos cercanos \nsuelen ser accedidos también.\n• Ejemplos:\n– Registros consecutivos.\n– Objetos relacionados.\n– Páginas contiguas.\n7"
+    },
+    {
+      "n": 8,
+      "texto": "Fundamento teórico de las caches\n• Las caches aprovechan ambos fenómenos para reducir \naccesos repetitivos a componentes costosos.\n• La mayoría de los sistemas exhibe una distribución de \naccesos tipo Pareto:\n• 20% de los datos generan 80% de las consultas.\n• En algunos sistemas la concentración es aún mayor.\n• Por esta razón, almacenar una pequeña fracción de los \ndatos puede producir una mejora significativa del \nrendimiento global.\n8"
+    },
+    {
+      "n": 9,
+      "texto": "¿Qué es una Cache?\n• Una cache es un mecanismo de almacenamiento temporal \nque conserva copias de datos previamente recuperados con \nel objetivo de acelerar accesos futuros.\n• Desde una perspectiva arquitectónica, una cache representa \nuna táctica orientada al atributo de calidad \"performance\".\n• Funcionamiento general: cuando una aplicación necesita \ninformación:\n–\nConsulta la cache.\n–\nSi encuentra el dato (cache hit), responde \ninmediatamente.\n–\nSi no lo encuentra (cache miss), consulta la fuente \noriginal.\n–\nAlmacena el resultado para futuras consultas.\n9"
+    },
+    {
+      "n": 10,
+      "texto": "¿Qué es una Cache? (Métricas)\n•\nMétricas importantes: Hit Ratio\n•\nPorcentaje de consultas satisfechas por la cache.\n•\nFórmula:\n–\nHit Ratio = Hits / (Hits + Misses)\n•\nEjemplo:\n–\n950 hits\n–\n50 misses\n–\nHit Ratio = 95%\n•\nLatencia Promedio\n–\nMide el tiempo medio de respuesta considerando accesos exitosos \ny fallidos.\n•\nThroughput\n–\nCantidad de operaciones procesadas por unidad de tiempo.\n–\nUna cache efectiva aumenta significativamente este indicador.\n10"
+    },
+    {
+      "n": 11,
+      "texto": "Bases de Datos en Memoria\n• Una base de datos en memoria almacena sus \nestructuras principales directamente en RAM, eliminando \nla dependencia del acceso permanente a disco para \noperaciones normales.\n• A diferencia de una cache tradicional, una base de datos \nen memoria puede actuar como sistema principal de \nalmacenamiento operativo.\n• La memoria RAM moderna permite:\n– cientos de gigabytes por servidor.\n– acceso extremadamente rápido.\n– procesamiento masivo de datos.\n11"
+    },
+    {
+      "n": 12,
+      "texto": "Bases de Datos en Memoria\n• Esto ha permitido que muchas aplicaciones ejecuten \noperaciones completas en memoria.\n• Características\n–\nAcceso en microsegundos.\n–\nEstructuras optimizadas para RAM.\n–\nÍndices residentes en memoria.\n–\nProcesamiento altamente concurrente.\n•\nEjemplos\n–\nRedis\n–\nHazelcast\n–\nEtc\n•\nEstas tecnologías permiten construir aplicaciones con \ntiempos de respuesta extremadamente bajos.\n12"
+    },
+    {
+      "n": 13,
+      "texto": "Cache vs Base de Datos en Memoria\n•\nDiferencias Conceptuales\n–\nAunque frecuentemente se utilizan como sinónimos, representan conceptos \ndistintos.\n•\nCache\n–\nSu propósito principal es acelerar el acceso a otra fuente de datos.\n•\nCaracterísticas:\n–\nDatos derivados.\n–\nInformación reemplazable.\n–\nDependencia de un sistema persistente.\n•\nBase de Datos en Memoria\n–\nPuede constituir la fuente principal de información.\n•\nCaracterísticas:\n–\nAdministración de estructuras complejas.\n–\nReplicación.\n–\nPersistencia opcional.\n–\nProcesamiento transaccional.\n•\nToda base de datos en memoria puede utilizarse como cache, pero no toda cache puede \nactuar como base de datos principal.\n13"
+    },
+    {
+      "n": 14,
+      "texto": "Atributos de Calidad Relacionados a Cache\n•\nRendimiento\n–\nEl principal objetivo de las caches es mejorar performance.\n•\nSe reduce:\n–\ntiempo de respuesta\n–\nacceso a disco\n–\ntráfico de red\n•\nEscalabilidad\n–\nPermite soportar más usuarios utilizando la misma \ninfraestructura.\n•\nBeneficios:\n–\nmenos consultas a la base\n–\nmenor saturación de conexiones\n–\ndistribución eficiente de carga\n14"
+    },
+    {
+      "n": 15,
+      "texto": "Atributos de Calidad Relacionados a Cache\n• Disponibilidad\n– Una cache distribuida puede continuar respondiendo \nsolicitudes aun cuando existan degradaciones \ntemporales en componentes persistentes.\n• Elasticidad: en arquitecturas cloud las caches facilitan:\n– escalado horizontal\n– balanceo de carga\n– respuesta a picos de demanda\n• Desde la perspectiva de arquitectura de software, la \ncache constituye una táctica arquitectónica para mejorar \natributos de calidad sin modificar la funcionalidad \nobservable del sistema.\n15"
+    },
+    {
+      "n": 16,
+      "texto": "Táctica Arquitectónica: Cache Aside\n•\nEs uno de los patrones más utilizado en aplicaciones empresariales.\n•\nTambién se denomina Lazy Loading.\n•\nFlujo detallado\n–\nUsuario solicita dato.\n–\nAplicación consulta cache.\n–\nSi existe:\n retorna dato.\n–\nSi no existe:\n consulta base de datos.\n–\nalmacena resultado.\n–\ndevuelve respuesta.\n•\nVentajas\n–\nSimplicidad\n–\nNo requiere infraestructura compleja.\n16"
+    },
+    {
+      "n": 17,
+      "texto": "Táctica Arquitectónica: Cache Aside\n• Flexibilidad\n– La aplicación decide qué cachear.\n• Eficiencia\n– Solo se almacenan datos efectivamente utilizados.\n• Desventajas\n– Cache Miss Inicial\n El primer acceso continúa siendo costoso.\n– Consistencia\n Puede existir información obsoleta.\n– Complejidad de invalidación\n La actualización de datos debe coordinarse \ncuidadosamente.\n17"
+    },
+    {
+      "n": 18,
+      "texto": "Táctica Arquitectónica: Read Through\n•\nLa cache se convierte en un intermediario transparente entre \nla aplicación y la base de datos.\n•\nLa aplicación deja de conocer el mecanismo de \nalmacenamiento.\n•\nBeneficios\n–\nMenor complejidad\n–\nLa lógica de cache se centraliza.\n•\nUniformidad\n–\nTodas las aplicaciones utilizan la misma política.\n–\nMantenimiento simplificado\n–\nCambios futuros afectan solamente a la capa intermedia.\n18"
+    },
+    {
+      "n": 19,
+      "texto": "Táctica Arquitectónica: Read Through\n• Riesgos\n– Dependencia tecnológica\n– La infraestructura adquiere mayor complejidad.\n– La cache se convierte en componente crítico.\n19"
+    },
+    {
+      "n": 20,
+      "texto": "Táctica Arquitectónica: Write Through\n•\nObjetivo\n–\nMantener sincronizadas la cache y la base de datos.\n•\nFlujo: cada operación de escritura realiza:\n–\nActualización en persistencia.\n–\nActualización en cache.\n–\nConfirmación al cliente.\n•\nVentajas\n–\nAlta consistencia\n–\nLos datos leídos desde cache suelen reflejar la última \nversión disponible.\n–\nMenor riesgo de obsolescencia\n–\nLa sincronización es inmediata.\n20"
+    },
+    {
+      "n": 21,
+      "texto": "Táctica Arquitectónica: Write Through\n•\nCostos\n–\nMayor latencia de escritura\n–\nLa operación no finaliza hasta completar ambas actualizaciones.\n•\nMenor throughput\n–\nLas escrituras pueden convertirse en cuello de botella.\n•\nPosibles usos: \n–\npagos electrónicos\n–\nsistemas de reservas\n–\ninventarios críticos\n•\nRepresenta un claro ejemplo de decisión entre rendimiento y \nconsistencia. A medida que se incrementa la garantía de consistencia, \nse sacrifica parte de la velocidad y escalabilidad del sistema.\n21"
+    },
+    {
+      "n": 22,
+      "texto": "Táctica Arquitectónica: Write Back (Write \nBehind)\n• El patrón Write Back (también denominado Write \nBehind) busca maximizar el rendimiento de escritura \nevitando que cada operación tenga que esperar la \nconfirmación de la base de datos persistente.\n• A diferencia de Write Through, donde la persistencia \nocurre inmediatamente, en Write Back la actualización \nse registra inicialmente en memoria y posteriormente se \nsincroniza con el almacenamiento permanente.\n22"
+    },
+    {
+      "n": 23,
+      "texto": "Táctica Arquitectónica: Write Back (Write \nBehind)\n• Funcionamiento\n• Paso 1\n– La aplicación escribe en la cache.\n• Paso 2\n– La cache confirma inmediatamente la operación.\n• Paso 3\n– Un proceso asíncrono actualiza la base de datos \nposteriormente.\n23"
+    },
+    {
+      "n": 24,
+      "texto": "Táctica Arquitectónica: Write Back (Write \nBehind)\n•\nBeneficios\n–\nMuy alta velocidad de escritura\n–\nLa operación finaliza sin esperar acceso a disco.\n–\nReducción de I/O\n–\nVarias escrituras pueden agruparse en una sola operación.\n•\nMayor throughput\n–\nIdeal para sistemas con enormes volúmenes transaccionales.\n•\nRiesgos\n–\nPérdida de información\n–\nSi la cache falla antes de persistir los cambios, pueden perderse datos.\n•\nComplejidad operativa\n–\nSe requieren mecanismos de recuperación.\n•\nConsistencia temporal\n–\nLos datos pueden estar momentáneamente desactualizados.\n•\nEste patrón representa una implementación práctica de sistemas que privilegian \ndisponibilidad y rendimiento por encima de consistencia inmediata.\n24"
+    },
+    {
+      "n": 25,
+      "texto": "Táctica Arquitectónica: Refresh Ahead\n• Incluso una cache eficiente puede generar latencias \nelevadas cuando los datos expiran y deben recuperarse \nnuevamente desde la fuente persistente.\n• Este fenómeno produce picos temporales de respuesta \nconocidos como:\n– Cache Miss Storms\n– Cold Cache Events\n25"
+    },
+    {
+      "n": 26,
+      "texto": "Táctica Arquitectónica: Refresh Ahead\n• La cache identifica datos frecuentemente utilizados y los \nactualiza antes de que expiren.\n• Flujo\n– Dato próximo a expirar.\n– Sistema detecta alta frecuencia de acceso.\n– Actualización preventiva.\n– Usuario continúa obteniendo respuestas rápidas.\n26"
+    },
+    {
+      "n": 27,
+      "texto": "Táctica Arquitectónica: Refresh Ahead\n• Ventajas\n– Menor latencia\n Se reducen los cache misses.\n– Mayor estabilidad\n Los tiempos de respuesta son más predecibles.\n– Mejor experiencia de usuario\n Importante en sistemas interactivos.\n• Desventajas\n– Se realizan actualizaciones incluso si luego no son \nutilizadas.\n27"
+    },
+    {
+      "n": 28,
+      "texto": "Replicación de Datos en Memoria\n• Una cache centralizada introduce un punto único de \nfalla.\n• Si el servidor falla:\n– Se pierde disponibilidad.\n– Se pierden datos temporales.\n– Puede colapsar la base de datos por sobrecarga.\n• La información se mantiene en múltiples nodos.\n– Nodo Primario\n Nodo Réplica A\nNodo Réplica B\n28"
+    },
+    {
+      "n": 29,
+      "texto": "El Problema de la Invalidación de Cache\n• La utilidad de una cache depende de que los datos \nalmacenados sean suficientemente correctos.\n• Sin embargo, toda cache genera duplicación de \ninformación.\n• Cuando la fuente original cambia surge la pregunta:\n• ¿Cómo mantener sincronizadas ambas copias?\n29"
+    },
+    {
+      "n": 30,
+      "texto": "El Problema de la Invalidación de Cache\n• Posibles problemas\n– Datos obsoletos\n– El usuario recibe información incorrecta.\n– Inconsistencia\n– Diferentes usuarios observan estados distintos.\n– Decisiones erróneas\n– La aplicación opera sobre información \ndesactualizada.\n30"
+    },
+    {
+      "n": 31,
+      "texto": "El Problema de la Invalidación de Cache\n• Estrategias\n• TTL\n– Expiración automática.\n• Invalidación explícita\n– Eliminar entradas cuando ocurren cambios.\n• Actualización proactiva\n– Reemplazar valores inmediatamente.\n31"
+    },
+    {
+      "n": 32,
+      "texto": "El Problema de la Invalidación de \nCache:TTL\n• TTL (Time To Live)\n• Cada elemento almacenado posee una duración \nmáxima.\n• Al finalizar ese período:\n– se elimina\n– o se considera inválido\n• Ejemplo\n– Producto 123\n– Valor:USD 250\n– TTL: 300 segundos\n32"
+    },
+    {
+      "n": 33,
+      "texto": "El Problema de la Invalidación de Cache: \nTTL\n• Ventajas\n– Implementación simple\n– No requiere coordinación compleja.\n• Escalabilidad\n– Funciona bien en sistemas distribuidos.\n• Menor acoplamiento\n– No depende de eventos externos.\n• Problemas\n– Selección del TTL\n– Demasiado corto: muchos misses\n– Demasiado largo: datos obsoletos\n33"
+    },
+    {
+      "n": 34,
+      "texto": "Relación entre Persistencia y Cache\n• Arquitectura en Capas: las arquitecturas empresariales \nmodernas suelen separar claramente las \nresponsabilidades.\n– Presentación\n– Servicios\n– Cache\n– Persistencia\n– Base de Datos\n34"
+    },
+    {
+      "n": 35,
+      "texto": "Relación entre Persistencia y Cache\n• Razón Arquitectónica\n– Cada capa se especializa en una función concreta.\n• Persistencia\n– Garantiza durabilidad.\n• Cache\n– Optimiza rendimiento.\n• Servicios\n– Implementan reglas de negocio.\n35"
+    },
+    {
+      "n": 36,
+      "texto": "Responsabilidades de la Capa de \nPersistencia\n•\nFunción principal: conservar información de manera durable \ny consistente.\n•\nResponsabilidades\n–\nDurabilidad: los datos sobreviven reinicios y fallos.\n–\nIntegridad: mantener restricciones y reglas.\n–\nTransacciones: garantizar propiedades ACID.\n–\nRecuperación: permitir restauración después de \nincidentes.\n–\nAuditoría: conservar historial de operaciones.\n•\nTecnologías habituales\n–\nPostgreSQL\n–\nOracle\n–\nSQL Server\n–\nMySQL\n–\nMongoDB\n–\nEtc\n36"
+    },
+    {
+      "n": 37,
+      "texto": "Responsabilidades de la Capa de \nPersistencia\n• Las bases de datos están diseñadas para:\n– confiabilidad\n– recuperación\n– integridad\n• No necesariamente para latencias muy bajas.\n• Por esta razón suelen complementarse con caches.\n37"
+    },
+    {
+      "n": 38,
+      "texto": "Responsabilidades de la Capa de Cache\n• Función principal: reducir el tiempo necesario para \nacceder a información.\n• Responsabilidades\n– Almacenamiento temporal: conservar datos \nfrecuentemente utilizados.\n– Absorción de tráfico: reducir consultas repetitivas.\n– Optimización de recursos: disminuir carga sobre \nbases de datos.\n– Soporte para escalabilidad: permitir crecimiento sin \nmultiplicar costos.\n38"
+    },
+    {
+      "n": 39,
+      "texto": "Responsabilidades de la Capa de Cache\n• Qué NO debería hacer una cache\n– Reemplazar completamente la persistencia.\n– Almacenar información crítica sin respaldo.\n– Gestionar reglas de negocio complejas.\n• La cache debe considerarse una optimización \narquitectónica y no la única fuente de verdad.\n39"
+    }
+  ]
+}

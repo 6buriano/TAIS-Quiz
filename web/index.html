@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es" data-tema="oscuro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TAIS Quiz · Parcial de Tendencias Aplicadas</title>
+  <meta name="description" content="Generador aleatorio de exámenes del curso Taller de Tendencias Aplicadas de Ingeniería de Software: 30 preguntas de múltiple opción y 5 de desarrollo corto.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237c9cff'/%3E%3Ctext x='32' y='43' font-family='Arial,sans-serif' font-size='26' font-weight='bold' fill='%230b1020' text-anchor='middle'%3ETA%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/static/estilos.css">
+</head>
+<body>
+  <div class="decoracion" aria-hidden="true"></div>
+
+  <header class="barra-superior">
+    <a class="marca" href="#" data-nav="inicio" aria-label="Inicio">
+      <span class="logo">TAIS</span>
+      <span class="marca-texto">
+        <strong>Quiz del parcial</strong>
+        <small>Taller de Tendencias Aplicadas de Ingeniería de Software</small>
+      </span>
+    </a>
+    <nav class="navegacion" aria-label="Principal">
+      <button class="enlace" data-nav="inicio">Inicio</button>
+      <button class="enlace" data-nav="historial">Historial</button>
+      <span id="badge-ia" class="badge" title="Estado del modelo local">IA: consultando…</span>
+      <button id="btn-tema" class="boton-icono" title="Cambiar tema claro/oscuro" aria-label="Cambiar tema">◐</button>
+    </nav>
+  </header>
+
+  <main class="contenido">
+
+    <!-- ================== INICIO ================== -->
+    <section id="vista-inicio" class="vista">
+      <div class="portada">
+        <p class="etiqueta">Preparate para el parcial</p>
+        <h1>Cada intento, un examen distinto</h1>
+        <p class="bajada">
+          Preguntas generadas al azar de todo el material del curso: arquitectura y tácticas,
+          contenedores y CI/CD, persistencia no relacional, caché y Redis, programación
+          asincrónica y APIs REST. Múltiple opción con explicación y fuente, y desarrollo
+          corto corregido con criterios (o con un modelo local si lo tenés instalado).
+        </p>
+        <div class="chips">
+          <span class="chip">30 múltiple opción</span>
+          <span class="chip">5 desarrollo corto</span>
+          <span class="chip">Aleatorio</span>
+          <span class="chip">Corrección con IA local (opcional)</span>
+        </div>
+      </div>
+
+      <div id="aviso-borrador" class="aviso oculto"></div>
+
+      <div class="grilla-inicio">
+        <article class="tarjeta">
+          <h2>Armá tu intento</h2>
+
+          <div class="modos" role="radiogroup" aria-label="Modo de examen">
+            <button class="modo activo" data-modo="examen" role="radio" aria-checked="true">
+              <span class="modo-titulo">Examen completo</span>
+              <span class="modo-detalle" id="detalle-examen">30 múltiple opción + 5 desarrollo</span>
+            </button>
+            <button class="modo" data-modo="practica" role="radio" aria-checked="false">
+              <span class="modo-titulo">Práctica rápida</span>
+              <span class="modo-detalle">Con corrección al instante</span>
+            </button>
+            <button class="modo" data-modo="tema" role="radio" aria-checked="false">
+              <span class="modo-titulo">Por tema</span>
+              <span class="modo-detalle">Enfocate en lo que te falta</span>
+            </button>
+          </div>
+
+          <div class="campos oculto" id="campos-practica">
+            <label class="campo">
+              <span>Cantidad de preguntas</span>
+              <select id="practica-cantidad">
+                <option value="5">5</option>
+                <option value="10" selected>10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+            </label>
+            <label class="campo">
+              <span>Tema</span>
+              <select id="practica-tema"><option value="">Todos los temas</option></select>
+            </label>
+            <label class="interruptor">
+              <input type="checkbox" id="practica-desarrollo">
+              <span>Incluir una pregunta de desarrollo</span>
+            </label>
+          </div>
+
+          <div class="campos oculto" id="campos-tema">
+            <label class="campo">
+              <span>Tema</span>
+              <select id="tema-tema"></select>
+            </label>
+            <label class="campo">
+              <span>Preguntas de múltiple opción</span>
+              <select id="tema-mc">
+                <option value="5">5</option>
+                <option value="10" selected>10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+            </label>
+            <label class="campo">
+              <span>Preguntas de desarrollo</span>
+              <select id="tema-desarrollo">
+                <option value="0">0</option>
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="interruptor">
+            <input type="checkbox" id="usar-ia" checked>
+            <span>Usar el modelo local para corregir el desarrollo (si está disponible)</span>
+          </label>
+
+          <div class="acciones">
+            <button id="btn-comenzar" class="boton primario">Comenzar intento</button>
+            <button id="btn-ver-historial" class="boton fantasma">Ver historial</button>
+          </div>
+          <p class="nota" id="nota-config"></p>
+        </article>
+
+        <aside class="tarjeta">
+          <h2>Cobertura del banco</h2>
+          <p class="nota">Preguntas disponibles por tema. Cuantas más haya, más tarda en repetirse un intento.</p>
+          <div id="cobertura" class="cobertura">
+            <div class="cargando">Cargando…</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ================== EXAMEN ================== -->
+    <section id="vista-examen" class="vista oculto">
+      <div class="barra-examen">
+        <div class="progreso" role="progressbar" aria-label="Progreso del examen" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="progreso-relleno" id="progreso-relleno"></div>
+        </div>
+        <div class="meta-examen">
+          <span id="contador-preguntas">Pregunta 1</span>
+          <span id="reloj" class="reloj oculto">100:00</span>
+          <div class="acciones-examen">
+            <button id="btn-abandonar" class="boton fantasma chico">Abandonar</button>
+            <button id="btn-finalizar" class="boton primario chico">Finalizar</button>
+          </div>
+        </div>
+      </div>
+
+      <article id="tarjeta-pregunta" class="tarjeta pregunta" aria-live="polite"></article>
+
+      <div class="navegacion-examen">
+        <button id="btn-anterior" class="boton fantasma">← Anterior</button>
+        <div id="puntos" class="puntos" aria-label="Mapa de preguntas"></div>
+        <button id="btn-siguiente" class="boton primario">Siguiente →</button>
+      </div>
+    </section>
+
+    <!-- ================== RESULTADOS ================== -->
+    <section id="vista-resultados" class="vista oculto">
+      <div id="resumen-resultados"></div>
+      <div class="filtros" id="filtros">
+        <button class="filtro activo" data-filtro="todas">Todas</button>
+        <button class="filtro" data-filtro="incorrectas">Para repasar</button>
+        <button class="filtro" data-filtro="desarrollo">Desarrollo</button>
+      </div>
+      <div id="detalle-resultados" class="detalle"></div>
+      <div class="acciones finales">
+        <button id="btn-descargar" class="boton fantasma">Descargar boleta (.md)</button>
+        <button id="btn-nuevo" class="boton primario">Nuevo intento</button>
+        <button id="btn-volver-inicio" class="boton fantasma">Volver al inicio</button>
+      </div>
+    </section>
+
+    <!-- ================== HISTORIAL ================== -->
+    <section id="vista-historial" class="vista oculto">
+      <div class="encabezado-vista">
+        <h1>Historial de intentos</h1>
+        <p class="nota">Se guardan en la carpeta <code>examenes/</code> del repositorio.</p>
+      </div>
+      <div id="lista-historial" class="lista-historial"></div>
+    </section>
+
+  </main>
+
+  <footer class="pie">
+    <p>
+      TAIS Quiz · material del curso <em>Taller de Tendencias Aplicadas de Ingeniería de Software</em>.
+      La corrección automática es una ayuda para estudiar: contrastá siempre con la respuesta modelo y las fuentes.
+    </p>
+  </footer>
+
+  <div id="toast" class="toast oculto" role="status" aria-live="polite"></div>
+
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+{
+  "archivo": "02-02-tais-CI-CD-02-02.pdf",
+  "carpeta": "",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Curso\nTendencias Aplicadas de \nIngenería de Software\nCI/CD\n1"
+    },
+    {
+      "n": 2,
+      "texto": "¿Qué es Continuous Integration?\n• La Integración Continua (Continuous Integration o CI) es una \npráctica de ingeniería de software que propone que todos los \ndesarrolladores integren frecuentemente sus cambios en un \nrepositorio compartido. La idea central es evitar los problemas \nasociados a las integraciones tardías, donde los conflictos entre \nmódulos, dependencias y versiones pueden acumularse durante \ndías o semanas.\n• Antes de la adopción masiva de CI, era común que los equipos \ntrabajaran durante largos períodos sobre ramas aisladas. Cuando \nfinalmente se intentaba integrar el trabajo, aparecían conflictos \ncomplejos, errores de compilación y fallas funcionales difíciles de \ndiagnosticar. Este fenómeno fue denominado por algunos autores \ncomo \"Integration Hell\".\n• La integración continua reduce este problema mediante una \nestrategia basada en pequeñas integraciones frecuentes. \n2"
+    },
+    {
+      "n": 3,
+      "texto": "¿Qué es Continuous Integration?\n• Cada modificación enviada al repositorio desencadena \nautomáticamente una serie de actividades:\n– Obtención del código fuente.\n– Compilación del proyecto.\n– Ejecución de pruebas unitarias.\n– Ejecución de análisis estático.\n– Generación de reportes.\n– Notificación de resultados.\n• El objetivo principal es detectar errores tan pronto como \nson introducidos, reduciendo significativamente el costo \nde corrección.\n3"
+    },
+    {
+      "n": 4,
+      "texto": "Ejemplo Práctico\n• Supongamos un equipo de cinco desarrolladores \ntrabajando sobre una API REST.\n    Sin CI:\n– Cada desarrollador integra una vez por semana.\n– Los conflictos se descubren al final del sprint.\n– El tiempo promedio de resolución es elevado.\n    Con CI:\n– Cada desarrollador integra varias veces al día.\n– Los conflictos aparecen inmediatamente.\n– El sistema proporciona retroalimentación en minutos.\n4"
+    },
+    {
+      "n": 5,
+      "texto": "Ejemplo Práctico\n\"Integrar frecuentemente reduce el riesgo acumulado.\"\n5\nPush\nRepositorio\nJenkins\nBuild\nUnit Test\nReport"
+    },
+    {
+      "n": 6,
+      "texto": "Beneficios de Continuous Integration\n• La integración continua no debe verse únicamente como una \nherramienta de automatización. Constituye una estrategia de \nreducción sistemática del riesgo técnico dentro del proceso de \ndesarrollo.\n• Uno de los beneficios más importantes es la detección temprana \nde defectos. Cuando una modificación genera un problema, el \npipeline identifica inmediatamente qué cambio introdujo el error. \nEsto reduce drásticamente el tiempo necesario para localizar la \ncausa raíz.\n• Otro beneficio importante es la disminución de conflictos de \nintegración. Las integraciones frecuentes implican que los \ndesarrolladores trabajan con versiones recientes del sistema y \nsincronizan constantemente sus cambios con el resto del equipo.\n6"
+    },
+    {
+      "n": 7,
+      "texto": "Beneficios de Continuous Integration\n• Además, CI favorece la calidad del software mediante la \nautomatización de pruebas. Cada ejecución del pipeline \nverifica automáticamente cientos o miles de casos de \nprueba, proporcionando una validación mucho más \nrigurosa que las revisiones manuales.\n• Desde la perspectiva organizacional, CI genera una \ncultura de responsabilidad compartida. Un build roto se \nconvierte en un problema visible para todo el equipo y \nsuele corregirse inmediatamente.\n7"
+    },
+    {
+      "n": 8,
+      "texto": "Arquitectura de un Pipeline CI/CD\n• Un pipeline CI/CD puede interpretarse como una cadena \nautomatizada de actividades que transforma código \nfuente en software desplegable.\n• Los pipelines modernos suelen estar compuestos por \nvarias etapas claramente diferenciadas.\n   Etapa 1: Source Control\n• El repositorio actúa como fuente única de verdad.\n• Todas las modificaciones deben pasar por él.\n8"
+    },
+    {
+      "n": 9,
+      "texto": "Arquitectura de un Pipeline CI/CD\n     Etapa 2: Build\n• Se compila el código fuente y se generan artefactos ejecutables.\n• Ejemplos:\n–\nJAR\n–\nWAR\n–\nBinarios\n–\nImágenes Docker\n      Etapa 3: Testing\n• Se ejecutan pruebas automatizadas:\n–\nUnitarias\n–\nIntegración\n9"
+    },
+    {
+      "n": 10,
+      "texto": "Arquitectura de un Pipeline CI/CD\n    Etapa 4: Packaging\n• Los artefactos son preparados para distribución.\n    Etapa 5: Deployment\n• El software es desplegado automáticamente.\n10"
+    },
+    {
+      "n": 11,
+      "texto": "Integración de Herramientas en el Pipeline\n• Un pipeline moderno no es una herramienta aislada. Es un \necosistema compuesto por múltiples aplicaciones especializadas \nque colaboran para automatizar el ciclo de vida del software.\n• Una arquitectura típica puede incluir:\n• Gestión de Código\n–\nGit\n–\nGitHub\n–\nGitLab\n• Integración Continua\n–\nJenkins\n11"
+    },
+    {
+      "n": 12,
+      "texto": "Integración de Herramientas en el Pipeline\n• Testing\n–\nJUnit\n–\nMockito\n• Contenedores\n–\nDocker\n• Gestión de Incidentes\n–\nJira\n• La integración entre estas herramientas permite construir una \ncadena continua de trazabilidad desde el requerimiento inicial \nhasta el despliegue en producción.\n• Por ejemplo, una incidencia registrada en Jira puede asociarse a \nun commit, el commit puede activar un pipeline en Jenkins y dicho \npipeline puede generar una nueva versión desplegada \nautomáticamente.\n12"
+    },
+    {
+      "n": 13,
+      "texto": "Gestión de Incidencias dentro del Ciclo \nCI/CD\n•\nEn proyectos profesionales, el desarrollo de software no comienza con código \nsino con la identificación de necesidades, defectos o mejoras. Estas actividades \nsuelen registrarse mediante sistemas de gestión de incidencias.\n•\nUna incidencia puede representar:\n–\nUn error (bug).\n–\nUna nueva funcionalidad.\n–\nUna mejora de rendimiento.\n–\nUn requisito de seguridad.\n–\nUna tarea técnica.\n•\nLa integración entre herramientas de gestión de incidencias y plataformas CI/CD \npermite mantener una trazabilidad completa entre los requerimientos y las \nmodificaciones realizadas sobre el sistema.\n•\nUn flujo típico comienza cuando un usuario reporta un problema. El incidente es \nregistrado, asignado a un desarrollador, corregido mediante una modificación de \ncódigo y finalmente validado a través de un pipeline automatizado.\n13"
+    },
+    {
+      "n": 14,
+      "texto": "Gestión de Incidencias dentro del Ciclo \nCI/CD\n• Este proceso permite responder preguntas \nfundamentales como:\n– ¿Qué cambio corrigió un determinado error?\n– ¿Quién implementó la solución?\n– ¿Qué pruebas validaron la corrección?\n– ¿En qué versión fue desplegada?\n• La capacidad de responder estas preguntas resulta \nesencial en proyectos con altos requerimientos de \ncalidad, auditoría o cumplimiento normativo.\n14"
+    },
+    {
+      "n": 15,
+      "texto": "Trazabilidad de Extremo a Extremo\n•\nLa trazabilidad consiste en la capacidad de relacionar todos los artefactos \ngenerados durante el ciclo de vida del software.\n•\nLa trazabilidad constituye una práctica esencial para sistemas complejos porque \npermite comprender cómo evolucionan los requisitos y cómo estos impactan \nsobre el diseño y la implementación.\n•\nEn un entorno CI/CD moderno la trazabilidad puede establecerse entre:\n–\nRequerimientos.\n–\nHistorias de usuario.\n–\nIncidencias.\n–\nCommits.\n–\nPull Requests.\n–\nBuilds.\n–\nCasos de prueba.\n–\nReleases.\n–\nDespliegues.\n15"
+    },
+    {
+      "n": 16,
+      "texto": "Trazabilidad de Extremo a Extremo\n• Por ejemplo, una historia de usuario registrada en Jira \npuede vincularse a una rama Git específica. Esa rama \ngenera un Pull Request que activa un pipeline en \nJenkins. El pipeline ejecuta pruebas y genera una nueva \nversión del producto.\n• Toda esa información queda registrada y puede ser \nconsultada posteriormente.\n16"
+    },
+    {
+      "n": 17,
+      "texto": "Jenkins: Introducción y Arquitectura \nGeneral\n• Jenkins es una plataforma de automatización de código \nabierto ampliamente utilizada para implementar prácticas de \nIntegración Continua (CI) y Entrega Continua (CD). Su \nprincipal objetivo es automatizar tareas repetitivas \nrelacionadas con la construcción, prueba y despliegue de \nsoftware.\n• Antes de herramientas como Jenkins, muchas organizaciones \nrealizaban estas actividades manualmente, generando \nerrores, inconsistencias y retrasos en la entrega.\n• Jenkins permite transformar estas actividades en procesos \nrepetibles, auditables y completamente automatizados.\n17"
+    },
+    {
+      "n": 18,
+      "texto": "Jenkins: Introducción y Arquitectura \nGeneral\n• Su popularidad se debe a varios factores:\n– Es software libre.\n– Posee una arquitectura extensible basada en \nplugins.\n– Puede integrarse con prácticamente cualquier \nherramienta del ecosistema DevOps.\n– Soporta múltiples lenguajes y tecnologías.\n– Permite definir pipelines como código.\n• Actualmente Jenkins es utilizado en organizaciones de \ndistintos tamaños, desde startups hasta grandes \nempresas tecnológicas.\n18"
+    },
+    {
+      "n": 19,
+      "texto": "Jenkins: Introducción y Arquitectura \nGeneral\n• Funciones principales\n– Compilación automática.\n– Ejecución de pruebas.\n– Generación de reportes.\n– Integración con repositorios Git.\n– Construcción de contenedores.\n– Despliegue automatizado.\n19"
+    },
+    {
+      "n": 20,
+      "texto": "Evolución de Jenkins dentro del Ecosistema \nDevOps\n•\nJenkins tiene su origen en el proyecto Hudson, desarrollado en 2004. \nPosteriormente la comunidad creó Jenkins, que evolucionó hasta convertirse en \nuno de los servidores de automatización más utilizados.\n•\nSu crecimiento estuvo directamente relacionado con la adopción de prácticas \nDevOps.\n•\nInicialmente Jenkins era utilizado únicamente para:\n–\nCompilar proyectos.\n–\nEjecutar pruebas.\n•\nCon el tiempo incorporó capacidades más avanzadas:\n•\nPrimera generación\n–\nAutomatización de builds.\n20"
+    },
+    {
+      "n": 21,
+      "texto": "Evolución de Jenkins dentro del Ecosistema \nDevOps\n•\nSegunda generación\n–\nIntegración continua completa.\n•\nTercera generación\n–\nEntrega continua.\n•\nCuarta generación\n–\nIntegración con contenedores y cloud.\n•\nQuinta generación\n–\nPipeline as Code e Infrastructure as Code.\n•\nHoy Jenkins puede formar parte de arquitecturas modernas basadas en:\n–\nDocker.\n–\nKubernetes.\n–\nMicroservicios.\n21"
+    },
+    {
+      "n": 22,
+      "texto": "Instalación de Jenkins mediante Docker\n•\nLa utilización de contenedores simplifica significativamente la instalación de \nJenkins.\n•\nEn lugar de instalar manualmente:\n–\nJava.\n–\nDependencias.\n–\nConfiguraciones.\n•\nPodemos utilizar una imagen preconfigurada.\n•\nLas ventajas son:\n–\nReproducibilidad\n–\nTodos los entornos son idénticos.\n–\nPortabilidad\n–\nPuede ejecutarse en cualquier sistema compatible con Docker.\n–\nNo afecta otras aplicaciones instaladas.\n–\nFacilidad de actualización\n•\nLas nuevas versiones pueden desplegarse mediante nuevas imágenes.\n22"
+    },
+    {
+      "n": 23,
+      "texto": "Persistencia de Datos en Jenkins\n• Uno de los errores más comunes al instalar Jenkins \nmediante Docker es no persistir los datos.\n• Si el contenedor se elimina, también desaparecen:\n– Configuraciones.\n– Historial de builds.\n– Plugins.\n– Usuarios.\n• Por esta razón es necesario utilizar volúmenes \npersistentes.\n23"
+    },
+    {
+      "n": 24,
+      "texto": "Gestión de Plugins en Jenkins\n• La arquitectura de Jenkins se basa en plugins.\n• La instalación básica proporciona únicamente \nfuncionalidades mínimas.\n• La mayoría de las capacidades avanzadas se incorporan \nmediante plugins.\n• Ejemplos importantes:\n– Git Plugin\n– Pipeline Plugin\n– Docker Plugin\n– JUnit Plugin\n– Etc\n24"
+    },
+    {
+      "n": 25,
+      "texto": "Concepto de Job en Jenkins\n• Un Job representa una tarea automatizada ejecutada por \nJenkins.\n• Puede incluir:\n–\nCompilación.\n–\nTesting.\n–\nDespliegue.\n–\nGeneración de reportes.\n• Tipos de Jobs:\n–\nFreestyle\n Configuración mediante interfaz gráfica.\n–\nPipeline\n Configuración mediante código.\n25"
+    },
+    {
+      "n": 26,
+      "texto": "Concepto de Job en Jenkins\n• Multibranch Pipeline\n– Soporte para múltiples ramas Git.\n• Folder\n– Agrupación de proyectos.\n• En entornos modernos se recomienda utilizar Pipeline \nJobs debido a su trazabilidad y capacidad de versionado.\n26"
+    },
+    {
+      "n": 27,
+      "texto": "Pipeline as Code y Jenkinsfile\n• Uno de los avances más importantes en Jenkins fue la \nintroducción del concepto Pipeline as Code.\n• La idea consiste en almacenar la definición completa del \npipeline dentro del repositorio mediante un archivo llamado:\n–\nJenkinsfile\n• Esto permite:\n–\nVersionar pipelines.\n–\nRevisar cambios.\n–\nReplicar configuraciones.\n–\nReducir errores manuales.\n• El pipeline se convierte en parte del producto software.\n27"
+    },
+    {
+      "n": 28,
+      "texto": "Ejemplo\n•\npipeline {\n•\n    agent any\n•\n•\n    stages {\n•\n•\n        stage('Build') {\n•\n            steps {\n•\n                echo 'Compilando'\n•\n            }\n•\n        }\n•\n•\n        stage('Test') {\n•\n            steps {\n•\n                echo 'Ejecutando pruebas'\n•\n            }\n•\n        }\n•\n•\n    }\n•\n}\n28"
+    }
+  ]
+}

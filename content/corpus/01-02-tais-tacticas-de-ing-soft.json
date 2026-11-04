@@ -1,0 +1,138 @@
+{
+  "archivo": "01-02-tais-Tacticas de Ing Soft.pdf",
+  "carpeta": "",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Curso\nTAIS\nTácticas y Arq. de Software\n1"
+    },
+    {
+      "n": 2,
+      "texto": "Tácticas de Diseño y Arquitectura de \nSoftware\n• Temas\n– ¿Qué son las tácticas de diseño?\n– La arquitectura como balance de características.\n– Tácticas de diseño más comunes.\n2"
+    },
+    {
+      "n": 3,
+      "texto": "Motivación\n• Dos sistemas pueden implementar exactamente las mismas \nfuncionalidades:\n–\nRegistrar usuarios.\n–\nProcesar pagos.\n–\nGenerar reportes.\n• Sin embargo:\n–\nUno responde en milisegundos.\n–\nOtro tarda varios segundos.\n–\nUno permanece disponible.\n–\nOtro falla frecuentemente.\n• Pregunta\n–\n¿Qué explica estas diferencias?\n3"
+    },
+    {
+      "n": 4,
+      "texto": "La importancia de la Arquitectura\n• La arquitectura determina aspectos críticos del sistema:\n– Rendimiento\n– Disponibilidad\n– Seguridad\n– Escalabilidad\n– Evolución\n• Muchas veces los problemas más costosos de corregir \nson consecuencia de decisiones arquitectónicas \nincorrectas.\n4"
+    },
+    {
+      "n": 5,
+      "texto": "¿Qué es una Arquitectura de Software?\n• La arquitectura describe:\n–\nComponentes principales.\n–\nRelaciones entre componentes.\n–\nInterfaces.\n–\nRestricciones de diseño.\n• Analogía\n     Arquitectura de un edificio:\n–\nNo define cada ladrillo.\n–\nDefine la estructura principal.\n–\nLo mismo ocurre en software.\n5"
+    },
+    {
+      "n": 6,
+      "texto": "Arquitectura como conjunto de decisiones\n• Al diseñar un sistema debemos decidir:\n– Monolito o microservicios.\n– SQL o NoSQL.\n– Comunicación síncrona o asíncrona.\n– Replicación o no replicación.\n• Cada decisión genera consecuencias e impactos en el \nsoftware y por ende en el negocio.\n6"
+    },
+    {
+      "n": 7,
+      "texto": "Requisitos Funcionales\n• Definen los servicios/funcionalidades del sistema.\n• Ejemplos:\n– Registrar cliente.\n– Realizar compra.\n– Emitir factura.\n– Guardar histórico.\n• Describen:\n– ¿Qué hace el sistema?\n– Muchas veces en un documento de requerimientos o \na través de Épicas/User Stories\n7"
+    },
+    {
+      "n": 8,
+      "texto": "Requisitos No Funcionales\n• Definen atributos de calidad/performance.\n• Ejemplos:\n– Tiempo de respuesta.\n– Disponibilidad.\n– Seguridad.\n– Escalabilidad.\n• Describen:\n– ¿Cómo debe comportarse el sistema? Atributos de \ncomportamiento del software\n8"
+    },
+    {
+      "n": 9,
+      "texto": "Los requisitos no funcionales impactan en \nla arquitectura\n• Dos sistemas pueden cumplir exactamente los mismos \nrequisitos funcionales.\n• Lo que puede hacer diferenciar sus arquitecturas son los \nrequisitos no funcionales.\n• Ejemplo:\n–\nSistema bancario.\nDisponibilidad Alta\n Seguridad alta.\n Consistencia alta.\n–\nRed social.\n Disponibilidad alta.\n Escalabilidad alta.\n9"
+    },
+    {
+      "n": 10,
+      "texto": "Atributos de Calidad\n• Características medibles de un sistema.\n• Los más relevantes:\n– Rendimiento (tiempo de respuestas)\n– Disponibilidad (24x7)\n– Seguridad \n– Escalabilidad (potencial crecimiento)\n– Modificabilidad\n– Confiabilidad\n10"
+    },
+    {
+      "n": 11,
+      "texto": "Atributos de Calidad\n• Rendimiento\n– Capacidad del sistema para responder \neficientemente.\n• Métricas comunes:\n– Latencia\n– Throughput\n– Utilización de CPU\n– Utilización de memoria\n• Pregunta:\n– ¿Cuánto tiempo espera un usuario antes de \nabandonar una aplicación?\n11"
+    },
+    {
+      "n": 12,
+      "texto": "Atributos de Calidad\n• Disponibilidad\n– Probabilidad de que el sistema esté operativo \ncuando se necesita.\n• Ejemplos:\n– 99%\n– 99.9%\n– 99.99%\n• Cada decimal adicional implica costos significativos.\n12"
+    },
+    {
+      "n": 13,
+      "texto": "Atributos de Calidad\n• Seguridad\n• Objetivo:\n– Proteger los activos del sistema y del negocio\n• Principios:\n– Confidencialidad\n– Integridad\n– Disponibilidad\n13"
+    },
+    {
+      "n": 14,
+      "texto": "Atributos de Calidad\n• Escalabilidad\n– Capacidad para soportar crecimiento.\n• Tipos:\n– Más usuarios.\n– Más datos.\n– Más transacciones.\n14"
+    },
+    {
+      "n": 15,
+      "texto": "Atributos de Calidad\n• Modificabilidad\n– Capacidad para adaptarse al cambio.\n• Ejemplos:\n– Nuevos requisitos.\n– Cambios regulatorios.\n– Integración con nuevos sistemas.\n• Una arquitectura rígida incrementa significativamente los \ncostos futuros.\n15"
+    },
+    {
+      "n": 16,
+      "texto": "¿Qué son las tácticas de diseño?\n• Definición:\n• Una táctica es una decisión arquitectónica destinada a \ninfluir en un atributo de calidad específico.\n• Ejemplos:\n– Caché.\n– Replicación.\n– Balanceo de carga.\n– Cifrado.\n16"
+    },
+    {
+      "n": 17,
+      "texto": "¿Por qué utilizar tácticas?\n• Las tácticas permiten transformar objetivos abstractos en \nmecanismos concretos.\n• Ejemplo:\n– \"Necesitamos mejorar el rendimiento en cuanto al \ntiempo de respuesta\"\n• Posibles tácticas:\n– Caché.\n– Balanceo.\n– Procesamiento asíncrono.\n17"
+    },
+    {
+      "n": 18,
+      "texto": "Tácticas, Patrones y Arquitectura\n• Tácticas: Mecanismos específicos.\n– Ejemplo:\n Caché.\n• Patrones: Soluciones estructurales.\n– Ejemplo:\n MVC.\n Microservicios.\n• Arquitectura: Combinación de múltiples decisiones.\n18"
+    },
+    {
+      "n": 19,
+      "texto": "Relación entre conceptos\n19\nRequerimientos \nFuncionales y No \nFuncionales\nArquitectura/Estilos\nPatrones\nTácticas\nImplementación"
+    },
+    {
+      "n": 20,
+      "texto": "Arquitectura como balance\n• La arquitectura no consiste en maximizar todos los \natributos.\n• Consiste en: Encontrar el equilibrio adecuado para el \ncontexto del negocio.\n20"
+    },
+    {
+      "n": 21,
+      "texto": "Caso: Sistema Bancario\n• Prioridades:\n– Disponibilidad\n– Seguridad.\n– Integridad.\n– Consistencia\n– Rendimiento\n• Tácticas habituales:\n– MFA.\n– Auditoría.\n– Replicación síncrona.\n21"
+    },
+    {
+      "n": 22,
+      "texto": "Caso: Red Social\n• Prioridades:\n– Disponibilidad.\n– Escalabilidad.\n– Rendimiento.\n• Tácticas habituales:\n– Caché distribuida.\n– Replicación.\n– Consistencia eventual.\n22"
+    },
+    {
+      "n": 23,
+      "texto": "Tácticas para Rendimiento y Cache\n• Objetivo: Reducir tiempos de respuesta.\n• Tácticas frecuentes:\n– Caché.\n– Balanceo.\n– Procesamiento asíncrono.\n– Pool de conexiones.\n23"
+    },
+    {
+      "n": 24,
+      "texto": "Tácticas para Rendimiento \n• Caché: Guardar resultados previamente calculados.\n• Beneficios:\n– Menor acceso a bases de datos.\n– Menor latencia.\n– Menor uso de recursos.\n• Ejemplos:\n– Redis.\n– Memcached.\n24"
+    },
+    {
+      "n": 25,
+      "texto": "Tácticas para Rendimiento \n• Balanceo de Carga: Distribuye solicitudes entre múltiples \ninstancias.\n• Beneficios:\n– Mejor rendimiento.\n– Mayor disponibilidad.\n– Mejor escalabilidad.\n25"
+    },
+    {
+      "n": 26,
+      "texto": "Tácticas para Rendimiento \n• Procesamiento asíncrono: Separar la solicitud del \nprocesamiento.\n• Ejemplo:\n– Registro de usuario.\n– Crear cuenta.\n– Enviar correo posteriormente.\n• Beneficio:\n– Menor tiempo de respuesta percibido.\n26"
+    },
+    {
+      "n": 27,
+      "texto": "Tácticas para Disponibilidad\n• Mantener el sistema operativo frente a fallas.\n• Tácticas:\n– Redundancia.\n– Replicación.\n– Failover.\n– Monitoreo.\n27"
+    },
+    {
+      "n": 28,
+      "texto": "Tácticas para Disponibilidad\n• Redundancia: Mantener componentes duplicados.\n• Beneficio:\n– Eliminar puntos únicos de falla.\n• Replicación: Mantener múltiples copias de datos.\n• Beneficio:\n– Mayor disponibilidad.\n– Mejor rendimiento de lectura.\n28"
+    },
+    {
+      "n": 29,
+      "texto": "Tácticas para Disponibilidad\n• Failover: Transferencia automática de operaciones a un \ncomponente alternativo.\n• Beneficios:\n– Continuidad del servicio.\n– Menor tiempo de inactividad.\n• Monitoreo:Detectar problemas tempranamente.\n29"
+    },
+    {
+      "n": 30,
+      "texto": "Tácticas para Seguridad\n• Reducir riesgos y vulnerabilidades.\n• Tácticas:\n– Autenticación.\n– Autorización.\n– Validación.\n– Cifrado.\n30"
+    },
+    {
+      "n": 31,
+      "texto": "Tácticas para Seguridad\n• Autenticación y Autorización\n• Autenticación:\n– ¿Quién eres? (MFA)\n• Autorización:\n– ¿Qué puedes hacer?\n• Ambas son necesarias.\n31"
+    },
+    {
+      "n": 32,
+      "texto": "Tácticas para Seguridad\n• Validación de Entradas y Cifrado\n• Protección contra:\n– SQL Injection.\n– XSS.\n• Cifrado:\n– Datos en tránsito.\n– Datos en reposo.\n• Estas herramientas son a modo de ejemplo y son una \nlista acotada\n32"
+    },
+    {
+      "n": 33,
+      "texto": "Propuesta de Caso para Analisis\n• Se requiere diseñar una arquitectura para una \nplataforma de streaming.\n• Requisitos:\n– 5 millones de usuarios.\n– Disponibilidad 99.99%.\n– Tiempo de respuesta menor a 2 segundos.\n– Seguridad de cuentas.\n• Preguntas:\n– ¿Qué atributos son prioritarios?\n– ¿Qué tácticas utilizarían?\n33"
+    }
+  ]
+}

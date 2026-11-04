@@ -1,0 +1,102 @@
+{
+  "archivo": "03-01-tais-PersistenciaNoRelacional-03-01.pdf",
+  "carpeta": "",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Curso\nTendencias Aplicadas de \nIngenería de Software\nPersistencia de Datos No Relacional\n1"
+    },
+    {
+      "n": 2,
+      "texto": "Persistencia de Datos No Relacional\n• La persistencia de datos constituye uno de los pilares \nfundamentales de la ingeniería de software moderna. \nDurante mucho tiempo, las bases de datos relacionales \nhan sido la tecnología predominante para almacenar \ninformación debido a su sólido fundamento teórico, \nbasado en el álgebra relacional y en las propiedades \nACID. \n• Sin embargo, la aparición de aplicaciones web masivas, \nplataformas globales, sistemas distribuidos, redes \nsociales, servicios de streaming, soluciones cloud e \nInternet de las Cosas (IoT) ha generado nuevos \nrequerimientos que desafían las capacidades \ntradicionales de los sistemas relacionales.\n2"
+    },
+    {
+      "n": 3,
+      "texto": "Persistencia de Datos No Relacional\n• En este contexto surgen las bases de datos NoSQL (Not Only \nSQL), un conjunto de tecnologías de persistencia que priorizan \naspectos como la escalabilidad horizontal, la disponibilidad, la \nflexibilidad de los esquemas y el manejo eficiente de grandes \nvolúmenes de información distribuidos geográficamente.\n• Es importante destacar que NoSQL no pretende reemplazar \ncompletamente al modelo relacional. Más bien, propone \nalternativas que resultan más adecuadas para determinados \nescenarios arquitectónicos. \n• La selección de una tecnología de persistencia debe realizarse \nconsiderando los requisitos funcionales y no funcionales del \nsistema, así como las restricciones operativas y de negocio.\n3"
+    },
+    {
+      "n": 4,
+      "texto": "Persistencia de Datos No Relacional\n• Durante las décadas de 1980, 1990 y comienzos de los años 2000, \nla mayoría de las aplicaciones empresariales operaban sobre \nbases de datos relacionales. Este modelo funcionaba \nadecuadamente porque los volúmenes de información eran \nrelativamente moderados y las aplicaciones se ejecutaban \nnormalmente dentro de una única organización o centro de datos.\n• La situación cambió radicalmente con la aparición de aplicaciones \nque procesan grandes volumenes de datos y de usuarios. \n• Estas organizaciones descubrieron que los enfoques tradicionales \nde escalamiento vertical resultaban insuficientes o \nextremadamente costosos.\n4"
+    },
+    {
+      "n": 5,
+      "texto": "Persistencia de Datos No Relacional\n• Además, comenzaron a surgir nuevos tipos de datos:\n–\nContenido multimedia.\n–\nRegistros de eventos (logs).\n–\nDatos de sensores IoT.\n–\nInformación geoespacial.\n–\nDatos semiestructurados en formatos JSON y XML.\n–\nInformación generada por usuarios en redes sociales.\n• Las nuevas aplicaciones requerían almacenar y procesar \nvolúmenes masivos de información en tiempo real, \nmanteniendo altos niveles de disponibilidad. \n• Como respuesta a estos desafíos, aparecieron nuevas \ntecnologías de persistencia agrupadas bajo el término \nNoSQL.\n5"
+    },
+    {
+      "n": 6,
+      "texto": "Limitaciones del Modelo Relacional\n• Aunque los sistemas relacionales continúan siendo \nextremadamente importantes, presentan ciertas limitaciones \ncuando se utilizan en entornos altamente distribuidos o de \ngran escala.\n• Uno de los principales problemas es la dependencia de \nesquemas rígidos. \n• En una base de datos relacional, cualquier modificación \nestructural requiere modificar tablas, índices, restricciones y, \nen ocasiones, migrar millones de registros existentes. \n• Este proceso puede afectar la disponibilidad y el rendimiento \ndel sistema.\n6"
+    },
+    {
+      "n": 7,
+      "texto": "Limitaciones del Modelo Relacional\n•\nOtro desafío importante es la necesidad de realizar JOINs para \nreconstruir relaciones complejas. \n•\nCuando las tablas contienen millones o miles de millones de registros, \nestas operaciones pueden transformarse en cuellos de botella \nsignificativos.\n•\nDesde el punto de vista de la escalabilidad, los sistemas relacionales \nsuelen crecer mediante escalamiento vertical, es decir, incorporando más \nmemoria, procesadores o almacenamiento al mismo servidor. \n•\nSin embargo, esta estrategia presenta límites físicos y económicos.\n•\nFinalmente, los mecanismos de consistencia transaccional estricta, \naunque muy valiosos para aplicaciones financieras o críticas, pueden \ngenerar dificultades cuando se intenta distribuir datos entre múltiples \ncentros de datos geográficamente separados.\n7"
+    },
+    {
+      "n": 8,
+      "texto": "Sistemas Distribuidos y Nuevos Desafíos\n• Uno de los desafíos de los sistemas modernos no es \nalmacenar datos, sino hacerlo de manera confiable en \nambientes distribuidos.\n• En un sistema distribuido pueden ocurrir múltiples tipos \nde fallas:\n– Caída de servidores.\n– Interrupciones de red.\n– Latencias variables.\n– Pérdida temporal de conectividad.\n– Inconsistencias entre réplicas.\n– Sobrecarga de algunos nodos.\n8"
+    },
+    {
+      "n": 9,
+      "texto": "Sistemas Distribuidos y Nuevos Desafíos\n• A diferencia de un sistema centralizado, donde todos los \ncomponentes comparten memoria y almacenamiento, en una \narquitectura distribuida cada nodo posee una visión parcial del \nsistema.\n• Esto obliga a resolver problemas complejos relacionados con:\n–\nReplicación de datos.\n–\nSincronización.\n–\nConsistencia.\n–\nRecuperación ante fallas.\n–\nBalanceo de carga.\n• Muchas tecnologías NoSQL fueron diseñadas específicamente \npara enfrentar estos desafíos desde su origen, incorporando \nmecanismos de particionamiento y replicación distribuidos de forma \nnativa.\n9"
+    },
+    {
+      "n": 10,
+      "texto": "Motivaciones Fundamentales de NoSQL\n•\nLas soluciones NoSQL no surgieron simplemente como una alternativa \ntecnológica, sino como una respuesta a necesidades concretas de las \norganizaciones modernas.\n•\nEntre los principales objetivos se encuentran:\n      Escalabilidad horizontal\n•\nPermitir el crecimiento mediante la incorporación de nuevos servidores en \nlugar de depender exclusivamente de hardware cada vez más potente y \ncostoso.\n      Alta disponibilidad\n•\nMantener el servicio operativo incluso cuando algunos nodos o enlaces \nde comunicación fallen.\n10"
+    },
+    {
+      "n": 11,
+      "texto": "Motivaciones Fundamentales de NoSQL\n     Flexibilidad estructural\n•\nFacilitar la evolución de los modelos de datos sin requerir complejas \nmigraciones de esquema.\n     Rendimiento\n•\nOptimizar operaciones de lectura y escritura para aplicaciones que \nprocesan millones de transacciones por segundo.\n     Distribución geográfica\n•\nPermitir que los datos se encuentren replicados en distintas regiones para \nreducir latencia y mejorar la resiliencia.\n•\nEstas características resultan especialmente relevantes para \narquitecturas cloud, sistemas de microservicios y aplicaciones globales.\n11"
+    },
+    {
+      "n": 12,
+      "texto": "Flexibilidad de Datos y Evolución de \nEsquemas\n• Uno de los aspectos más atractivos de muchas bases de \ndatos NoSQL es su capacidad para manejar estructuras \nheterogéneas dentro de una misma colección de datos.\n• Por ejemplo, en una base documental como MongoDB \nes posible almacenar documentos con diferentes \natributos sin necesidad de redefinir el esquema global.\n• Esto resulta particularmente útil cuando:\n– Los requisitos cambian frecuentemente.\n– El dominio de negocio evoluciona rápidamente.\n– Existen múltiples versiones de objetos.\n– Se integran fuentes de datos diversas.\n12"
+    },
+    {
+      "n": 13,
+      "texto": "Flexibilidad de Datos y Evolución de \nEsquemas\n• Desde la perspectiva de la ingeniería de software, esta \nflexibilidad reduce el costo de evolución del sistema y \nfacilita la adopción de enfoques ágiles.\n• No obstante, también introduce desafíos. La ausencia de \nrestricciones estructurales estrictas puede provocar \ninconsistencias, duplicación de datos o dificultades de \nmantenimiento si no se aplican adecuadas prácticas de \nmodelado.\n• Por este motivo, la flexibilidad no debe interpretarse \ncomo ausencia de diseño. Por el contrario, exige una \ncomprensión profunda de los patrones de acceso y de \nlos requisitos del dominio.\n13"
+    },
+    {
+      "n": 14,
+      "texto": "Ventajas de NoSQL Frente al Modelo \nRelacional\n• Las bases de datos NoSQL ofrecen ventajas \nsignificativas en determinados escenarios \narquitectónicos.\n• En primer lugar, proporcionan mecanismos de \nescalabilidad horizontal que permiten distribuir la \ninformación entre múltiples nodos. Esto posibilita \nmanejar volúmenes de datos que resultarían difíciles de \nadministrar mediante un único servidor.\n• En segundo lugar, muchas tecnologías NoSQL están \noptimizadas para operar en entornos distribuidos y \ncloud-native, incorporando capacidades de replicación y \nrecuperación automática ante fallas.\n14"
+    },
+    {
+      "n": 15,
+      "texto": "Ventajas de NoSQL Frente al Modelo \nRelacional\n•\nOtra ventaja importante es la reducción de la complejidad asociada a las \noperaciones JOIN. En muchos modelos NoSQL, los datos se almacenan \nde forma desnormalizada, priorizando la eficiencia de acceso.\n•\nAsimismo, permiten trabajar con datos semiestructurados y no \nestructurados de manera más natural que las bases relacionales \ntradicionales.\n•\nSin embargo, estas ventajas suelen obtenerse a costa de sacrificar \nalgunos aspectos del modelo relacional, como la consistencia fuerte, las \ntransacciones complejas o la integridad referencial estricta.\n•\nPor esta razón, la elección entre SQL y NoSQL debe basarse en los \nrequisitos específicos del sistema y no en tendencias tecnológicas.\n15"
+    },
+    {
+      "n": 16,
+      "texto": "Teorema CAP (Consistency, Availabity, \nPartition tolerance)\n•\nUno nuevo concepto que puede llegar a incidir en el diseño de bases de \ndatos distribuidas es el Teorema CAP.\n•\nEl teorema establece que un sistema distribuido no puede garantizar \nsimultáneamente tres propiedades cuando ocurre una partición de red:\n•\nConsistency (C)\n–\nTodos los nodos observan exactamente la misma información al \nmismo tiempo. Una lectura realizada inmediatamente después de \nuna escritura siempre devuelve el valor más reciente.\n•\nAvailability (A)\n–\nToda solicitud recibe una respuesta válida, aunque algunos nodos \ndel sistema hayan fallado.\n16"
+    },
+    {
+      "n": 17,
+      "texto": "Teorema CAP (Consistency, Availabity, \nPartition tolerance)\n• Partition Tolerance (P)\n– El sistema continúa funcionando incluso cuando \nexisten fallas de comunicación entre grupos de \nnodos.\n• En ambientes distribuidos reales, las particiones de red \nson inevitables. Por esta razón, los arquitectos deben \ndecidir qué característica priorizar cuando dichas fallas \nocurren.\n• El teorema CAP no implica que una base de datos deba \nelegir permanentemente sólo dos propiedades, sino que \ndurante una partición será necesario realizar \ncompromisos entre consistencia y disponibilidad.\n17"
+    },
+    {
+      "n": 18,
+      "texto": "Teorema CAP (Consistency, Availabity, \nPartition tolerance)\n•\nEl verdadero valor del teorema CAP no reside en la teoría matemática \nsino en sus consecuencias prácticas para el diseño arquitectónico.\n•\nSupongamos un sistema distribuido compuesto por tres centros de datos \nubicados en diferentes regiones del mundo. Si una interrupción de red \nimpide la comunicación entre ellos, aparecen dos opciones:\n•\nMantener la consistencia\n–\nEl sistema rechaza algunas solicitudes hasta que pueda garantizar \nque todos los nodos poseen la misma información.\n•\nConsecuencias:\n–\nMenor disponibilidad.\n–\nMayor confiabilidad de los datos.\n–\nPosibles tiempos de espera.\n–\nMantener la disponibilidad\n18"
+    },
+    {
+      "n": 19,
+      "texto": "Teorema CAP (Consistency, Availabity, \nPartition tolerance)\n• Mantener la disponibilidad\n–\nCada nodo continúa respondiendo solicitudes aunque no \npueda sincronizarse inmediatamente con los demás.\n• Consecuencias:\n–\nMejor experiencia de usuario.\n–\nRiesgo de lecturas desactualizadas.\n–\nNecesidad de mecanismos posteriores de reconciliación.\n• Las bases de datos relacionales tradicionales suelen \nprivilegiar la consistencia, mientras que muchos sistemas \nNoSQL fueron diseñados para favorecer la disponibilidad y la \ntolerancia a particiones.\n19"
+    },
+    {
+      "n": 20,
+      "texto": "Teorema CAP (Consistency, Availabity, \nPartition tolerance)\n•\nUn ejemplo sencillo: Supongamos que se tienen dos servidores:\n–\nServidor A en Montevideo.\n–\nServidor B en Madrid.\n•\nAmbos almacenan la misma información.\n•\nAhora un usuario cambia su nombre en el servidor A, pero justo en ese momento \nse corta la comunicación entre A y B (una partición de red).\n•\nSegún CAP, cuando ocurre esa partición, debes elegir entre:\n•\nOpción 1: Consistencia (CP): El servidor B deja de responder o rechaza ciertas \nconsultas hasta sincronizarse con A.\n•\nEn esta opción: \n–\nLos datos son siempre correctos y consistentes.\n–\nAlgunas solicitudes pueden no recibir respuesta.\n20"
+    },
+    {
+      "n": 21,
+      "texto": "Teorema CAP (Consistency, Availabity, \nPartition tolerance)\n•\nOpción 2: Disponibilidad (AP): El servidor B sigue respondiendo aunque tenga \ndatos antiguos.\n•\nEn esta opción:\n–\nEl sistema siempre responde.\n–\nDurante un tiempo algunos usuarios pueden ver información diferente.\n•\n¿Por qué no existe CA?\n•\nExisten 3 combinaciones posibles\n–\nCA\n–\nCP\n–\nAP\n•\nPero en sistemas distribuidos reales la P (tolerancia a particiones) es \nprácticamente obligatoria, porque los fallos de red pueden ocurrir.\n•\nPor eso, cuando hay una partición, normalmente la decisión real es:  ¿Se prefiere \nconsistencia (CP) o disponibilidad (AP)?\n21"
+    },
+    {
+      "n": 22,
+      "texto": "Teorema CAP (Consistency, Availabity, \nPartition tolerance)\n•\nUna analogía rápida: Supongamos dos sucursales de una biblioteca.\n–\nConsistencia: ambas tienen exactamente el mismo catálogo.\n–\nDisponibilidad: ambas atienden a los usuarios siempre.\n•\nPartición: se cae Internet entre las sucursales.\n•\nSi una sucursal presta un libro y no puede avisar a la otra:\n–\nSi se prioriza consistencia, una sucursal deja de prestar libros hasta \nsincronizarse.\n–\nSi se prioriza disponibilidad, ambas siguen prestando libros, aunque \ndurante un tiempo el catálogo pueda diferir.\n•\nNo puedes tener las tres cosas perfectas al mismo tiempo cuando existe una \npartición.\n•\nResumen: El teorema CAP dice que, en un sistema distribuido, cuando ocurre un \nfallo de comunicación entre nodos, debes elegir entre mantener la consistencia \nde los datos o mantener la disponibilidad\n22"
+    },
+    {
+      "n": 23,
+      "texto": "Consistencia Eventual\n•\nLa consistencia eventual es uno de los conceptos más importantes dentro del \necosistema NoSQL.\n•\nLa idea central consiste en aceptar que diferentes nodos puedan contener \nversiones distintas de un mismo dato durante un período limitado de tiempo.\n•\nPor ejemplo:\n–\nUn usuario modifica su perfil.\n–\nEl cambio se registra en un nodo.\n–\nLas réplicas reciben la actualización gradualmente.\n–\nDurante algunos segundos diferentes usuarios podrían observar versiones \ndistintas.\n•\nFinalmente todas las réplicas convergen al mismo estado.\n•\nEste comportamiento permite:\n–\nReducir latencias.\n–\nMejorar disponibilidad.\n–\nIncrementar capacidad de escalamiento.\n23"
+    },
+    {
+      "n": 24,
+      "texto": "Consistencia Eventual\n• Sin embargo, también introduce desafíos.\n• Los desarrolladores deben considerar escenarios donde:\n– Una lectura puede  devolver información antigua.\n– Existen escrituras concurrentes.\n– Aparecen conflictos entre réplicas.\n• Muchos sistemas modernos implementan variantes más \nsofisticadas como:\n– Read-after-write consistency.\n– Session consistency.\n– Strong eventual consistency.\n• Comprender estos modelos resulta esencial para diseñar \naplicaciones distribuidas confiables.\n24"
+    }
+  ]
+}

@@ -1,0 +1,622 @@
+[
+  {
+    "id": "cache-021",
+    "tema": "cache",
+    "subtema": "bases-en-memoria",
+    "dificultad": "facil",
+    "pregunta": "¿Qué distingue a una base de datos en memoria de una caché tradicional?",
+    "opciones": [
+      {
+        "texto": "Almacena sus estructuras principales en RAM y puede ser el almacenamiento operativo principal.",
+        "correcta": true
+      },
+      {
+        "texto": "Solo conserva los resultados de consultas anteriores por un tiempo limitado.",
+        "correcta": false,
+        "porque_no": "Eso describe a una caché, cuyo contenido es derivado y reemplazable."
+      },
+      {
+        "texto": "Requiere un motor relacional detrás para funcionar.",
+        "correcta": false,
+        "porque_no": "El material la presenta como posible fuente principal, sin depender de otro motor."
+      },
+      {
+        "texto": "Trabaja únicamente sobre archivos en disco con índices en RAM.",
+        "correcta": false,
+        "porque_no": "Sus estructuras principales viven en memoria; el disco aparece como persistencia opcional."
+      }
+    ],
+    "explicacion": "Una base de datos en memoria almacena sus estructuras principales directamente en RAM y elimina la dependencia del acceso permanente a disco para las operaciones normales. A diferencia de una caché tradicional, puede actuar como sistema principal de almacenamiento operativo. La RAM moderna permite cientos de gigabytes por servidor, acceso extremadamente rápido y procesamiento masivo de datos.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 11 },
+    "tags": ["cache", "bases-en-memoria", "ram"]
+  },
+  {
+    "id": "cache-022",
+    "tema": "cache",
+    "subtema": "bases-en-memoria",
+    "dificultad": "media",
+    "pregunta": "Un equipo necesita accesos en microsegundos, índices residentes en memoria y procesamiento altamente concurrente. ¿Qué tecnología del material responde a eso?",
+    "opciones": [
+      {
+        "texto": "Una base de datos en memoria, como Redis o Hazelcast.",
+        "correcta": true
+      },
+      {
+        "texto": "Un motor relacional con los índices guardados en disco.",
+        "correcta": false,
+        "porque_no": "El acceso al almacenamiento persistente es varios órdenes de magnitud más lento que el acceso a RAM."
+      },
+      {
+        "texto": "Un almacén de datos con tablas particionadas por fecha.",
+        "correcta": false,
+        "porque_no": "El particionado organiza el volumen, pero no aporta accesos en microsegundos."
+      },
+      {
+        "texto": "Un servidor de archivos compartido por todas las instancias.",
+        "correcta": false,
+        "porque_no": "Agrega entrada/salida de red y de disco, justo el costo que se quiere evitar."
+      }
+    ],
+    "explicacion": "Las bases de datos en memoria se caracterizan por acceso en microsegundos, estructuras optimizadas para RAM, índices residentes en memoria y procesamiento altamente concurrente. El material menciona Redis y Hazelcast entre sus ejemplos. Con estas tecnologías se construyen aplicaciones con tiempos de respuesta extremadamente bajos.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 12 },
+    "tags": ["cache", "bases-en-memoria", "redis"]
+  },
+  {
+    "id": "cache-023",
+    "tema": "cache",
+    "subtema": "redis",
+    "dificultad": "facil",
+    "pregunta": "¿Cómo describe el material a Redis?",
+    "opciones": [
+      {
+        "texto": "Como una base NoSQL clave-valor en memoria con cadenas, listas, sets y hashes.",
+        "correcta": true
+      },
+      {
+        "texto": "Como un motor relacional que reemplaza a PostgreSQL conservando SQL.",
+        "correcta": false,
+        "porque_no": "Redis adopta un modelo clave-valor, no el modelo relacional con SQL."
+      },
+      {
+        "texto": "Como un sistema de archivos distribuido para almacenar imágenes.",
+        "correcta": false,
+        "porque_no": "Es una base de datos en memoria, no un sistema de archivos."
+      },
+      {
+        "texto": "Como una caché de solo lectura pensada para páginas web.",
+        "correcta": false,
+        "porque_no": "Permite escrituras y múltiples estructuras de datos; no se limita a páginas."
+      }
+    ],
+    "explicacion": "Redis (Remote Dictionary Server) es una base de datos NoSQL pensada para operar en memoria principal. A diferencia de los sistemas relacionales tradicionales, adopta un modelo clave-valor en el que cada clave puede almacenar estructuras como cadenas de caracteres, listas, conjuntos, tablas hash, conjuntos ordenados y flujos de eventos.",
+    "fuente": { "archivo": "04-02-Redis-04-02.pdf", "pagina": 2 },
+    "tags": ["redis", "bases-en-memoria"]
+  },
+  {
+    "id": "cache-024",
+    "tema": "cache",
+    "subtema": "redis-estructuras",
+    "dificultad": "media",
+    "pregunta": "El ranking de jugadores de un juego se ordena por puntaje y se actualiza a cada rato. ¿Qué estructura de Redis usa el material para ese caso?",
+    "opciones": [
+      {
+        "texto": "Sorted sets, que mantienen los elementos ordenados por un puntaje.",
+        "correcta": true
+      },
+      {
+        "texto": "Lists, que conservan los elementos en orden de inserción.",
+        "correcta": false,
+        "porque_no": "La lista ordena por inserción, no por puntaje; el material la usa para colas de procesamiento."
+      },
+      {
+        "texto": "Hashes, que agrupan los campos de un mismo objeto.",
+        "correcta": false,
+        "porque_no": "El hash guarda atributos de un objeto y no establece un orden por puntaje."
+      },
+      {
+        "texto": "Sets, que agrupan elementos sin orden ni repetición.",
+        "correcta": false,
+        "porque_no": "El conjunto no tiene orden ni puntaje asociado."
+      }
+    ],
+    "explicacion": "El modelo de datos de Redis permite resolver varios problemas sin sumar sistemas adicionales. En el ejemplo de comercio electrónico del material se usan hashes para los productos, lists para las colas de procesamiento, sorted sets para los rankings y strings para las sesiones de usuario. Para un ranking importa el orden por puntaje, que es exactamente lo que aporta el conjunto ordenado.",
+    "fuente": { "archivo": "04-02-Redis-04-02.pdf", "pagina": 7 },
+    "tags": ["redis", "estructuras", "ranking"]
+  },
+  {
+    "id": "cache-025",
+    "tema": "cache",
+    "subtema": "redis-estructuras",
+    "dificultad": "media",
+    "pregunta": "Un equipo guardó la cola de trabajos pendientes en un hash de Redis, con un campo por trabajo, y no logra respetar el orden de llegada. ¿Qué estructura correspondía según el material?",
+    "opciones": [
+      {
+        "texto": "Una list, que es la estructura que el material usa para colas de procesamiento.",
+        "correcta": true
+      },
+      {
+        "texto": "Un sorted set, que ordena los elementos por el puntaje asignado.",
+        "correcta": false,
+        "porque_no": "El orden por puntaje no respeta el orden de llegada de los trabajos."
+      },
+      {
+        "texto": "Un set, que evita los elementos repetidos dentro de la colección.",
+        "correcta": false,
+        "porque_no": "El conjunto elimina duplicados, pero no conserva el orden de llegada."
+      },
+      {
+        "texto": "Un string, que guarda un único valor asociado a la clave.",
+        "correcta": false,
+        "porque_no": "Un valor único no permite mantener una secuencia de trabajos pendientes."
+      }
+    ],
+    "explicacion": "En el ejemplo del material las lists se usan para colas de procesamiento y los hashes para representar objetos con varios campos. Un hash no conserva el orden de llegada de los trabajos y obliga a inventar un campo de orden. La list mantiene la secuencia, que es la semántica que una cola necesita.",
+    "fuente": { "archivo": "04-02-Redis-04-02.pdf", "pagina": 7 },
+    "tags": ["redis", "estructuras", "colas"]
+  },
+  {
+    "id": "cache-026",
+    "tema": "cache",
+    "subtema": "redis-estructuras",
+    "dificultad": "facil",
+    "pregunta": "Cada sesión de usuario se guarda como un valor simple asociado a un identificador, sin campos internos. ¿Qué estructura usa el material para ese caso?",
+    "opciones": [
+      {
+        "texto": "Strings, empleados para las sesiones de usuario.",
+        "correcta": true
+      },
+      {
+        "texto": "Sorted sets, pensados para rankings por puntaje.",
+        "correcta": false,
+        "porque_no": "El conjunto ordenado agrega puntajes que una sesión no necesita."
+      },
+      {
+        "texto": "Lists, pensadas para colas de procesamiento.",
+        "correcta": false,
+        "porque_no": "Una sesión es un valor único, no una secuencia de elementos."
+      },
+      {
+        "texto": "Sets, pensados para agrupar elementos sin repetición.",
+        "correcta": false,
+        "porque_no": "No hace falta una colección: alcanza con un valor asociado a la clave."
+      }
+    ],
+    "explicacion": "En el reparto de estructuras que propone el material, los strings se usan para las sesiones de usuario, los hashes para los productos, las lists para las colas y los sorted sets para los rankings. Una sesión se representa como un valor simple asociado a una clave, sin necesidad de una colección. Esa correspondencia entre problema y estructura es la que vuelve flexible a Redis.",
+    "fuente": { "archivo": "04-02-Redis-04-02.pdf", "pagina": 7 },
+    "tags": ["redis", "estructuras", "sesiones"]
+  },
+  {
+    "id": "cache-027",
+    "tema": "cache",
+    "subtema": "redis-casos-de-uso",
+    "dificultad": "media",
+    "pregunta": "Un equipo arrastra latencias altas en consultas frecuentes, sobrecarga del motor relacional y problemas para gestionar sesiones. ¿Qué problemas del material resuelve Redis en ese escenario?",
+    "opciones": [
+      {
+        "texto": "Latencias de consultas frecuentes, sobrecarga del motor relacional y gestión de sesiones.",
+        "correcta": true
+      },
+      {
+        "texto": "La durabilidad, las transacciones ACID y la auditoría de las operaciones.",
+        "correcta": false,
+        "porque_no": "Esas son responsabilidades de la capa de persistencia, no lo que Redis aporta como caché."
+      },
+      {
+        "texto": "El modelado relacional y la integridad referencial entre tablas.",
+        "correcta": false,
+        "porque_no": "Redis es clave-valor y no reemplaza el modelado relacional."
+      },
+      {
+        "texto": "El balanceo de carga entre los servidores de aplicación.",
+        "correcta": false,
+        "porque_no": "El material atribuye esa función a la infraestructura, no a la base en memoria."
+      }
+    ],
+    "explicacion": "El material enumera los problemas que Redis ayuda a resolver: latencias elevadas en consultas frecuentes, sobrecarga de bases relacionales, gestión eficiente de sesiones de usuarios, almacenamiento temporal de datos y procesamiento de eventos en tiempo real. Al mantener los datos en RAM, las operaciones de lectura y escritura corren varios órdenes de magnitud más rápido que en sistemas basados en disco. Eso desacopla parcialmente la carga de los sistemas persistentes.",
+    "fuente": { "archivo": "04-02-Redis-04-02.pdf", "pagina": 4 },
+    "tags": ["redis", "casos-de-uso", "sesiones"]
+  },
+  {
+    "id": "cache-028",
+    "tema": "cache",
+    "subtema": "redis",
+    "dificultad": "media",
+    "pregunta": "Diez mil usuarios piden el mismo producto y la primera consulta ya guardó el dato en Redis. Según el ejemplo del material, ¿cuántas consultas recibe el motor relacional?",
+    "opciones": [
+      {
+        "texto": "Una sola: la primera; las 9.999 restantes se responden desde Redis.",
+        "correcta": true
+      },
+      {
+        "texto": "Diez mil, porque Redis solo conserva los resultados unos segundos.",
+        "correcta": false,
+        "porque_no": "La clave sigue disponible hasta que expire o se invalide; el ejemplo muestra 9.999 lecturas servidas por Redis."
+      },
+      {
+        "texto": "Dos: la primera y una de control para verificar que el dato siga vigente.",
+        "correcta": false,
+        "porque_no": "El flujo consulta la base solo ante un miss, no para validar cada lectura."
+      },
+      {
+        "texto": "Ninguna, porque la aplicación escribe en la base solo cuando el dato no existe.",
+        "correcta": false,
+        "porque_no": "La primera lectura todavía no está en la caché y debe ir a la base."
+      }
+    ],
+    "explicacion": "En el ejemplo del material, la primera consulta obtiene el dato desde el motor relacional y lo guarda en Redis, bajo la clave producto:238. Las siguientes 9.999 consultas se responden desde Redis. El resultado es menos carga en PostgreSQL, menor tiempo de respuesta y una mejor experiencia para el usuario.",
+    "fuente": { "archivo": "04-02-Redis-04-02.pdf", "pagina": 11 },
+    "tags": ["redis", "cache", "hit-ratio"]
+  },
+  {
+    "id": "cache-029",
+    "tema": "cache",
+    "subtema": "redis-comandos",
+    "dificultad": "facil",
+    "pregunta": "Al actualizar un producto, el servicio decide eliminar su clave de Redis para que la próxima lectura la repueble. ¿Qué comando del material hace eso?",
+    "opciones": [
+      {
+        "texto": "DEL, que elimina la clave indicada.",
+        "correcta": true
+      },
+      {
+        "texto": "GET, que recupera el valor asociado a la clave.",
+        "correcta": false,
+        "porque_no": "GET lee el valor; no lo borra."
+      },
+      {
+        "texto": "HSET, que guarda un campo del hash asociado a la clave.",
+        "correcta": false,
+        "porque_no": "HSET escribe o actualiza un valor; no elimina la clave."
+      },
+      {
+        "texto": "SET, que asigna un valor nuevo a la clave.",
+        "correcta": false,
+        "porque_no": "SET sobrescribe el valor en lugar de invalidarlo."
+      }
+    ],
+    "explicacion": "Redis almacena pares clave-valor y el material muestra los comandos básicos: HSET para guardar, GET para obtener y DEL para eliminar. Borrar la clave después de escribir en la base es la forma más simple de invalidación: la próxima lectura hace un miss, consulta el motor relacional y vuelve a guardar el dato vigente. Es la variante que el ejemplo implementa al final del método de actualización.",
+    "fuente": { "archivo": "04-02-Redis-04-02.pdf", "pagina": 12 },
+    "tags": ["redis", "comandos", "invalidacion"]
+  },
+  {
+    "id": "cache-030",
+    "tema": "cache",
+    "subtema": "ttl",
+    "dificultad": "facil",
+    "pregunta": "Se guardó producto:1 con un TTL de 10 minutos. A los 12 minutos llega la primera consulta. ¿Qué ocurre?",
+    "opciones": [
+      {
+        "texto": "Redis ya eliminó la clave: hay un miss, la aplicación consulta la base y vuelve a guardar el resultado.",
+        "correcta": true
+      },
+      {
+        "texto": "Hay un acierto y se devuelve el valor guardado, porque las claves no vencen solas.",
+        "correcta": false,
+        "porque_no": "Con TTL, la clave expira al cumplirse el plazo y deja de estar disponible."
+      },
+      {
+        "texto": "Hay un error, porque la consulta llegó después del vencimiento.",
+        "correcta": false,
+        "porque_no": "El vencimiento no invalida la operación: se resuelve como un miss y se repuebla la clave."
+      },
+      {
+        "texto": "El TTL se renueva automáticamente y el contador vuelve a 10 minutos.",
+        "correcta": false,
+        "porque_no": "La renovación no es automática; la clave expiró y debe volver a guardarse con su plazo."
+      }
+    ],
+    "explicacion": "El ejemplo del material guarda producto:1 con vencimiento a 10 minutos. Durante esos 10 minutos las consultas son hits; después Redis elimina la clave automáticamente y la próxima consulta produce un miss, va a la base y vuelve a llenar la caché. Ese mecanismo acota la obsolescencia, pero no la evita dentro de la ventana del TTL.",
+    "fuente": { "archivo": "04-02-Redis-04-02.pdf", "pagina": 25 },
+    "tags": ["redis", "ttl", "expiracion"]
+  },
+  {
+    "id": "cache-031",
+    "tema": "cache",
+    "subtema": "coherencia",
+    "dificultad": "dificil",
+    "pregunta": "Un equipo decide no invalidar y confiar solo en un TTL de 10 minutos para los precios. ¿Qué está aceptando?",
+    "opciones": [
+      {
+        "texto": "Acepta hasta 10 minutos de datos obsoletos a cambio de simplicidad.",
+        "correcta": true
+      },
+      {
+        "texto": "Consistencia inmediata, porque el TTL se controla desde la base de datos.",
+        "correcta": false,
+        "porque_no": "El TTL se define al guardar la clave en Redis; durante ese lapso el valor puede estar viejo."
+      },
+      {
+        "texto": "Pérdida de datos, porque las claves se borran sin respaldo.",
+        "correcta": false,
+        "porque_no": "El vencimiento afecta solo la copia en caché; la base conserva el dato."
+      },
+      {
+        "texto": "Una reducción de la latencia a costa de perder el hit ratio.",
+        "correcta": false,
+        "porque_no": "El hit ratio no es lo que se resigna: el costo es la obsolescencia acotada por el plazo."
+      }
+    ],
+    "explicacion": "El material muestra que si alguien cambia el precio a 1200, Redis seguirá mostrando 1000 durante los 10 minutos del TTL, y al vencer lo eliminará hasta la próxima consulta. La expiración automática es simple, escala bien en sistemas distribuidos y no depende de eventos externos, pero no garantiza frescura: solo pone un techo al tiempo en que el dato puede estar desactualizado. Cuando se necesita consistencia inmediata hay que invalidar o actualizar al escribir.",
+    "fuente": { "archivo": "04-02-Redis-04-02.pdf", "pagina": 26 },
+    "tags": ["redis", "ttl", "coherencia"]
+  },
+  {
+    "id": "cache-032",
+    "tema": "cache",
+    "subtema": "persistencia",
+    "dificultad": "media",
+    "pregunta": "El equipo acepta perder los últimos minutos de datos con tal de recuperar rápido y con archivos compactos. ¿Qué mecanismo de persistencia de Redis encaja?",
+    "opciones": [
+      {
+        "texto": "RDB, que genera imágenes completas del estado en momentos determinados.",
+        "correcta": true
+      },
+      {
+        "texto": "AOF, que registra secuencialmente todas las operaciones ejecutadas.",
+        "correcta": false,
+        "porque_no": "AOF da mayor durabilidad y menor pérdida, pero consume más almacenamiento."
+      },
+      {
+        "texto": "La replicación entre un nodo primario y sus réplicas.",
+        "correcta": false,
+        "porque_no": "Replica el estado en vivo; no define cómo se recupera el dato desde disco."
+      },
+      {
+        "texto": "El TTL, que conserva únicamente las claves más usadas.",
+        "correcta": false,
+        "porque_no": "El TTL administra vencimientos en memoria, no la persistencia en disco."
+      }
+    ],
+    "explicacion": "RDB genera imágenes completas del estado del sistema en momentos determinados. Sus ventajas son la recuperación rápida y los archivos compactos; su desventaja es la posible pérdida de información reciente, justo lo que este equipo está dispuesto a tolerar. AOF, en cambio, prioriza la durabilidad a costa de más almacenamiento.",
+    "fuente": { "archivo": "04-02-Redis-04-02.pdf", "pagina": 27 },
+    "tags": ["redis", "persistencia", "rdb"]
+  },
+  {
+    "id": "cache-033",
+    "tema": "cache",
+    "subtema": "persistencia",
+    "dificultad": "media",
+    "pregunta": "Después de un corte, un equipo no puede perder las escrituras de los últimos segundos y acepta un mayor consumo de disco. ¿Qué mecanismo elige?",
+    "opciones": [
+      {
+        "texto": "AOF, que registra secuencialmente las operaciones y reduce la pérdida de datos.",
+        "correcta": true
+      },
+      {
+        "texto": "RDB, que toma una foto completa del estado cada cierto tiempo.",
+        "correcta": false,
+        "porque_no": "Entre dos imágenes se pierden las escrituras posteriores al último snapshot."
+      },
+      {
+        "texto": "Un TTL más alto, para que las claves no venzan durante el corte.",
+        "correcta": false,
+        "porque_no": "El TTL no guarda nada en disco; solo controla la vigencia en memoria."
+      },
+      {
+        "texto": "Más réplicas en memoria del mismo nodo.",
+        "correcta": false,
+        "porque_no": "Las réplicas mejoran la disponibilidad, pero no reemplazan el registro en disco."
+      }
+    ],
+    "explicacion": "AOF registra secuencialmente todas las operaciones ejecutadas. Sus ventajas son mayor durabilidad y menor pérdida de datos; su desventaja, un mayor consumo de almacenamiento, que este equipo acepta asumir. RDB sigue siendo útil para recuperaciones rápidas, pero por sí solo deja una ventana de pérdida entre snapshots.",
+    "fuente": { "archivo": "04-02-Redis-04-02.pdf", "pagina": 28 },
+    "tags": ["redis", "persistencia", "aof"]
+  },
+  {
+    "id": "cache-034",
+    "tema": "cache",
+    "subtema": "persistencia",
+    "dificultad": "dificil",
+    "pregunta": "¿Por qué el material propone combinar RDB y AOF en lugar de elegir uno solo?",
+    "opciones": [
+      {
+        "texto": "Porque la combinación equilibra rendimiento y confiabilidad entre RDB y AOF.",
+        "correcta": true
+      },
+      {
+        "texto": "Porque AOF reemplaza a RDB y juntos garantizan propiedades ACID.",
+        "correcta": false,
+        "porque_no": "No hay tal garantía: AOF no vuelve transaccional a Redis ni anula el uso de snapshots."
+      },
+      {
+        "texto": "Porque RDB solo sirve para réplicas y AOF solo para el nodo primario.",
+        "correcta": false,
+        "porque_no": "El material no restringe los mecanismos según el tipo de nodo."
+      },
+      {
+        "texto": "Porque usar los dos elimina la pérdida de datos ante cualquier fallo.",
+        "correcta": false,
+        "porque_no": "La combinación reduce el riesgo y equilibra costos; no elimina toda pérdida posible."
+      }
+    ],
+    "explicacion": "Aunque Redis almacena información en memoria, dispone de mecanismos para persistir en disco. RDB aporta recuperación rápida y archivos compactos, con posible pérdida de lo más reciente; AOF aporta mayor durabilidad y menor pérdida, a cambio de más almacenamiento. Por eso el material concluye que combinar ambos mecanismos permite equilibrar rendimiento y confiabilidad.",
+    "fuente": { "archivo": "04-02-Redis-04-02.pdf", "pagina": 28 },
+    "tags": ["redis", "persistencia", "trade-off"]
+  },
+  {
+    "id": "cache-035",
+    "tema": "cache",
+    "subtema": "disponibilidad",
+    "dificultad": "facil",
+    "pregunta": "Cuando la base de datos se degrada, una caché distribuida sigue respondiendo consultas. ¿Qué atributo de calidad se está aprovechando?",
+    "opciones": [
+      {
+        "texto": "Disponibilidad: el sistema sigue respondiendo pese a la degradación de la base.",
+        "correcta": true
+      },
+      {
+        "texto": "Elasticidad, que es la capacidad de responder a picos de demanda.",
+        "correcta": false,
+        "porque_no": "La elasticidad describe el escalado ante cambios de carga, no la continuidad del servicio ante fallas."
+      },
+      {
+        "texto": "Seguridad, porque la caché aísla los datos de la base.",
+        "correcta": false,
+        "porque_no": "El material no atribuye a la caché un rol de aislamiento de seguridad."
+      },
+      {
+        "texto": "Modificabilidad, porque se pueden cambiar los datos sin tocar la base.",
+        "correcta": false,
+        "porque_no": "El atributo que describe el caso es la continuidad del servicio, no la facilidad de cambio."
+      }
+    ],
+    "explicacion": "El material asocia la caché con varios atributos de calidad. El rendimiento es el principal, porque reduce el tiempo de respuesta, el acceso a disco y el tráfico de red. La disponibilidad aparece cuando una caché distribuida puede continuar respondiendo solicitudes aun con degradaciones temporales en los componentes persistentes, y la elasticidad, cuando facilita el escalado horizontal y la respuesta a picos de demanda.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 15 },
+    "tags": ["cache", "disponibilidad", "atributos"]
+  },
+  {
+    "id": "cache-036",
+    "tema": "cache",
+    "subtema": "escalabilidad",
+    "dificultad": "media",
+    "pregunta": "¿Cómo contribuye una caché a la escalabilidad del sistema?",
+    "opciones": [
+      {
+        "texto": "Reduce las consultas a la base, la saturación de conexiones y reparte mejor la carga.",
+        "correcta": true
+      },
+      {
+        "texto": "Aumenta la capacidad de almacenamiento persistente del sistema.",
+        "correcta": false,
+        "porque_no": "La caché guarda copias temporales; no agrega capacidad al almacenamiento persistente."
+      },
+      {
+        "texto": "Garantiza la durabilidad de los datos que se escriben en ella.",
+        "correcta": false,
+        "porque_no": "La durabilidad es responsabilidad de la capa de persistencia."
+      },
+      {
+        "texto": "Elimina la necesidad de balancear la carga entre instancias.",
+        "correcta": false,
+        "porque_no": "La caché alivia la base, pero no reemplaza el balanceo de carga."
+      }
+    ],
+    "explicacion": "El material vincula la caché con la escalabilidad porque permite soportar más usuarios con la misma infraestructura. Los beneficios son menos consultas a la base, menor saturación de conexiones y una distribución eficiente de la carga. En arquitecturas cloud, además, las cachés facilitan el escalado horizontal, el balanceo y la respuesta a picos de demanda.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 14 },
+    "tags": ["cache", "escalabilidad"]
+  },
+  {
+    "id": "cache-037",
+    "tema": "cache",
+    "subtema": "capas",
+    "dificultad": "facil",
+    "pregunta": "En la arquitectura en capas que presenta el material, ¿qué rol cumple cada capa?",
+    "opciones": [
+      {
+        "texto": "La persistencia aporta durabilidad, la caché rendimiento y los servicios las reglas de negocio.",
+        "correcta": true
+      },
+      {
+        "texto": "La caché garantiza durabilidad y la persistencia optimiza el rendimiento.",
+        "correcta": false,
+        "porque_no": "Los roles están invertidos: la caché no asegura durabilidad."
+      },
+      {
+        "texto": "Los servicios almacenan los datos y la persistencia ejecuta las reglas de negocio.",
+        "correcta": false,
+        "porque_no": "El material asigna las reglas a los servicios y el almacenamiento durable a la persistencia."
+      },
+      {
+        "texto": "Cada capa resuelve la misma función con distinta tecnología.",
+        "correcta": false,
+        "porque_no": "La razón de la separación es justamente que cada capa se especializa en una función concreta."
+      }
+    ],
+    "explicacion": "Las arquitecturas empresariales modernas separan presentación, servicios, caché, persistencia y base de datos. Cada capa se especializa en una función: la persistencia garantiza durabilidad, la caché optimiza el rendimiento y los servicios implementan las reglas de negocio. Esa separación evita mezclar la fuente de verdad con una copia pensada para acelerar el acceso.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 35 },
+    "tags": ["cache", "capas", "arquitectura"]
+  },
+  {
+    "id": "cache-038",
+    "tema": "cache",
+    "subtema": "persistencia",
+    "dificultad": "facil",
+    "pregunta": "Un sistema necesita auditoría, recuperación tras incidentes y transacciones ACID. ¿Qué capa asume esas responsabilidades?",
+    "opciones": [
+      {
+        "texto": "La capa de persistencia, que garantiza durabilidad, integridad, transacciones y recuperación.",
+        "correcta": true
+      },
+      {
+        "texto": "La capa de caché, que conserva copias para acelerar el acceso.",
+        "correcta": false,
+        "porque_no": "La caché optimiza rendimiento y su contenido es derivado y reemplazable."
+      },
+      {
+        "texto": "La capa de servicios, que orquesta las llamadas entre componentes.",
+        "correcta": false,
+        "porque_no": "Los servicios aplican reglas de negocio; no garantizan durabilidad ni recuperación."
+      },
+      {
+        "texto": "La capa de presentación, que arma las respuestas para el usuario.",
+        "correcta": false,
+        "porque_no": "La presentación no almacena datos ni garantiza persistencia."
+      }
+    ],
+    "explicacion": "La función principal de la capa de persistencia es conservar información de manera durable y consistente. Sus responsabilidades incluyen durabilidad, integridad, transacciones ACID, recuperación y auditoría, y sus tecnologías habituales son PostgreSQL, Oracle, SQL Server, MySQL o MongoDB. Estas bases están diseñadas para confiabilidad, recuperación e integridad, no necesariamente para latencias muy bajas, y por eso se complementan con cachés.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 36 },
+    "tags": ["cache", "persistencia", "capas"]
+  },
+  {
+    "id": "cache-039",
+    "tema": "cache",
+    "subtema": "write-through",
+    "dificultad": "dificil",
+    "pregunta": "Un flujo con muchas escrituras adopta write through y el throughput cae. ¿Qué explica el resultado?",
+    "opciones": [
+      {
+        "texto": "Cada escritura espera la persistencia y la caché: la latencia sube y el throughput baja.",
+        "correcta": true
+      },
+      {
+        "texto": "La caché dejó de expirar las claves y acumula datos viejos.",
+        "correcta": false,
+        "porque_no": "El problema aparece en cada escritura, no por falta de vencimientos."
+      },
+      {
+        "texto": "El hit ratio de lectura bajó porque las claves se sobrescriben.",
+        "correcta": false,
+        "porque_no": "El material atribuye la caída del throughput a la espera de las dos actualizaciones."
+      },
+      {
+        "texto": "Las réplicas de la base reciben todas las escrituras dos veces.",
+        "correcta": false,
+        "porque_no": "El patrón duplica la actualización en base y caché, no en las réplicas."
+      }
+    ],
+    "explicacion": "En write through la operación no finaliza hasta completar la actualización en persistencia y en caché. Eso encarece cada escritura: la latencia de escritura aumenta y el throughput baja, porque las escrituras pueden convertirse en cuello de botella. El patrón representa un trade-off explícito entre rendimiento y consistencia: cuanto más se garantiza la consistencia, más velocidad y escalabilidad se sacrifican.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 21 },
+    "tags": ["cache", "write-through", "throughput"]
+  },
+  {
+    "id": "cache-040",
+    "tema": "cache",
+    "subtema": "refresh-ahead",
+    "dificultad": "dificil",
+    "pregunta": "El equipo propone reemplazar la invalidación al escribir por refresh ahead, argumentando que así el precio se mantiene fresco. ¿Por qué la propuesta no alcanza?",
+    "opciones": [
+      {
+        "texto": "Refresh ahead renueva según el vencimiento; si la fuente cambia hay que invalidar o actualizar.",
+        "correcta": true
+      },
+      {
+        "texto": "Porque refresh ahead solo funciona cuando el TTL es infinito.",
+        "correcta": false,
+        "porque_no": "El patrón se apoya justamente en que el dato está próximo a expirar."
+      },
+      {
+        "texto": "Porque refresh ahead elimina las claves antes de que expiren.",
+        "correcta": false,
+        "porque_no": "Las renueva por anticipado; no las invalida ante un cambio de la fuente."
+      },
+      {
+        "texto": "Porque refresh ahead solo aplica a datos que no se consultan.",
+        "correcta": false,
+        "porque_no": "Se aplica a los datos con alta frecuencia de acceso."
+      }
+    ],
+    "explicacion": "Refresh ahead detecta los datos frecuentemente utilizados y los actualiza antes de que expiren, para evitar los picos de latencia de los cache miss storms. Trabaja sobre el vencimiento y la frecuencia de acceso, no sobre el momento en que la fuente cambia. Si el precio se modifica en la base, la copia en caché sigue siendo la anterior hasta que se invalide, se actualice o venza el TTL.",
+    "fuente": { "archivo": "04-01-CacheDatos-BD-Memoria-04-01.pdf", "pagina": 26 },
+    "tags": ["cache", "refresh-ahead", "invalidacion"]
+  }
+]

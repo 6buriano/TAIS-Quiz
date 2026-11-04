@@ -1,0 +1,5 @@
+# TAIS Quiz no tiene dependencias en tiempo de ejecución.
+# Solo necesita Python 3.9 o superior.
+#
+# Para instalar las dependencias opcionales de desarrollo:
+#     pip install -r requirements-dev.txt

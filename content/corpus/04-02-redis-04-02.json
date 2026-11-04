@@ -1,0 +1,118 @@
+{
+  "archivo": "04-02-Redis-04-02.pdf",
+  "carpeta": "",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Curso\nTendencias Aplicadas de \nIngenería de Software\nRedis \n1"
+    },
+    {
+      "n": 2,
+      "texto": "Redis: Introducción\n• Redis (Remote Dictionary Server) es una base de datos \nNoSQL y utilizada en general para operar en memoria \nprincipal (RAM). \n• A diferencia de los sistemas de gestión de bases de \ndatos relacionales tradicionales, Redis adopta un \nmodelo clave-valor.\n• Cada clave puede almacenar distintos tipos de \nestructuras de datos como cadenas de caracteres, \nlistas, conjuntos, tablas hash, conjuntos ordenados y \nflujos de eventos.\n2"
+    },
+    {
+      "n": 3,
+      "texto": "Motivación para Utilizar Redis\n•\nLos sistemas modernos deben procesar cantidades \ncrecientes de usuarios, transacciones y solicitudes \nconcurrentes. En muchos casos, las bases de datos \nrelacionales se convierten en un cuello de botella debido al \ncosto de acceder al almacenamiento persistente.\n•\nRedis surge como una solución para reducir este problema \nmediante el almacenamiento temporal de información \nfrecuentemente utilizada. \n•\nAl mantener los datos en memoria RAM, las operaciones de \nlectura y escritura pueden ejecutarse varios órdenes de \nmagnitud más rápido que en sistemas basados en disco.\n3"
+    },
+    {
+      "n": 4,
+      "texto": "Motivación para Utilizar Redis\n• Los principales problemas que Redis ayuda a resolver \nson:\n– Latencias elevadas en consultas frecuentes.\n– Sobrecarga de bases de datos relacionales.\n– Gestión eficiente de sesiones de usuarios.\n– Almacenamiento temporal de datos.\n– Procesamiento de eventos en tiempo real.\n• La utilización de Redis permite desacoplar parcialmente \nla carga de trabajo de los sistemas persistentes, \ncontribuyendo a una arquitectura más escalable.\n4"
+    },
+    {
+      "n": 5,
+      "texto": "Arquitectura Interna de Redis\n• El flujo simplificado puede describirse de la siguiente \nmanera:\n– El cliente envía una petición.\n– Redis recibe la solicitud.\n– El comando es ejecutado sobre la estructura de \ndatos correspondiente.\n– Se actualiza la memoria si es necesario.\n– Se devuelve la respuesta.\n5"
+    },
+    {
+      "n": 6,
+      "texto": "Modelo de Datos en Redis\n• Aunque suele describirse como una base de datos \nclave-valor, Redis ofrece un modelo de datos \nconsiderablemente más rico que otros sistemas de la \nmisma categoría.\n• Cada clave puede contener distintos tipos de \nestructuras:\n– Strings\n– Hashes\n– Lists\n– Sets\n– Sorted Sets\n– Etc\n6"
+    },
+    {
+      "n": 7,
+      "texto": "Modelo de Datos en Redis\n• Esta diversidad permite resolver múltiples problemas sin \nnecesidad de incorporar sistemas adicionales.\n• Por ejemplo, un sistema de comercio electrónico podría \nutilizar:\n– Hashes para almacenar productos.\n– Lists para colas de procesamiento.\n– Sorted Sets para rankings.\n– Strings para sesiones de usuario.\n• Esta capacidad convierte a Redis en una plataforma \nextremadamente flexible para aplicaciones de alta \ndemanda.\n7"
+    },
+    {
+      "n": 8,
+      "texto": "Ejemplo: Redis\n• Supongamos que una aplicación tiene una base de \ndatos tradicional (MySQL, PostgreSQL, SQL Server, \netc.).\n• Cuando un usuario pide información, la aplicación \nconsulta la base de datos:\n– Usuario -> aplicación -> bases de datos\n• El problema es que acceder a la base de datos puede \nser relativamente lento si miles de usuarios hacen \nconsultas al mismo tiempo.\n• Redis funciona como una “memoria” que se coloca entre \nla aplicación y la base de datos.\n8"
+    },
+    {
+      "n": 9,
+      "texto": "Ejemplo: Redis\n• El objetivo es:\n– Buscar primero en Redis.\n Si el dato existe, devolverlo inmediatamente.\n– Si no existe:\n consultar la base de datos;\n guardar el resultado en Redis;\n devolver la respuesta.\n• Supongamos una tienda online, cada vez que alguien \nentra a ver el producto con codigo 238.\n9"
+    },
+    {
+      "n": 10,
+      "texto": "Ejemplo: Redis\n• La aplicación consulta PostgreSQL o el motor relacional\n– Si 10.000 usuarios consultan el mismo producto, se \nejecutará:\nSELECT * \nFROM productos\nWHERE id = 238;\n• La base de datos recibirá potencialmente 10.000 \nconsultas.\n10"
+    },
+    {
+      "n": 11,
+      "texto": "Ejemplo: Redis\n• Con Redis:\n– La primera consulta obtiene el dato desde \nPostgreSQL o el motor relacional que sea y lo \nguarda.\n• Redis:\n– producto:238\n• Las siguientes 9.999 consultas se responden desde \nRedis.\n• Resultado:\n– Menos carga en PostgreSQL.\n– Menor tiempo de respuesta.\n– Mejor experiencia para el usuario.\n11"
+    },
+    {
+      "n": 12,
+      "texto": "Ejemplo: Redis\n• ¿Cómo se almacena información? Redis almacena \npares:\n– clave → valor\n• Por ejemplo:\n– usuario:1 → Juan\n– usuario:2 → María\n– usuario:3 → Pedro\n• Comandos básicos\n– Guardar: HSET usuario:1 \"Juan\" \n– Obtener: GET usuario:1 \n Resultado: Juan\n– Eliminar: DEL usuario:1\n12"
+    },
+    {
+      "n": 13,
+      "texto": "Ejemplo: Redis/Java\n@Autowired\nprivate RedisTemplate<String, Object> redisTemplate;\nSin Redis: cada llamada accede a la base de datos.\npublic Producto obtenerProducto(Long id) {\n    return productoRepository\n            .findById(id)\n            .orElseThrow();\n}\n13"
+    },
+    {
+      "n": 14,
+      "texto": "Ejemplo: Redis/Java\nCon Redis:\nPrimera consulta → PostgreSQL o motor relacional\nSiguientes consultas → Redis.\n14"
+    },
+    {
+      "n": 15,
+      "texto": "Ejemplo: Redis/Java\nCon Redis:\npublic Producto obtenerProducto(Long id) {\n    String key = \"producto:\" + id;\n    Producto producto =\n        (Producto) redisTemplate\n            .opsForValue()\n            .get(key);\n    if(producto != null) {\n        return producto;\n    }\n    producto = productoRepository\n        .findById(id)\n        .orElseThrow();\n    redisTemplate\n        .opsForValue()\n        .set(key, producto);\n    return producto;\n}\n15"
+    },
+    {
+      "n": 16,
+      "texto": "Ejemplo: Redis/Java - Invalidar Cache\n• Supongamos se tiene una tabla de productos:\n• Y Redis almacena el producto 1\nproducto:1\n{\n   id:1,\n   nombre:\"Laptop\",\n   precio:1000\n}\n16\nID\nNombre\nPrecio\n1\nLaptop\n1000\n2\nKeyboard\n40\n3\nMouse\n12"
+    },
+    {
+      "n": 17,
+      "texto": "Ejemplo: Redis/Java - Invalidar Cache\n• Ejemplo de flujo de ejecución:\n– Primera consulta de Usuario llama a api: GET \n/productos/1\n– En la aplicación: \n  Redis: producto:1 -> No existe (Redis Miss)\n– Entonces en la aplicación se realiza lo siguiente:\nRedis Miss -> PostgreSQL -> Producto -> Almacena en Redis\n17"
+    },
+    {
+      "n": 18,
+      "texto": "Ejemplo: Redis/Java - Invalidar Cache\n– En Redis queda:\nproducto:1\n{\n  id:1,\n  nombre:\"Laptop\",\n  precio:1000\n}\n18"
+    },
+    {
+      "n": 19,
+      "texto": "Ejemplo: Redis/Java - Invalidar Cache\n– Segunda consulta de Usuario llama a api: GET \n/productos/1\n– Ahora: Redis HIT\n– No se consulta la base de datos.\n• Supongamos que alguien actualiza el valor de la Laptop \nde 1000 a 1200. En PostgreSQL queda así:\n19\nID\nNombre\nPrecio\n1\nLaptop\n1200\n2\nKeyboard\n40\n3\nMouse\n12"
+    },
+    {
+      "n": 20,
+      "texto": "Ejemplo: Redis/Java - Invalidar Cache\n• Pero Redis sigue teniendo:1000 porque nadie lo \nactualizó.\n• Entonces una solución posible es invalidar el cache \ncuando se actualiza el producto para que lo vuelva a \nrefrescar en Redis\n– Se actualiza PostgreSQL.\n– Se elimina Redis.\n– La próxima lectura vuelve a consultar la BD.\nActualizar -> DELETE producto:1 -> Redis vacío\n20"
+    },
+    {
+      "n": 21,
+      "texto": "Ejemplo: Redis/Java - Invalidar Cache\n• Proxima consulta: GET /productos/1\nRedis MISS ->PostgreSQL -> Redis\n• Ahora Redis tendrá: precio=1200\n21"
+    },
+    {
+      "n": 22,
+      "texto": "Ejemplo: Redis/Java - Invalidar Cache\npublic Producto actualizarProducto( Long id, ProductoDTO \ndto) {   \n Producto producto = \nproductoRepository.findById(id).orElseThrow();\n    producto.setPrecio(dto.getPrecio());\n    productoRepository.save(producto);\n    redisTemplate.delete( \"producto:\" + id);\n    return producto;\n}\n22"
+    },
+    {
+      "n": 23,
+      "texto": "Ejemplo: Redis/Java - Actualizar Cache\n• Otra solución posible es actualizar el cache cuando se \nactualiza el producto para que a Redis también le quede \nactualizado\n– Se actualiza PostgreSQL.\n– Se actualiza Redis.\n23"
+    },
+    {
+      "n": 24,
+      "texto": "Ejemplo: Redis/Java - Actualizar Cache \n•\nOtra solución: actualizar Redis inmediatamente\npublic Producto actualizarProducto(Long id, ProductoDTO dto) {\n    Producto producto \n=productoRepository.findById(id).orElseThrow();\n    producto.setPrecio(dto.getPrecio());\n    producto =productoRepository.save(producto);\n    redisTemplate.opsForValue().set(\"producto:\" + id,producto);\n    return producto;\n}\n24"
+    },
+    {
+      "n": 25,
+      "texto": "Ejemplo: Redis/Java - TTL\n• Otra solución: Expiración automática (TTL)\nredisTemplate.opsForValue().set(\"producto:1\",producto,\nDuration.ofMinutes(10));\n• Conceptualmente el producto:1 expira en 10 minutos\n– ¿Qué pasa? Durante 10 minutos: Redis HIT\n– Después: Redis elimina automáticamente la clave\n– Próxima consulta: \n Redis MISS->PostgreSQL -> Redis\n25"
+    },
+    {
+      "n": 26,
+      "texto": "Ejemplo: Redis/Java - Invalidar Cache (3)\n• Si alguien cambia el precio del producto a 1200 Redis \nseguirá mostrando 1000 por 10 minutos\n• Pero al vencer el TTL lo eliminará del caché hasta que \nse consulte nuevamente\n26"
+    },
+    {
+      "n": 27,
+      "texto": "Persistencia en Redis\n• Aunque Redis almacena información en memoria, \ndispone de mecanismos para persistir datos en disco.\n• RDB (Redis Database Snapshot):\n– Genera imágenes completas del estado del sistema \nen momentos determinados.\n• Ventajas:\n– Recuperación rápida.\n– Archivos compactos.\n• Desventajas:\n– Posible pérdida de información reciente.\n27"
+    },
+    {
+      "n": 28,
+      "texto": "Persistencia en Redis\n• AOF (Append Only File):\n– También registra secuencialmente todas las \noperaciones ejecutadas.\n• Ventajas:\n– Mayor durabilidad.\n– Menor pérdida de datos.\n• Desventajas:\n– Mayor consumo de almacenamiento.\n• La combinación de ambos mecanismos permite \nequilibrar rendimiento y confiabilidad.\n28"
+    }
+  ]
+}

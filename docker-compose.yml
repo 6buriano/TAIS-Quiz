@@ -1,0 +1,28 @@
+services:
+  quiz:
+    build: .
+    ports:
+      - "8765:8765"
+    environment:
+      # Con el perfil "ia" el servidor de modelos está en el servicio ollama.
+      # Si usás un modelo en tu máquina, sobreescribí QUIZ_LLM_URL.
+      QUIZ_LLM_PROVEEDOR: ${QUIZ_LLM_PROVEEDOR:-auto}
+      QUIZ_LLM_URL: ${QUIZ_LLM_URL:-http://ollama:11434}
+      QUIZ_LLM_MODELO: ${QUIZ_LLM_MODELO:-qwen2.5:7b-instruct}
+    volumes:
+      - ./examenes:/app/examenes
+    restart: unless-stopped
+
+  # Opcional: docker compose --profile ia up
+  # Después:  docker compose exec ollama ollama pull qwen2.5:7b-instruct
+  ollama:
+    image: ollama/ollama:latest
+    profiles: ["ia"]
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  ollama:

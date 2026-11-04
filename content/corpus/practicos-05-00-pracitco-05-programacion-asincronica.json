@@ -1,0 +1,14 @@
+{
+  "archivo": "05-00-Pracitco 05 Programación Asincrónica.pdf",
+  "carpeta": "Practicos",
+  "paginas": [
+    {
+      "n": 1,
+      "texto": "Práctico 5: Programación Asincrónica \n \n \n \n1. ¿Qué se entiende por programación asincrónica en sistemas de software? \n \n2. ¿Cuál es la principal diferencia entre un modelo síncrono y uno asincrónico? \n \n3. ¿Qué problema de rendimiento resuelve principalmente el asincronismo? \n \n4. ¿Qué es el acoplamiento temporal en sistemas distribuidos? \n \n5. ¿Por qué el asincronismo reduce el acoplamiento entre componentes? \n \n6. ¿Qué es la mensajería en arquitectura de software? \n \n7. ¿Qué rol cumple un broker en un sistema de mensajería? \n \n8. ¿Qué es un canal (queue) en mensajería? \n \n9. En un sistema basado en canales, ¿cuántos consumidores procesan un mismo mensaje? \n \n10. ¿Qué es el patrón Publish/Subscribe (Pub/Sub)? \n \n11. ¿Cuántos consumidores pueden recibir un mismo mensaje en Pub/Sub? \n \n12. Explique una diferencia clave entre canal y Pub/Sub. \n \n13. Dé un ejemplo de uso real de canales en sistemas distribuidos. \n \n14. Dé un ejemplo de uso real de Pub/Sub en sistemas distribuidos. \n \n15. Explique por qué la mensajería mejora la escalabilidad de un sistema. \n \n16. Dado un sistema de pagos que procesa transacciones críticas: El equipo de diseño \npropone usar un modelo asincrónico basado en colas para mejorar la escalabilidad. \nExplique qué beneficios y riesgos introduce este cambio en términos de consistencia y \nconfiabilidad del sistema. \n \n17. En un sistema basado en microservicios, se observa que múltiples servicios dependen \nde respuestas inmediatas entre sí (llamadas síncronas en cadena). Explique cómo el uso de \nmensajería asincrónica podría reducir el acoplamiento temporal pero también qué nuevos \nproblemas introduce. \n \n18. Se tiene un sistema de procesamiento de órdenes donde se utiliza un canal (queue). En \nalgunos casos, el equipo necesita que varios servicios reaccionen al mismo evento de \ncreación de orden (inventario, facturación, notificaciones). ¿Es adecuado seguir usando un \ncanal? Justifique y proponga una alternativa arquitectónica."
+    },
+    {
+      "n": 2,
+      "texto": "19. Diseñe (conceptualmente) una arquitectura para un sistema de e-commerce donde: \n \n●​ pedidos deben procesarse de forma asincrónica \n●​ múltiples servicios deben reaccionar a un pedido confirmado \n●​ el sistema debe tolerar caídas temporales de servicios \n \nIndique qué patrón usaría (canal, pub/sub o combinación) y justifique su decisión."
+    }
+  ]
+}
